@@ -14,18 +14,17 @@ public class Robot extends SampleRobot {
     }
     
     public void robotInit() {
+
     }
 
     public void autonomous() {
+
     }
 
     public void operatorControl() {
+
     }
 
     public void test() {
-    	
-    	
     }
-    
-    //hehtiueaghdngeiusvxc kdjeutidvkxmc ldjeu
 }

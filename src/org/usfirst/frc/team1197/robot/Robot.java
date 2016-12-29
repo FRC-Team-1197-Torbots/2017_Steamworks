@@ -22,6 +22,11 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
+    	
+    	
+  
+    	
+    	
 
     }
 

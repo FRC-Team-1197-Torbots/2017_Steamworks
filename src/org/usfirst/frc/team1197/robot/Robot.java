@@ -9,23 +9,17 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends SampleRobot {
 	private Compressor compressor;
-	private CANTalon rightTalon1;
-	private CANTalon rightTalon2;
-	private CANTalon leftTalon1;
-	private CANTalon leftTalon2;
-	private Solenoid solenoid;
+	private Solenoid shift;
 	private Joystick stick;
-	private RobotDrive robot;
+	private double approximateSensorSpeed = 4109.84;
+	
+	private TorDrive drive;
 
     public Robot() {
     	compressor = new Compressor();
-    	rightTalon1 = new CANTalon(2); //right master
-    	rightTalon2 = new CANTalon(3);
-    	leftTalon1 = new CANTalon(4); //left master
-    	leftTalon2 = new CANTalon(6);
     	stick = new Joystick(0);
-    	solenoid = new Solenoid(1);
-    	robot = new RobotDrive(leftTalon1, leftTalon2, rightTalon1, rightTalon2);
+    	shift = new Solenoid(1);
+    	drive = new TorDrive(stick, shift, approximateSensorSpeed);
     }
     
     public void robotInit() {
@@ -37,20 +31,68 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
+    	drive.shiftToHighGear();
     	while(isEnabled()){
-    		robot.arcadeDrive(stick);
-    		if(stick.getRawButton(1)){
-    			solenoid.set(true);
-    		}
-    		if(stick.getRawButton(2)){
-    			solenoid.set(false);
-    		}
+    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightTrigger(), 
+					getButtonA(), getButtonB(), getButtonX(), getButtonY());
     	}
     }
 
     public void test() {
-    	while(isEnabled()){
-    		compressor.start();
-    	}
-    }
+		while(isEnabled()){
+			compressor.start();
+		}
+	}
+
+	//Low-gear software wise, High-gear mechanically
+	public void disabled() {
+		drive.shiftToLowGear();
+		shift.set(false); 
+		TorCAN.INSTANCE.SetDrive(0.0, 0.0);
+	}
+
+	// Getting the left analog stick X-axis value from the xbox controller. 
+	public double getLeftX(){
+		return stick.getRawAxis(0);
+	}
+
+	// Getting the left analog stick Y-axis value from the xbox controller. 
+	public double getLeftY(){
+		return stick.getRawAxis(1);
+	}
+
+	// Getting the right analog stick X-axis value from the xbox controller. 
+	public double getRightX(){
+		return stick.getRawAxis(4);
+	}
+
+	// Getting the right trigger value from the xbox controller.
+	public double getRightTrigger(){
+		return stick.getRawAxis(3);
+	}
+
+	// Getting the left bumper button value from the xbox controller. 
+	public boolean getShiftButton(){
+		return stick.getRawButton(5);
+	}
+
+	public boolean getRightBumper(){
+		return stick.getRawButton(6);
+	}
+
+	public boolean getButtonA(){
+		return stick.getRawButton(1);
+	}
+
+	public boolean getButtonB(){
+		return stick.getRawButton(2);
+	}
+
+	public boolean getButtonX(){
+		return stick.getRawButton(3);
+	}
+
+	public boolean getButtonY(){
+		return stick.getRawButton(4);
+	}
 }

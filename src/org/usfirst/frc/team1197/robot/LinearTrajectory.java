@@ -1,9 +1,5 @@
 package org.usfirst.frc.team1197.robot;
 
-import java.util.LinkedList;
-
-import java.util.List;
-
 public class LinearTrajectory extends TorTrajectory{
 	
 	public LinearTrajectory(double goal) {

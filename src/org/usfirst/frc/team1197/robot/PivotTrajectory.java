@@ -1,8 +1,5 @@
 package org.usfirst.frc.team1197.robot;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class PivotTrajectory extends TorTrajectory {
 	
 	public PivotTrajectory(double goal){

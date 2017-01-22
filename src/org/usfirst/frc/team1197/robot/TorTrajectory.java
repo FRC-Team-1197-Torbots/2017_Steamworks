@@ -175,10 +175,8 @@ public abstract class TorTrajectory {
 	}
 	
 	public void execute(){
-		long t = 0;
 		startTime = System.currentTimeMillis();
 		startTime = startTime - (startTime % 10);
-		int length = time.size();
 		TorMotionProfile.INSTANCE.loadTrajectory(this);
 	}
 	

@@ -13,7 +13,6 @@ public class TorDrive
 		
 		private TEST(){}
 	}
-	private TEST teststates = TEST.IDLE;
 	private boolean isHighGear = true;
 	private Solenoid m_solenoidshift;
 
@@ -32,7 +31,6 @@ public class TorDrive
 	private static TorTrajectory rightTrajectory;
 	private static TorTrajectory backwardTrajectory;
 	private static TorTrajectory leftTrajectory;
-	private static StationaryTrajectory stationaryTraj;
 	
 	private boolean buttonYlast;
 	private boolean buttonBlast;
@@ -53,7 +51,6 @@ public class TorDrive
 		backwardTrajectory = new LinearTrajectory(-1.0);
 		rightTrajectory = new PivotTrajectory(90);
 		leftTrajectory = new PivotTrajectory(-90);
-		stationaryTraj = new StationaryTrajectory();
 		
 		maxThrottle = (5.0/6.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		

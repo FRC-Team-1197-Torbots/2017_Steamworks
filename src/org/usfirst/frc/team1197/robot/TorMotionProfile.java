@@ -47,23 +47,17 @@ public enum TorMotionProfile
 	
 	public JoystickTrajectory joystickTraj;
 	private StationaryTrajectory stationaryTraj;
-	private TorDerivative displacementDerivative;
-	private TorDerivative headingDerivative;
 	private TorPID displacementPID;
 	private TorPID headingPID;
 	
 	protected static double displacementWaypoint;
 	protected static double headingWaypoint;
-	private double velocityWaypoint;
-	private double omegaWaypoint;
 	
 	private boolean usingWaypoint = true;
 	
 	private TorMotionProfile(){
 		joystickTraj = new JoystickTrajectory();
 		stationaryTraj = new StationaryTrajectory();
-		displacementDerivative = new TorDerivative(getTimeInterval());
-		headingDerivative = new TorDerivative(getTimeInterval());
 		displacementPID = new TorPID(dt);
 		headingPID = new TorPID(dt);
 		
@@ -153,9 +147,6 @@ public enum TorMotionProfile
 	
 	public void run(){		
 		if(isActive()){
-//			System.out.println(activeTrajectory.toString());
-//			System.out.println(nextTrajectory.toString());
-			
 			currentTime = System.currentTimeMillis();
 			dt = (currentTime - lastTime) * 0.001;
 			lastTime = currentTime; //TODO (1): uncomment and re-tune PID, if necessary

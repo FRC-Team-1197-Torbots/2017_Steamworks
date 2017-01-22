@@ -22,7 +22,7 @@ public class TorDrive
 	private TorJoystickProfiles joystickProfile;
 	private double targetSpeed;
 	private double targetOmega;
-	private double trackWidth = 0.5525; //meters, in inches 21.75
+	private double trackWidth = 0.3683; //meters, in inches 14.5
 	private double halfTrackWidth = trackWidth / 2.0;
 	private double centerRadius = 0.0;
 	private double maxThrottle;
@@ -91,7 +91,7 @@ public class TorDrive
 	//Shifts the robot to high gear and change the talon's control mode to speed.
 	public void shiftToHighGear(){
 		if (!isHighGear){
-			m_solenoidshift.set(true);
+			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
 			TorMotionProfile.INSTANCE.executeDefault();
@@ -102,7 +102,7 @@ public class TorDrive
 	//Shifts the robot to low gear and change the talon's control mode to percentVbus.
 	public void shiftToLowGear(){
 		if (isHighGear){
-			m_solenoidshift.set(false);
+			m_solenoidshift.set(true);
 			TorCAN.INSTANCE.choosePercentVbus();
 			isHighGear = false;
 			TorMotionProfile.INSTANCE.setInactive();

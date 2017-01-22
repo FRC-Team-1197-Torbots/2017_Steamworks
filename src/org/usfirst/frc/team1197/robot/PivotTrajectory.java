@@ -4,7 +4,6 @@ public class PivotTrajectory extends TorTrajectory {
 	
 	public PivotTrajectory(double goal){
 		super(goal * (Math.PI/180.0));
-		type = new String("Pivot");
 		build(goal_pos, max_omg, max_alf, max_jeta, heading, omega, alpha);
 	}
 	
@@ -30,7 +29,7 @@ public class PivotTrajectory extends TorTrajectory {
 		return alpha.elementAt(i);
 	}
 	
-	public double lookUpDisplacement(long t){
+	public double lookUpPosition(long t){
 		return 0;
 	}
 	public double lookUpVelocity(long t){

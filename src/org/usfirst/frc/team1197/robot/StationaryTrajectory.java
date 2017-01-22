@@ -4,14 +4,13 @@ public class StationaryTrajectory extends TorTrajectory{
 	
 	public StationaryTrajectory() {
 		super(0.0);
-		type = new String("Stationary");
 	}
 	
 	public boolean lookUpIsLast(long t){
 		return true;
 	}
 	
-	public double lookUpDisplacement(long t){
+	public double lookUpPosition(long t){
 		return goal_pos;
 	}
 	public double lookUpVelocity(long t){

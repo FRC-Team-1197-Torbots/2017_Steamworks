@@ -4,16 +4,15 @@ public class LinearTrajectory extends TorTrajectory{
 	
 	public LinearTrajectory(double goal) {
 		super(goal);
-		type = new String("Linear");
-		build(goal_pos, max_vel, max_acc, max_jerk, displacement, velocity, acceleration);
+		build(goal_pos, max_vel, max_acc, max_jerk, position, velocity, acceleration);
 	}
 	
-	public double lookUpDisplacement(long t){
+	public double lookUpPosition(long t){
 		int i = time.indexOf(t);
 		if(i == -1){
 			return goal_pos;
 		}
-		return displacement.elementAt(i);
+		return position.elementAt(i);
 	}
 	public double lookUpVelocity(long t){
 		int i = time.indexOf(t);

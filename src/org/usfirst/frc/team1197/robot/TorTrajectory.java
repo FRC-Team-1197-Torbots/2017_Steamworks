@@ -18,7 +18,7 @@ public abstract class TorTrajectory {
 	
 	protected Vector<Long> time;
 	
-	protected Vector<Double> displacement;
+	protected Vector<Double> position;
 	protected Vector<Double> velocity;
 	protected Vector<Double> acceleration;
 	
@@ -27,7 +27,6 @@ public abstract class TorTrajectory {
 	protected Vector<Double> heading;
 	
 	protected static long startTime;
-	protected String type;
 	protected double dt = 0.005;
 	
 	public class Motion {
@@ -53,11 +52,9 @@ public abstract class TorTrajectory {
 		max_alf = 32.0; //16.0
 		max_jeta = 38.0; //22.0
 		
-		type = new String("null");
-		
 		time = new Vector<Long>();
 		
-		displacement = new Vector<Double>();
+		position = new Vector<Double>();
 		velocity = new Vector<Double>();
 		acceleration = new Vector<Double>();
 		
@@ -72,8 +69,8 @@ public abstract class TorTrajectory {
 	
 	// The following magic was adapted from 254's TrajectoryLib.
 	protected void build(double goal_pos, double max_vel, double max_acc, double max_jerk, 
-						Vector<Double> displacement, Vector<Double> velocity, Vector<Double> acceleration){
-		displacement.clear();
+						Vector<Double> position, Vector<Double> velocity, Vector<Double> acceleration){
+		position.clear();
 		velocity.clear();
 		acceleration.clear();
 		time.clear();
@@ -105,11 +102,11 @@ public abstract class TorTrajectory {
 		if(goal_pos < 0.0){
 			adjusted_max_vel = -adjusted_max_vel;
 		}
-		secondOrderFilter(f0_length, f1_length, f2_length, dt, adjusted_max_vel, tot_length, displacement, velocity, acceleration);
+		secondOrderFilter(f0_length, f1_length, f2_length, dt, adjusted_max_vel, tot_length, position, velocity, acceleration);
 	}
 	
 	protected void secondOrderFilter(int f0_length, int f1_length, int f2_length, double dt, double max_vel, int tot_length,
-			Vector<Double> displacement, Vector<Double> velocity, Vector<Double> acceleration) {
+			Vector<Double> position, Vector<Double> velocity, Vector<Double> acceleration) {
 		// Why no "f0"? Because the zero-filter can be equivalently implemented more
 		// simply by just feeding a constant velocity value into the first filter for
 		// the correct length of time. The "real" filters, on the other hand, MUST be 
@@ -165,7 +162,7 @@ public abstract class TorTrajectory {
 		    // We have to integrate to get position. This uses trapezoidal integration,
 		    // but the choice of integration strategy probably doesn't matter:
 			pos = last_pos + 0.5 * (last_vel + vel) * dt;
-			displacement.addElement(new Double(pos));
+			position.addElement(new Double(pos));
 			// We have to differentiate to get acceleration:
 			acc = (vel - last_vel) / dt;
 			acceleration.addElement(new Double(acc));
@@ -184,7 +181,7 @@ public abstract class TorTrajectory {
 		return goal_pos;
 	}
 	
-	public abstract double lookUpDisplacement(long t);
+	public abstract double lookUpPosition(long t);
 	public abstract double lookUpVelocity(long t);
 	public abstract double lookUpAcceleration(long t);
 	

@@ -115,7 +115,7 @@ public enum TorCAN
 		m_Ltalon2.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
 	}
 	
-	public double getDisplacement(){
+	public double getPosition(){
 		return -(m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
 	}
 	public double getVelocity(){

@@ -15,7 +15,7 @@ public class JoystickTrajectory extends TorTrajectory{
 		rotationalMotion = new Motion(0.0, 0.0, 0.0);
 	}
 	
-	public double lookUpDisplacement(long t){
+	public double lookUpPosition(long t){
 		return linearMotion.pos;
 	}
 	public double lookUpVelocity(long t){

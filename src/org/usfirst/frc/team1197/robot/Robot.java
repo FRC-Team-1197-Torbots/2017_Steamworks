@@ -10,7 +10,6 @@ public class Robot extends SampleRobot {
 	private Compressor compressor;
 	private Solenoid shift;
 	private Joystick stick;
-	private double approximateSensorSpeed = 4620.0;
 	
 	private TorDrive drive;
 
@@ -18,7 +17,7 @@ public class Robot extends SampleRobot {
     	compressor = new Compressor();
     	stick = new Joystick(0);
     	shift = new Solenoid(0);
-    	drive = new TorDrive(stick, shift, approximateSensorSpeed);
+    	drive = new TorDrive(stick, shift);
     }
     
     public void robotInit() {

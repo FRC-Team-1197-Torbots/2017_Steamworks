@@ -74,8 +74,8 @@ public enum TorCAN
 		m_Ltalon3.changeControlMode(CANTalon.TalonControlMode.Follower);
 		m_Ltalon3.set(m_Ltalon1.getDeviceID());
 
-		m_Rtalon1.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
-		m_Ltalon1.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
+		m_Rtalon2.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
+		m_Ltalon2.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
 	}
 
 	public void SetDrive(double leftSpeed, double rightSpeed)
@@ -150,5 +150,9 @@ public enum TorCAN
 	
 	public double absoluteMaxSpeed(){
 		return absoluteMaxSpeed; // (units: meters per second)
+	}
+	
+	public double getSensorSpeed(){
+		return approximateSensorSpeed;
 	}
 }

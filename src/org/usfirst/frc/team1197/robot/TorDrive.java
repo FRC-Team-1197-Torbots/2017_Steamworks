@@ -25,7 +25,6 @@ public class TorDrive
 	private double halfTrackWidth = trackWidth / 2.0;
 	private double centerRadius = 0.0;
 	private double maxThrottle;
-	private double approximateSensorSpeed;
 
 	private static TorTrajectory forwardTrajectory;
 	private static TorTrajectory rightTrajectory;
@@ -44,7 +43,7 @@ public class TorDrive
 	}
 	Notifier mpNotifier = new Notifier(new PeriodicRunnable());
 
-	public TorDrive(Joystick stick, Solenoid shift, double approximateSensorSpeed)
+	public TorDrive(Joystick stick, Solenoid shift)
 	{
 		joystickProfile = new TorJoystickProfiles();
 		forwardTrajectory = new LinearTrajectory(1.0);
@@ -55,7 +54,6 @@ public class TorDrive
 		maxThrottle = (5.0/6.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
 		m_solenoidshift = shift;
-		this.approximateSensorSpeed = approximateSensorSpeed;
 		mpNotifier.startPeriodic(0.005);
 	}
 	
@@ -165,7 +163,7 @@ public class TorDrive
 		throttleAxis = -throttleAxis;
 		carSteeringAxis = -carSteeringAxis;
 		
-		targetSpeed = joystickProfile.findSpeed(throttleAxis) * approximateSensorSpeed;
+		targetSpeed = joystickProfile.findSpeed(throttleAxis) * TorCAN.INSTANCE.getSensorSpeed();
 		
 		targetSpeed *= maxThrottle;
 		

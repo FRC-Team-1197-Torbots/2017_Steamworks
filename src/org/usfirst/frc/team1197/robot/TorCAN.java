@@ -11,27 +11,27 @@ public enum TorCAN
 {
 	INSTANCE;
 	
-	private CANTalon m_Rtalon1;
-	private CANTalon m_Rtalon2;
-	private CANTalon m_Rtalon3;
-	private CANTalon m_Ltalon1;
-	private CANTalon m_Ltalon2;
-	private CANTalon m_Ltalon3;
+	private final CANTalon m_Rtalon1;
+	private final CANTalon m_Rtalon2;
+	private final CANTalon m_Rtalon3;
+	private final CANTalon m_Ltalon1;
+	private final CANTalon m_Ltalon2;
+	private final CANTalon m_Ltalon3;
 	
-	private AHRS gyro;
-	private double encoderTicksPerMeter = 8945.0; // (units: ticks per meter)
-	private double approximateSensorSpeed = 2368.51; // measured maximum (units: RPM)
-	private double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
-	private double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private double kP = 0.0; //0.0
-	private double kI = 0.0; //0.0
-	private double kD = 0.0; //0.0
+	private final AHRS gyro;
+	private final double encoderTicksPerMeter = 8945.0; // (units: ticks per meter)
+	private final double approximateSensorSpeed = 2368.51; // measured maximum (units: RPM)
+	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
+	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
+	private final double kP = 0.0; //0.0
+	private final double kI = 0.0; //0.0
+	private final double kD = 0.0; //0.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
-	private double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
-	private double trackWidth = 0.3683; // (units: meters (14.5 in inches))
-	private double halfTrackWidth = trackWidth / 2.0; // (units: meters)
+	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
+	private final double trackWidth = 0.3683; // (units: meters (14.5 in inches))
+	private final double halfTrackWidth = trackWidth / 2.0; // (units: meters)
 	
-	private double backlash = 0.015; // (units: meters)
+	private final double backlash = 0.015; // (units: meters)
 	
 	private TorCAN(){
 		

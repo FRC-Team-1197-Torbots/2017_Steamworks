@@ -7,12 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TorDrive
 {	
-	public enum TEST
-	{
-		NULL, IDLE, POS1, POS2;
-		
-		private TEST(){}
-	}
 	private boolean isHighGear = true;
 	private Solenoid m_solenoidshift;
 

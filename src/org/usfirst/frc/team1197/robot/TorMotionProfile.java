@@ -23,20 +23,20 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 	
-	private double kPv = 0.0; //0.0
-	private double kA = 0.0; //0.0
-	private double kP = 0.0;  //0.0
-	private double kI = 0.0;  //0.0
-	private double kD = 0.0;  //0.0
+	private final double kPv = 0.0; //0.0
+	private final double kA = 0.0; //0.0
+	private final double kP = 0.0;  //0.0
+	private final double kI = 0.0;  //0.0
+	private final double kD = 0.0;  //0.0
 	
-	private double kpv = 0.0; //0.0
-	private double ka = 0.0; //0.0
-	private double kp = 0.0; //0.0
-	private double ki = 0.0; //0.0
-	private double kd = 0.0; //0.0
+	private final double kpv = 0.0; //0.0
+	private final double ka = 0.0; //0.0
+	private final double kp = 0.0; //0.0
+	private final double ki = 0.0; //0.0
+	private final double kd = 0.0; //0.0
 	
-	private double minLineOutput = 0.0; //0.085
-	private double minTurnOutput = 0.3; //0.4
+	private final double minLineOutput = 0.0; //0.085
+	private final double minTurnOutput = 0.3; //0.4
 
 	private double dt = 0.005;
 	
@@ -45,15 +45,15 @@ public enum TorMotionProfile
 	private long lookupTime;
 	private long startTime;
 	
-	public JoystickTrajectory joystickTraj;
-	private StationaryTrajectory stationaryTraj;
-	private TorPID positionPID;
-	private TorPID headingPID;
+	public final JoystickTrajectory joystickTraj;
+	private final StationaryTrajectory stationaryTraj;
+	private final TorPID positionPID;
+	private final TorPID headingPID;
 	
 	protected static double positionWaypoint;
 	protected static double headingWaypoint;
 	
-	private boolean usingWaypoint = true;
+	private final boolean usingWaypoint = true;
 	
 	private TorMotionProfile(){
 		joystickTraj = new JoystickTrajectory();
@@ -159,7 +159,7 @@ public enum TorMotionProfile
 //			joystickTraj.updateVelocity();
 //			joystickTraj.updateOmega();
 			
-			//position
+			//Position
 			positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
 			positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
 

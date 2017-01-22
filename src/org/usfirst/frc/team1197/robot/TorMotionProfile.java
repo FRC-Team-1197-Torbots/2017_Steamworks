@@ -25,15 +25,15 @@ public enum TorMotionProfile
 	
 	private double kPv = 0.0; //0.0
 	private double kA = 0.0; //0.0
-	private double kP = 0.3;  //2.5
+	private double kP = 0.0;  //0.0
 	private double kI = 0.0;  //0.0
-	private double kD = 0.2;  //0.3
+	private double kD = 0.0;  //0.0
 	
-	private double kpv = 0.0; //0.5
+	private double kpv = 0.0; //0.0
 	private double ka = 0.0; //0.0
-	private double kp = 0.0; //10.0
+	private double kp = 0.0; //0.0
 	private double ki = 0.0; //0.0
-	private double kd = 0.0; //0.5
+	private double kd = 0.0; //0.0
 	
 	private double minLineOutput = 0.0; //0.085
 	private double minTurnOutput = 0.3; //0.4

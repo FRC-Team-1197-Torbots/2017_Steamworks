@@ -3,8 +3,8 @@ package org.usfirst.frc.team1197.robot;
 public class PivotTrajectory extends TorTrajectory {
 	
 	public PivotTrajectory(double goal){
-		super(goal * (Math.PI/180.0));
-		build(goal_pos, max_omg, max_alf, max_jeta, heading, omega, alpha);
+		super(0.0, goal * (Math.PI/180.0));
+		build(goal_head, max_omg, max_alf, max_jeta, heading, omega, alpha);
 	}
 	
 	public double lookUpHeading(long t){

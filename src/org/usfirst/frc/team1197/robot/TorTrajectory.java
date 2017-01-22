@@ -7,6 +7,7 @@ import java.util.List;
 
 public abstract class TorTrajectory {
 	protected double goal_pos = 0.0;
+	protected double goal_head = 0.0;
 	
 	protected double max_vel = 1000.0;
 	protected double max_acc = 1000.0;
@@ -41,8 +42,9 @@ public abstract class TorTrajectory {
 		}
 	}
 	
-	public TorTrajectory(double goal){
-		goal_pos = goal;
+	public TorTrajectory(double goal_pos, double goal_head){
+		this.goal_pos = goal_pos;
+		this.goal_head = goal_head;
 		
 		max_vel = 5.0; //2.5
 		max_acc = 6.0; //6.0 

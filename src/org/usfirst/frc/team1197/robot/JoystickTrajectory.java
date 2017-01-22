@@ -9,7 +9,7 @@ public class JoystickTrajectory extends TorTrajectory{
 	private double tgt_acc;
 	
 	public JoystickTrajectory(){
-		super(0.0);
+		super(0.0, 0.0);
 		max_alf = 1000.0;
 		linearMotion = new Motion(0.0, 0.0, 0.0);
 		rotationalMotion = new Motion(0.0, 0.0, 0.0);

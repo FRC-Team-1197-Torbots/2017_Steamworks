@@ -23,9 +23,9 @@ public enum TorCAN
 	private double approximateSensorSpeed = 2368.51; // measured maximum (units: RPM)
 	private double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	private double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private double kP = 0.009; //0.009
+	private double kP = 0.0; //0.0
 	private double kI = 0.0; //0.0
-	private double kD = 0.09; //0.09
+	private double kD = 0.0; //0.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
 	private double trackWidth = 0.3683; // (units: meters (14.5 in inches))

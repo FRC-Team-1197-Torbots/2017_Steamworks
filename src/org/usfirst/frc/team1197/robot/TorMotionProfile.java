@@ -102,7 +102,6 @@ public enum TorMotionProfile
 	}
 	
 	public double lookUpHeading(long t){
-		
 		return activeTrajectory.lookUpHeading(lookupTime);
 	}
 	public double lookUpOmega(long t){

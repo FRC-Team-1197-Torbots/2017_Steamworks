@@ -25,7 +25,7 @@ public enum TorCAN
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 //	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
 	private final double kF = 0.219791;
-	private final double kP = 0.1; //0.0
+	private final double kP = 0.0; //0.03
 	private final double kI = 0.0; //0.0
 	private final double kD = 0.0; //0.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
@@ -36,7 +36,6 @@ public enum TorCAN
 	private final double backlash = 0.015; // (units: meters)
 	
 	private TorCAN(){
-		
 		gyro = new AHRS(SerialPort.Port.kMXP);
 		
 		m_Ltalon1 = new CANTalon(1);
@@ -47,7 +46,8 @@ public enum TorCAN
 		m_Rtalon3 = new CANTalon(6);
 		
 		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Rtalon2.reverseSensor(false);
+		m_Rtalon2.reverseSensor(true);
+		m_Rtalon2.reverseOutput(false);
 		m_Rtalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Rtalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Rtalon2.setProfile(0);
@@ -62,7 +62,8 @@ public enum TorCAN
 		m_Rtalon3.set(m_Rtalon2.getDeviceID());
 		
 		m_Ltalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Ltalon2.reverseSensor(false);
+		m_Ltalon2.reverseSensor(true);
+		m_Ltalon2.reverseOutput(true);
 		m_Ltalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Ltalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Ltalon2.setProfile(0);
@@ -118,8 +119,8 @@ public enum TorCAN
 	}
 	
 	public double getPosition(){
-//		SmartDashboard.putNumber("m_Rtalon2.getPosition()", m_Rtalon2.getPosition());
-//		SmartDashboard.putNumber("m_Ltalon2.getPosition()", m_Ltalon2.getPosition());
+		SmartDashboard.putNumber("m_Rtalon2.getPosition()", m_Rtalon2.getPosition());
+		SmartDashboard.putNumber("m_Ltalon2.getPosition()", m_Ltalon2.getPosition());
 		return -(m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
 	}
 	public double getVelocity(){
@@ -136,11 +137,10 @@ public enum TorCAN
 	//1.555 is the conversion factor that we found experimentally.
 	public void setTargets(double v, double omega){ 
 		m_Rtalon2.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		m_Ltalon2.set(-(v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+		m_Ltalon2.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
 	public void resetEncoder(){
-//		System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEE");
 		m_Rtalon2.setPosition(0);
 		m_Ltalon2.setPosition(0);
 	}

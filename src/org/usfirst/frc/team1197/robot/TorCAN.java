@@ -46,7 +46,7 @@ public enum TorCAN
 		m_Rtalon3 = new CANTalon(6);
 		
 		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Rtalon2.reverseSensor(true);
+		m_Rtalon2.reverseSensor(false);
 		m_Rtalon2.reverseOutput(false);
 		m_Rtalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Rtalon2.configPeakOutputVoltage(+12.0f, -12.0f);
@@ -121,10 +121,10 @@ public enum TorCAN
 	public double getPosition(){
 		SmartDashboard.putNumber("m_Rtalon2.getPosition()", m_Rtalon2.getPosition());
 		SmartDashboard.putNumber("m_Ltalon2.getPosition()", m_Ltalon2.getPosition());
-		return -(m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
+		return (m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
 	}
 	public double getVelocity(){
-		return -(m_Rtalon2.getSpeed() + m_Ltalon2.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // (units: meters)
+		return (m_Rtalon2.getSpeed() + m_Ltalon2.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // (units: meters)
 	}
 	
 	public double getHeading(){

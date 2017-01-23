@@ -174,11 +174,11 @@ public enum TorMotionProfile
 			SmartDashboard.putNumber("targetVelocity", targetVelocity);
 			SmartDashboard.putNumber("targetAcceleration", targetAcceleration);
 			SmartDashboard.putNumber("targetPosition", targetPosition);
-			SmartDashboard.putNumber("currentVelocity", -positionPID.velocity());
-			SmartDashboard.putNumber("currentAcceleration", -positionPID.acceleration());
-			SmartDashboard.putNumber("currentPosition", -positionPID.position());
-			SmartDashboard.putNumber("dDispErrordt", -positionPID.dErrodt());
-			SmartDashboard.putNumber("positionError", -positionPID.error());
+			SmartDashboard.putNumber("currentVelocity", positionPID.velocity());
+			SmartDashboard.putNumber("currentAcceleration", positionPID.acceleration());
+			SmartDashboard.putNumber("currentPosition", positionPID.position());
+			SmartDashboard.putNumber("dDispErrordt", positionPID.dErrodt());
+			SmartDashboard.putNumber("positionError", positionPID.error());
 
 			//Heading
 			headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
@@ -195,11 +195,11 @@ public enum TorMotionProfile
 			SmartDashboard.putNumber("targetOmega", targetOmega);
 			SmartDashboard.putNumber("targetAlpha", targetAlpha);
 			SmartDashboard.putNumber("targetHeading", targetHeading);
-			SmartDashboard.putNumber("currentOmega", -headingPID.velocity());
-			SmartDashboard.putNumber("currentAlpha", -headingPID.acceleration());
-			SmartDashboard.putNumber("currentHeading", -headingPID.position());
-			SmartDashboard.putNumber("dHeadErrordt", -headingWaypoint);
-			SmartDashboard.putNumber("headingError", -headingPID.error());
+			SmartDashboard.putNumber("currentOmega", headingPID.velocity());
+			SmartDashboard.putNumber("currentAlpha", headingPID.acceleration());
+			SmartDashboard.putNumber("currentHeading", headingPID.position());
+			SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
+			SmartDashboard.putNumber("headingError", headingPID.error());
 
 			positionPID.update();
 			headingPID.update();

@@ -6,6 +6,7 @@ import com.ctre.CANTalon.StatusFrameRate;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public enum TorCAN
 {
@@ -22,13 +23,14 @@ public enum TorCAN
 	private final double encoderTicksPerMeter = 8945.0; // (units: ticks per meter)
 	private final double approximateSensorSpeed = 2368.51; // measured maximum (units: RPM)
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
-	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 0.0; //0.0
+//	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
+	private final double kF = 0.219791;
+	private final double kP = 0.1; //0.0
 	private final double kI = 0.0; //0.0
 	private final double kD = 0.0; //0.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
-	private final double trackWidth = 0.3683; // (units: meters (14.5 in inches))
+	private final double trackWidth = 0.5786; // (units: meters (14.5 in inches))
 	private final double halfTrackWidth = trackWidth / 2.0; // (units: meters)
 	
 	private final double backlash = 0.015; // (units: meters)
@@ -55,12 +57,12 @@ public enum TorCAN
 		m_Rtalon2.setD(kD);
 		
 		m_Rtalon1.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Rtalon1.set(m_Rtalon1.getDeviceID());
+		m_Rtalon1.set(m_Rtalon2.getDeviceID());
 		m_Rtalon3.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Rtalon3.set(m_Rtalon1.getDeviceID());
+		m_Rtalon3.set(m_Rtalon2.getDeviceID());
 		
 		m_Ltalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Ltalon2.reverseSensor(true);
+		m_Ltalon2.reverseSensor(false);
 		m_Ltalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Ltalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Ltalon2.setProfile(0);
@@ -70,9 +72,9 @@ public enum TorCAN
 		m_Ltalon2.setD(kD); 
 		
 		m_Ltalon1.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Ltalon1.set(m_Ltalon1.getDeviceID());
+		m_Ltalon1.set(m_Ltalon2.getDeviceID());
 		m_Ltalon3.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Ltalon3.set(m_Ltalon1.getDeviceID());
+		m_Ltalon3.set(m_Ltalon2.getDeviceID());
 
 		m_Rtalon2.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
 		m_Ltalon2.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
@@ -116,6 +118,8 @@ public enum TorCAN
 	}
 	
 	public double getPosition(){
+//		SmartDashboard.putNumber("m_Rtalon2.getPosition()", m_Rtalon2.getPosition());
+//		SmartDashboard.putNumber("m_Ltalon2.getPosition()", m_Ltalon2.getPosition());
 		return -(m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
 	}
 	public double getVelocity(){
@@ -136,6 +140,7 @@ public enum TorCAN
 	}
 	
 	public void resetEncoder(){
+//		System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEE");
 		m_Rtalon2.setPosition(0);
 		m_Ltalon2.setPosition(0);
 	}

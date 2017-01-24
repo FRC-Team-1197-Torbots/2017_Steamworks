@@ -25,9 +25,9 @@ public enum TorMotionProfile
 	
 	private final double kPv = 0.0; //0.0
 	private final double kA = 0.0; //0.0
-	private final double kP = 0.0;  //0.0
+	private final double kP = 1.5;  //1.7
 	private final double kI = 0.0;  //0.0
-	private final double kD = 0.0;  //0.0
+	private final double kD = 0.05;  //0.1
 	
 	private final double kpv = 0.0; //0.0
 	private final double ka = 0.0; //0.0

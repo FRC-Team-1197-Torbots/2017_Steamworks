@@ -46,9 +46,9 @@ public abstract class TorTrajectory {
 		this.goal_pos = goal_pos;
 		this.goal_head = goal_head;
 		
-		max_vel = 10.0; //2.5
-		max_acc = 12.0; //6.0 
-		max_jerk = 24.0; //12.0
+		max_vel = 15.0; //2.5
+		max_acc = 17.0; //6.0 
+		max_jerk = 29.0; //12.0
 		
 		max_omg = 30.0; //14.0
 		max_alf = 32.0; //16.0

@@ -25,9 +25,9 @@ public enum TorCAN
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 //	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
 	private final double kF = 0.219791;
-	private final double kP = 0.0; //0.03
+	private final double kP = 1.125; //1.125
 	private final double kI = 0.0; //0.0
-	private final double kD = 0.0; //0.0
+	private final double kD = 70.0; //70.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
 	private final double trackWidth = 0.5786; // (units: meters (14.5 in inches))
@@ -48,6 +48,7 @@ public enum TorCAN
 		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_Rtalon2.reverseSensor(false);
 		m_Rtalon2.reverseOutput(false);
+//		m_Rtalon2.setAllowableClosedLoopErr(10);
 		m_Rtalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Rtalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Rtalon2.setProfile(0);
@@ -64,6 +65,7 @@ public enum TorCAN
 		m_Ltalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_Ltalon2.reverseSensor(true);
 		m_Ltalon2.reverseOutput(true);
+//		m_Ltalon2.setAllowableClosedLoopErr(10);
 		m_Ltalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Ltalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Ltalon2.setProfile(0);

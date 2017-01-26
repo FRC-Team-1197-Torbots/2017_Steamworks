@@ -27,6 +27,7 @@ public class TorPID {
 	private double dt;
 	private boolean dtIsUpdated;
 	private boolean velIsUpdated;
+	private double kI_temp;
 	
 	public enum sensorLimitMode{Default, Coterminal;}
 	public enum sensorNoiseMode{Clean, Noisy;}
@@ -89,7 +90,13 @@ public class TorPID {
 			while(error < -Math.PI) error += 2*Math.PI;
 			while(error > Math.PI) error -= 2*Math.PI;
 		}
-		errorIntegral += error*dt;
+		if(Math.abs(error) > posTolerance){
+			errorIntegral += error*dt;
+		}
+		if(Math.abs(velTarget) > velTolerance)
+			kI_temp = kI;
+		else
+			kI_temp = 0.0;
 		// TODO: think about how to guarantee continuous velocity w/ coterminal sensor limits.
 		if(noiseMode == sensorNoiseMode.Noisy)
 			dErrordt = ErrorDerivative.estimate(error);
@@ -102,7 +109,7 @@ public class TorPID {
 				+ (kPv * (velTarget-vel))
 				+ (kA * accTarget )
 				+ (kP * error) 
-				+ (kI * errorIntegral)
+				+ (kI_temp * errorIntegral)
 				+ (kD * dErrordt);
 		if(Math.abs(velTarget) > 0.0 || error > posTolerance){
 			if(v < 0.0)

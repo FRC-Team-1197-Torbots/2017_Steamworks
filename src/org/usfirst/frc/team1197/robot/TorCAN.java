@@ -48,7 +48,7 @@ public enum TorCAN
 		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_Rtalon2.reverseSensor(false);
 		m_Rtalon2.reverseOutput(false);
-//		m_Rtalon2.setAllowableClosedLoopErr(10);
+//		m_Rtalon2.setAllowableClosedLoopErr((int) (0.005 * 0.1 * encoderTicksPerMeter));
 		m_Rtalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Rtalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Rtalon2.setProfile(0);
@@ -65,7 +65,7 @@ public enum TorCAN
 		m_Ltalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_Ltalon2.reverseSensor(true);
 		m_Ltalon2.reverseOutput(true);
-//		m_Ltalon2.setAllowableClosedLoopErr(10);
+//		m_Ltalon2.setAllowableClosedLoopErr((int) (0.005 * 0.1 * encoderTicksPerMeter));
 		m_Ltalon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Ltalon2.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Ltalon2.setProfile(0);

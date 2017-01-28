@@ -10,7 +10,7 @@ public class PivotTrajectory extends TorTrajectory {
 	public double lookUpHeading(long t){
 		int i = time.indexOf(t);
 		if(i == -1){
-			return goal_pos;
+			return goal_head;
 		}
 		return heading.elementAt(i);
 	}

@@ -10,7 +10,6 @@ public class Robot extends SampleRobot {
 	private Compressor compressor;
 	private Solenoid shift;
 	private Joystick stick;
-	
 	private TorDrive drive;
 
     public Robot() {
@@ -33,6 +32,7 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightTrigger(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+    		System.out.println(TorCAN.INSTANCE.getAverageRawVelocity());
     	}
     }
 

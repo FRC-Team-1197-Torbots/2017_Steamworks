@@ -1,12 +1,12 @@
 package org.usfirst.frc.team1197.robot;
 
 import com.ctre.CANTalon;
+
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.StatusFrameRate;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public enum TorCAN
 {
@@ -20,14 +20,13 @@ public enum TorCAN
 	private final CANTalon m_Ltalon3;
 	
 	private final AHRS gyro;
-	private final double encoderTicksPerMeter = 8945.0; // (units: ticks per meter)
-	private final double approximateSensorSpeed = 2368.51; // measured maximum (units: RPM)
+	private final double encoderTicksPerMeter = 7353.5; // (units: ticks per meter)
+	private final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
-//	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kF = 0.219791;
-	private final double kP = 1.125; //1.125
+	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
+	private final double kP = 0.0; //1.125
 	private final double kI = 0.0; //0.0
-	private final double kD = 70.0; //70.0
+	private final double kD = 0.0; //70.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
 	private final double trackWidth = 0.5786; // (units: meters (14.5 in inches))
@@ -44,6 +43,9 @@ public enum TorCAN
 		m_Rtalon1 = new CANTalon(4);
 		m_Rtalon2 = new CANTalon(5);
 		m_Rtalon3 = new CANTalon(6);
+		
+//		m_Rtalon2.configEncoderCodesPerRev(128);
+//		m_Ltalon2.configEncoderCodesPerRev(128);
 		
 		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_Rtalon2.reverseSensor(false);
@@ -120,9 +122,13 @@ public enum TorCAN
 		m_Ltalon2.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
 	}
 	
+	public double getAverageRawVelocity(){
+		return (m_Rtalon2.getSpeed() + m_Ltalon2.getSpeed()) * 0.5;
+	}
+	public double getAverageEncoderPosition(){
+		return (m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5;
+	}
 	public double getPosition(){
-		SmartDashboard.putNumber("m_Rtalon2.getPosition()", m_Rtalon2.getPosition());
-		SmartDashboard.putNumber("m_Ltalon2.getPosition()", m_Ltalon2.getPosition());
 		return (m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
 	}
 	public double getVelocity(){

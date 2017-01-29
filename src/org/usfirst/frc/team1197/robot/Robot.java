@@ -32,7 +32,7 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightTrigger(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-    		System.out.println(TorCAN.INSTANCE.getAverageRawVelocity());
+//    		System.out.println(TorCAN.INSTANCE.getOmega());
     	}
     }
 

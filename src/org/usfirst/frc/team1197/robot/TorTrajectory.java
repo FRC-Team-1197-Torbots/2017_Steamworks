@@ -46,13 +46,13 @@ public abstract class TorTrajectory {
 		this.goal_pos = goal_pos;
 		this.goal_head = goal_head;
 		
-		max_vel = 2.5; //2.5
+		max_vel = 4.5; //2.5
 		max_acc = 6.0; //6.0 
-		max_jerk = 12.0; //12.0
+		max_jerk = 20.0; //12.0
 		
-		max_omg = 30.0; //14.0
-		max_alf = 32.0; //16.0
-		max_jeta = 38.0; //22.0
+		max_omg = 8.0; //14.0
+		max_alf = 12.0; //16.0
+		max_jeta = 40.0; //22.0
 		
 		time = new Vector<Long>();
 		

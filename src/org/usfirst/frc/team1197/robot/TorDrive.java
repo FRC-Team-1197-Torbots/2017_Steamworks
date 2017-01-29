@@ -40,10 +40,10 @@ public class TorDrive
 	public TorDrive(Joystick stick, Solenoid shift)
 	{
 		joystickProfile = new TorJoystickProfiles();
-		forwardTrajectory = new LinearTrajectory(1.0);
+		forwardTrajectory = new LinearTrajectory(3.0);
 		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(90);
-		leftTrajectory = new PivotTrajectory(-90);
+		rightTrajectory = new PivotTrajectory(360);
+		leftTrajectory = new PivotTrajectory(-720);
 		
 		maxThrottle = (5.0/6.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
@@ -80,7 +80,7 @@ public class TorDrive
 	//Shifts the robot to high gear and change the talon's control mode to speed.
 	public void shiftToHighGear(){
 		if (!isHighGear){
-			m_solenoidshift.set(true);
+			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
 			TorMotionProfile.INSTANCE.executeDefault();

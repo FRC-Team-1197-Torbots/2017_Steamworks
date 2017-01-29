@@ -9,7 +9,6 @@ public class TorClimb {
 
 	private CANTalon climbTalon;
 
-
 	public TorClimb(CANTalon climbTalon){
 		this.climbTalon = climbTalon;
 	}

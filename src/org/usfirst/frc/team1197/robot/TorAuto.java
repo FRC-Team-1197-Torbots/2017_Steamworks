@@ -44,9 +44,10 @@ public class TorAuto {
 	}
 	
 	
-	/**
-	 * below are the auto code the 3 starting positions
-	 */
+	/*****************************************************
+	 * BELOW ARE THE THREE AUTO CODE SITUATIONS
+	 *****************************************************/
+	
 	public void center() {
 		//drive to gear 
 		
@@ -55,6 +56,8 @@ public class TorAuto {
 	
 	public void right() {
 		//drive to gear
+		
+		intake.DumpBalls();
 		
 		//drive to boiler
 		

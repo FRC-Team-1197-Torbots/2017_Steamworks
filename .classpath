@@ -8,5 +8,6 @@
 	<classpathentry exported="true" kind="var" path="cscore" sourcepath="cscore.sources"/>
 	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/TorTrajectoryLib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

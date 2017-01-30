@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1197.robot;
 
+import org.usfirst.frc.team1197.TorTrajectoryLib.JoystickTrajectory;
+import org.usfirst.frc.team1197.TorTrajectoryLib.StationaryTrajectory;
+import org.usfirst.frc.team1197.TorTrajectoryLib.TorTrajectory;
 import org.usfirst.frc.team1197.robot.TorPID.sensorLimitMode;
 import org.usfirst.frc.team1197.robot.TorPID.sensorNoiseMode;
 
@@ -10,9 +13,12 @@ public enum TorMotionProfile
 	INSTANCE;
 	
 	private boolean isActive = false;
-	private TorTrajectory activeTrajectory = null;
-	private TorTrajectory nextTrajectory = null;
-	private TorTrajectory defaultTrajectory = null;
+	public static final JoystickTrajectory joystickTraj = new JoystickTrajectory();
+	private static final StationaryTrajectory stationaryTraj = new StationaryTrajectory();
+	private static TorTrajectory defaultTrajectory = joystickTraj;
+	private static TorTrajectory activeTrajectory = defaultTrajectory;
+	private static TorTrajectory nextTrajectory = defaultTrajectory;
+
 	private final double timeInterval = 0.005;
 	
 	private double targetVelocity;
@@ -45,8 +51,6 @@ public enum TorMotionProfile
 	private long lookupTime;
 	private long startTime;
 	
-	public final JoystickTrajectory joystickTraj;
-	private final StationaryTrajectory stationaryTraj;
 	private final TorPID positionPID;
 	private final TorPID headingPID;
 	
@@ -56,15 +60,8 @@ public enum TorMotionProfile
 	private final boolean usingWaypoint = true;
 	
 	private TorMotionProfile(){
-		joystickTraj = new JoystickTrajectory();
-		stationaryTraj = new StationaryTrajectory();
 		positionPID = new TorPID(dt);
 		headingPID = new TorPID(dt);
-		
-		defaultTrajectory = joystickTraj;
-		
-		activeTrajectory = defaultTrajectory;
-		nextTrajectory = defaultTrajectory;
 		
 		positionPID.setLimitMode(sensorLimitMode.Default);
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
@@ -125,7 +122,7 @@ public enum TorMotionProfile
 	}
 	
 	public void setActive(){
-		activeTrajectory = defaultTrajectory;
+		activeTrajectory = nextTrajectory;
 		nextTrajectory = defaultTrajectory;
 		resetWaypoints();
 		TorCAN.INSTANCE.resetEncoder();
@@ -213,8 +210,12 @@ public enum TorMotionProfile
 						headingWaypoint += lookUpHeading(-1);
 					}
 					System.out.println("IS ON TARGETTTTTTTTTTTTTTTTTTTTTTTT");
+					if (nextTrajectory == joystickTraj){
+						joystickTraj.init(0.0, 0.0, 0.0, 0.0); //TODO: put correct numbers in here!
+					}
+					activeTrajectory.setComplete(true);
 					activeTrajectory = nextTrajectory;
-					nextTrajectory = defaultTrajectory;
+					executeDefaultTrajectory(); // queues up the default trajectory into the "next trajectory" slot.
 				}
 			}
 		}
@@ -224,17 +225,18 @@ public enum TorMotionProfile
 		}
 	}
 	
-	public void executeDefault(){
+	public void executeDefaultTrajectory(){
 		if(defaultTrajectory == stationaryTraj){
-			stationaryTraj.execute();
+			executeTrajectory(stationaryTraj);
 		}
 		else{
-			joystickTraj.execute(0.0,0.0,0.0,0.0);
+			executeTrajectory(joystickTraj);
 		}
 	}
 	
-	public boolean isComplete(){
-		return (activeTrajectory == defaultTrajectory);
+	public static void executeTrajectory(TorTrajectory t){
+		t.setComplete(false);
+		nextTrajectory = t;
 	}
 	
 	public boolean dispOnTarget(){

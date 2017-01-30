@@ -40,10 +40,10 @@ public class TorDrive
 	public TorDrive(Joystick stick, Solenoid shift)
 	{
 		joystickProfile = new TorJoystickProfiles();
-		forwardTrajectory = new LinearTrajectory(3.0);
-		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(360);
-		leftTrajectory = new PivotTrajectory(-720);
+		forwardTrajectory = new LinearTrajectory(1.0);
+		backwardTrajectory = new LinearTrajectory(1.0);
+		rightTrajectory = new PivotTrajectory(90);
+		leftTrajectory = new PivotTrajectory(-45);
 		
 		maxThrottle = (5.0/6.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		

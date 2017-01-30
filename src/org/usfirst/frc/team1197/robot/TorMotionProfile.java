@@ -25,18 +25,18 @@ public enum TorMotionProfile
 	
 	private final double kPv = 0.05; //0.05
 	private final double kA = 0.05; //0.05
-	private final double kP = 3.85;  //3.85
-	private final double kI = 1.5;  //1.5
-	private final double kD = 0.2;  //0.2
+	private final double kP = 5.0;  //5.0
+	private final double kI = 1.75;  //1.75
+	private final double kD = 0.05;  //0.05
 	
-	private final double kpv = 0.075; //0.075
-	private final double ka = 0.03; //0.03
+	private final double kpv = 0.1; //0.1
+	private final double ka = 0.05; //0.05
 	private final double kp = 18.5; //18.5
 	private final double ki = 3.75; //3.75
-	private final double kd = 1.0; //1.0
+	private final double kd = 0.35; //0.35
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.3; //0.3
+	private final double minTurnOutput = 0.2; //0.2
 
 	private double dt = 0.005;
 	
@@ -61,7 +61,7 @@ public enum TorMotionProfile
 		positionPID = new TorPID(dt);
 		headingPID = new TorPID(dt);
 		
-		defaultTrajectory = stationaryTraj;
+		defaultTrajectory = joystickTraj;
 		
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
@@ -155,9 +155,9 @@ public enum TorMotionProfile
 			positionPID.updateDt(dt);
 			headingPID.updateDt(dt);
 			
-//			joystickTraj.updateDt(dt); //TODO (2): uncomment and see if this makes things better/worse after doing (1).
-//			joystickTraj.updateVelocity();
-//			joystickTraj.updateOmega();
+			joystickTraj.updateDt(dt); //TODO (2): uncomment and see if this makes things better/worse after doing (1).
+			joystickTraj.updateVelocity();
+			joystickTraj.updateOmega();
 			
 			//Position
 			positionPID.updatePosition(TorCAN.INSTANCE.getPosition());

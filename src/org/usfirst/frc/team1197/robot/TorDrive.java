@@ -40,12 +40,12 @@ public class TorDrive
 	public TorDrive(Joystick stick, Solenoid shift)
 	{
 		joystickProfile = new TorJoystickProfiles();
-		forwardTrajectory = new LinearTrajectory(1.0);
-		backwardTrajectory = new LinearTrajectory(1.0);
-		rightTrajectory = new PivotTrajectory(90);
+		forwardTrajectory = new LinearTrajectory(2.0);
+		backwardTrajectory = new LinearTrajectory(-1.0);
+		rightTrajectory = new PivotTrajectory(180);
 		leftTrajectory = new PivotTrajectory(-45);
 		
-		maxThrottle = (5.0/6.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
+		maxThrottle = (0.6*12.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
 		m_solenoidshift = shift;
 		mpNotifier.startPeriodic(0.005);
@@ -56,8 +56,8 @@ public class TorDrive
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-//			ackermanDrive(throttleAxis, carSteerAxis);
-			buttonDrive(buttonA, buttonB, buttonX, buttonY);
+			ackermanDrive(throttleAxis, carSteerAxis);
+//			buttonDrive(buttonA, buttonB, buttonX, buttonY);
 			
 			//When you hold down the shiftButton (left bumper), then shift to low gear.
 			if(shiftButton){

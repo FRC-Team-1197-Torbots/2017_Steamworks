@@ -51,7 +51,7 @@ public abstract class TorTrajectory {
 		max_jerk = 20.0; //20.0
 		
 		max_omg = 8.0; //8.0
-		max_alf = 10.0; //10.0
+		max_alf = 9.0; //10.0
 		max_jeta = 40.0; //40.0
 		
 		time = new Vector<Long>();

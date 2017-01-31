@@ -19,7 +19,7 @@ public enum TorMotionProfile
 	private static TorTrajectory activeTrajectory = defaultTrajectory;
 	private static TorTrajectory nextTrajectory = defaultTrajectory;
 
-	private final static double timeInterval = 0.005;
+	private final double timeInterval = 0.005;
 	
 	private double targetVelocity;
 	private double targetAcceleration;
@@ -88,6 +88,30 @@ public enum TorMotionProfile
 		headingPID.setkA(ka);
 	}
 	
+	public double lookUpPosition(long t){
+		return activeTrajectory.lookUpPosition(lookupTime);
+	}
+	public double lookUpVelocity(long t){
+		return activeTrajectory.lookUpVelocity(lookupTime);
+	}
+	public double lookUpAcceleration(long t){
+		return activeTrajectory.lookUpAcceleration(lookupTime);
+	}
+	
+	public double lookUpHeading(long t){
+		return activeTrajectory.lookUpHeading(lookupTime);
+	}
+	public double lookUpOmega(long t){
+		return activeTrajectory.lookUpOmega(lookupTime);
+	}
+	public double lookUpAlpha(long t){
+		return activeTrajectory.lookUpAlpha(lookupTime);
+	}
+	
+	public boolean lookUpIsLast(long t){
+		return activeTrajectory.lookUpIsLast(lookupTime);
+	}
+	
 	public void loadTrajectory(TorTrajectory traj){
 		if(!usingWaypoint){
 			TorCAN.INSTANCE.resetEncoder();
@@ -113,7 +137,7 @@ public enum TorMotionProfile
 		return isActive;
 	}
 	
-	public static double getTimeInterval(){
+	public double getTimeInterval(){
 		return timeInterval;
 	}
 	
@@ -121,14 +145,14 @@ public enum TorMotionProfile
 		if(isActive()){
 			currentTime = System.currentTimeMillis();
 			dt = (currentTime - lastTime) * 0.001;
-			lastTime = currentTime;
+			lastTime = currentTime; //TODO (1): uncomment and re-tune PID, if necessary
 			currentTime = (currentTime - (currentTime % ((long)(getTimeInterval() * 1000))));
 			lookupTime = currentTime - startTime;
 			
 			positionPID.updateDt(dt);
 			headingPID.updateDt(dt);
 			
-			joystickTraj.updateDt(dt);
+			joystickTraj.updateDt(dt); //TODO (2): uncomment and see if this makes things better/worse after doing (1).
 			joystickTraj.updateVelocity();
 			joystickTraj.updateOmega();
 			
@@ -136,9 +160,9 @@ public enum TorMotionProfile
 			positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
 			positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
 
-			targetPosition = activeTrajectory.lookUpPosition(lookupTime) + positionWaypoint;
-			targetVelocity = activeTrajectory.lookUpVelocity(lookupTime);
-			targetAcceleration = activeTrajectory.lookUpAcceleration(lookupTime);	
+			targetPosition = lookUpPosition(currentTime) + positionWaypoint;
+			targetVelocity = lookUpVelocity(currentTime);
+			targetAcceleration = lookUpAcceleration(currentTime);	
 
 			positionPID.updatePositionTarget(targetPosition);
 			positionPID.updateVelocityTarget(targetVelocity);
@@ -157,9 +181,9 @@ public enum TorMotionProfile
 			headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
 			headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
 
-			targetHeading = activeTrajectory.lookUpHeading(lookupTime) + headingWaypoint;
-			targetOmega = activeTrajectory.lookUpOmega(lookupTime);
-			targetAlpha = activeTrajectory.lookUpAlpha(lookupTime);	
+			targetHeading = lookUpHeading(currentTime) + headingWaypoint;
+			targetOmega = lookUpOmega(currentTime);
+			targetAlpha = lookUpAlpha(currentTime);	
 
 			headingPID.updatePositionTarget(targetHeading);
 			headingPID.updateVelocityTarget(targetOmega);
@@ -178,14 +202,12 @@ public enum TorMotionProfile
 			headingPID.update();
 			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
 //			TorCAN.INSTANCE.setTargets(0.0, 0.0);
-			if(activeTrajectory.lookUpIsLast(lookupTime)
-			   && positionPID.isOnTarget()
-			   && headingPID.isOnTarget()){
+			if(lookUpIsLast(currentTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 				startTime = currentTime;
 				if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
 					if(usingWaypoint){
-						positionWaypoint += activeTrajectory.goal_pos();
-						headingWaypoint += activeTrajectory.goal_head();
+						positionWaypoint += lookUpPosition(-1);
+						headingWaypoint += lookUpHeading(-1);
 					}
 					System.out.println("IS ON TARGETTTTTTTTTTTTTTTTTTTTTTTT");
 					if (nextTrajectory == joystickTraj){
@@ -223,6 +245,10 @@ public enum TorMotionProfile
 	
 	public boolean headOnTarget(){
 		return headingPID.isOnTarget();
+	}
+	
+	public boolean lookUpIsLast(){
+		return lookUpIsLast(currentTime);
 	}
 	
 	public void resetWaypoints(){

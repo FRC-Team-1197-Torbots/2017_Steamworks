@@ -49,7 +49,7 @@ public class TorDrive
 		rightTrajectory = new PivotTrajectory(180);
 		leftTrajectory = new PivotTrajectory(-45);
 		
-		maxThrottle = 0.6 * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
+		maxThrottle = (0.6*12.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
 		m_solenoidshift = shift;
 		mpNotifier.startPeriodic(0.005);

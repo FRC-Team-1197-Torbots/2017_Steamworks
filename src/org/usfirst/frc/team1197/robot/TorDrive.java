@@ -1,9 +1,5 @@
 package org.usfirst.frc.team1197.robot;
 
-import org.usfirst.frc.team1197.TorTrajectoryLib.LinearTrajectory;
-import org.usfirst.frc.team1197.TorTrajectoryLib.PivotTrajectory;
-import org.usfirst.frc.team1197.TorTrajectoryLib.TorTrajectory;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -87,7 +83,7 @@ public class TorDrive
 			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
-			TorMotionProfile.INSTANCE.executeDefaultTrajectory(); //TODO: do we need this?
+			TorMotionProfile.INSTANCE.executeDefault();
 			TorMotionProfile.INSTANCE.setActive();
 		}
 	}
@@ -188,16 +184,16 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-			TorMotionProfile.executeTrajectory(rightTrajectory);
+			rightTrajectory.execute();
 		}
 		else if(buttonX && !buttonXlast){
-			TorMotionProfile.executeTrajectory(leftTrajectory);
+			leftTrajectory.execute();
 		}
 		else if(buttonY && !buttonYlast){
-			TorMotionProfile.executeTrajectory(forwardTrajectory);
+			forwardTrajectory.execute();
 		}
 		else if(buttonA && !buttonAlast){
-			TorMotionProfile.executeTrajectory(backwardTrajectory);
+			backwardTrajectory.execute();
 		}
 		else{
 			
@@ -232,7 +228,7 @@ public class TorDrive
 		}
 
 		// Setting the joystick trajectory targets so that it actually drives:
-		TorMotionProfile.joystickTraj.setTargets(targetSpeed, targetOmega);
+		TorMotionProfile.INSTANCE.joystickTraj.setTargets(targetSpeed, targetOmega);
 		SmartDashboard.putNumber("targetSpeed", targetSpeed);
 
 	}

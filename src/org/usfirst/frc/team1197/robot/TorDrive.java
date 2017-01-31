@@ -15,7 +15,7 @@ public class TorDrive
 	private TorJoystickProfiles joystickProfile;
 	private double targetSpeed;
 	private double targetOmega;
-	private double trackWidth = 0.3683; //meters, in inches 14.5
+	private double trackWidth = 0.5715; //meters, in inches 22.5
 	private double halfTrackWidth = trackWidth / 2.0;
 	private double centerRadius = 0.0;
 	private double maxThrottle;
@@ -45,7 +45,7 @@ public class TorDrive
 		rightTrajectory = new PivotTrajectory(180);
 		leftTrajectory = new PivotTrajectory(-45);
 		
-		maxThrottle = (0.6*12.0) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
+		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
 		m_solenoidshift = shift;
 		mpNotifier.startPeriodic(0.005);

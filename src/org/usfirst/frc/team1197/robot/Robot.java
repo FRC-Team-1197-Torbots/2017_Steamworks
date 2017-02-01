@@ -30,7 +30,7 @@ public class Robot extends SampleRobot {
     public void operatorControl() {
     	drive.shiftToHighGear();
     	while(isEnabled()){
-    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightTrigger(), 
+    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		System.out.println(TorCAN.INSTANCE.getOmega());
     	}

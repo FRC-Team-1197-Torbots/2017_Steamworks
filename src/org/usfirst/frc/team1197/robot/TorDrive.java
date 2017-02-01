@@ -52,7 +52,7 @@ public class TorDrive
 	}
 	
 	
-	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton, double rightTrigger,
+	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton, boolean rightBumper,
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
@@ -67,10 +67,16 @@ public class TorDrive
 		
 		//Only switch to ArcadeDrive in low gear
 		else{	
+			if(rightBumper){
+				m_solenoidshift.set(false);
+			}
+			else{
+				m_solenoidshift.set(true);
+			}
 			ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			
 			//When you release the shiftButton (left bumper), then shift to high gear.
-			if(!shiftButton){
+			if(!shiftButton ){
 				shiftToHighGear();
 			}
 			
@@ -91,7 +97,7 @@ public class TorDrive
 	//Shifts the robot to low gear and change the talon's control mode to percentVbus.
 	public void shiftToLowGear(){
 		if (isHighGear){
-			m_solenoidshift.set(false);
+			m_solenoidshift.set(true);
 			TorCAN.INSTANCE.choosePercentVbus();
 			isHighGear = false;
 			TorMotionProfile.INSTANCE.setInactive();

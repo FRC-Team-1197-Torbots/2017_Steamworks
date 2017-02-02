@@ -16,10 +16,21 @@ public class TorGear {
 
 	public void Gear(){
 		if(limitSwitch.get()){
-			gearPiston.set(true);
-			//need to determine if true or false
-		}else
-			gearPiston.set(false);
+			gearOpen();
+		}
+		else{
+			gearClosed();
+		}
+	}
+	
+	public void gearOpen(){
+		gearPiston.set(true);
+		//determine if true or false for open position
+	}
+	
+	public void gearClosed(){
+		gearPiston.set(false);
+		//determine if true or false for closed position
 	}
 
 }

@@ -240,7 +240,7 @@ public class TorPID {
 	}
 	
 	public void reset(){
-		PositionDerivative.reset();
+//		PositionDerivative.reset();
 		errorIntegral = 0;
 	}
 }

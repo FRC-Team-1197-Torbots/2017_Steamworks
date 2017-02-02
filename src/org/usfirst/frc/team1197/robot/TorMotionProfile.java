@@ -22,13 +22,13 @@ public enum TorMotionProfile
 	private double targetOmega;
 	private double targetAlpha;
 	private double targetHeading;
-	//kp = 3.75
+
 	private final double kPv = 0.05; //0.05
 	private final double kA = 0.05; //0.05
 	private final double kP = 5.5;  //5.25
 	private final double kI = 1.75;  //1.75
 	private final double kD = 0.07;  //0.05
-	//kpv = 0.5
+
 	private final double kpv = 0.1; //0.1
 	private final double ka = 0.05; //0.05
 	private final double kp = 19.0; //18.75
@@ -135,6 +135,8 @@ public enum TorMotionProfile
 	}
 	public void setInactive(){
 		isActive = false;
+		activeTrajectory = defaultTrajectory;
+		nextTrajectory = defaultTrajectory;
 	}
 	public boolean isActive(){
 		return isActive;
@@ -144,84 +146,177 @@ public enum TorMotionProfile
 		return timeInterval;
 	}
 	
-	public void run(){		
-		if(isActive()){
-			currentTime = System.currentTimeMillis();
-			dt = (currentTime - lastTime) * 0.001;
-			lastTime = currentTime; //TODO (1): uncomment and re-tune PID, if necessary
-			currentTime = (currentTime - (currentTime % ((long)(getTimeInterval() * 1000))));
-			lookupTime = currentTime - startTime;
-			
-			positionPID.updateDt(dt);
-			headingPID.updateDt(dt);
-			
-			joystickTraj.updateDt(dt); //TODO (2): uncomment and see if this makes things better/worse after doing (1).
+//	public void run(){		
+//		if(isActive()){
+//			currentTime = System.currentTimeMillis();
+//			dt = (currentTime - lastTime) * 0.001;
+//			lastTime = currentTime; //TODO (1): uncomment and re-tune PID, if necessary
+//			currentTime = (currentTime - (currentTime % ((long)(getTimeInterval() * 1000))));
+//			lookupTime = currentTime - startTime;
+//			
+//			positionPID.updateDt(dt);
+//			headingPID.updateDt(dt);
+//			
+//			joystickTraj.updateDt(dt); //TODO (2): uncomment and see if this makes things better/worse after doing (1).
+//			joystickTraj.updateVelocity();
+//			joystickTraj.updateOmega();
+//			
+//			//Position
+//			positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
+//			positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
+//
+//			targetPosition = lookUpPosition(currentTime) + positionWaypoint;
+//			targetVelocity = lookUpVelocity(currentTime);
+//			targetAcceleration = lookUpAcceleration(currentTime);	
+//
+//			positionPID.updatePositionTarget(targetPosition);
+//			positionPID.updateVelocityTarget(targetVelocity);
+//			positionPID.updateAccelerationTarget(targetAcceleration);
+//
+//			SmartDashboard.putNumber("targetVelocity", targetVelocity);
+//			SmartDashboard.putNumber("targetAcceleration", targetAcceleration);
+//			SmartDashboard.putNumber("targetPosition", targetPosition);
+//			SmartDashboard.putNumber("currentVelocity", positionPID.velocity());
+//			SmartDashboard.putNumber("currentAcceleration", positionPID.acceleration());
+//			SmartDashboard.putNumber("currentPosition", positionPID.position());
+//			SmartDashboard.putNumber("dDispErrordt", positionPID.dErrodt());
+//			SmartDashboard.putNumber("positionError", positionPID.error());
+//
+//			//Heading
+//			headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
+//			headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
+//
+//			targetHeading = lookUpHeading(currentTime) + headingWaypoint;
+//			targetOmega = lookUpOmega(currentTime);
+//			targetAlpha = lookUpAlpha(currentTime);	
+//
+//			headingPID.updatePositionTarget(targetHeading);
+//			headingPID.updateVelocityTarget(targetOmega);
+//			headingPID.updateAccelerationTarget(targetAlpha);	
+//
+//			SmartDashboard.putNumber("targetOmega", targetOmega);
+//			SmartDashboard.putNumber("targetAlpha", targetAlpha);
+//			SmartDashboard.putNumber("targetHeading", targetHeading);
+//			SmartDashboard.putNumber("currentOmega", headingPID.velocity());
+//			SmartDashboard.putNumber("currentAlpha", headingPID.acceleration());
+//			SmartDashboard.putNumber("currentHeading", headingPID.position());
+//			SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
+//			SmartDashboard.putNumber("headingError", headingPID.error());
+//
+//			positionPID.update();
+//			headingPID.update();
+//			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
+////			TorCAN.INSTANCE.setTargets(0.0, 0.0);
+//			if(lookUpIsLast(currentTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
+//				startTime = currentTime;
+//				if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
+//					if(usingWaypoint){
+//						positionWaypoint += lookUpPosition(-1);
+//						headingWaypoint += lookUpHeading(-1);
+//					}
+//					System.out.println("IS ON TARGETTTTTTTTTTTTTTTTTTTTTTTT");
+//					activeTrajectory = nextTrajectory;
+//					nextTrajectory = defaultTrajectory;
+//				}
+//			}
+//		}
+//		else{
+//			TorCAN.INSTANCE.resetEncoder();
+//			TorCAN.INSTANCE.resetHeading();
+//		}
+//	}
+	
+	public void run(){
+		currentTime = System.currentTimeMillis();
+		dt = (currentTime - lastTime) * 0.001;
+		lastTime = currentTime; //TODO (1): uncomment and re-tune PID, if necessary
+		currentTime = (currentTime - (currentTime % ((long)(getTimeInterval() * 1000))));
+		lookupTime = currentTime - startTime;
+		positionPID.updateDt(dt);
+		headingPID.updateDt(dt);
+		joystickTraj.updateDt(dt); 
+
+		//Position
+		positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
+		positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
+
+		positionPID.updatePositionTarget(targetPosition);
+		positionPID.updateVelocityTarget(targetVelocity);
+		positionPID.updateAccelerationTarget(targetAcceleration);
+
+		//Heading
+		headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
+		headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
+
+		targetHeading = lookUpHeading(currentTime) + headingWaypoint;
+		targetOmega = lookUpOmega(currentTime);
+		targetAlpha = lookUpAlpha(currentTime);	
+
+		
+		if(isActive){
 			joystickTraj.updateVelocity();
 			joystickTraj.updateOmega();
-			
-			//Position
-			positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
-			positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
-
-			targetPosition = lookUpPosition(currentTime) + positionWaypoint;
-			targetVelocity = lookUpVelocity(currentTime);
-			targetAcceleration = lookUpAcceleration(currentTime);	
-
-			positionPID.updatePositionTarget(targetPosition);
-			positionPID.updateVelocityTarget(targetVelocity);
-			positionPID.updateAccelerationTarget(targetAcceleration);
-
-			SmartDashboard.putNumber("targetVelocity", targetVelocity);
-			SmartDashboard.putNumber("targetAcceleration", targetAcceleration);
-			SmartDashboard.putNumber("targetPosition", targetPosition);
-			SmartDashboard.putNumber("currentVelocity", positionPID.velocity());
-			SmartDashboard.putNumber("currentAcceleration", positionPID.acceleration());
-			SmartDashboard.putNumber("currentPosition", positionPID.position());
-			SmartDashboard.putNumber("dDispErrordt", positionPID.dErrodt());
-			SmartDashboard.putNumber("positionError", positionPID.error());
-
-			//Heading
-			headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
-			headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
-
-			targetHeading = lookUpHeading(currentTime) + headingWaypoint;
-			targetOmega = lookUpOmega(currentTime);
-			targetAlpha = lookUpAlpha(currentTime);	
-
-			headingPID.updatePositionTarget(targetHeading);
-			headingPID.updateVelocityTarget(targetOmega);
-			headingPID.updateAccelerationTarget(targetAlpha);	
-
-			SmartDashboard.putNumber("targetOmega", targetOmega);
-			SmartDashboard.putNumber("targetAlpha", targetAlpha);
-			SmartDashboard.putNumber("targetHeading", targetHeading);
-			SmartDashboard.putNumber("currentOmega", headingPID.velocity());
-			SmartDashboard.putNumber("currentAlpha", headingPID.acceleration());
-			SmartDashboard.putNumber("currentHeading", headingPID.position());
-			SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
-			SmartDashboard.putNumber("headingError", headingPID.error());
-
-			positionPID.update();
-			headingPID.update();
-			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
-//			TorCAN.INSTANCE.setTargets(0.0, 0.0);
-			if(lookUpIsLast(currentTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
-				startTime = currentTime;
-				if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
-					if(usingWaypoint){
-						positionWaypoint += lookUpPosition(-1);
-						headingWaypoint += lookUpHeading(-1);
-					}
-					System.out.println("IS ON TARGETTTTTTTTTTTTTTTTTTTTTTTT");
-					activeTrajectory = nextTrajectory;
-					nextTrajectory = defaultTrajectory;
-				}
-			}
 		}
 		else{
-			TorCAN.INSTANCE.resetEncoder();
-			TorCAN.INSTANCE.resetHeading();
+			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
 		}
+		
+		targetPosition = lookUpPosition(currentTime) + positionWaypoint;
+		targetVelocity = lookUpVelocity(currentTime);
+		targetAcceleration = lookUpAcceleration(currentTime);
+		
+		targetHeading = lookUpHeading(currentTime) + headingWaypoint;
+		targetOmega = lookUpOmega(currentTime);
+		targetAlpha = lookUpAlpha(currentTime);
+		
+		headingPID.updatePositionTarget(targetHeading);
+		headingPID.updateVelocityTarget(targetOmega);
+		headingPID.updateAccelerationTarget(targetAlpha);
+		
+		positionPID.update();
+		headingPID.update();
+		
+		graphLinear();
+		graphRotational();
+		
+		if(isActive){
+			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
+		}
+		
+		if(lookUpIsLast(currentTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
+			startTime = currentTime;
+			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
+				if(usingWaypoint){
+					positionWaypoint += lookUpPosition(-1);
+					headingWaypoint += lookUpHeading(-1);
+				}
+				System.out.println("IS ON TARGETTTTTTTTTTTTTTTTTTTTTTTT");
+				activeTrajectory = nextTrajectory;
+				nextTrajectory = defaultTrajectory;
+			}
+		}
+	}
+	
+	public void graphLinear(){
+		SmartDashboard.putNumber("targetVelocity", targetVelocity);
+		SmartDashboard.putNumber("targetAcceleration", targetAcceleration);
+		SmartDashboard.putNumber("targetPosition", targetPosition);
+		SmartDashboard.putNumber("currentVelocity", positionPID.velocity());
+		SmartDashboard.putNumber("currentAcceleration", positionPID.acceleration());
+		SmartDashboard.putNumber("currentPosition", positionPID.position());
+		SmartDashboard.putNumber("dDispErrordt", positionPID.dErrodt());
+		SmartDashboard.putNumber("positionError", positionPID.error());
+	}
+	
+	public void graphRotational(){
+		SmartDashboard.putNumber("targetOmega", targetOmega);
+		SmartDashboard.putNumber("targetAlpha", targetAlpha);
+		SmartDashboard.putNumber("targetHeading", targetHeading);
+		SmartDashboard.putNumber("currentOmega", headingPID.velocity());
+		SmartDashboard.putNumber("currentAlpha", headingPID.acceleration());
+		SmartDashboard.putNumber("currentHeading", headingPID.position());
+		SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
+		SmartDashboard.putNumber("headingError", headingPID.error());
 	}
 	
 	public void executeDefault(){

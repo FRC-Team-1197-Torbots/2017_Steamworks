@@ -44,6 +44,15 @@ public class JoystickTrajectory extends TorTrajectory{
 		tgt_omg = w;
 	}
 	
+	public void setState(double pos, double v, double head, double w){
+		linearMotion.pos = pos;
+		linearMotion.vel = v;
+		tgt_vel = v;
+		rotationalMotion.pos = head;
+		rotationalMotion.vel = w;
+		tgt_omg = w;
+	}
+	
 	public void execute(double p_init, double v_init, double h_init, double w_init){
 		linearMotion.pos = p_init;
 		linearMotion.vel = v_init;
@@ -53,6 +62,10 @@ public class JoystickTrajectory extends TorTrajectory{
 		rotationalMotion.vel = w_init;
 		rotationalMotion.acc = 0.0;
 		
+		TorMotionProfile.INSTANCE.loadTrajectory(this);
+	}
+	
+	public void execute(){
 		TorMotionProfile.INSTANCE.loadTrajectory(this);
 	}
 	

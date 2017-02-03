@@ -6,16 +6,16 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class TorGear {
 
 	private Solenoid gearPiston;
-	private DigitalInput limitSwitch;
+	private DigitalInput gearSwitch;
 
 
-	public TorGear(Solenoid gearPiston, DigitalInput limitSwitch){
+	public TorGear(Solenoid gearPiston, DigitalInput climbSwitch){
 		this.gearPiston = gearPiston;
-		this.limitSwitch = limitSwitch;
+		this.gearSwitch = climbSwitch;
 	}
 
 	public void Gear(){
-		if(limitSwitch.get()){
+		if(gearSwitch.get()){
 			gearOpen();
 		}
 		else{

@@ -2,6 +2,8 @@ package org.usfirst.frc.team1197.robot;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * 2017 Intake.  Features a intake vertical elevator and
  * single roller bar for pushing balls out of the hopper.
@@ -14,10 +16,12 @@ public class TorIntake {
 
 	private CANTalon elevatorTalon;
 	private CANTalon dumperTalon;
+	private Joystick stick;
 
-	public TorIntake(CANTalon elevatorTalon, CANTalon dumperTalon){
+	public TorIntake(CANTalon elevatorTalon, CANTalon dumperTalon, Joystick stick){
 		this.elevatorTalon = elevatorTalon;
 		this.dumperTalon = dumperTalon;
+		this.stick = stick;
 	}
 
 	/**
@@ -29,13 +33,13 @@ public class TorIntake {
 		dumperTalon.set(0.6);
 		//going in same direction
 	}
-	
+
 	/**
 	 * Pushes balls back onto the floor.  Run the elevator in reverse
 	 * and keep the dumper wheel spinning to keep balls inside
 	 */
-	public void IntakeOut(){
-		elevatorTalon.set(-0.6);
+	public void elevatorIn(){
+		elevatorTalon.set(0.6);
 		dumperTalon.set(0.6);
 		//elevator going in opposite direction
 	}
@@ -50,13 +54,44 @@ public class TorIntake {
 		dumperTalon.set(-0.6);
 		//dumper going in opposite direction
 	}
-	
+
 	/**
 	 * Function to turn off intake
 	 */
 	public void IntakeOff(){
 		elevatorTalon.set(0);
 		dumperTalon.set(0);
+	}
+
+	public void forwardElevator(){
+		elevatorTalon.set(1.0);
+	}
+
+	public void reverseElevator(){
+		elevatorTalon.set(-1.0);
+	}
+
+	public void forwardDumper(){
+		dumperTalon.set(1.0);
+	}
+
+	public void reverseDumper(){
+		dumperTalon.set(-1.0);
+	}
+
+	public void update(){
+		if(stick.getRawButton(1)){
+			forwardElevator();
+		}
+		if(stick.getRawButton(2)){
+			reverseElevator();
+		}
+		if(stick.getRawButton(3)){
+			forwardDumper();
+		}
+		if(stick.getRawButton(4)){
+			reverseDumper();
+		}
 	}
 }
 

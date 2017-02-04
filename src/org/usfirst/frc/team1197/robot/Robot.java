@@ -2,21 +2,47 @@ package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.SampleRobot;
 
+
 import edu.wpi.first.wpilibj.Solenoid;
+
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends SampleRobot {
+	private CANTalon climbTalon;
+	private CANTalon elevatorTalon;
+	private CANTalon dumperTalon;
 	private Compressor compressor;
 	private Solenoid shift;
-	private Joystick stick;
+	private Joystick player1;
+	private Joystick player2;
+	private DigitalInput gearSwitch;
+	private DigitalInput climbSwitch;
+	private Solenoid gearPiston;
 	private TorDrive drive;
-
+	private TorGear gear;
+	private TorClimb climb;
+	private TorIntake intake;
+	
     public Robot() {
+    	climbTalon = new CANTalon(0);
+    	elevatorTalon = new CANTalon(0);
+    	dumperTalon = new CANTalon(0);
     	compressor = new Compressor();
-    	stick = new Joystick(0);
+    	player1 = new Joystick(0);
+    	player2 = new Joystick(1);
+    	climbSwitch = new DigitalInput(0);
+    	gearSwitch = new DigitalInput(0);
+    	gearPiston = new Solenoid(0);
     	shift = new Solenoid(0);
-    	drive = new TorDrive(stick, shift);
+    	drive = new TorDrive(player1, shift);
+    	gear = new TorGear(gearPiston, gearSwitch, player1);
+    	climb = new TorClimb(climbTalon, climbSwitch, player2);
+    	intake = new TorIntake(elevatorTalon, dumperTalon, player2);
+    	
     }
     
     public void robotInit() {
@@ -24,7 +50,7 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-
+    	
     }
 
     public void operatorControl() {
@@ -32,13 +58,17 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		System.out.println(TorCAN.INSTANCE.getOmega());
+    		climb.update();
+    		gear.update();
+    		intake.update();
     	}
     }
 
     public void test() {
 		while(isEnabled()){
 			compressor.start();
+			
+			
 		}
 	}
 
@@ -51,46 +81,46 @@ public class Robot extends SampleRobot {
 
 	// Getting the left analog stick X-axis value from the xbox controller. 
 	public double getLeftX(){
-		return stick.getRawAxis(0);
+		return player1.getRawAxis(0);
 	}
 
 	// Getting the left analog stick Y-axis value from the xbox controller. 
 	public double getLeftY(){
-		return stick.getRawAxis(1);
+		return player1.getRawAxis(1);
 	}
 
 	// Getting the right analog stick X-axis value from the xbox controller. 
 	public double getRightX(){
-		return stick.getRawAxis(4);
+		return player1.getRawAxis(4);
 	}
 
 	// Getting the right trigger value from the xbox controller.
 	public double getRightTrigger(){
-		return stick.getRawAxis(3);
+		return player1.getRawAxis(3);
 	}
 
 	// Getting the left bumper button value from the xbox controller. 
 	public boolean getShiftButton(){
-		return stick.getRawButton(5);
+		return player1.getRawButton(5);
 	}
 
 	public boolean getRightBumper(){
-		return stick.getRawButton(6);
+		return player1.getRawButton(6);
 	}
 
 	public boolean getButtonA(){
-		return stick.getRawButton(1);
+		return player1.getRawButton(1);
 	}
 
 	public boolean getButtonB(){
-		return stick.getRawButton(2);
+		return player1.getRawButton(2);
 	}
 
 	public boolean getButtonX(){
-		return stick.getRawButton(3);
+		return player1.getRawButton(3);
 	}
 
 	public boolean getButtonY(){
-		return stick.getRawButton(4);
+		return player1.getRawButton(4);
 	}
 }

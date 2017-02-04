@@ -19,11 +19,8 @@ public class Robot extends SampleRobot {
 	private Solenoid shift;
 	private Joystick player1;
 	private Joystick player2;
-	private DigitalInput gearSwitch;
 	private DigitalInput climbSwitch;
-	private Solenoid gearPiston;
 	private TorDrive drive;
-	private TorGear gear;
 	private TorClimb climb;
 	private TorIntake intake;
 	
@@ -35,11 +32,8 @@ public class Robot extends SampleRobot {
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
     	climbSwitch = new DigitalInput(0);
-    	gearSwitch = new DigitalInput(1);
-    	gearPiston = new Solenoid(0);
     	shift = new Solenoid(0);
     	drive = new TorDrive(player1, shift);
-    	gear = new TorGear(gearPiston, gearSwitch, player1);
     	climb = new TorClimb(climbTalon, climbSwitch, player2);
     	intake = new TorIntake(elevatorTalon, dumperTalon, player2);
     	
@@ -59,7 +53,6 @@ public class Robot extends SampleRobot {
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
     		climb.update();
-    		gear.update();
     		intake.update();
     	}
     }

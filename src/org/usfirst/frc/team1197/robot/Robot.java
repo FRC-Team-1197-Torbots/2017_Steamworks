@@ -28,14 +28,14 @@ public class Robot extends SampleRobot {
 	private TorIntake intake;
 	
     public Robot() {
-    	climbTalon = new CANTalon(0);
-    	elevatorTalon = new CANTalon(0);
-    	dumperTalon = new CANTalon(0);
+    	climbTalon = new CANTalon(7);
+    	elevatorTalon = new CANTalon(8);
+    	dumperTalon = new CANTalon(9);
     	compressor = new Compressor();
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
     	climbSwitch = new DigitalInput(0);
-    	gearSwitch = new DigitalInput(0);
+    	gearSwitch = new DigitalInput(1);
     	gearPiston = new Solenoid(0);
     	shift = new Solenoid(0);
     	drive = new TorDrive(player1, shift);
@@ -67,8 +67,6 @@ public class Robot extends SampleRobot {
     public void test() {
 		while(isEnabled()){
 			compressor.start();
-			
-			
 		}
 	}
 

@@ -1,13 +1,18 @@
 package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends SampleRobot {
+	private SerialPort port;
+	
 	private CANTalon climbTalon;
 	private CANTalon elevatorTalon;
 	private CANTalon dumperTalon;
@@ -29,8 +34,11 @@ public class Robot extends SampleRobot {
 	private TorIntake intake;
 	private TorGear gear;
 	private TorAuto auto;
+	private TorLidar lidar;
 	
     public Robot() {
+    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
+    	
     	climbTalon = new CANTalon(7);
     	elevatorTalon = new CANTalon(8);
     	dumperTalon = new CANTalon(9);
@@ -47,6 +55,7 @@ public class Robot extends SampleRobot {
     	climbSwitch = new DigitalInput(0);
     	gearSwitch = new DigitalInput(1);
     	
+    	lidar = new TorLidar(port);
     	drive = new TorDrive(player1, shift, autoBox);
     	climb = new TorClimb(climbTalon, climbSwitch, player2);
     	intake = new TorIntake(elevatorTalon, dumperTalon, player2);

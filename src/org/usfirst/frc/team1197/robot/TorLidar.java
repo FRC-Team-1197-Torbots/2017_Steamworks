@@ -8,7 +8,8 @@ public class TorLidar
 	int lastDistance = 0;
 	SerialPort m_port;
 
-	/** Use 9600 baud rate and SerialPort.Port.kOnboard to instantiate.
+	/** 
+	 * Use 9600 baud rate and SerialPort.Port.kOnboard to instantiate.
 	 *  port = new SerialPort(9600, SerialPort.Port.kOnboard);
 	 *  
 	 */
@@ -23,16 +24,12 @@ public class TorLidar
 		Timer.delay(0.05D);
 
 		String distance = m_port.readString();
-//		System.out.println(distance);
 		if (distance.length() == 0) {
 			return lastDistance;
 		}
 
 		int start = 0;
 		char[] dist = distance.toCharArray();
-		if(dist[0] == '\n'){
-			System.out.println("!!!!!!!!!!!!!!!!!!!!");
-		}
 		for (int i = 0; i < distance.length(); i++) {
 			if (dist[i] != '0')
 			{

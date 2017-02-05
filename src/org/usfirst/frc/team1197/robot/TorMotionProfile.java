@@ -128,8 +128,8 @@ public enum TorMotionProfile
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 		resetWaypoints();
-		TorCAN.INSTANCE.resetEncoder();
-		TorCAN.INSTANCE.resetHeading();
+//		TorCAN.INSTANCE.resetEncoder();
+//		TorCAN.INSTANCE.resetHeading();
 		resetPID();
 		isActive = true;
 	}
@@ -240,18 +240,9 @@ public enum TorMotionProfile
 		positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
 		positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
 
-		positionPID.updatePositionTarget(targetPosition);
-		positionPID.updateVelocityTarget(targetVelocity);
-		positionPID.updateAccelerationTarget(targetAcceleration);
-
 		//Heading
 		headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
 		headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
-
-		targetHeading = lookUpHeading(currentTime) + headingWaypoint;
-		targetOmega = lookUpOmega(currentTime);
-		targetAlpha = lookUpAlpha(currentTime);	
-
 		
 		if(isActive){
 			joystickTraj.updateVelocity();
@@ -264,6 +255,10 @@ public enum TorMotionProfile
 		targetPosition = lookUpPosition(currentTime) + positionWaypoint;
 		targetVelocity = lookUpVelocity(currentTime);
 		targetAcceleration = lookUpAcceleration(currentTime);
+		
+		positionPID.updatePositionTarget(targetPosition);
+		positionPID.updateVelocityTarget(targetVelocity);
+		positionPID.updateAccelerationTarget(targetAcceleration);
 		
 		targetHeading = lookUpHeading(currentTime) + headingWaypoint;
 		targetOmega = lookUpOmega(currentTime);

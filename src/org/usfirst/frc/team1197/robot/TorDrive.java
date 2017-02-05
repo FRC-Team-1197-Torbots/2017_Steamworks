@@ -59,7 +59,7 @@ public class TorDrive
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			if(cypress.getRawButton(0)){
+			if(cypress.getRawButton(1)){
 				carDrive(throttleAxis, carSteerAxis);
 				
 				
@@ -80,7 +80,7 @@ public class TorDrive
 		
 		//Only switch to ArcadeDrive in low gear
 		else{
-			if(cypress.getRawButton(0)){
+			if(cypress.getRawButton(1)){
 				carDrive(throttleAxis, carSteerAxis);
 				
 				if(shiftButton){
@@ -110,10 +110,12 @@ public class TorDrive
 	}
 	
 	public void shiftToHighGearNoMotion(){
-		m_solenoidshift.set(false);
-		TorCAN.INSTANCE.chooseVelocityControl();
-		isHighGear = true;
-		TorMotionProfile.INSTANCE.setInactive();
+		if(!isHighGear){
+			m_solenoidshift.set(false);
+			TorCAN.INSTANCE.chooseVelocityControl();
+			isHighGear = true;
+			TorMotionProfile.INSTANCE.setInactive();
+		}
 	}
 	
 	//Shifts the robot to low gear and change the talon's control mode to percentVbus.

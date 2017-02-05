@@ -63,34 +63,15 @@ public class TorIntake {
 		dumperTalon.set(0);
 	}
 
-	public void forwardElevator(){
-		elevatorTalon.set(1.0);
-	}
-
-	public void reverseElevator(){
-		elevatorTalon.set(-1.0);
-	}
-
-	public void forwardDumper(){
-		dumperTalon.set(1.0);
-	}
-
-	public void reverseDumper(){
-		dumperTalon.set(-1.0);
-	}
-
 	public void update(){
 		if(stick.getRawButton(1)){
-			forwardElevator();
+			IntakeIn();
 		}
-		if(stick.getRawButton(2)){
-			reverseElevator();
+		else if(stick.getRawButton(2)){
+			elevatorIn();
 		}
-		if(stick.getRawButton(3)){
-			forwardDumper();
-		}
-		if(stick.getRawButton(4)){
-			reverseDumper();
+		else if(stick.getRawButton(3)){
+			DumpBalls();
 		}
 	}
 }

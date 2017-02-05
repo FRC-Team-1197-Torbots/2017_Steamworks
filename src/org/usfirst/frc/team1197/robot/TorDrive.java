@@ -9,6 +9,7 @@ public class TorDrive
 {	
 	private boolean isHighGear = true;
 	private Solenoid m_solenoidshift;
+	private Joystick cypress;
 
 	private double rightMotorSpeed;
 	private double leftMotorSpeed;
@@ -37,8 +38,10 @@ public class TorDrive
 	}
 	Notifier mpNotifier = new Notifier(new PeriodicRunnable());
 
-	public TorDrive(Joystick stick, Solenoid shift)
+	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
+		this.cypress = cypress;
+		
 		joystickProfile = new TorJoystickProfiles();
 		forwardTrajectory = new LinearTrajectory(2.0);
 		backwardTrajectory = new LinearTrajectory(-1.0);
@@ -56,35 +59,47 @@ public class TorDrive
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			ackermanDrive(throttleAxis, carSteerAxis);
-//			buttonDrive(buttonA, buttonB, buttonX, buttonY);
-			
-			//When you hold down the shiftButton (left bumper), then shift to low gear.
-			if(shiftButton){
-				shiftToLowGear();
+			if(cypress.getRawButton(0)){
+				carDrive(throttleAxis, carSteerAxis);
+				
+				
+				if(shiftButton){
+					shiftToLowGear();
+				}
+			}
+			else{
+				ackermanDrive(throttleAxis, carSteerAxis);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+				
+				//When you hold down the shiftButton (left bumper), then shift to low gear.
+				if(shiftButton){
+					shiftToLowGear();
+				}
 			}
 		}
 		
 		//Only switch to ArcadeDrive in low gear
-		else{	
-			if(rightBumper){
-				m_solenoidshift.set(false);
+		else{
+			if(cypress.getRawButton(0)){
+				carDrive(throttleAxis, carSteerAxis);
+				
+				if(shiftButton){
+					shiftToHighGearNoMotion();
+				}
 			}
 			else{
-				m_solenoidshift.set(true);
-			}
-			ArcadeDrive(throttleAxis, arcadeSteerAxis);
-			
-			//When you release the shiftButton (left bumper), then shift to high gear.
-			if(!shiftButton ){
-				shiftToHighGear();
-			}
-			
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				
+				//When you release the shiftButton (left bumper), then shift to high gear.
+				if(!shiftButton ){
+					shiftToHighGearMotion();
+				}
+			}		
 		}
 	}
 	
 	//Shifts the robot to high gear and change the talon's control mode to speed.
-	public void shiftToHighGear(){
+	public void shiftToHighGearMotion(){
 		if (!isHighGear){
 			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
@@ -92,6 +107,13 @@ public class TorDrive
 			TorMotionProfile.INSTANCE.joystickTraj.execute();
 			TorMotionProfile.INSTANCE.setActive();
 		}
+	}
+	
+	public void shiftToHighGearNoMotion(){
+		m_solenoidshift.set(false);
+		TorCAN.INSTANCE.chooseVelocityControl();
+		isHighGear = true;
+		TorMotionProfile.INSTANCE.setInactive();
 	}
 	
 	//Shifts the robot to low gear and change the talon's control mode to percentVbus.

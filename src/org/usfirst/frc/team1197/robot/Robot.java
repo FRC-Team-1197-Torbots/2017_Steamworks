@@ -1,12 +1,8 @@
 package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.SampleRobot;
-
-
 import edu.wpi.first.wpilibj.Solenoid;
-
 import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -15,45 +11,62 @@ public class Robot extends SampleRobot {
 	private CANTalon climbTalon;
 	private CANTalon elevatorTalon;
 	private CANTalon dumperTalon;
+	
 	private Compressor compressor;
+	
 	private Solenoid shift;
+	private Solenoid gearPiston;
+	
 	private Joystick player1;
 	private Joystick player2;
+	private Joystick autoBox;
+	
 	private DigitalInput climbSwitch;
+	private DigitalInput gearSwitch;
+	
 	private TorDrive drive;
 	private TorClimb climb;
 	private TorIntake intake;
+	private TorGear gear;
+	private TorAuto auto;
 	
     public Robot() {
     	climbTalon = new CANTalon(7);
     	elevatorTalon = new CANTalon(8);
     	dumperTalon = new CANTalon(9);
+    	
     	compressor = new Compressor();
+    	
+    	shift = new Solenoid(0);
+    	gearPiston = new Solenoid(1);
+    	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
+    	autoBox = new Joystick(2);
+    	
     	climbSwitch = new DigitalInput(0);
-    	shift = new Solenoid(0);
-    	drive = new TorDrive(player1, shift);
+    	gearSwitch = new DigitalInput(1);
+    	
+    	drive = new TorDrive(player1, shift, autoBox);
     	climb = new TorClimb(climbTalon, climbSwitch, player2);
     	intake = new TorIntake(elevatorTalon, dumperTalon, player2);
-    	
-    }
-    
-    public void robotInit() {
-
+    	gear = new TorGear(gearPiston, gearSwitch, player2);
+    	auto = new TorAuto(intake, drive, autoBox);
     }
 
     public void autonomous() {
-    	
+    	auto.initialize();
+    	auto.run();
     }
 
     public void operatorControl() {
-    	drive.shiftToHighGear();
+    	drive.shiftToHighGearMotion();
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
     		climb.update();
     		intake.update();
+    		gear.update();
     	}
     }
 

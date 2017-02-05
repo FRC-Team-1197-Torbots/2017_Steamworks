@@ -22,10 +22,10 @@ public class TorAuto {
 		if(!cypress.getRawButton(1)  && cypress.getRawButton(2)){
 			position = 1;
 		}
-		else if(cypress.getRawButton(1) && !cypress.getRawButton(2)){
+		else if(!cypress.getRawButton(1) && !cypress.getRawButton(2)){
 			position = 2;
 		}
-		else if(!cypress.getRawButton(1) && !cypress.getRawButton(2)){
+		else if(cypress.getRawButton(1) && !cypress.getRawButton(2)){
 			position = 3;
 		}
 		else{
@@ -36,7 +36,7 @@ public class TorAuto {
 	
 	public void run() {
 		//use position to determine which auto to run
-		if(position  < 0) {
+		if(position < 0) {
 			//something bad
 		}
 		else if(position == 1){

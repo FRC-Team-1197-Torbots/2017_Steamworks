@@ -31,11 +31,11 @@ public class TorClimb {
 
 	public void startClimb(){
 		//need to figure out speed
-		climbTalon.set(0.8f);
+		climbTalon.set(0.8);
 	}
 
 	public void stopClimb(){
-		climbTalon.set(0);
+		climbTalon.set(0.0);
 	}
 	
 	public void update(){

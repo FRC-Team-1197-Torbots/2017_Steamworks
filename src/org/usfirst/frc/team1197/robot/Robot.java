@@ -40,13 +40,13 @@ public class Robot extends SampleRobot {
     	port = new SerialPort(9600, SerialPort.Port.kOnboard);
     	
     	climbTalon = new CANTalon(7);
-    	elevatorTalon = new CANTalon(8);
-    	dumperTalon = new CANTalon(9);
+    	dumperTalon = new CANTalon(8);
+    	elevatorTalon = new CANTalon(9);
     	
     	compressor = new Compressor();
     	
-    	shift = new Solenoid(1);
-    	gearPiston = new Solenoid(0);
+    	shift = new Solenoid(0);
+    	gearPiston = new Solenoid(1);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
@@ -59,7 +59,7 @@ public class Robot extends SampleRobot {
     	drive = new TorDrive(player1, shift, autoBox);
     	climb = new TorClimb(climbTalon, climbSwitch, player2);
     	intake = new TorIntake(elevatorTalon, dumperTalon, player2);
-    	gear = new TorGear(gearPiston, gearSwitch, player2);
+    	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(intake, drive, autoBox);
     }
 
@@ -73,9 +73,9 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		climb.update();
-//    		intake.update();
-//    		gear.update();
+    		climb.update();
+    		intake.update();
+    		gear.update();
     	}
     }
 

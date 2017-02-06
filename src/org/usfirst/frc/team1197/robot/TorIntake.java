@@ -29,8 +29,8 @@ public class TorIntake {
 	 * Both have to be running to keep balls inside the hopper
 	 */
 	public void IntakeIn(){
-		elevatorTalon.set(0.6);
-		dumperTalon.set(0.6);
+		elevatorTalon.set(1.0);
+		dumperTalon.set(-1.0);
 		//going in same direction
 	}
 
@@ -39,8 +39,8 @@ public class TorIntake {
 	 * and keep the dumper wheel spinning to keep balls inside
 	 */
 	public void elevatorIn(){
-		elevatorTalon.set(0.6);
-		dumperTalon.set(0.6);
+		elevatorTalon.set(1.0);
+		dumperTalon.set(-1.0);
 		//elevator going in opposite direction
 	}
 
@@ -50,8 +50,8 @@ public class TorIntake {
 	 * so balls do not get forced back down elevator
 	 */
 	public void DumpBalls(){
-		elevatorTalon.set(0.6);
-		dumperTalon.set(-0.6);
+		elevatorTalon.set(1.0);
+		dumperTalon.set(1.0);
 		//dumper going in opposite direction
 	}
 
@@ -72,6 +72,9 @@ public class TorIntake {
 		}
 		else if(stick.getRawButton(3)){
 			DumpBalls();
+		}
+		else{
+			IntakeOff();
 		}
 	}
 }

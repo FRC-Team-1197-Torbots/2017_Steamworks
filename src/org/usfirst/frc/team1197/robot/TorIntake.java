@@ -14,12 +14,14 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class TorIntake {
 
-	private CANTalon elevatorTalon;
+	private CANTalon elevatorTalon1;
+	private CANTalon elevatorTalon2;
 	private CANTalon dumperTalon;
 	private Joystick stick;
 
-	public TorIntake(CANTalon elevatorTalon, CANTalon dumperTalon, Joystick stick){
-		this.elevatorTalon = elevatorTalon;
+	public TorIntake(CANTalon elevatorTalon1, CANTalon elevatorTalon2, CANTalon dumperTalon, Joystick stick){
+		this.elevatorTalon1 = elevatorTalon1;
+		this.elevatorTalon2 = elevatorTalon2;
 		this.dumperTalon = dumperTalon;
 		this.stick = stick;
 	}
@@ -29,7 +31,8 @@ public class TorIntake {
 	 * Both have to be running to keep balls inside the hopper
 	 */
 	public void IntakeIn(){
-		elevatorTalon.set(1.0);
+		elevatorTalon1.set(-0.6);
+		elevatorTalon2.set(0.6);
 		dumperTalon.set(-1.0);
 		//going in same direction
 	}
@@ -39,7 +42,8 @@ public class TorIntake {
 	 * and keep the dumper wheel spinning to keep balls inside
 	 */
 	public void elevatorIn(){
-		elevatorTalon.set(1.0);
+		elevatorTalon1.set(-0.6);
+		elevatorTalon2.set(0.6);
 		dumperTalon.set(-1.0);
 		//elevator going in opposite direction
 	}
@@ -50,7 +54,8 @@ public class TorIntake {
 	 * so balls do not get forced back down elevator
 	 */
 	public void DumpBalls(){
-		elevatorTalon.set(1.0);
+		elevatorTalon1.set(-0.6);
+		elevatorTalon2.set(0.6);
 		dumperTalon.set(1.0);
 		//dumper going in opposite direction
 	}
@@ -59,8 +64,9 @@ public class TorIntake {
 	 * Function to turn off intake
 	 */
 	public void IntakeOff(){
-		elevatorTalon.set(0);
-		dumperTalon.set(0);
+		elevatorTalon1.set(0.0);
+		elevatorTalon2.set(0.0);
+		dumperTalon.set(0.0);
 	}
 
 	public void update(){

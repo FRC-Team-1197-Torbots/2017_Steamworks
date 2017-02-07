@@ -14,7 +14,8 @@ public class Robot extends SampleRobot {
 	private SerialPort port;
 	
 	private CANTalon climbTalon;
-	private CANTalon elevatorTalon;
+	private CANTalon elevatorTalon1;
+	private CANTalon elevatorTalon2;
 	private CANTalon dumperTalon;
 	
 	private Compressor compressor;
@@ -41,7 +42,8 @@ public class Robot extends SampleRobot {
     	
     	climbTalon = new CANTalon(7);
     	dumperTalon = new CANTalon(8);
-    	elevatorTalon = new CANTalon(9);
+    	elevatorTalon1 = new CANTalon(9);
+    	elevatorTalon2 = new CANTalon(10);
     	
     	compressor = new Compressor();
     	
@@ -58,7 +60,7 @@ public class Robot extends SampleRobot {
     	lidar = new TorLidar(port);
     	drive = new TorDrive(player1, shift, autoBox);
     	climb = new TorClimb(climbTalon, climbSwitch, player2);
-    	intake = new TorIntake(elevatorTalon, dumperTalon, player2);
+    	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(intake, drive, autoBox);
     }

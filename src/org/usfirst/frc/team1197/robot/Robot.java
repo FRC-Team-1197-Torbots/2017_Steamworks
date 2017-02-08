@@ -54,8 +54,8 @@ public class Robot extends SampleRobot {
     	player2 = new Joystick(1);
     	autoBox = new Joystick(2);
     	
-    	climbSwitch = new DigitalInput(0);
-    	gearSwitch = new DigitalInput(1);
+    	climbSwitch = new DigitalInput(1);
+    	gearSwitch = new DigitalInput(0);
     	
     	lidar = new TorLidar(port);
     	drive = new TorDrive(player1, shift, autoBox);
@@ -75,23 +75,30 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-    		climb.update();
+//    		climb.Climb();
     		intake.update();
-    		gear.update();
+    		gear.Gear();
     	}
     }
 
     public void test() {
 		while(isEnabled()){
 			compressor.start();
+			if(player1.getRawButton(1)){
+				climbTalon.set(-0.8);
+			}
+			else{
+				climbTalon.set(0.0);
+			}
 		}
 	}
 
 	//Low-gear software wise, High-gear mechanically
 	public void disabled() {
+		climb.resetClimb();
 		drive.shiftToLowGear();
 		shift.set(false); 
-//		TorMotionProfile.INSTANCE.setInactive();
+		TorMotionProfile.INSTANCE.setInactive();
 		TorCAN.INSTANCE.SetDrive(0.0, 0.0);
 	}
 

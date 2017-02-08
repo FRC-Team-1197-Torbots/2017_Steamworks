@@ -13,7 +13,8 @@ public class TorClimb {
 	private CANTalon climbTalon;
 	private DigitalInput climbSwitch;
 	private Joystick stick;
-	
+	private boolean climbFlag = true;
+
 	public TorClimb(CANTalon climbTalon, DigitalInput climbSwitch, Joystick stick){
 		this.climbTalon = climbTalon;
 		this.climbSwitch= climbSwitch;
@@ -23,8 +24,9 @@ public class TorClimb {
 	public void Climb(){
 		if(climbSwitch.get()){
 			stopClimb();
+			climbFlag = false;
 		}
-		else{
+		else if(climbFlag){
 			startClimb();
 		}
 	}
@@ -37,7 +39,7 @@ public class TorClimb {
 	public void stopClimb(){
 		climbTalon.set(0.0);
 	}
-	
+
 	public void update(){
 		if(stick.getRawButton(6)){
 			startClimb();
@@ -45,6 +47,10 @@ public class TorClimb {
 		else{
 			stopClimb();
 		}
+	}
+	
+	public void resetClimb(){
+		climbFlag = true;
 	}
 }
 

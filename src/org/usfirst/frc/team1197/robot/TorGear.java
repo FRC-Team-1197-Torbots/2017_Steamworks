@@ -3,6 +3,7 @@ package org.usfirst.frc.team1197.robot;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 
 public class TorGear {
 
@@ -20,6 +21,7 @@ public class TorGear {
 	public void Gear(){
 		if(gearSwitch.get()){
 			gearOpen();
+			Timer.delay(0.5);
 		}
 		else{
 			gearClosed();
@@ -45,5 +47,6 @@ public class TorGear {
 		}
 	}
 }
+
 
 

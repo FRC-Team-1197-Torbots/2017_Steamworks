@@ -33,7 +33,7 @@ public class TorIntake {
 	public void IntakeIn(){
 		elevatorTalon1.set(-0.7);
 		elevatorTalon2.set(0.7);
-		dumperTalon.set(-1.0);
+		dumperTalon.set(-0.625);
 		//going in same direction
 	}
 
@@ -44,7 +44,7 @@ public class TorIntake {
 	public void elevatorIn(){
 		elevatorTalon1.set(-0.7);
 		elevatorTalon2.set(0.7);
-		dumperTalon.set(-1.0);
+		dumperTalon.set(-0.625);
 		//elevator going in opposite direction
 	}
 
@@ -56,7 +56,7 @@ public class TorIntake {
 	public void DumpBalls(){
 		elevatorTalon1.set(-0.7);
 		elevatorTalon2.set(0.7);
-		dumperTalon.set(1.0);
+		dumperTalon.set(0.625);
 		//dumper going in opposite direction
 	}
 
@@ -68,6 +68,7 @@ public class TorIntake {
 		elevatorTalon2.set(0.0);
 		dumperTalon.set(0.0);
 	}
+	
 
 	public void update(){
 		if(stick.getRawButton(1)){

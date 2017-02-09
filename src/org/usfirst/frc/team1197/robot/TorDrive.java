@@ -43,10 +43,10 @@ public class TorDrive
 		this.cypress = cypress;
 		
 		joystickProfile = new TorJoystickProfiles();
-		forwardTrajectory = new LinearTrajectory(2.0);
+		forwardTrajectory = new LinearTrajectory(1.0);
 		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(180);
-		leftTrajectory = new PivotTrajectory(-45);
+		rightTrajectory = new PivotTrajectory(90);
+		leftTrajectory = new PivotTrajectory(-90);
 		
 		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
@@ -184,7 +184,6 @@ public class TorDrive
 	public void carDrive(double throttleAxis, double carSteeringAxis){
 		
 		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
-		throttleAxis = -throttleAxis;
 		carSteeringAxis = -carSteeringAxis;
 		
 		targetSpeed = joystickProfile.findSpeed(throttleAxis) * TorCAN.INSTANCE.getSensorSpeed();

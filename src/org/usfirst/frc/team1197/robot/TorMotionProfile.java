@@ -23,20 +23,20 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 
-	private final double kPv = 0.05; //0.05
-	private final double kA = 0.05; //0.05
-	private final double kP = 5.25;  //5.25
-	private final double kI = 1.75;  //1.75
-	private final double kD = 0.05;  //0.05
+	private final double kPv = 0.0; //0.05
+	private final double kA = 0.0; //0.05
+	private final double kP = 0.0;  //5.25
+	private final double kI = 0.0;  //1.75
+	private final double kD = 0.0;  //0.05
 
-	private final double kpv = 0.1; //0.1
-	private final double ka = 0.05; //0.05
-	private final double kp = 18.75; //18.75
-	private final double ki = 4.0; //4.0
-	private final double kd = 0.35; //0.35
+	private final double kpv = 0.75; //0.1
+	private final double ka = 0.1; //0.05
+	private final double kp = 15.0; //18.75
+	private final double ki = 3.0; //4.0
+	private final double kd = 0.01; //0.35
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.3; //0.2
+	private final double minTurnOutput = 0.25; //0.2
 
 	private double dt = 0.005;
 	
@@ -201,6 +201,7 @@ public enum TorMotionProfile
 		if(lookUpIsLast(currentTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 			startTime = currentTime;
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
+				System.out.println("IS ON TARGET!!!!");
 				if(usingWaypoint){
 					positionWaypoint += lookUpPosition(-1);
 					headingWaypoint += lookUpHeading(-1);

@@ -21,7 +21,7 @@ public class TorGear {
 	public void Gear(){
 		if(gearSwitch.get()){
 			gearOpen();
-			Timer.delay(0.75);
+			Timer.delay(0.5);
 		}
 		else{
 			gearClosed();

@@ -60,8 +60,7 @@ public class TorDrive
 		//Only switch to carDrive in high gear
 		if(isHighGear){
 			if(cypress.getRawButton(1)){
-				carDrive(throttleAxis, carSteerAxis);
-				
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 				
 				if(shiftButton){
 					shiftToLowGear();

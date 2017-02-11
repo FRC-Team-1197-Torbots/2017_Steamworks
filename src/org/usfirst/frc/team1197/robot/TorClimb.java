@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1197.robot;
 
-import java.util.Set;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,16 +19,22 @@ public class TorClimb {
 		this.stick = stick;
 	}
 
-	public void Climb(){
-		if(overrideFlag && stick.getRawButton(6)) {
-			startClimb();
-			//if the override button and the climbing button are pressed, start climb
-		}
-		else if(climbSwitch.get()){
+	public void climb(){
+		if(climbSwitch.get()){
 			stopClimb();
 			climbFlag = false;
 		}
 		else if(climbFlag){
+			startClimb();
+		}
+	}
+	
+	public void overrideClimb(){
+		if(overrideFlag && !stick.getRawButton(6)) {
+			stopClimb();
+			//if the override button and the climbing button are pressed, start climb
+		}
+		else if(overrideFlag && stick.getRawButton(6)){
 			startClimb();
 		}
 	}
@@ -43,13 +48,14 @@ public class TorClimb {
 	}
 
 	public void update(){
-		if(stick.getRawButton(6)){
-			startClimb();
+		if(overrideFlag){
+			overrideClimb();
 		}
-		else if(stick.getRawButton(7)){
-			climbTalon.set(-1.0);
+		else if(stick.getRawButton(5)){
+			climb();
 		}
 		else{
+			override();
 			stopClimb();
 		}
 	}

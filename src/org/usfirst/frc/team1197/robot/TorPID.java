@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1197.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class TorPID {
 	private double v;
 	private double kP;
@@ -126,6 +128,9 @@ public class TorPID {
 	}
 	
 	public boolean isOnTarget(){
+		SmartDashboard.putNumber("Math.abs(error)", Math.abs(error));
+		SmartDashboard.putNumber("Math.abs(vel) <= velTolerance", Math.abs(error));
+		SmartDashboard.putNumber("velTarget", velTarget);
 		return ( (Math.abs(error) <= posTolerance) 
 			  && (velTarget == 0.0) 
 			  && (Math.abs(vel) <= velTolerance) );

@@ -103,7 +103,7 @@ public enum TorMotionProfile
 	public void setActive(){
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
-		resetWaypoints();
+//		resetWaypoints();
 //		TorCAN.INSTANCE.resetEncoder();
 //		TorCAN.INSTANCE.resetHeading();
 		resetPID();

@@ -140,15 +140,19 @@ public enum TorMotionProfile
 		headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
 		headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
 		
-		if(isActive){
+		//TODO: Set the joystick trajectory's acceleration equal to the active trajectory's acceleration
+		if(isActive && activeTrajectory == joystickTraj){
 			joystickTraj.updateVelocity();
 			joystickTraj.updateOmega();
 		}
 		else{
-			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
+			joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetVelocity);
 		}
 		
-		targetPosition = activeTrajectory.lookUpPosition(currentTime) + positionWaypoint;
+		targetPosition = activeTrajectory.lookUpPosition(currentTime);
+		if(activeTrajectory != joystickTraj){
+			targetPosition += positionWaypoint;
+		}
 		targetVelocity = activeTrajectory.lookUpVelocity(currentTime);
 		targetAcceleration = activeTrajectory.lookUpAcceleration(currentTime);
 		
@@ -156,7 +160,10 @@ public enum TorMotionProfile
 		positionPID.updateVelocityTarget(targetVelocity);
 		positionPID.updateAccelerationTarget(targetAcceleration);
 		
-		targetHeading = activeTrajectory.lookUpHeading(currentTime) + headingWaypoint;
+		targetHeading = activeTrajectory.lookUpHeading(currentTime);
+		if(activeTrajectory != joystickTraj){
+			targetHeading += headingWaypoint;
+		}
 		targetOmega = activeTrajectory.lookUpOmega(currentTime);
 		targetAlpha = activeTrajectory.lookUpAlpha(currentTime);
 		
@@ -168,6 +175,13 @@ public enum TorMotionProfile
 		headingPID.update();
 		
 		if(isActive){
+			if(activeTrajectory == joystickTraj){
+				joystickTraj.updateVelocity();
+				joystickTraj.updateOmega();
+			}
+			else{
+				joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
+			}
 			graphLinear();
 			graphRotational();
 			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
@@ -180,8 +194,8 @@ public enum TorMotionProfile
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
 				System.out.println("IS ON TARGET!!!!");
 				if(usingWaypoint){
-					positionWaypoint += activeTrajectory.lookUpPosition(-1);
-					headingWaypoint += activeTrajectory.lookUpHeading(-1);
+					positionWaypoint += activeTrajectory.goalPos();
+					headingWaypoint += activeTrajectory.goalHead();
 				}
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;

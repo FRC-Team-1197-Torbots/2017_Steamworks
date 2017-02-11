@@ -128,9 +128,6 @@ public class TorPID {
 	}
 	
 	public boolean isOnTarget(){
-		SmartDashboard.putNumber("Math.abs(error)", Math.abs(error));
-		SmartDashboard.putNumber("Math.abs(vel) <= velTolerance", Math.abs(error));
-		SmartDashboard.putNumber("velTarget", velTarget);
 		return ( (Math.abs(error) <= posTolerance) 
 			  && (velTarget == 0.0) 
 			  && (Math.abs(vel) <= velTolerance) );

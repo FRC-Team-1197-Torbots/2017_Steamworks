@@ -182,6 +182,9 @@ public abstract class TorTrajectory {
 	public double goalPos(){
 		return goal_pos;
 	}
+	public double goalHead(){
+		return goal_head;
+	}
 	
 	public abstract double lookUpPosition(long t);
 	public abstract double lookUpVelocity(long t);

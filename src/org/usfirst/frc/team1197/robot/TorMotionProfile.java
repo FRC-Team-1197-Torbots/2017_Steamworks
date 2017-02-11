@@ -141,12 +141,14 @@ public enum TorMotionProfile
 		headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
 		
 		//TODO: Set the joystick trajectory's acceleration equal to the active trajectory's acceleration
-		if(isActive && activeTrajectory == joystickTraj){
-			joystickTraj.updateVelocity();
-			joystickTraj.updateOmega();
+		if(isActive){
+			if(activeTrajectory == joystickTraj){
+				joystickTraj.updateVelocity();
+				joystickTraj.updateOmega();
+			}
 		}
 		else{
-			joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetVelocity);
+			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
 		}
 		
 		targetPosition = activeTrajectory.lookUpPosition(currentTime);
@@ -180,7 +182,7 @@ public enum TorMotionProfile
 				joystickTraj.updateOmega();
 			}
 			else{
-				joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
+				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
 			graphLinear();
 			graphRotational();

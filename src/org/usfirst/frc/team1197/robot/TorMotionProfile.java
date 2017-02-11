@@ -151,23 +151,23 @@ public enum TorMotionProfile
 			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
 		}
 		
-		targetPosition = activeTrajectory.lookUpPosition(currentTime);
+		targetPosition = activeTrajectory.lookUpPosition(lookupTime);
 		if(activeTrajectory != joystickTraj){
 			targetPosition += positionWaypoint;
 		}
-		targetVelocity = activeTrajectory.lookUpVelocity(currentTime);
-		targetAcceleration = activeTrajectory.lookUpAcceleration(currentTime);
+		targetVelocity = activeTrajectory.lookUpVelocity(lookupTime);
+		targetAcceleration = activeTrajectory.lookUpAcceleration(lookupTime);
 		
 		positionPID.updatePositionTarget(targetPosition);
 		positionPID.updateVelocityTarget(targetVelocity);
 		positionPID.updateAccelerationTarget(targetAcceleration);
 		
-		targetHeading = activeTrajectory.lookUpHeading(currentTime);
+		targetHeading = activeTrajectory.lookUpHeading(lookupTime);
 		if(activeTrajectory != joystickTraj){
 			targetHeading += headingWaypoint;
 		}
-		targetOmega = activeTrajectory.lookUpOmega(currentTime);
-		targetAlpha = activeTrajectory.lookUpAlpha(currentTime);
+		targetOmega = activeTrajectory.lookUpOmega(lookupTime);
+		targetAlpha = activeTrajectory.lookUpAlpha(lookupTime);
 		
 		headingPID.updatePositionTarget(targetHeading);
 		headingPID.updateVelocityTarget(targetOmega);
@@ -177,11 +177,7 @@ public enum TorMotionProfile
 		headingPID.update();
 		
 		if(isActive){
-			if(activeTrajectory == joystickTraj){
-				joystickTraj.updateVelocity();
-				joystickTraj.updateOmega();
-			}
-			else{
+			if(activeTrajectory != joystickTraj){
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
 			graphLinear();
@@ -191,7 +187,7 @@ public enum TorMotionProfile
 		SmartDashboard.putBoolean("lookUpIsLast(currentTime)", activeTrajectory.lookUpIsLast(currentTime));
 		SmartDashboard.putBoolean("positionPID.isOnTarget()", positionPID.isOnTarget());
 		SmartDashboard.putBoolean("headingPID.isOnTarget()", headingPID.isOnTarget());
-		if(activeTrajectory.lookUpIsLast(currentTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
+		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 			startTime = currentTime;
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
 				System.out.println("IS ON TARGET!!!!");

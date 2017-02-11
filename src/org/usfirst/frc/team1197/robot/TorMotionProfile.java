@@ -192,8 +192,8 @@ public enum TorMotionProfile
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
 				System.out.println("IS ON TARGET!!!!");
 				if(usingWaypoint){
-					positionWaypoint += activeTrajectory.goalPos();
-					headingWaypoint += activeTrajectory.goalHead();
+					positionWaypoint = targetPosition;
+					headingWaypoint = targetHeading;
 				}
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;
@@ -228,7 +228,7 @@ public enum TorMotionProfile
 			stationaryTraj.execute();
 		}
 		else{
-			joystickTraj.execute(0.0,0.0,0.0,0.0);
+			joystickTraj.execute();
 		}
 	}
 	

@@ -76,8 +76,8 @@ public class Robot extends SampleRobot {
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.Climb();
-    		intake.update();
-    		gear.Gear();
+//    		intake.update();
+//    		gear.Gear();
     	}
     }
 

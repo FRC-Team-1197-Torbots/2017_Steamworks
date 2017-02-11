@@ -103,7 +103,7 @@ public class TorDrive
 			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
-			TorMotionProfile.INSTANCE.joystickTraj.execute();
+//			TorMotionProfile.INSTANCE.joystickTraj.execute();
 			TorMotionProfile.INSTANCE.setActive();
 		}
 	}

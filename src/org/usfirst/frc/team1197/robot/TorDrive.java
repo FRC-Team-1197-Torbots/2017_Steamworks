@@ -40,6 +40,8 @@ public class TorDrive
 
 	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
+		TorCAN.INSTANCE.resetEncoder();
+		TorCAN.INSTANCE.resetHeading();
 		this.cypress = cypress;
 		
 		joystickProfile = new TorJoystickProfiles();

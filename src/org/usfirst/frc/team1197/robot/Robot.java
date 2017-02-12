@@ -98,7 +98,6 @@ public class Robot extends SampleRobot {
 		climb.resetClimb();
 		drive.shiftToLowGear();
 		shift.set(false); 
-		TorMotionProfile.INSTANCE.setInactive();
 		TorCAN.INSTANCE.SetDrive(0.0, 0.0);
 	}
 

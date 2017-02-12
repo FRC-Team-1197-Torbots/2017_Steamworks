@@ -59,7 +59,7 @@ public class Robot extends SampleRobot {
     	
     	lidar = new TorLidar(port);
     	drive = new TorDrive(player1, shift, autoBox);
-    	climb = new TorClimb(climbTalon, climbSwitch, player2);
+    	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(intake, drive, autoBox);
@@ -71,11 +71,12 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-    	drive.shiftToHighGearMotion();
+//    	drive.shiftToHighGearMotion();
     	while(isEnabled()){
-    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		climb.Climb();
+//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+//    		climb.update();
+    		SmartDashboard.putNumber("lidar", lidar.getDistance());
 //    		intake.update();
 //    		gear.Gear();
     	}

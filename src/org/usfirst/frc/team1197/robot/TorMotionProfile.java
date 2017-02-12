@@ -23,20 +23,20 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 
-	private final double kPv = 0.5; //0.05
-	private final double kA = 0.25; //0.05
-	private final double kP = 6.0;  //5.25
-	private final double kI = 2.0;  //1.75
-	private final double kD = 0.01;  //0.05
+	private final double kPv = 0.5; //0.5
+	private final double kA = 0.05; //0.05
+	private final double kP = 6.0;  //6.0
+	private final double kI = 3.0;  //3.0
+	private final double kD = 0.0;  //0.0
 
-	private final double kpv = 0.3; //0.3
-	private final double ka = 0.03; //0.03
-	private final double kp = 23.5; //23.5
-	private final double ki = 3.5; //3.5
-	private final double kd = 0.01; //0.01
+	private final double kpv = 1.0; //1.0
+	private final double ka = 0.05; //0.05
+	private final double kp = 27.5; //27.5
+	private final double ki = 17.5; //17.5
+	private final double kd = 0.0; //0.0
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.35; //0.2
+	private final double minTurnOutput = 0.5; //0.5
 
 	private double dt = 0.005;
 	
@@ -69,7 +69,7 @@ public enum TorMotionProfile
 		positionPID.setLimitMode(sensorLimitMode.Default);
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
-		positionPID.setPositionTolerance(0.01); //0.015
+		positionPID.setPositionTolerance(0.01); 
 		positionPID.setVelocityTolerance(0.01);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
@@ -81,7 +81,7 @@ public enum TorMotionProfile
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.015);
+		headingPID.setPositionTolerance(0.0125); //0.015
 		headingPID.setVelocityTolerance(0.01);
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);

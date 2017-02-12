@@ -4,7 +4,7 @@ public class PivotTrajectory extends TorTrajectory {
 	
 	public PivotTrajectory(double goal){
 		super(0.0, goal * (Math.PI/180.0));
-		build(goal_head, max_omg, max_alf, max_jeta, heading, omega, alpha);
+		build(goal_head, max_omg, max_alf, max_jeta, rotation);
 	}
 	
 	public double lookUpHeading(long t){
@@ -12,21 +12,21 @@ public class PivotTrajectory extends TorTrajectory {
 		if(i == -1){
 			return goal_head;
 		}
-		return heading.elementAt(i);
+		return rotation.get(i).pos;
 	}
 	public double lookUpOmega(long t){
 		int i = time.indexOf(t);
 		if(i == -1){
 			return 0.0;
 		}
-		return omega.elementAt(i);
+		return rotation.get(i).vel;
 	}
 	public double lookUpAlpha(long t){
 		int i = time.indexOf(t);
 		if(i == -1){
 			return 0.0;
 		}
-		return alpha.elementAt(i);
+		return rotation.get(i).acc;
 	}
 	
 	public double lookUpPosition(long t){

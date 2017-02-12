@@ -26,6 +26,8 @@ public class TorDrive
 	private static TorTrajectory backwardTrajectory;
 	private static TorTrajectory leftTrajectory;
 	
+	private testSpline testspline;
+	
 	private boolean buttonYlast;
 	private boolean buttonBlast;
 	private boolean buttonXlast;
@@ -50,6 +52,8 @@ public class TorDrive
 		rightTrajectory = new PivotTrajectory(90);
 		leftTrajectory = new PivotTrajectory(-90);
 		
+		testspline = new testSpline();
+		
 		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
 		m_solenoidshift = shift;
@@ -69,8 +73,8 @@ public class TorDrive
 				}
 			}
 			else{
-//				ackermanDrive(throttleAxis, carSteerAxis);
-				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+				ackermanDrive(throttleAxis, carSteerAxis);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 				
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
 				if(shiftButton){
@@ -214,16 +218,17 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-			rightTrajectory.execute();
+//			rightTrajectory.execute();
 		}
 		else if(buttonX && !buttonXlast){
-			leftTrajectory.execute();
+//			leftTrajectory.execute();
 		}
 		else if(buttonY && !buttonYlast){
-			forwardTrajectory.execute();
+//			forwardTrajectory.execute();
+			testspline.execute();
 		}
 		else if(buttonA && !buttonAlast){
-			backwardTrajectory.execute();
+//			backwardTrajectory.execute();
 		}
 		else{
 			

@@ -71,12 +71,11 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-//    	drive.shiftToHighGearMotion();
+    	drive.shiftToHighGearMotion();
     	while(isEnabled()){
-//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
-    		SmartDashboard.putNumber("lidar", lidar.getDistance());
 //    		intake.update();
 //    		gear.Gear();
     	}

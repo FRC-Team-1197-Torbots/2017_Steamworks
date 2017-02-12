@@ -136,16 +136,16 @@ public enum TorCAN
 	}
 	
 	public double getHeading(){
-		return (gyro.getAngle() * (Math.PI / 180)); // (units: radians)
+		return (-gyro.getAngle() * (Math.PI / 180)); // (units: radians)
 	}
 	public double getOmega(){
-		return (gyro.getRate()); // (units: radians (contrary to navX documentation))
+		return (-gyro.getRate()); // (units: radians (contrary to navX documentation))
 	}
 	
 	//1.555 is the conversion factor that we found experimentally.
 	public void setTargets(double v, double omega){ 
-		m_Rtalon2.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		m_Ltalon2.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+		m_Rtalon2.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		m_Ltalon2.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
 	public void resetEncoder(){

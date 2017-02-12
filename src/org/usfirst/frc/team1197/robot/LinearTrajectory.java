@@ -29,7 +29,6 @@ public class LinearTrajectory extends TorTrajectory{
 		return translation.get(i).acc;
 	}
 	
-	
 	public double lookUpOmega(long t){
 		return 0;
 	}

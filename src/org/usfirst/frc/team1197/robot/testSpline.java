@@ -1912,10 +1912,4 @@ public class testSpline extends TorTrajectory {
 		translation.add(new MotionState1D(3.1686, 0, 0));
 		rotation.add(new MotionState1D(-1.0471, 0, 0));
 	}
-	public double lookUpPosition(long t) {return 0;}
-	public double lookUpVelocity(long t) {return 0;}
-	public double lookUpAcceleration(long t) {return 0;}
-	public double lookUpAlpha(long t) {return 0;}
-	public double lookUpOmega(long t) {return 0;}
-	public double lookUpHeading(long t) {return 0;}
 }

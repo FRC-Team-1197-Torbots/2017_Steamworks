@@ -73,11 +73,11 @@ public class Robot extends SampleRobot {
     public void operatorControl() {
     	drive.shiftToHighGearMotion();
     	while(isEnabled()){
-    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
-//    		intake.update();
-//    		gear.Gear();
+    		intake.update();
+//    		gear.update();
     	}
     }
 

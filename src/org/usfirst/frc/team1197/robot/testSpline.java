@@ -3,1913 +3,1241 @@ package org.usfirst.frc.team1197.robot;
 public class testSpline extends TorTrajectory {
 
 	public testSpline() {
-		super(3.1686, -1.0471);
+		super(10.3919, 0);
 		time.clear();
 		translation.clear();
 		rotation.clear();
-
-		time.add((long) 0);
-		translation.add(new MotionState1D(0, 0, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 5);
-		translation.add(new MotionState1D(0, 0.0005, 0.0992));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 10);
-		translation.add(new MotionState1D(0, 0.0015, 0.1983));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 15);
-		translation.add(new MotionState1D(0, 0.003, 0.2975));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 20);
-		translation.add(new MotionState1D(0, 0.005, 0.3966));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 25);
-		translation.add(new MotionState1D(0.0001, 0.0074, 0.4958));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 30);
-		translation.add(new MotionState1D(0.0001, 0.0104, 0.595));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 35);
-		translation.add(new MotionState1D(0.0002, 0.0139, 0.6941));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 40);
-		translation.add(new MotionState1D(0.0003, 0.0178, 0.7933));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 45);
-		translation.add(new MotionState1D(0.0004, 0.0223, 0.8925));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 50);
-		translation.add(new MotionState1D(0.0005, 0.0273, 0.9916));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 55);
-		translation.add(new MotionState1D(0.0006, 0.0327, 1.0908));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 60);
-		translation.add(new MotionState1D(0.0008, 0.0387, 1.1899));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 65);
-		translation.add(new MotionState1D(0.001, 0.0451, 1.2891));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 70);
-		translation.add(new MotionState1D(0.0013, 0.0521, 1.3883));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 75);
-		translation.add(new MotionState1D(0.0015, 0.0595, 1.4874));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 80);
-		translation.add(new MotionState1D(0.0019, 0.0674, 1.5866));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 85);
-		translation.add(new MotionState1D(0.0022, 0.0759, 1.6858));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 90);
-		translation.add(new MotionState1D(0.0026, 0.0848, 1.7849));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 95);
-		translation.add(new MotionState1D(0.0031, 0.0942, 1.8841));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 100);
-		translation.add(new MotionState1D(0.0036, 0.1041, 1.9832));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 105);
-		translation.add(new MotionState1D(0.0041, 0.1145, 2.0824));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 110);
-		translation.add(new MotionState1D(0.0047, 0.1254, 2.1816));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 115);
-		translation.add(new MotionState1D(0.0054, 0.1368, 2.2807));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 120);
-		translation.add(new MotionState1D(0.0061, 0.1487, 2.3799));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 125);
-		translation.add(new MotionState1D(0.0068, 0.1611, 2.4791));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 130);
-		translation.add(new MotionState1D(0.0077, 0.174, 2.5782));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 135);
-		translation.add(new MotionState1D(0.0086, 0.1874, 2.6774));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 140);
-		translation.add(new MotionState1D(0.0096, 0.2013, 2.7765));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 145);
-		translation.add(new MotionState1D(0.0106, 0.2157, 2.8757));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 150);
-		translation.add(new MotionState1D(0.0117, 0.2306, 2.9749));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 155);
-		translation.add(new MotionState1D(0.0129, 0.2459, 3.074));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 160);
-		translation.add(new MotionState1D(0.0142, 0.2618, 3.1732));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 165);
-		translation.add(new MotionState1D(0.0155, 0.2781, 3.2723));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 170);
-		translation.add(new MotionState1D(0.017, 0.295, 3.3715));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 175);
-		translation.add(new MotionState1D(0.0185, 0.3124, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 180);
-		translation.add(new MotionState1D(0.0201, 0.3297, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 185);
-		translation.add(new MotionState1D(0.0218, 0.3471, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 190);
-		translation.add(new MotionState1D(0.0236, 0.3644, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 195);
-		translation.add(new MotionState1D(0.0254, 0.3818, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 200);
-		translation.add(new MotionState1D(0.0274, 0.3991, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 205);
-		translation.add(new MotionState1D(0.0294, 0.4165, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 210);
-		translation.add(new MotionState1D(0.0315, 0.4338, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 215);
-		translation.add(new MotionState1D(0.0338, 0.4512, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 220);
-		translation.add(new MotionState1D(0.0361, 0.4685, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 225);
-		translation.add(new MotionState1D(0.0384, 0.4859, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 230);
-		translation.add(new MotionState1D(0.0409, 0.5032, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 235);
-		translation.add(new MotionState1D(0.0435, 0.5206, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 240);
-		translation.add(new MotionState1D(0.0461, 0.538, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 245);
-		translation.add(new MotionState1D(0.0488, 0.5553, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 250);
-		translation.add(new MotionState1D(0.0517, 0.5727, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 255);
-		translation.add(new MotionState1D(0.0546, 0.59, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 260);
-		translation.add(new MotionState1D(0.0576, 0.6074, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 265);
-		translation.add(new MotionState1D(0.0607, 0.6247, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 270);
-		translation.add(new MotionState1D(0.0638, 0.6421, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 275);
-		translation.add(new MotionState1D(0.0671, 0.6594, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 280);
-		translation.add(new MotionState1D(0.0704, 0.6768, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 285);
-		translation.add(new MotionState1D(0.0738, 0.6941, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 290);
-		translation.add(new MotionState1D(0.0774, 0.7115, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 295);
-		translation.add(new MotionState1D(0.081, 0.7288, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 300);
-		translation.add(new MotionState1D(0.0846, 0.7462, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 305);
-		translation.add(new MotionState1D(0.0884, 0.7635, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 310);
-		translation.add(new MotionState1D(0.0923, 0.7809, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 315);
-		translation.add(new MotionState1D(0.0962, 0.7983, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 320);
-		translation.add(new MotionState1D(0.1003, 0.8156, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 325);
-		translation.add(new MotionState1D(0.1044, 0.833, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 330);
-		translation.add(new MotionState1D(0.1086, 0.8503, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 335);
-		translation.add(new MotionState1D(0.1129, 0.8677, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 340);
-		translation.add(new MotionState1D(0.1173, 0.885, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 345);
-		translation.add(new MotionState1D(0.1217, 0.9024, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 350);
-		translation.add(new MotionState1D(0.1263, 0.9197, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 355);
-		translation.add(new MotionState1D(0.1309, 0.9371, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 360);
-		translation.add(new MotionState1D(0.1357, 0.9544, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 365);
-		translation.add(new MotionState1D(0.1405, 0.9718, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 370);
-		translation.add(new MotionState1D(0.1454, 0.9891, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 375);
-		translation.add(new MotionState1D(0.1504, 1.0065, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 380);
-		translation.add(new MotionState1D(0.1554, 1.0238, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 385);
-		translation.add(new MotionState1D(0.1606, 1.0412, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 390);
-		translation.add(new MotionState1D(0.1659, 1.0586, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 395);
-		translation.add(new MotionState1D(0.1712, 1.0759, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 400);
-		translation.add(new MotionState1D(0.1766, 1.0933, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 405);
-		translation.add(new MotionState1D(0.1821, 1.1106, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 410);
-		translation.add(new MotionState1D(0.1877, 1.128, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 415);
-		translation.add(new MotionState1D(0.1934, 1.1453, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 420);
-		translation.add(new MotionState1D(0.1992, 1.1627, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 425);
-		translation.add(new MotionState1D(0.205, 1.18, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 430);
-		translation.add(new MotionState1D(0.211, 1.1974, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 435);
-		translation.add(new MotionState1D(0.217, 1.2147, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 440);
-		translation.add(new MotionState1D(0.2231, 1.2321, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 445);
-		translation.add(new MotionState1D(0.2293, 1.2494, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 450);
-		translation.add(new MotionState1D(0.2356, 1.2668, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 455);
-		translation.add(new MotionState1D(0.242, 1.2841, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 460);
-		translation.add(new MotionState1D(0.2485, 1.3015, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 465);
-		translation.add(new MotionState1D(0.255, 1.3189, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 470);
-		translation.add(new MotionState1D(0.2616, 1.3362, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 475);
-		translation.add(new MotionState1D(0.2684, 1.3536, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 480);
-		translation.add(new MotionState1D(0.2752, 1.3709, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 485);
-		translation.add(new MotionState1D(0.2821, 1.3883, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 490);
-		translation.add(new MotionState1D(0.2891, 1.4056, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 495);
-		translation.add(new MotionState1D(0.2961, 1.423, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 500);
-		translation.add(new MotionState1D(0.3033, 1.4403, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 505);
-		translation.add(new MotionState1D(0.3105, 1.4577, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 510);
-		translation.add(new MotionState1D(0.3179, 1.475, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 515);
-		translation.add(new MotionState1D(0.3253, 1.4924, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 520);
-		translation.add(new MotionState1D(0.3328, 1.5097, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 525);
-		translation.add(new MotionState1D(0.3404, 1.5271, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 530);
-		translation.add(new MotionState1D(0.3481, 1.5444, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 535);
-		translation.add(new MotionState1D(0.3558, 1.5618, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 540);
-		translation.add(new MotionState1D(0.3637, 1.5792, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 545);
-		translation.add(new MotionState1D(0.3716, 1.5965, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 550);
-		translation.add(new MotionState1D(0.3796, 1.6139, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 555);
-		translation.add(new MotionState1D(0.3878, 1.6312, 3.4707));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 560);
-		translation.add(new MotionState1D(0.396, 1.6481, 3.3715));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 565);
-		translation.add(new MotionState1D(0.4042, 1.6644, 3.2723));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 570);
-		translation.add(new MotionState1D(0.4126, 1.6803, 3.1732));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 575);
-		translation.add(new MotionState1D(0.421, 1.6957, 3.074));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 580);
-		translation.add(new MotionState1D(0.4296, 1.7105, 2.9749));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 585);
-		translation.add(new MotionState1D(0.4381, 1.7249, 2.8757));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 590);
-		translation.add(new MotionState1D(0.4468, 1.7388, 2.7765));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 595);
-		translation.add(new MotionState1D(0.4555, 1.7522, 2.6774));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 600);
-		translation.add(new MotionState1D(0.4643, 1.7651, 2.5782));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 605);
-		translation.add(new MotionState1D(0.4732, 1.7775, 2.4791));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 610);
-		translation.add(new MotionState1D(0.4821, 1.7894, 2.3799));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 615);
-		translation.add(new MotionState1D(0.4911, 1.8008, 2.2807));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 620);
-		translation.add(new MotionState1D(0.5001, 1.8117, 2.1816));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 625);
-		translation.add(new MotionState1D(0.5092, 1.8221, 2.0824));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 630);
-		translation.add(new MotionState1D(0.5183, 1.832, 1.9832));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 635);
-		translation.add(new MotionState1D(0.5275, 1.8414, 1.8841));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 640);
-		translation.add(new MotionState1D(0.5367, 1.8504, 1.7849));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 645);
-		translation.add(new MotionState1D(0.546, 1.8588, 1.6858));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 650);
-		translation.add(new MotionState1D(0.5553, 1.8667, 1.5866));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 655);
-		translation.add(new MotionState1D(0.5647, 1.8742, 1.4874));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 660);
-		translation.add(new MotionState1D(0.5741, 1.8811, 1.3883));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 665);
-		translation.add(new MotionState1D(0.5835, 1.8876, 1.2891));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 670);
-		translation.add(new MotionState1D(0.5929, 1.8935, 1.1899));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 675);
-		translation.add(new MotionState1D(0.6024, 1.899, 1.0908));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 680);
-		translation.add(new MotionState1D(0.6119, 1.9039, 0.9916));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 685);
-		translation.add(new MotionState1D(0.6215, 1.9084, 0.8925));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 690);
-		translation.add(new MotionState1D(0.631, 1.9123, 0.7933));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 695);
-		translation.add(new MotionState1D(0.6406, 1.9158, 0.6941));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 700);
-		translation.add(new MotionState1D(0.6502, 1.9188, 0.595));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 705);
-		translation.add(new MotionState1D(0.6598, 1.9213, 0.4958));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 710);
-		translation.add(new MotionState1D(0.6694, 1.9232, 0.3966));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 715);
-		translation.add(new MotionState1D(0.679, 1.9247, 0.2975));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 720);
-		translation.add(new MotionState1D(0.6886, 1.9257, 0.1983));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 725);
-		translation.add(new MotionState1D(0.6983, 1.9262, 0.0992));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 730);
-		translation.add(new MotionState1D(0.7079, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 735);
-		translation.add(new MotionState1D(0.7175, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 740);
-		translation.add(new MotionState1D(0.7271, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 745);
-		translation.add(new MotionState1D(0.7368, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 750);
-		translation.add(new MotionState1D(0.7464, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 755);
-		translation.add(new MotionState1D(0.756, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 760);
-		translation.add(new MotionState1D(0.7657, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 765);
-		translation.add(new MotionState1D(0.7753, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 770);
-		translation.add(new MotionState1D(0.7849, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 775);
-		translation.add(new MotionState1D(0.7946, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 780);
-		translation.add(new MotionState1D(0.8042, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 785);
-		translation.add(new MotionState1D(0.8138, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 790);
-		translation.add(new MotionState1D(0.8235, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 795);
-		translation.add(new MotionState1D(0.8331, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 800);
-		translation.add(new MotionState1D(0.8427, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 805);
-		translation.add(new MotionState1D(0.8524, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 810);
-		translation.add(new MotionState1D(0.862, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 815);
-		translation.add(new MotionState1D(0.8716, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 820);
-		translation.add(new MotionState1D(0.8812, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 825);
-		translation.add(new MotionState1D(0.8909, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 830);
-		translation.add(new MotionState1D(0.9005, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 835);
-		translation.add(new MotionState1D(0.9101, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 840);
-		translation.add(new MotionState1D(0.9198, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 845);
-		translation.add(new MotionState1D(0.9294, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 850);
-		translation.add(new MotionState1D(0.939, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 855);
-		translation.add(new MotionState1D(0.9487, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 860);
-		translation.add(new MotionState1D(0.9583, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 865);
-		translation.add(new MotionState1D(0.9679, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 870);
-		translation.add(new MotionState1D(0.9776, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 875);
-		translation.add(new MotionState1D(0.9872, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 880);
-		translation.add(new MotionState1D(0.9968, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 885);
-		translation.add(new MotionState1D(1.0065, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 890);
-		translation.add(new MotionState1D(1.0161, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 895);
-		translation.add(new MotionState1D(1.0257, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 900);
-		translation.add(new MotionState1D(1.0353, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 905);
-		translation.add(new MotionState1D(1.045, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 910);
-		translation.add(new MotionState1D(1.0546, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 915);
-		translation.add(new MotionState1D(1.0642, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 920);
-		translation.add(new MotionState1D(1.0739, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 925);
-		translation.add(new MotionState1D(1.0835, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 930);
-		translation.add(new MotionState1D(1.0931, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 935);
-		translation.add(new MotionState1D(1.1028, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 940);
-		translation.add(new MotionState1D(1.1124, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 945);
-		translation.add(new MotionState1D(1.122, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 950);
-		translation.add(new MotionState1D(1.1317, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 955);
-		translation.add(new MotionState1D(1.1413, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 960);
-		translation.add(new MotionState1D(1.1509, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 965);
-		translation.add(new MotionState1D(1.1605, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 970);
-		translation.add(new MotionState1D(1.1702, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 975);
-		translation.add(new MotionState1D(1.1798, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 980);
-		translation.add(new MotionState1D(1.1894, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 985);
-		translation.add(new MotionState1D(1.1991, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 990);
-		translation.add(new MotionState1D(1.2087, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 995);
-		translation.add(new MotionState1D(1.2183, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 1000);
-		translation.add(new MotionState1D(1.228, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 1005);
-		translation.add(new MotionState1D(1.2376, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 1010);
-		translation.add(new MotionState1D(1.2472, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 1015);
-		translation.add(new MotionState1D(1.2569, 1.9262, 0));
-		rotation.add(new MotionState1D(0, 0, 0));
-
-		time.add((long) 1020);
-		translation.add(new MotionState1D(1.2665, 1.9262, 0));
-		rotation.add(new MotionState1D(-0, -0.0004, -0.0872));
-
-		time.add((long) 1025);
-		translation.add(new MotionState1D(1.2761, 1.9262, 0));
-		rotation.add(new MotionState1D(-0, -0.0019, -0.2856));
-
-		time.add((long) 1030);
-		translation.add(new MotionState1D(1.2858, 1.9262, 0));
-		rotation.add(new MotionState1D(-0, -0.0043, -0.4843));
-
-		time.add((long) 1035);
-		translation.add(new MotionState1D(1.2954, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0001, -0.0077, -0.6831));
-
-		time.add((long) 1040);
-		translation.add(new MotionState1D(1.305, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0001, -0.0121, -0.8818));
-
-		time.add((long) 1045);
-		translation.add(new MotionState1D(1.3146, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0002, -0.0175, -1.0806));
-
-		time.add((long) 1050);
-		translation.add(new MotionState1D(1.3243, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0003, -0.0239, -1.2793));
-
-		time.add((long) 1055);
-		translation.add(new MotionState1D(1.3339, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0004, -0.0313, -1.4781));
-
-		time.add((long) 1060);
-		translation.add(new MotionState1D(1.3435, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0006, -0.0397, -1.6768));
-
-		time.add((long) 1065);
-		translation.add(new MotionState1D(1.3532, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0008, -0.0491, -1.8756));
-
-		time.add((long) 1070);
-		translation.add(new MotionState1D(1.3628, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0011, -0.0594, -2.0743));
-
-		time.add((long) 1075);
-		translation.add(new MotionState1D(1.3724, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0014, -0.0708, -2.273));
-
-		time.add((long) 1080);
-		translation.add(new MotionState1D(1.3821, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0018, -0.0832, -2.4718));
-
-		time.add((long) 1085);
-		translation.add(new MotionState1D(1.3917, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0022, -0.0965, -2.6705));
-
-		time.add((long) 1090);
-		translation.add(new MotionState1D(1.4013, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0028, -0.1109, -2.8693));
-
-		time.add((long) 1095);
-		translation.add(new MotionState1D(1.411, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0034, -0.1262, -3.068));
-
-		time.add((long) 1100);
-		translation.add(new MotionState1D(1.4206, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.004, -0.1425, -3.2668));
-
-		time.add((long) 1105);
-		translation.add(new MotionState1D(1.4302, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0048, -0.1599, -3.4655));
-
-		time.add((long) 1110);
-		translation.add(new MotionState1D(1.4399, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0056, -0.1782, -3.6643));
-
-		time.add((long) 1115);
-		translation.add(new MotionState1D(1.4495, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0066, -0.1975, -3.863));
-
-		time.add((long) 1120);
-		translation.add(new MotionState1D(1.4591, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0076, -0.2178, -4.0618));
-
-		time.add((long) 1125);
-		translation.add(new MotionState1D(1.4687, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0087, -0.2391, -4.2605));
-
-		time.add((long) 1130);
-		translation.add(new MotionState1D(1.4784, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.01, -0.2614, -4.4593));
-
-		time.add((long) 1135);
-		translation.add(new MotionState1D(1.488, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0114, -0.2847, -4.658));
-
-		time.add((long) 1140);
-		translation.add(new MotionState1D(1.4976, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0128, -0.309, -4.8568));
-
-		time.add((long) 1145);
-		translation.add(new MotionState1D(1.5073, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0144, -0.3343, -5.0555));
-
-		time.add((long) 1150);
-		translation.add(new MotionState1D(1.5169, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0162, -0.3605, -5.2543));
-
-		time.add((long) 1155);
-		translation.add(new MotionState1D(1.5265, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0181, -0.3878, -5.453));
-
-		time.add((long) 1160);
-		translation.add(new MotionState1D(1.5362, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0201, -0.416, -5.6518));
-
-		time.add((long) 1165);
-		translation.add(new MotionState1D(1.5458, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0222, -0.4453, -5.8505));
-
-		time.add((long) 1170);
-		translation.add(new MotionState1D(1.5554, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0245, -0.4755, -6.0492));
-
-		time.add((long) 1175);
-		translation.add(new MotionState1D(1.5651, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.027, -0.5068, -6.248));
-
-		time.add((long) 1180);
-		translation.add(new MotionState1D(1.5747, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0296, -0.539, -6.4467));
-
-		time.add((long) 1185);
-		translation.add(new MotionState1D(1.5843, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0324, -0.5722, -6.6455));
-
-		time.add((long) 1190);
-		translation.add(new MotionState1D(1.594, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0353, -0.6065, -6.8442));
-
-		time.add((long) 1195);
-		translation.add(new MotionState1D(1.6036, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0384, -0.6417, -7.043));
-
-		time.add((long) 1200);
-		translation.add(new MotionState1D(1.6132, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0417, -0.6779, -7.2417));
-
-		time.add((long) 1205);
-		translation.add(new MotionState1D(1.6228, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0452, -0.7151, -7.4405));
-
-		time.add((long) 1210);
-		translation.add(new MotionState1D(1.6325, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0489, -0.7533, -7.6392));
-
-		time.add((long) 1215);
-		translation.add(new MotionState1D(1.6421, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0527, -0.7925, -7.838));
-
-		time.add((long) 1220);
-		translation.add(new MotionState1D(1.6517, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0568, -0.8327, -8.0367));
-
-		time.add((long) 1225);
-		translation.add(new MotionState1D(1.6614, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0611, -0.8738, -8.2355));
-
-		time.add((long) 1230);
-		translation.add(new MotionState1D(1.671, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0656, -0.916, -8.4342));
-
-		time.add((long) 1235);
-		translation.add(new MotionState1D(1.6806, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0702, -0.9592, -8.633));
-
-		time.add((long) 1240);
-		translation.add(new MotionState1D(1.6903, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0751, -1.0033, -8.8317));
-
-		time.add((long) 1245);
-		translation.add(new MotionState1D(1.6999, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0803, -1.0482, -8.9683));
-
-		time.add((long) 1250);
-		translation.add(new MotionState1D(1.7095, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0856, -1.0931, -8.9938));
-
-		time.add((long) 1255);
-		translation.add(new MotionState1D(1.7192, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.0912, -1.137, -8.7628));
-
-		time.add((long) 1260);
-		translation.add(new MotionState1D(1.7288, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.097, -1.1798, -8.5641));
-
-		time.add((long) 1265);
-		translation.add(new MotionState1D(1.7384, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.103, -1.2216, -8.3653));
-
-		time.add((long) 1270);
-		translation.add(new MotionState1D(1.748, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1092, -1.2624, -8.1666));
-
-		time.add((long) 1275);
-		translation.add(new MotionState1D(1.7577, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1156, -1.3023, -7.9678));
-
-		time.add((long) 1280);
-		translation.add(new MotionState1D(1.7673, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1222, -1.3411, -7.7691));
-
-		time.add((long) 1285);
-		translation.add(new MotionState1D(1.7769, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.129, -1.379, -7.5703));
-
-		time.add((long) 1290);
-		translation.add(new MotionState1D(1.7866, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.136, -1.4158, -7.3716));
-
-		time.add((long) 1295);
-		translation.add(new MotionState1D(1.7962, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1432, -1.4517, -7.1728));
-
-		time.add((long) 1300);
-		translation.add(new MotionState1D(1.8058, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1505, -1.4866, -6.9741));
-
-		time.add((long) 1305);
-		translation.add(new MotionState1D(1.8155, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1581, -1.5204, -6.7754));
-
-		time.add((long) 1310);
-		translation.add(new MotionState1D(1.8251, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1657, -1.5533, -6.5766));
-
-		time.add((long) 1315);
-		translation.add(new MotionState1D(1.8347, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1736, -1.5852, -6.3779));
-
-		time.add((long) 1320);
-		translation.add(new MotionState1D(1.8444, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1816, -1.6161, -6.1791));
-
-		time.add((long) 1325);
-		translation.add(new MotionState1D(1.854, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.1897, -1.646, -5.9804));
-
-		time.add((long) 1330);
-		translation.add(new MotionState1D(1.8636, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.198, -1.6749, -5.7816));
-
-		time.add((long) 1335);
-		translation.add(new MotionState1D(1.8733, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2065, -1.7028, -5.5829));
-
-		time.add((long) 1340);
-		translation.add(new MotionState1D(1.8829, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2151, -1.7298, -5.3841));
-
-		time.add((long) 1345);
-		translation.add(new MotionState1D(1.8925, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2238, -1.7557, -5.1854));
-
-		time.add((long) 1350);
-		translation.add(new MotionState1D(1.9021, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2326, -1.7806, -4.9866));
-
-		time.add((long) 1355);
-		translation.add(new MotionState1D(1.9118, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2416, -1.8046, -4.7879));
-
-		time.add((long) 1360);
-		translation.add(new MotionState1D(1.9214, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2507, -1.8275, -4.5891));
-
-		time.add((long) 1365);
-		translation.add(new MotionState1D(1.931, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2599, -1.8495, -4.3904));
-
-		time.add((long) 1370);
-		translation.add(new MotionState1D(1.9407, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2692, -1.8704, -4.1916));
-
-		time.add((long) 1375);
-		translation.add(new MotionState1D(1.9503, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2786, -1.8904, -3.9929));
-
-		time.add((long) 1380);
-		translation.add(new MotionState1D(1.9599, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2881, -1.9094, -3.7941));
-
-		time.add((long) 1385);
-		translation.add(new MotionState1D(1.9696, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.2977, -1.9273, -3.5954));
-
-		time.add((long) 1390);
-		translation.add(new MotionState1D(1.9792, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3073, -1.9443, -3.3967));
-
-		time.add((long) 1395);
-		translation.add(new MotionState1D(1.9888, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3171, -1.9603, -3.1979));
-
-		time.add((long) 1400);
-		translation.add(new MotionState1D(1.9985, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3269, -1.9753, -2.9992));
-
-		time.add((long) 1405);
-		translation.add(new MotionState1D(2.0081, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3369, -1.9893, -2.8004));
-
-		time.add((long) 1410);
-		translation.add(new MotionState1D(2.0177, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3468, -2.0023, -2.6017));
-
-		time.add((long) 1415);
-		translation.add(new MotionState1D(2.0274, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3569, -2.0143, -2.4029));
-
-		time.add((long) 1420);
-		translation.add(new MotionState1D(2.037, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.367, -2.0253, -2.2042));
-
-		time.add((long) 1425);
-		translation.add(new MotionState1D(2.0466, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3771, -2.0354, -2.0054));
-
-		time.add((long) 1430);
-		translation.add(new MotionState1D(2.0562, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3873, -2.0444, -1.8067));
-
-		time.add((long) 1435);
-		translation.add(new MotionState1D(2.0659, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.3976, -2.0524, -1.6079));
-
-		time.add((long) 1440);
-		translation.add(new MotionState1D(2.0755, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4078, -2.0595, -1.4092));
-
-		time.add((long) 1445);
-		translation.add(new MotionState1D(2.0851, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4182, -2.0655, -1.2104));
-
-		time.add((long) 1450);
-		translation.add(new MotionState1D(2.0948, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4285, -2.0706, -1.0117));
-
-		time.add((long) 1455);
-		translation.add(new MotionState1D(2.1044, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4389, -2.0747, -0.8129));
-
-		time.add((long) 1460);
-		translation.add(new MotionState1D(2.114, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4492, -2.0777, -0.6142));
-
-		time.add((long) 1465);
-		translation.add(new MotionState1D(2.1237, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4596, -2.0798, -0.4154));
-
-		time.add((long) 1470);
-		translation.add(new MotionState1D(2.1333, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.47, -2.0809, -0.2167));
-
-		time.add((long) 1475);
-		translation.add(new MotionState1D(2.1429, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4804, -2.0811, -0.0346));
-
-		time.add((long) 1480);
-		translation.add(new MotionState1D(2.1526, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.4909, -2.0811, 0));
-
-		time.add((long) 1485);
-		translation.add(new MotionState1D(2.1622, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5013, -2.0811, 0));
-
-		time.add((long) 1490);
-		translation.add(new MotionState1D(2.1718, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5117, -2.0811, 0));
-
-		time.add((long) 1495);
-		translation.add(new MotionState1D(2.1814, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5221, -2.0811, 0));
-
-		time.add((long) 1500);
-		translation.add(new MotionState1D(2.1911, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5325, -2.0811, 0));
-
-		time.add((long) 1505);
-		translation.add(new MotionState1D(2.2007, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5429, -2.0811, 0));
-
-		time.add((long) 1510);
-		translation.add(new MotionState1D(2.2103, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5533, -2.0811, 0));
-
-		time.add((long) 1515);
-		translation.add(new MotionState1D(2.22, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5637, -2.0811, 0));
-
-		time.add((long) 1520);
-		translation.add(new MotionState1D(2.2296, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5741, -2.081, 0.0092));
-
-		time.add((long) 1525);
-		translation.add(new MotionState1D(2.2392, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5845, -2.0802, 0.1599));
-
-		time.add((long) 1530);
-		translation.add(new MotionState1D(2.2489, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.5949, -2.0784, 0.3587));
-
-		time.add((long) 1535);
-		translation.add(new MotionState1D(2.2585, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6053, -2.0756, 0.5574));
-
-		time.add((long) 1540);
-		translation.add(new MotionState1D(2.2681, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6157, -2.0719, 0.7562));
-
-		time.add((long) 1545);
-		translation.add(new MotionState1D(2.2778, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.626, -2.0671, 0.9549));
-
-		time.add((long) 1550);
-		translation.add(new MotionState1D(2.2874, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6363, -2.0613, 1.1537));
-
-		time.add((long) 1555);
-		translation.add(new MotionState1D(2.297, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6466, -2.0546, 1.3524));
-
-		time.add((long) 1560);
-		translation.add(new MotionState1D(2.3067, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6569, -2.0468, 1.5512));
-
-		time.add((long) 1565);
-		translation.add(new MotionState1D(2.3163, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6671, -2.038, 1.7499));
-
-		time.add((long) 1570);
-		translation.add(new MotionState1D(2.3259, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6772, -2.0283, 1.9487));
-
-		time.add((long) 1575);
-		translation.add(new MotionState1D(2.3355, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6874, -2.0176, 2.1474));
-
-		time.add((long) 1580);
-		translation.add(new MotionState1D(2.3452, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.6974, -2.0058, 2.3462));
-
-		time.add((long) 1585);
-		translation.add(new MotionState1D(2.3548, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7074, -1.9931, 2.5449));
-
-		time.add((long) 1590);
-		translation.add(new MotionState1D(2.3644, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7173, -1.9794, 2.7437));
-
-		time.add((long) 1595);
-		translation.add(new MotionState1D(2.3741, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7272, -1.9647, 2.9424));
-
-		time.add((long) 1600);
-		translation.add(new MotionState1D(2.3837, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.737, -1.949, 3.1411));
-
-		time.add((long) 1605);
-		translation.add(new MotionState1D(2.3933, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7467, -1.9323, 3.3399));
-
-		time.add((long) 1610);
-		translation.add(new MotionState1D(2.403, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7563, -1.9146, 3.5386));
-
-		time.add((long) 1615);
-		translation.add(new MotionState1D(2.4126, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7658, -1.8959, 3.7374));
-
-		time.add((long) 1620);
-		translation.add(new MotionState1D(2.4222, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7753, -1.8762, 3.9361));
-
-		time.add((long) 1625);
-		translation.add(new MotionState1D(2.4319, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7846, -1.8555, 4.1349));
-
-		time.add((long) 1630);
-		translation.add(new MotionState1D(2.4415, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.7938, -1.8339, 4.3336));
-
-		time.add((long) 1635);
-		translation.add(new MotionState1D(2.4511, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.8029, -1.8112, 4.5324));
-
-		time.add((long) 1640);
-		translation.add(new MotionState1D(2.4608, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.8119, -1.7876, 4.7311));
-
-		time.add((long) 1645);
-		translation.add(new MotionState1D(2.4704, 1.9262, 0));
-		rotation.add(new MotionState1D(-0.8208, -1.7629, 4.9299));
-
-		time.add((long) 1650);
-		translation.add(new MotionState1D(2.48, 1.9257, -0.0992));
-		rotation.add(new MotionState1D(-0.8296, -1.7368, 5.2174));
-
-		time.add((long) 1655);
-		translation.add(new MotionState1D(2.4896, 1.9247, -0.1983));
-		rotation.add(new MotionState1D(-0.8382, -1.7093, 5.4993));
-
-		time.add((long) 1660);
-		translation.add(new MotionState1D(2.4993, 1.9232, -0.2975));
-		rotation.add(new MotionState1D(-0.8467, -1.6804, 5.7751));
-
-		time.add((long) 1665);
-		translation.add(new MotionState1D(2.5089, 1.9213, -0.3966));
-		rotation.add(new MotionState1D(-0.855, -1.6502, 6.0444));
-
-		time.add((long) 1670);
-		translation.add(new MotionState1D(2.5185, 1.9188, -0.4958));
-		rotation.add(new MotionState1D(-0.8632, -1.6187, 6.3065));
-
-		time.add((long) 1675);
-		translation.add(new MotionState1D(2.5281, 1.9158, -0.595));
-		rotation.add(new MotionState1D(-0.8712, -1.5859, 6.5611));
-
-		time.add((long) 1680);
-		translation.add(new MotionState1D(2.5376, 1.9123, -0.6941));
-		rotation.add(new MotionState1D(-0.879, -1.5519, 6.8077));
-
-		time.add((long) 1685);
-		translation.add(new MotionState1D(2.5472, 1.9084, -0.7933));
-		rotation.add(new MotionState1D(-0.8867, -1.5166, 7.0457));
-
-		time.add((long) 1690);
-		translation.add(new MotionState1D(2.5567, 1.9039, -0.8925));
-		rotation.add(new MotionState1D(-0.8942, -1.4802, 7.2747));
-
-		time.add((long) 1695);
-		translation.add(new MotionState1D(2.5662, 1.899, -0.9916));
-		rotation.add(new MotionState1D(-0.9015, -1.4428, 7.4943));
-
-		time.add((long) 1700);
-		translation.add(new MotionState1D(2.5757, 1.8935, -1.0908));
-		rotation.add(new MotionState1D(-0.9086, -1.4043, 7.704));
-
-		time.add((long) 1705);
-		translation.add(new MotionState1D(2.5851, 1.8876, -1.1899));
-		rotation.add(new MotionState1D(-0.9155, -1.3647, 7.9034));
-
-		time.add((long) 1710);
-		translation.add(new MotionState1D(2.5946, 1.8811, -1.2891));
-		rotation.add(new MotionState1D(-0.9222, -1.3243, 8.0921));
-
-		time.add((long) 1715);
-		translation.add(new MotionState1D(2.604, 1.8742, -1.3883));
-		rotation.add(new MotionState1D(-0.9288, -1.2829, 8.2697));
-
-		time.add((long) 1720);
-		translation.add(new MotionState1D(2.6133, 1.8667, -1.4874));
-		rotation.add(new MotionState1D(-0.9351, -1.2408, 8.4358));
-
-		time.add((long) 1725);
-		translation.add(new MotionState1D(2.6226, 1.8588, -1.5866));
-		rotation.add(new MotionState1D(-0.9412, -1.1978, 8.59));
-
-		time.add((long) 1730);
-		translation.add(new MotionState1D(2.6319, 1.8504, -1.6858));
-		rotation.add(new MotionState1D(-0.947, -1.1541, 8.732));
-
-		time.add((long) 1735);
-		translation.add(new MotionState1D(2.6411, 1.8414, -1.7849));
-		rotation.add(new MotionState1D(-0.9527, -1.1098, 8.8614));
-
-		time.add((long) 1740);
-		translation.add(new MotionState1D(2.6503, 1.832, -1.8841));
-		rotation.add(new MotionState1D(-0.9581, -1.0649, 8.978));
-
-		time.add((long) 1745);
-		translation.add(new MotionState1D(2.6594, 1.8221, -1.9832));
-		rotation.add(new MotionState1D(-0.9634, -1.0195, 9.0814));
-
-		time.add((long) 1750);
-		translation.add(new MotionState1D(2.6685, 1.8117, -2.0824));
-		rotation.add(new MotionState1D(-0.9683, -0.9739, 9.1217));
-
-		time.add((long) 1755);
-		translation.add(new MotionState1D(2.6776, 1.8008, -2.1816));
-		rotation.add(new MotionState1D(-0.9731, -0.9286, 9.0689));
-
-		time.add((long) 1760);
-		translation.add(new MotionState1D(2.6865, 1.7894, -2.2807));
-		rotation.add(new MotionState1D(-0.9776, -0.8846, 8.7888));
-
-		time.add((long) 1765);
-		translation.add(new MotionState1D(2.6955, 1.7775, -2.3799));
-		rotation.add(new MotionState1D(-0.9819, -0.842, 8.5318));
-
-		time.add((long) 1770);
-		translation.add(new MotionState1D(2.7043, 1.7651, -2.4791));
-		rotation.add(new MotionState1D(-0.986, -0.8006, 8.274));
-
-		time.add((long) 1775);
-		translation.add(new MotionState1D(2.7131, 1.7522, -2.5782));
-		rotation.add(new MotionState1D(-0.99, -0.7605, 8.0157));
-
-		time.add((long) 1780);
-		translation.add(new MotionState1D(2.7218, 1.7388, -2.6774));
-		rotation.add(new MotionState1D(-0.9937, -0.7217, 7.7574));
-
-		time.add((long) 1785);
-		translation.add(new MotionState1D(2.7305, 1.7249, -2.7765));
-		rotation.add(new MotionState1D(-0.9972, -0.6842, 7.4996));
-
-		time.add((long) 1790);
-		translation.add(new MotionState1D(2.7391, 1.7105, -2.8757));
-		rotation.add(new MotionState1D(-1.0005, -0.648, 7.2427));
-
-		time.add((long) 1795);
-		translation.add(new MotionState1D(2.7476, 1.6957, -2.9749));
-		rotation.add(new MotionState1D(-1.0037, -0.6131, 6.987));
-
-		time.add((long) 1800);
-		translation.add(new MotionState1D(2.756, 1.6803, -3.074));
-		rotation.add(new MotionState1D(-1.0066, -0.5794, 6.7331));
-
-		time.add((long) 1805);
-		translation.add(new MotionState1D(2.7644, 1.6644, -3.1732));
-		rotation.add(new MotionState1D(-1.0094, -0.547, 6.4812));
-
-		time.add((long) 1810);
-		translation.add(new MotionState1D(2.7727, 1.6481, -3.2723));
-		rotation.add(new MotionState1D(-1.0121, -0.5159, 6.2317));
-
-		time.add((long) 1815);
-		translation.add(new MotionState1D(2.7809, 1.6312, -3.3715));
-		rotation.add(new MotionState1D(-1.0146, -0.4859, 5.9851));
-
-		time.add((long) 1820);
-		translation.add(new MotionState1D(2.789, 1.6139, -3.4707));
-		rotation.add(new MotionState1D(-1.017, -0.4572, 5.7416));
-
-		time.add((long) 1825);
-		translation.add(new MotionState1D(2.797, 1.5965, -3.4707));
-		rotation.add(new MotionState1D(-1.0192, -0.4299, 5.4755));
-
-		time.add((long) 1830);
-		translation.add(new MotionState1D(2.805, 1.5792, -3.4707));
-		rotation.add(new MotionState1D(-1.0213, -0.4038, 5.2185));
-
-		time.add((long) 1835);
-		translation.add(new MotionState1D(2.8128, 1.5618, -3.4707));
-		rotation.add(new MotionState1D(-1.0232, -0.3789, 4.9703));
-
-		time.add((long) 1840);
-		translation.add(new MotionState1D(2.8206, 1.5444, -3.4707));
-		rotation.add(new MotionState1D(-1.0251, -0.3553, 4.7308));
-
-		time.add((long) 1845);
-		translation.add(new MotionState1D(2.8283, 1.5271, -3.4707));
-		rotation.add(new MotionState1D(-1.0268, -0.3328, 4.4997));
-
-		time.add((long) 1850);
-		translation.add(new MotionState1D(2.8358, 1.5097, -3.4707));
-		rotation.add(new MotionState1D(-1.0284, -0.3114, 4.2769));
-
-		time.add((long) 1855);
-		translation.add(new MotionState1D(2.8433, 1.4924, -3.4707));
-		rotation.add(new MotionState1D(-1.0299, -0.2911, 4.0621));
-
-		time.add((long) 1860);
-		translation.add(new MotionState1D(2.8508, 1.475, -3.4707));
-		rotation.add(new MotionState1D(-1.0313, -0.2718, 3.8553));
-
-		time.add((long) 1865);
-		translation.add(new MotionState1D(2.8581, 1.4577, -3.4707));
-		rotation.add(new MotionState1D(-1.0326, -0.2535, 3.6561));
-
-		time.add((long) 1870);
-		translation.add(new MotionState1D(2.8653, 1.4403, -3.4707));
-		rotation.add(new MotionState1D(-1.0338, -0.2362, 3.4644));
-
-		time.add((long) 1875);
-		translation.add(new MotionState1D(2.8725, 1.423, -3.4707));
-		rotation.add(new MotionState1D(-1.035, -0.2198, 3.28));
-
-		time.add((long) 1880);
-		translation.add(new MotionState1D(2.8796, 1.4056, -3.4707));
-		rotation.add(new MotionState1D(-1.036, -0.2043, 3.1027));
-
-		time.add((long) 1885);
-		translation.add(new MotionState1D(2.8866, 1.3883, -3.4707));
-		rotation.add(new MotionState1D(-1.037, -0.1896, 2.9325));
-
-		time.add((long) 1890);
-		translation.add(new MotionState1D(2.8935, 1.3709, -3.4707));
-		rotation.add(new MotionState1D(-1.0379, -0.1758, 2.769));
-
-		time.add((long) 1895);
-		translation.add(new MotionState1D(2.9003, 1.3536, -3.4707));
-		rotation.add(new MotionState1D(-1.0388, -0.1627, 2.6121));
-
-		time.add((long) 1900);
-		translation.add(new MotionState1D(2.907, 1.3362, -3.4707));
-		rotation.add(new MotionState1D(-1.0396, -0.1504, 2.4616));
-
-		time.add((long) 1905);
-		translation.add(new MotionState1D(2.9136, 1.3189, -3.4707));
-		rotation.add(new MotionState1D(-1.0403, -0.1388, 2.3174));
-
-		time.add((long) 1910);
-		translation.add(new MotionState1D(2.9202, 1.3015, -3.4707));
-		rotation.add(new MotionState1D(-1.041, -0.1279, 2.1793));
-
-		time.add((long) 1915);
-		translation.add(new MotionState1D(2.9266, 1.2841, -3.4707));
-		rotation.add(new MotionState1D(-1.0416, -0.1177, 2.0471));
-
-		time.add((long) 1920);
-		translation.add(new MotionState1D(2.933, 1.2668, -3.4707));
-		rotation.add(new MotionState1D(-1.0421, -0.1081, 1.9207));
-
-		time.add((long) 1925);
-		translation.add(new MotionState1D(2.9393, 1.2494, -3.4707));
-		rotation.add(new MotionState1D(-1.0426, -0.0991, 1.7999));
-
-		time.add((long) 1930);
-		translation.add(new MotionState1D(2.9455, 1.2321, -3.4707));
-		rotation.add(new MotionState1D(-1.0431, -0.0907, 1.6846));
-
-		time.add((long) 1935);
-		translation.add(new MotionState1D(2.9516, 1.2147, -3.4707));
-		rotation.add(new MotionState1D(-1.0436, -0.0828, 1.5745));
-
-		time.add((long) 1940);
-		translation.add(new MotionState1D(2.9577, 1.1974, -3.4707));
-		rotation.add(new MotionState1D(-1.044, -0.0754, 1.4696));
-
-		time.add((long) 1945);
-		translation.add(new MotionState1D(2.9636, 1.18, -3.4707));
-		rotation.add(new MotionState1D(-1.0443, -0.0686, 1.3697));
-
-		time.add((long) 1950);
-		translation.add(new MotionState1D(2.9695, 1.1627, -3.4707));
-		rotation.add(new MotionState1D(-1.0446, -0.0622, 1.2746));
-
-		time.add((long) 1955);
-		translation.add(new MotionState1D(2.9752, 1.1453, -3.4707));
-		rotation.add(new MotionState1D(-1.0449, -0.0563, 1.1842));
-
-		time.add((long) 1960);
-		translation.add(new MotionState1D(2.9809, 1.128, -3.4707));
-		rotation.add(new MotionState1D(-1.0452, -0.0508, 1.0983));
-
-		time.add((long) 1965);
-		translation.add(new MotionState1D(2.9865, 1.1106, -3.4707));
-		rotation.add(new MotionState1D(-1.0454, -0.0457, 1.0168));
-
-		time.add((long) 1970);
-		translation.add(new MotionState1D(2.992, 1.0933, -3.4707));
-		rotation.add(new MotionState1D(-1.0457, -0.041, 0.9396));
-
-		time.add((long) 1975);
-		translation.add(new MotionState1D(2.9974, 1.0759, -3.4707));
-		rotation.add(new MotionState1D(-1.0459, -0.0367, 0.8665));
-
-		time.add((long) 1980);
-		translation.add(new MotionState1D(3.0028, 1.0586, -3.4707));
-		rotation.add(new MotionState1D(-1.046, -0.0327, 0.7973));
-
-		time.add((long) 1985);
-		translation.add(new MotionState1D(3.008, 1.0412, -3.4707));
-		rotation.add(new MotionState1D(-1.0462, -0.029, 0.732));
-
-		time.add((long) 1990);
-		translation.add(new MotionState1D(3.0132, 1.0238, -3.4707));
-		rotation.add(new MotionState1D(-1.0463, -0.0257, 0.6704));
-
-		time.add((long) 1995);
-		translation.add(new MotionState1D(3.0183, 1.0065, -3.4707));
-		rotation.add(new MotionState1D(-1.0464, -0.0226, 0.6124));
-
-		time.add((long) 2000);
-		translation.add(new MotionState1D(3.0233, 0.9891, -3.4707));
-		rotation.add(new MotionState1D(-1.0465, -0.0198, 0.5579));
-
-		time.add((long) 2005);
-		translation.add(new MotionState1D(3.0282, 0.9718, -3.4707));
-		rotation.add(new MotionState1D(-1.0466, -0.0173, 0.5066));
-
-		time.add((long) 2010);
-		translation.add(new MotionState1D(3.033, 0.9544, -3.4707));
-		rotation.add(new MotionState1D(-1.0467, -0.015, 0.4586));
-
-		time.add((long) 2015);
-		translation.add(new MotionState1D(3.0377, 0.9371, -3.4707));
-		rotation.add(new MotionState1D(-1.0468, -0.0129, 0.4136));
-
-		time.add((long) 2020);
-		translation.add(new MotionState1D(3.0423, 0.9197, -3.4707));
-		rotation.add(new MotionState1D(-1.0468, -0.0111, 0.3716));
-
-		time.add((long) 2025);
-		translation.add(new MotionState1D(3.0469, 0.9024, -3.4707));
-		rotation.add(new MotionState1D(-1.0469, -0.0094, 0.3324));
-
-		time.add((long) 2030);
-		translation.add(new MotionState1D(3.0514, 0.885, -3.4707));
-		rotation.add(new MotionState1D(-1.0469, -0.0079, 0.296));
-
-		time.add((long) 2035);
-		translation.add(new MotionState1D(3.0558, 0.8677, -3.4707));
-		rotation.add(new MotionState1D(-1.047, -0.0066, 0.2621));
-
-		time.add((long) 2040);
-		translation.add(new MotionState1D(3.06, 0.8503, -3.4707));
-		rotation.add(new MotionState1D(-1.047, -0.0055, 0.2308));
-
-		time.add((long) 2045);
-		translation.add(new MotionState1D(3.0643, 0.833, -3.4707));
-		rotation.add(new MotionState1D(-1.047, -0.0045, 0.2018));
-
-		time.add((long) 2050);
-		translation.add(new MotionState1D(3.0684, 0.8156, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0036, 0.1751));
-
-		time.add((long) 2055);
-		translation.add(new MotionState1D(3.0724, 0.7983, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0028, 0.1506));
-
-		time.add((long) 2060);
-		translation.add(new MotionState1D(3.0764, 0.7809, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0022, 0.1282));
-
-		time.add((long) 2065);
-		translation.add(new MotionState1D(3.0802, 0.7635, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0017, 0.1078));
-
-		time.add((long) 2070);
-		translation.add(new MotionState1D(3.084, 0.7462, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0012, 0.0892));
-
-		time.add((long) 2075);
-		translation.add(new MotionState1D(3.0877, 0.7288, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0009, 0.0724));
-
-		time.add((long) 2080);
-		translation.add(new MotionState1D(3.0913, 0.7115, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0006, 0.0573));
-
-		time.add((long) 2085);
-		translation.add(new MotionState1D(3.0948, 0.6941, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0003, 0.0438));
-
-		time.add((long) 2090);
-		translation.add(new MotionState1D(3.0982, 0.6768, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0002, 0.0318));
-
-		time.add((long) 2095);
-		translation.add(new MotionState1D(3.1016, 0.6594, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0.0001, 0.0212));
-
-		time.add((long) 2100);
-		translation.add(new MotionState1D(3.1048, 0.6421, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0, 0.012));
-
-		time.add((long) 2105);
-		translation.add(new MotionState1D(3.108, 0.6247, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, -0, 0.004));
-
-		time.add((long) 2110);
-		translation.add(new MotionState1D(3.1111, 0.6074, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2115);
-		translation.add(new MotionState1D(3.1141, 0.59, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2120);
-		translation.add(new MotionState1D(3.117, 0.5727, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2125);
-		translation.add(new MotionState1D(3.1198, 0.5553, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2130);
-		translation.add(new MotionState1D(3.1225, 0.538, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2135);
-		translation.add(new MotionState1D(3.1252, 0.5206, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2140);
-		translation.add(new MotionState1D(3.1277, 0.5032, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2145);
-		translation.add(new MotionState1D(3.1302, 0.4859, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2150);
-		translation.add(new MotionState1D(3.1326, 0.4685, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2155);
-		translation.add(new MotionState1D(3.1349, 0.4512, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2160);
-		translation.add(new MotionState1D(3.1371, 0.4338, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2165);
-		translation.add(new MotionState1D(3.1392, 0.4165, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2170);
-		translation.add(new MotionState1D(3.1413, 0.3991, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2175);
-		translation.add(new MotionState1D(3.1432, 0.3818, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2180);
-		translation.add(new MotionState1D(3.1451, 0.3644, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2185);
-		translation.add(new MotionState1D(3.1469, 0.3471, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2190);
-		translation.add(new MotionState1D(3.1486, 0.3297, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2195);
-		translation.add(new MotionState1D(3.1502, 0.3124, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2200);
-		translation.add(new MotionState1D(3.1517, 0.295, -3.4707));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2205);
-		translation.add(new MotionState1D(3.1531, 0.2781, -3.3715));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2210);
-		translation.add(new MotionState1D(3.1545, 0.2618, -3.2723));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2215);
-		translation.add(new MotionState1D(3.1557, 0.2459, -3.1732));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2220);
-		translation.add(new MotionState1D(3.1569, 0.2306, -3.074));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2225);
-		translation.add(new MotionState1D(3.158, 0.2157, -2.9749));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2230);
-		translation.add(new MotionState1D(3.1591, 0.2013, -2.8757));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2235);
-		translation.add(new MotionState1D(3.16, 0.1874, -2.7765));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2240);
-		translation.add(new MotionState1D(3.161, 0.174, -2.6774));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2245);
-		translation.add(new MotionState1D(3.1618, 0.1611, -2.5782));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2250);
-		translation.add(new MotionState1D(3.1626, 0.1487, -2.4791));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2255);
-		translation.add(new MotionState1D(3.1633, 0.1368, -2.3799));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2260);
-		translation.add(new MotionState1D(3.1639, 0.1254, -2.2807));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2265);
-		translation.add(new MotionState1D(3.1645, 0.1145, -2.1816));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2270);
-		translation.add(new MotionState1D(3.1651, 0.1041, -2.0824));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2275);
-		translation.add(new MotionState1D(3.1656, 0.0942, -1.9832));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2280);
-		translation.add(new MotionState1D(3.166, 0.0848, -1.8841));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2285);
-		translation.add(new MotionState1D(3.1664, 0.0759, -1.7849));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2290);
-		translation.add(new MotionState1D(3.1668, 0.0674, -1.6858));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2295);
-		translation.add(new MotionState1D(3.1671, 0.0595, -1.5866));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2300);
-		translation.add(new MotionState1D(3.1674, 0.0521, -1.4874));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2305);
-		translation.add(new MotionState1D(3.1676, 0.0451, -1.3883));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2310);
-		translation.add(new MotionState1D(3.1678, 0.0387, -1.2891));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2315);
-		translation.add(new MotionState1D(3.168, 0.0327, -1.1899));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2320);
-		translation.add(new MotionState1D(3.1682, 0.0273, -1.0908));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2325);
-		translation.add(new MotionState1D(3.1683, 0.0223, -0.9916));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2330);
-		translation.add(new MotionState1D(3.1684, 0.0178, -0.8925));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2335);
-		translation.add(new MotionState1D(3.1685, 0.0139, -0.7933));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2340);
-		translation.add(new MotionState1D(3.1685, 0.0104, -0.6941));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2345);
-		translation.add(new MotionState1D(3.1686, 0.0074, -0.595));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2350);
-		translation.add(new MotionState1D(3.1686, 0.005, -0.4958));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2355);
-		translation.add(new MotionState1D(3.1686, 0.003, -0.3966));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2360);
-		translation.add(new MotionState1D(3.1686, 0.0015, -0.2975));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2365);
-		translation.add(new MotionState1D(3.1686, 0.0005, -0.1983));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2370);
-		translation.add(new MotionState1D(3.1686, 0, -0.0992));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
-
-		time.add((long) 2375);
-		translation.add(new MotionState1D(3.1686, 0, 0));
-		rotation.add(new MotionState1D(-1.0471, 0, 0));
+		testMethod(0, 0, 0, 0, 0, 0, 0);
+		testMethod(5, 0, 0.0005, 0.0993, 0, 0, 0);
+		testMethod(10, 0, 0.0015, 0.1985, 0, 0, 0);
+		testMethod(15, 0, 0.003, 0.2978, 0, 0, 0);
+		testMethod(20, 0, 0.005, 0.397, 0, 0, 0);
+		testMethod(25, 0.0001, 0.0074, 0.4963, 0, 0, 0);
+		testMethod(30, 0.0001, 0.0104, 0.5955, 0, 0, 0);
+		testMethod(35, 0.0002, 0.0139, 0.6948, 0, 0, 0);
+		testMethod(40, 0.0003, 0.0179, 0.794, 0, 0, 0);
+		testMethod(45, 0.0004, 0.0223, 0.8933, 0, 0, 0);
+		testMethod(50, 0.0005, 0.0273, 0.9925, 0, 0, 0);
+		testMethod(55, 0.0006, 0.0328, 1.0918, 0, 0, 0);
+		testMethod(60, 0.0008, 0.0387, 1.191, 0, 0, 0);
+		testMethod(65, 0.001, 0.0452, 1.2903, 0, 0, 0);
+		testMethod(70, 0.0013, 0.0521, 1.3896, 0, 0, 0);
+		testMethod(75, 0.0015, 0.0596, 1.4888, 0, 0, 0);
+		testMethod(80, 0.0019, 0.0675, 1.5881, 0, 0, 0);
+		testMethod(85, 0.0022, 0.0759, 1.6873, 0, 0, 0);
+		testMethod(90, 0.0026, 0.0849, 1.7866, 0, 0, 0);
+		testMethod(95, 0.0031, 0.0943, 1.8858, 0, 0, 0);
+		testMethod(100, 0.0036, 0.1042, 1.9851, 0, 0, 0);
+		testMethod(105, 0.0041, 0.1146, 2.0843, 0, 0, 0);
+		testMethod(110, 0.0047, 0.1256, 2.1836, 0, 0, 0);
+		testMethod(115, 0.0054, 0.137, 2.2828, 0, 0, 0);
+		testMethod(120, 0.0061, 0.1489, 2.3821, 0, 0, 0);
+		testMethod(125, 0.0069, 0.1613, 2.4813, 0, 0, 0);
+		testMethod(130, 0.0077, 0.1742, 2.5806, 0, 0, 0);
+		testMethod(135, 0.0086, 0.1876, 2.6799, 0, 0, 0);
+		testMethod(140, 0.0096, 0.2015, 2.7791, 0, 0, 0);
+		testMethod(145, 0.0106, 0.2159, 2.8784, 0, 0, 0);
+		testMethod(150, 0.0117, 0.2308, 2.9776, 0, 0, 0);
+		testMethod(155, 0.0129, 0.2461, 3.0769, 0, 0, 0);
+		testMethod(160, 0.0142, 0.262, 3.1761, 0, 0, 0);
+		testMethod(165, 0.0155, 0.2784, 3.2754, 0, 0, 0);
+		testMethod(170, 0.017, 0.2953, 3.3746, 0, 0, 0);
+		testMethod(175, 0.0185, 0.3126, 3.4739, 0, 0, 0);
+		testMethod(180, 0.0201, 0.33, 3.4739, 0, 0, 0);
+		testMethod(185, 0.0218, 0.3474, 3.4739, 0, 0, 0);
+		testMethod(190, 0.0236, 0.3648, 3.4739, 0, 0, 0);
+		testMethod(195, 0.0254, 0.3821, 3.4739, 0, 0, 0);
+		testMethod(200, 0.0274, 0.3995, 3.4739, 0, 0, 0);
+		testMethod(205, 0.0294, 0.4169, 3.4739, 0, 0, 0);
+		testMethod(210, 0.0316, 0.4342, 3.4739, 0, 0, 0);
+		testMethod(215, 0.0338, 0.4516, 3.4739, 0, 0, 0);
+		testMethod(220, 0.0361, 0.469, 3.4739, 0, 0, 0);
+		testMethod(225, 0.0385, 0.4863, 3.4739, 0, 0, 0);
+		testMethod(230, 0.0409, 0.5037, 3.4739, 0, 0, 0);
+		testMethod(235, 0.0435, 0.5211, 3.4739, 0, 0, 0);
+		testMethod(240, 0.0462, 0.5385, 3.4739, 0, 0, 0);
+		testMethod(245, 0.0489, 0.5558, 3.4739, 0, 0, 0);
+		testMethod(250, 0.0517, 0.5732, 3.4739, 0, 0, 0);
+		testMethod(255, 0.0546, 0.5906, 3.4739, 0, 0, 0);
+		testMethod(260, 0.0576, 0.6079, 3.4739, 0, 0, 0);
+		testMethod(265, 0.0607, 0.6253, 3.4739, 0, 0, 0);
+		testMethod(270, 0.0639, 0.6427, 3.4739, 0, 0, 0);
+		testMethod(275, 0.0671, 0.66, 3.4739, 0, 0, 0);
+		testMethod(280, 0.0705, 0.6774, 3.4739, 0, 0, 0);
+		testMethod(285, 0.0739, 0.6948, 3.4739, 0, 0, 0);
+		testMethod(290, 0.0774, 0.7121, 3.4739, 0, 0, 0);
+		testMethod(295, 0.081, 0.7295, 3.4739, 0, 0, 0);
+		testMethod(300, 0.0847, 0.7469, 3.4739, 0, 0, 0);
+		testMethod(305, 0.0885, 0.7643, 3.4739, 0, 0, 0);
+		testMethod(310, 0.0924, 0.7816, 3.4739, 0, 0, 0);
+		testMethod(315, 0.0963, 0.799, 3.4739, 0, 0, 0);
+		testMethod(320, 0.1004, 0.8164, 3.4739, 0, 0, 0);
+		testMethod(325, 0.1045, 0.8337, 3.4739, 0, 0, 0);
+		testMethod(330, 0.1087, 0.8511, 3.4739, 0, 0, 0);
+		testMethod(335, 0.113, 0.8685, 3.4739, 0, 0, 0);
+		testMethod(340, 0.1174, 0.8858, 3.4739, 0, 0, 0);
+		testMethod(345, 0.1218, 0.9032, 3.4739, 0, 0, 0);
+		testMethod(350, 0.1264, 0.9206, 3.4739, 0, 0, 0);
+		testMethod(355, 0.1311, 0.9379, 3.4739, 0, 0, 0);
+		testMethod(360, 0.1358, 0.9553, 3.4739, 0, 0, 0);
+		testMethod(365, 0.1406, 0.9727, 3.4739, 0, 0, 0);
+		testMethod(370, 0.1455, 0.9901, 3.4739, 0, 0, 0);
+		testMethod(375, 0.1505, 1.0074, 3.4739, 0, 0, 0);
+		testMethod(380, 0.1556, 1.0248, 3.4739, 0, 0, 0);
+		testMethod(385, 0.1608, 1.0422, 3.4739, 0, 0, 0);
+		testMethod(390, 0.166, 1.0595, 3.4739, 0, 0, 0);
+		testMethod(395, 0.1713, 1.0769, 3.4739, 0, 0, 0);
+		testMethod(400, 0.1768, 1.0943, 3.4739, 0, 0, 0);
+		testMethod(405, 0.1823, 1.1116, 3.4739, 0, 0, 0);
+		testMethod(410, 0.1879, 1.129, 3.4739, 0, 0, 0);
+		testMethod(415, 0.1936, 1.1464, 3.4739, 0, 0, 0);
+		testMethod(420, 0.1994, 1.1638, 3.4739, 0, 0, 0);
+		testMethod(425, 0.2052, 1.1811, 3.4739, 0, 0, 0);
+		testMethod(430, 0.2112, 1.1985, 3.4739, 0, 0, 0);
+		testMethod(435, 0.2172, 1.2159, 3.4739, 0, 0, 0);
+		testMethod(440, 0.2233, 1.2332, 3.4739, 0, 0, 0);
+		testMethod(445, 0.2295, 1.2506, 3.4739, 0, 0, 0);
+		testMethod(450, 0.2358, 1.268, 3.4739, 0, 0, 0);
+		testMethod(455, 0.2422, 1.2853, 3.4739, 0, 0, 0);
+		testMethod(460, 0.2487, 1.3027, 3.4739, 0, 0, 0);
+		testMethod(465, 0.2552, 1.3201, 3.4739, 0, 0, 0);
+		testMethod(470, 0.2619, 1.3374, 3.4739, 0, 0, 0);
+		testMethod(475, 0.2686, 1.3548, 3.4739, 0, 0, 0);
+		testMethod(480, 0.2754, 1.3722, 3.4739, 0, 0, 0);
+		testMethod(485, 0.2823, 1.3896, 3.4739, 0, 0, 0);
+		testMethod(490, 0.2893, 1.4069, 3.4739, 0, 0, 0);
+		testMethod(495, 0.2964, 1.4243, 3.4739, 0, 0, 0);
+		testMethod(500, 0.3036, 1.4417, 3.4739, 0, 0, 0);
+		testMethod(505, 0.3108, 1.459, 3.4739, 0, 0, 0);
+		testMethod(510, 0.3182, 1.4764, 3.4739, 0, 0, 0);
+		testMethod(515, 0.3256, 1.4938, 3.4739, 0, 0, 0);
+		testMethod(520, 0.3331, 1.5111, 3.4739, 0, 0, 0);
+		testMethod(525, 0.3407, 1.5285, 3.4739, 0, 0, 0);
+		testMethod(530, 0.3484, 1.5459, 3.4739, 0, 0, 0);
+		testMethod(535, 0.3562, 1.5632, 3.4739, 0, 0, 0);
+		testMethod(540, 0.364, 1.5806, 3.4739, 0, 0, 0);
+		testMethod(545, 0.372, 1.598, 3.4739, 0, 0, 0);
+		testMethod(550, 0.38, 1.6154, 3.4739, 0, 0, 0);
+		testMethod(555, 0.3881, 1.6327, 3.4739, 0, 0, 0);
+		testMethod(560, 0.3963, 1.6496, 3.3746, 0, 0, 0);
+		testMethod(565, 0.4046, 1.666, 3.2754, 0, 0, 0);
+		testMethod(570, 0.413, 1.6819, 3.1761, 0, 0, 0);
+		testMethod(575, 0.4214, 1.6972, 3.0769, 0, 0, 0);
+		testMethod(580, 0.43, 1.7121, 2.9776, 0, 0, 0);
+		testMethod(585, 0.4386, 1.7265, 2.8784, 0, 0, 0);
+		testMethod(590, 0.4472, 1.7404, 2.7791, 0, 0, 0);
+		testMethod(595, 0.456, 1.7538, 2.6799, 0, 0, 0);
+		testMethod(600, 0.4648, 1.7667, 2.5806, 0, 0, 0);
+		testMethod(605, 0.4736, 1.7791, 2.4813, 0, 0, 0);
+		testMethod(610, 0.4825, 1.791, 2.3821, 0, 0, 0);
+		testMethod(615, 0.4915, 1.8024, 2.2828, 0, 0, 0);
+		testMethod(620, 0.5006, 1.8134, 2.1836, -0, -0, -0.004);
+		testMethod(625, 0.5097, 1.8238, 2.0843, -0, -0.0006, -0.1205);
+		testMethod(630, 0.5188, 1.8337, 1.9851, -0, -0.0021, -0.2925);
+		testMethod(635, 0.528, 1.8431, 1.8858, -0, -0.0044, -0.4698);
+		testMethod(640, 0.5372, 1.8521, 1.7866, -0.0001, -0.0077, -0.652);
+		testMethod(645, 0.5465, 1.8605, 1.6873, -0.0001, -0.0119, -0.8386);
+		testMethod(650, 0.5558, 1.8685, 1.5881, -0.0002, -0.017, -1.0292);
+		testMethod(655, 0.5652, 1.8759, 1.4888, -0.0003, -0.0231, -1.2233);
+		testMethod(660, 0.5746, 1.8828, 1.3896, -0.0004, -0.0303, -1.4206);
+		testMethod(665, 0.584, 1.8893, 1.2903, -0.0006, -0.0384, -1.6206);
+		testMethod(670, 0.5935, 1.8953, 1.191, -0.0008, -0.0475, -1.8228);
+		testMethod(675, 0.603, 1.9007, 1.0918, -0.0011, -0.0576, -2.0267);
+		testMethod(680, 0.6125, 1.9057, 0.9925, -0.0014, -0.0688, -2.2318);
+		testMethod(685, 0.622, 1.9101, 0.8933, -0.0017, -0.081, -2.4377);
+		testMethod(690, 0.6316, 1.9141, 0.794, -0.0022, -0.0942, -2.6439);
+		testMethod(695, 0.6412, 1.9176, 0.6948, -0.0027, -0.1084, -2.8498);
+		testMethod(700, 0.6508, 1.9206, 0.5955, -0.0033, -0.1237, -3.0549);
+		testMethod(705, 0.6604, 1.923, 0.4963, -0.0039, -0.14, -3.2588);
+		testMethod(710, 0.67, 1.925, 0.397, -0.0047, -0.1573, -3.4609);
+		testMethod(715, 0.6796, 1.9265, 0.2978, -0.0055, -0.1756, -3.6607);
+		testMethod(720, 0.6893, 1.9275, 0.1985, -0.0064, -0.1949, -3.8576);
+		testMethod(725, 0.6989, 1.928, 0.0993, -0.0075, -0.2151, -4.0512);
+		testMethod(730, 0.7085, 1.928, 0, -0.0086, -0.2363, -4.241);
+		testMethod(735, 0.7182, 1.928, 0, -0.0098, -0.2585, -4.4403);
+		testMethod(740, 0.7278, 1.928, 0, -0.0112, -0.2817, -4.6396);
+		testMethod(745, 0.7375, 1.928, 0, -0.0126, -0.3059, -4.8389);
+		testMethod(750, 0.7471, 1.928, 0, -0.0142, -0.3311, -5.0382);
+		testMethod(755, 0.7567, 1.928, 0, -0.0159, -0.3573, -5.2375);
+		testMethod(760, 0.7664, 1.928, 0, -0.0178, -0.3845, -5.4368);
+		testMethod(765, 0.776, 1.928, 0, -0.0198, -0.4127, -5.6361);
+		testMethod(770, 0.7857, 1.928, 0, -0.0219, -0.4419, -5.8354);
+		testMethod(775, 0.7953, 1.928, 0, -0.0242, -0.472, -6.0347);
+		testMethod(780, 0.8049, 1.928, 0, -0.0267, -0.5032, -6.234);
+		testMethod(785, 0.8146, 1.928, 0, -0.0292, -0.5354, -6.4333);
+		testMethod(790, 0.8242, 1.928, 0, -0.032, -0.5685, -6.6326);
+		testMethod(795, 0.8339, 1.928, 0, -0.0349, -0.6027, -6.8319);
+		testMethod(800, 0.8435, 1.928, 0, -0.038, -0.6378, -7.0312);
+		testMethod(805, 0.8531, 1.928, 0, -0.0413, -0.674, -7.2305);
+		testMethod(810, 0.8628, 1.928, 0, -0.0448, -0.7111, -7.4298);
+		testMethod(815, 0.8724, 1.928, 0, -0.0484, -0.7493, -7.6291);
+		testMethod(820, 0.8821, 1.928, 0, -0.0523, -0.7884, -7.8284);
+		testMethod(825, 0.8917, 1.928, 0, -0.0563, -0.8286, -8.0277);
+		testMethod(830, 0.9013, 1.928, 0, -0.0606, -0.8697, -8.227);
+		testMethod(835, 0.911, 1.928, 0, -0.065, -0.9118, -8.4263);
+		testMethod(840, 0.9206, 1.928, 0, -0.0697, -0.955, -8.6256);
+		testMethod(845, 0.9303, 1.928, 0, -0.0746, -0.9991, -8.8249);
+		testMethod(850, 0.9399, 1.928, 0, -0.0797, -1.044, -8.9799);
+		testMethod(855, 0.9495, 1.928, 0, -0.085, -1.0889, -8.979);
+		testMethod(860, 0.9592, 1.928, 0, -0.0906, -1.1338, -8.979);
+		testMethod(865, 0.9688, 1.928, 0, -0.0963, -1.1787, -8.979);
+		testMethod(870, 0.9785, 1.928, 0, -0.1023, -1.2236, -8.979);
+		testMethod(875, 0.9881, 1.928, 0, -0.1086, -1.2685, -8.979);
+		testMethod(880, 0.9977, 1.928, 0, -0.115, -1.3134, -8.979);
+		testMethod(885, 1.0074, 1.928, 0, -0.1217, -1.3583, -8.979);
+		testMethod(890, 1.017, 1.928, 0, -0.1286, -1.4032, -8.979);
+		testMethod(895, 1.0267, 1.928, 0, -0.1357, -1.448, -8.979);
+		testMethod(900, 1.0363, 1.928, 0, -0.1431, -1.4929, -8.979);
+		testMethod(905, 1.0459, 1.928, 0, -0.1507, -1.5378, -8.979);
+		testMethod(910, 1.0556, 1.928, 0, -0.1585, -1.5827, -8.979);
+		testMethod(915, 1.0652, 1.928, 0, -0.1665, -1.6276, -8.979);
+		testMethod(920, 1.0749, 1.928, 0, -0.1748, -1.6727, -9.0105);
+		testMethod(925, 1.0845, 1.928, 0, -0.1832, -1.7169, -8.8467);
+		testMethod(930, 1.0941, 1.928, 0, -0.1919, -1.7601, -8.6474);
+		testMethod(935, 1.1038, 1.928, 0, -0.2008, -1.8024, -8.4481);
+		testMethod(940, 1.1134, 1.928, 0, -0.2099, -1.8436, -8.2488);
+		testMethod(945, 1.1231, 1.928, 0, -0.2193, -1.8839, -8.0495);
+		testMethod(950, 1.1327, 1.928, 0, -0.2288, -1.9231, -7.8502);
+		testMethod(955, 1.1423, 1.928, 0, -0.2385, -1.9614, -7.6509);
+		testMethod(960, 1.152, 1.928, 0, -0.2484, -1.9986, -7.4516);
+		testMethod(965, 1.1616, 1.928, 0, -0.2585, -2.0349, -7.2523);
+		testMethod(970, 1.1713, 1.928, 0, -0.2687, -2.0702, -7.053);
+		testMethod(975, 1.1809, 1.928, 0, -0.2792, -2.1044, -6.8537);
+		testMethod(980, 1.1905, 1.928, 0, -0.2898, -2.1377, -6.6544);
+		testMethod(985, 1.2002, 1.928, 0, -0.3005, -2.17, -6.4551);
+		testMethod(990, 1.2098, 1.928, 0, -0.3115, -2.2013, -6.2558);
+		testMethod(995, 1.2195, 1.928, 0, -0.3226, -2.2315, -6.0565);
+		testMethod(1000, 1.2291, 1.928, 0, -0.3338, -2.2608, -5.8572);
+		testMethod(1005, 1.2387, 1.928, 0, -0.3452, -2.2891, -5.6579);
+		testMethod(1010, 1.2484, 1.928, 0, -0.3567, -2.3164, -5.4586);
+		testMethod(1015, 1.258, 1.928, 0, -0.3683, -2.3427, -5.2593);
+		testMethod(1020, 1.2677, 1.928, 0, -0.3801, -2.368, -5.06);
+		testMethod(1025, 1.2773, 1.928, 0, -0.392, -2.3923, -4.8607);
+		testMethod(1030, 1.2869, 1.928, 0, -0.404, -2.4156, -4.6614);
+		testMethod(1035, 1.2966, 1.928, 0, -0.4162, -2.4379, -4.4621);
+		testMethod(1040, 1.3062, 1.928, 0, -0.4284, -2.4592, -4.2628);
+		testMethod(1045, 1.3159, 1.928, 0, -0.4408, -2.4796, -4.0635);
+		testMethod(1050, 1.3255, 1.928, 0, -0.4532, -2.4989, -3.8642);
+		testMethod(1055, 1.3351, 1.928, 0, -0.4657, -2.5172, -3.6649);
+		testMethod(1060, 1.3448, 1.928, 0, -0.4784, -2.5345, -3.4656);
+		testMethod(1065, 1.3544, 1.928, 0, -0.4911, -2.5509, -3.2663);
+		testMethod(1070, 1.3641, 1.928, 0, -0.5039, -2.5662, -3.067);
+		testMethod(1075, 1.3737, 1.928, 0, -0.5167, -2.5805, -2.8677);
+		testMethod(1080, 1.3833, 1.928, 0, -0.5297, -2.5939, -2.6684);
+		testMethod(1085, 1.393, 1.928, 0, -0.5427, -2.6062, -2.4691);
+		testMethod(1090, 1.4026, 1.928, 0, -0.5557, -2.6176, -2.2698);
+		testMethod(1095, 1.4123, 1.928, 0, -0.5689, -2.6279, -2.0705);
+		testMethod(1100, 1.4219, 1.928, 0, -0.582, -2.6373, -1.8712);
+		testMethod(1105, 1.4315, 1.928, 0, -0.5952, -2.6457, -1.6719);
+		testMethod(1110, 1.4412, 1.928, 0, -0.6085, -2.653, -1.4726);
+		testMethod(1115, 1.4508, 1.928, 0, -0.6218, -2.6594, -1.2733);
+		testMethod(1120, 1.4605, 1.928, 0, -0.6351, -2.6648, -1.074);
+		testMethod(1125, 1.4701, 1.928, 0, -0.6484, -2.6691, -0.8748);
+		testMethod(1130, 1.4797, 1.928, 0, -0.6618, -2.6725, -0.6755);
+		testMethod(1135, 1.4894, 1.928, 0, -0.6751, -2.6749, -0.4762);
+		testMethod(1140, 1.499, 1.928, 0, -0.6885, -2.6763, -0.2769);
+		testMethod(1145, 1.5087, 1.928, 0, -0.7019, -2.6767, -0.0788);
+		testMethod(1150, 1.5183, 1.928, 0, -0.7153, -2.6767, 0);
+		testMethod(1155, 1.5279, 1.928, 0, -0.7287, -2.6767, 0);
+		testMethod(1160, 1.5376, 1.928, 0, -0.742, -2.6767, 0);
+		testMethod(1165, 1.5472, 1.928, 0, -0.7554, -2.6767, 0);
+		testMethod(1170, 1.5569, 1.928, 0, -0.7688, -2.6767, 0);
+		testMethod(1175, 1.5665, 1.928, 0, -0.7822, -2.6767, 0);
+		testMethod(1180, 1.5761, 1.928, 0, -0.7956, -2.6767, 0);
+		testMethod(1185, 1.5858, 1.928, 0, -0.809, -2.6767, 0);
+		testMethod(1190, 1.5954, 1.928, 0, -0.8223, -2.6767, 0);
+		testMethod(1195, 1.6051, 1.928, 0, -0.8357, -2.6767, 0);
+		testMethod(1200, 1.6147, 1.928, 0, -0.8491, -2.6767, 0);
+		testMethod(1205, 1.6243, 1.928, 0, -0.8625, -2.6767, 0);
+		testMethod(1210, 1.634, 1.928, 0, -0.8759, -2.6767, 0);
+		testMethod(1215, 1.6436, 1.928, 0, -0.8893, -2.6767, 0);
+		testMethod(1220, 1.6533, 1.928, 0, -0.9026, -2.6767, 0);
+		testMethod(1225, 1.6629, 1.928, 0, -0.916, -2.6767, 0);
+		testMethod(1230, 1.6725, 1.928, 0, -0.9294, -2.6767, 0);
+		testMethod(1235, 1.6822, 1.928, 0, -0.9428, -2.6767, 0);
+		testMethod(1240, 1.6918, 1.928, 0, -0.9562, -2.6767, 0);
+		testMethod(1245, 1.7015, 1.928, 0, -0.9696, -2.6767, 0);
+		testMethod(1250, 1.7111, 1.928, 0, -0.9829, -2.6767, 0);
+		testMethod(1255, 1.7207, 1.928, 0, -0.9963, -2.6767, 0);
+		testMethod(1260, 1.7304, 1.928, 0, -1.0097, -2.6767, 0);
+		testMethod(1265, 1.74, 1.928, 0, -1.0231, -2.6767, 0);
+		testMethod(1270, 1.7497, 1.928, 0, -1.0365, -2.6767, 0);
+		testMethod(1275, 1.7593, 1.928, 0, -1.0499, -2.6767, 0);
+		testMethod(1280, 1.7689, 1.928, 0, -1.0632, -2.6767, 0);
+		testMethod(1285, 1.7786, 1.928, 0, -1.0766, -2.6767, 0);
+		testMethod(1290, 1.7882, 1.928, 0, -1.09, -2.6767, 0);
+		testMethod(1295, 1.7979, 1.928, 0, -1.1034, -2.6767, 0);
+		testMethod(1300, 1.8075, 1.928, 0, -1.1168, -2.6767, 0);
+		testMethod(1305, 1.8171, 1.928, 0, -1.1302, -2.6767, 0);
+		testMethod(1310, 1.8268, 1.928, 0, -1.1435, -2.6767, 0);
+		testMethod(1315, 1.8364, 1.928, 0, -1.1569, -2.6767, 0);
+		testMethod(1320, 1.8461, 1.928, 0, -1.1703, -2.6767, 0);
+		testMethod(1325, 1.8557, 1.928, 0, -1.1837, -2.6767, 0);
+		testMethod(1330, 1.8653, 1.928, 0, -1.1971, -2.6767, 0);
+		testMethod(1335, 1.875, 1.928, 0, -1.2105, -2.6767, 0);
+		testMethod(1340, 1.8846, 1.928, 0, -1.2238, -2.6767, 0);
+		testMethod(1345, 1.8943, 1.928, 0, -1.2372, -2.6767, 0);
+		testMethod(1350, 1.9039, 1.928, 0, -1.2506, -2.6767, 0);
+		testMethod(1355, 1.9135, 1.928, 0, -1.264, -2.6767, 0);
+		testMethod(1360, 1.9232, 1.928, 0, -1.2774, -2.6767, 0);
+		testMethod(1365, 1.9328, 1.928, 0, -1.2908, -2.6767, 0);
+		testMethod(1370, 1.9425, 1.928, 0, -1.3041, -2.6767, 0);
+		testMethod(1375, 1.9521, 1.928, 0, -1.3175, -2.6767, 0);
+		testMethod(1380, 1.9617, 1.928, 0, -1.3309, -2.6767, 0);
+		testMethod(1385, 1.9714, 1.928, 0, -1.3443, -2.6767, 0);
+		testMethod(1390, 1.981, 1.928, 0, -1.3577, -2.6767, 0);
+		testMethod(1395, 1.9907, 1.928, 0, -1.3711, -2.6767, 0);
+		testMethod(1400, 2.0003, 1.928, 0, -1.3844, -2.6767, 0);
+		testMethod(1405, 2.0099, 1.928, 0, -1.3978, -2.6767, 0);
+		testMethod(1410, 2.0196, 1.928, 0, -1.4112, -2.6767, 0);
+		testMethod(1415, 2.0292, 1.928, 0, -1.4246, -2.6767, 0);
+		testMethod(1420, 2.0389, 1.928, 0, -1.438, -2.6767, 0);
+		testMethod(1425, 2.0485, 1.928, 0, -1.4514, -2.6767, 0);
+		testMethod(1430, 2.0581, 1.928, 0, -1.4647, -2.6767, 0);
+		testMethod(1435, 2.0678, 1.928, 0, -1.4781, -2.6767, 0);
+		testMethod(1440, 2.0774, 1.928, 0, -1.4915, -2.6767, 0);
+		testMethod(1445, 2.0871, 1.928, 0, -1.5049, -2.6767, 0);
+		testMethod(1450, 2.0967, 1.928, 0, -1.5183, -2.6767, 0);
+		testMethod(1455, 2.1063, 1.928, 0, -1.5317, -2.6767, 0);
+		testMethod(1460, 2.116, 1.928, 0, -1.545, -2.6767, 0);
+		testMethod(1465, 2.1256, 1.928, 0, -1.5584, -2.6767, 0);
+		testMethod(1470, 2.1353, 1.928, 0, -1.5718, -2.6767, 0);
+		testMethod(1475, 2.1449, 1.928, 0, -1.5852, -2.6767, 0);
+		testMethod(1480, 2.1545, 1.928, 0, -1.5986, -2.6767, 0);
+		testMethod(1485, 2.1642, 1.928, 0, -1.612, -2.6767, 0);
+		testMethod(1490, 2.1738, 1.928, 0, -1.6253, -2.6767, 0);
+		testMethod(1495, 2.1835, 1.928, 0, -1.6387, -2.6767, 0);
+		testMethod(1500, 2.1931, 1.928, 0, -1.6521, -2.6767, 0);
+		testMethod(1505, 2.2027, 1.928, 0, -1.6655, -2.6767, 0);
+		testMethod(1510, 2.2124, 1.928, 0, -1.6789, -2.6767, 0);
+		testMethod(1515, 2.222, 1.928, 0, -1.6923, -2.6767, 0);
+		testMethod(1520, 2.2317, 1.928, 0, -1.7056, -2.6767, 0);
+		testMethod(1525, 2.2413, 1.928, 0, -1.719, -2.6767, 0);
+		testMethod(1530, 2.2509, 1.928, 0, -1.7324, -2.6767, 0);
+		testMethod(1535, 2.2606, 1.928, 0, -1.7458, -2.6767, 0);
+		testMethod(1540, 2.2702, 1.928, 0, -1.7592, -2.6767, 0);
+		testMethod(1545, 2.2799, 1.928, 0, -1.7726, -2.6767, 0);
+		testMethod(1550, 2.2895, 1.928, 0, -1.7859, -2.6767, 0);
+		testMethod(1555, 2.2991, 1.928, 0, -1.7993, -2.6767, 0);
+		testMethod(1560, 2.3088, 1.928, 0, -1.8127, -2.6767, 0);
+		testMethod(1565, 2.3184, 1.928, 0, -1.8261, -2.6767, 0);
+		testMethod(1570, 2.3281, 1.928, 0, -1.8395, -2.6767, 0);
+		testMethod(1575, 2.3377, 1.928, 0, -1.8529, -2.6767, 0);
+		testMethod(1580, 2.3473, 1.928, 0, -1.8662, -2.6767, 0);
+		testMethod(1585, 2.357, 1.928, 0, -1.8796, -2.6767, 0);
+		testMethod(1590, 2.3666, 1.928, 0, -1.893, -2.6767, 0);
+		testMethod(1595, 2.3763, 1.928, 0, -1.9064, -2.6767, 0);
+		testMethod(1600, 2.3859, 1.928, 0, -1.9198, -2.6767, 0);
+		testMethod(1605, 2.3955, 1.928, 0, -1.9332, -2.6767, 0);
+		testMethod(1610, 2.4052, 1.928, 0, -1.9465, -2.6767, 0);
+		testMethod(1615, 2.4148, 1.928, 0, -1.9599, -2.6767, 0);
+		testMethod(1620, 2.4245, 1.928, 0, -1.9733, -2.6767, 0);
+		testMethod(1625, 2.4341, 1.928, 0, -1.9867, -2.6767, 0);
+		testMethod(1630, 2.4437, 1.928, 0, -2.0001, -2.6767, 0);
+		testMethod(1635, 2.4534, 1.928, 0, -2.0135, -2.6767, 0);
+		testMethod(1640, 2.463, 1.928, 0, -2.0268, -2.6767, 0);
+		testMethod(1645, 2.4727, 1.928, 0, -2.0402, -2.6767, 0);
+		testMethod(1650, 2.4823, 1.928, 0, -2.0536, -2.6767, 0);
+		testMethod(1655, 2.4919, 1.928, 0, -2.067, -2.6767, 0);
+		testMethod(1660, 2.5016, 1.928, 0, -2.0804, -2.6767, 0);
+		testMethod(1665, 2.5112, 1.928, 0, -2.0938, -2.6767, 0);
+		testMethod(1670, 2.5209, 1.928, 0, -2.1071, -2.6767, 0);
+		testMethod(1675, 2.5305, 1.928, 0, -2.1205, -2.6767, 0);
+		testMethod(1680, 2.5401, 1.928, 0, -2.1339, -2.6767, 0);
+		testMethod(1685, 2.5498, 1.928, 0, -2.1473, -2.6767, 0);
+		testMethod(1690, 2.5594, 1.928, 0, -2.1607, -2.6767, 0);
+		testMethod(1695, 2.5691, 1.928, 0, -2.1741, -2.6767, 0);
+		testMethod(1700, 2.5787, 1.928, 0, -2.1874, -2.6767, 0);
+		testMethod(1705, 2.5883, 1.928, 0, -2.2008, -2.6767, 0);
+		testMethod(1710, 2.598, 1.928, 0, -2.2142, -2.6767, 0);
+		testMethod(1715, 2.6076, 1.928, 0, -2.2276, -2.6767, 0);
+		testMethod(1720, 2.6173, 1.928, 0, -2.241, -2.6767, 0);
+		testMethod(1725, 2.6269, 1.928, 0, -2.2544, -2.6767, 0);
+		testMethod(1730, 2.6365, 1.928, 0, -2.2677, -2.6767, 0);
+		testMethod(1735, 2.6462, 1.928, 0, -2.2811, -2.6767, 0);
+		testMethod(1740, 2.6558, 1.928, 0, -2.2945, -2.6767, 0);
+		testMethod(1745, 2.6655, 1.928, 0, -2.3079, -2.6767, 0);
+		testMethod(1750, 2.6751, 1.928, 0, -2.3213, -2.6767, 0);
+		testMethod(1755, 2.6847, 1.928, 0, -2.3347, -2.6767, 0);
+		testMethod(1760, 2.6944, 1.928, 0, -2.348, -2.6767, 0);
+		testMethod(1765, 2.704, 1.928, 0, -2.3614, -2.6767, 0);
+		testMethod(1770, 2.7137, 1.928, 0, -2.3748, -2.6767, 0);
+		testMethod(1775, 2.7233, 1.928, 0, -2.3882, -2.6767, 0);
+		testMethod(1780, 2.7329, 1.928, 0, -2.4016, -2.6767, 0);
+		testMethod(1785, 2.7426, 1.928, 0, -2.415, -2.6767, 0);
+		testMethod(1790, 2.7522, 1.928, 0, -2.4283, -2.6767, 0);
+		testMethod(1795, 2.7619, 1.928, 0, -2.4417, -2.6767, 0);
+		testMethod(1800, 2.7715, 1.928, 0, -2.4551, -2.6767, 0);
+		testMethod(1805, 2.7811, 1.928, 0, -2.4685, -2.6767, 0);
+		testMethod(1810, 2.7908, 1.928, 0, -2.4819, -2.6767, 0);
+		testMethod(1815, 2.8004, 1.928, 0, -2.4953, -2.6767, 0);
+		testMethod(1820, 2.8101, 1.928, 0, -2.5086, -2.6767, 0);
+		testMethod(1825, 2.8197, 1.928, 0, -2.522, -2.6767, 0);
+		testMethod(1830, 2.8293, 1.928, 0, -2.5354, -2.6767, 0);
+		testMethod(1835, 2.839, 1.928, 0, -2.5488, -2.6767, 0);
+		testMethod(1840, 2.8486, 1.928, 0, -2.5622, -2.6767, 0);
+		testMethod(1845, 2.8583, 1.928, 0, -2.5756, -2.6767, 0);
+		testMethod(1850, 2.8679, 1.928, 0, -2.5889, -2.6767, 0);
+		testMethod(1855, 2.8775, 1.928, 0, -2.6023, -2.6767, 0);
+		testMethod(1860, 2.8872, 1.928, 0, -2.6157, -2.6767, 0);
+		testMethod(1865, 2.8968, 1.928, 0, -2.6291, -2.6767, 0);
+		testMethod(1870, 2.9065, 1.928, 0, -2.6425, -2.6767, 0);
+		testMethod(1875, 2.9161, 1.928, 0, -2.6559, -2.6767, 0);
+		testMethod(1880, 2.9257, 1.928, 0, -2.6692, -2.6767, 0);
+		testMethod(1885, 2.9354, 1.928, 0, -2.6826, -2.6767, 0);
+		testMethod(1890, 2.945, 1.928, 0, -2.696, -2.6767, 0);
+		testMethod(1895, 2.9547, 1.928, 0, -2.7094, -2.6767, 0);
+		testMethod(1900, 2.9643, 1.928, 0, -2.7228, -2.6767, 0);
+		testMethod(1905, 2.9739, 1.928, 0, -2.7361, -2.6767, 0);
+		testMethod(1910, 2.9836, 1.928, 0, -2.7495, -2.6767, 0);
+		testMethod(1915, 2.9932, 1.928, 0, -2.7629, -2.6767, 0);
+		testMethod(1920, 3.0029, 1.928, 0, -2.7763, -2.6767, 0);
+		testMethod(1925, 3.0125, 1.928, 0, -2.7897, -2.6767, 0);
+		testMethod(1930, 3.0221, 1.928, 0, -2.8031, -2.6767, 0);
+		testMethod(1935, 3.0318, 1.928, 0, -2.8164, -2.6767, 0);
+		testMethod(1940, 3.0414, 1.928, 0, -2.8298, -2.6767, 0);
+		testMethod(1945, 3.0511, 1.928, 0, -2.8432, -2.6767, 0);
+		testMethod(1950, 3.0607, 1.928, 0, -2.8566, -2.6767, 0);
+		testMethod(1955, 3.0703, 1.928, 0, -2.87, -2.6767, 0);
+		testMethod(1960, 3.08, 1.928, 0, -2.8834, -2.6767, 0);
+		testMethod(1965, 3.0896, 1.928, 0, -2.8967, -2.6767, 0);
+		testMethod(1970, 3.0993, 1.928, 0, -2.9101, -2.6767, 0);
+		testMethod(1975, 3.1089, 1.928, 0, -2.9235, -2.6767, 0);
+		testMethod(1980, 3.1185, 1.928, 0, -2.9369, -2.6767, 0);
+		testMethod(1985, 3.1282, 1.928, 0, -2.9503, -2.6767, 0);
+		testMethod(1990, 3.1378, 1.928, 0, -2.9637, -2.6767, 0);
+		testMethod(1995, 3.1475, 1.928, 0, -2.977, -2.6767, 0);
+		testMethod(2000, 3.1571, 1.928, 0, -2.9904, -2.6767, 0);
+		testMethod(2005, 3.1667, 1.928, 0, -3.0038, -2.6767, 0);
+		testMethod(2010, 3.1764, 1.928, 0, -3.0172, -2.6767, 0);
+		testMethod(2015, 3.186, 1.928, 0, -3.0306, -2.6767, 0);
+		testMethod(2020, 3.1957, 1.928, 0, -3.044, -2.6767, 0);
+		testMethod(2025, 3.2053, 1.928, 0, -3.0573, -2.6767, 0);
+		testMethod(2030, 3.2149, 1.928, 0, -3.0707, -2.6767, 0);
+		testMethod(2035, 3.2246, 1.928, 0, -3.0841, -2.6767, 0);
+		testMethod(2040, 3.2342, 1.928, 0, -3.0975, -2.6767, 0);
+		testMethod(2045, 3.2439, 1.928, 0, -3.1109, -2.6767, 0);
+		testMethod(2050, 3.2535, 1.928, 0, -3.1243, -2.6767, 0);
+		testMethod(2055, 3.2631, 1.928, 0, -3.1376, -2.6767, 0);
+		testMethod(2060, 3.2728, 1.928, 0, -3.151, -2.6767, 0);
+		testMethod(2065, 3.2824, 1.928, 0, -3.1644, -2.6767, 0);
+		testMethod(2070, 3.2921, 1.928, 0, -3.1778, -2.6767, 0);
+		testMethod(2075, 3.3017, 1.928, 0, -3.1912, -2.6767, 0);
+		testMethod(2080, 3.3113, 1.928, 0, -3.2046, -2.6767, 0);
+		testMethod(2085, 3.321, 1.928, 0, -3.2179, -2.6767, 0);
+		testMethod(2090, 3.3306, 1.928, 0, -3.2313, -2.6767, 0);
+		testMethod(2095, 3.3403, 1.928, 0, -3.2447, -2.6767, 0);
+		testMethod(2100, 3.3499, 1.928, 0, -3.2581, -2.6767, 0);
+		testMethod(2105, 3.3595, 1.928, 0, -3.2715, -2.6767, 0);
+		testMethod(2110, 3.3692, 1.928, 0, -3.2849, -2.6767, 0);
+		testMethod(2115, 3.3788, 1.928, 0, -3.2982, -2.6767, 0);
+		testMethod(2120, 3.3885, 1.928, 0, -3.3116, -2.6767, 0);
+		testMethod(2125, 3.3981, 1.928, 0, -3.325, -2.6767, 0);
+		testMethod(2130, 3.4077, 1.928, 0, -3.3384, -2.6767, 0);
+		testMethod(2135, 3.4174, 1.928, 0, -3.3518, -2.6767, 0);
+		testMethod(2140, 3.427, 1.928, 0, -3.3652, -2.6767, 0);
+		testMethod(2145, 3.4367, 1.928, 0, -3.3785, -2.6767, 0);
+		testMethod(2150, 3.4463, 1.928, 0, -3.3919, -2.6767, 0);
+		testMethod(2155, 3.4559, 1.928, 0, -3.4053, -2.6767, 0);
+		testMethod(2160, 3.4656, 1.928, 0, -3.4187, -2.6767, 0);
+		testMethod(2165, 3.4752, 1.928, 0, -3.4321, -2.6767, 0);
+		testMethod(2170, 3.4849, 1.928, 0, -3.4455, -2.6767, 0);
+		testMethod(2175, 3.4945, 1.928, 0, -3.4588, -2.6767, 0);
+		testMethod(2180, 3.5041, 1.928, 0, -3.4722, -2.6767, 0);
+		testMethod(2185, 3.5138, 1.928, 0, -3.4856, -2.6767, 0);
+		testMethod(2190, 3.5234, 1.928, 0, -3.499, -2.6767, 0);
+		testMethod(2195, 3.5331, 1.928, 0, -3.5124, -2.6767, 0);
+		testMethod(2200, 3.5427, 1.928, 0, -3.5258, -2.6767, 0);
+		testMethod(2205, 3.5523, 1.928, 0, -3.5391, -2.6767, 0);
+		testMethod(2210, 3.562, 1.928, 0, -3.5525, -2.6767, 0);
+		testMethod(2215, 3.5716, 1.928, 0, -3.5659, -2.6767, 0);
+		testMethod(2220, 3.5813, 1.928, 0, -3.5793, -2.6767, 0);
+		testMethod(2225, 3.5909, 1.928, 0, -3.5927, -2.6767, 0);
+		testMethod(2230, 3.6005, 1.928, 0, -3.6061, -2.6767, 0);
+		testMethod(2235, 3.6102, 1.928, 0, -3.6194, -2.6767, 0);
+		testMethod(2240, 3.6198, 1.928, 0, -3.6328, -2.6767, 0);
+		testMethod(2245, 3.6295, 1.928, 0, -3.6462, -2.6767, 0);
+		testMethod(2250, 3.6391, 1.928, 0, -3.6596, -2.6767, 0);
+		testMethod(2255, 3.6487, 1.928, 0, -3.673, -2.6767, 0);
+		testMethod(2260, 3.6584, 1.928, 0, -3.6864, -2.6767, 0);
+		testMethod(2265, 3.668, 1.928, 0, -3.6997, -2.6767, 0);
+		testMethod(2270, 3.6777, 1.928, 0, -3.7131, -2.6767, 0);
+		testMethod(2275, 3.6873, 1.928, 0, -3.7265, -2.6767, 0);
+		testMethod(2280, 3.6969, 1.928, 0, -3.7399, -2.6763, 0.0786);
+		testMethod(2285, 3.7066, 1.928, 0, -3.7533, -2.6749, 0.2767);
+		testMethod(2290, 3.7162, 1.928, 0, -3.7666, -2.6725, 0.476);
+		testMethod(2295, 3.7259, 1.928, 0, -3.78, -2.6691, 0.6753);
+		testMethod(2300, 3.7355, 1.928, 0, -3.7933, -2.6648, 0.8746);
+		testMethod(2305, 3.7451, 1.928, 0, -3.8066, -2.6594, 1.0739);
+		testMethod(2310, 3.7548, 1.928, 0, -3.8199, -2.653, 1.2732);
+		testMethod(2315, 3.7644, 1.928, 0, -3.8332, -2.6457, 1.4725);
+		testMethod(2320, 3.7741, 1.928, 0, -3.8464, -2.6373, 1.6718);
+		testMethod(2325, 3.7837, 1.928, 0, -3.8595, -2.6279, 1.8711);
+		testMethod(2330, 3.7933, 1.928, 0, -3.8727, -2.6176, 2.0704);
+		testMethod(2335, 3.803, 1.928, 0, -3.8857, -2.6062, 2.2697);
+		testMethod(2340, 3.8126, 1.928, 0, -3.8987, -2.5939, 2.469);
+		testMethod(2345, 3.8223, 1.928, 0, -3.9117, -2.5806, 2.6683);
+		testMethod(2350, 3.8319, 1.928, 0, -3.9245, -2.5662, 2.8676);
+		testMethod(2355, 3.8415, 1.928, 0, -3.9373, -2.5509, 3.0669);
+		testMethod(2360, 3.8512, 1.928, 0, -3.95, -2.5346, 3.2662);
+		testMethod(2365, 3.8608, 1.928, 0, -3.9627, -2.5172, 3.4655);
+		testMethod(2370, 3.8705, 1.928, 0, -3.9752, -2.4989, 3.6647);
+		testMethod(2375, 3.8801, 1.928, 0, -3.9876, -2.4796, 3.864);
+		testMethod(2380, 3.8897, 1.928, 0, -4, -2.4593, 4.0633);
+		testMethod(2385, 3.8994, 1.928, 0, -4.0122, -2.438, 4.2626);
+		testMethod(2390, 3.909, 1.928, 0, -4.0244, -2.4156, 4.4619);
+		testMethod(2395, 3.9187, 1.928, 0, -4.0364, -2.3923, 4.6612);
+		testMethod(2400, 3.9283, 1.928, 0, -4.0483, -2.368, 4.8605);
+		testMethod(2405, 3.9379, 1.928, 0, -4.0601, -2.3427, 5.0598);
+		testMethod(2410, 3.9476, 1.928, 0, -4.0717, -2.3164, 5.2591);
+		testMethod(2415, 3.9572, 1.928, 0, -4.0832, -2.2891, 5.4584);
+		testMethod(2420, 3.9669, 1.928, 0, -4.0946, -2.2609, 5.6577);
+		testMethod(2425, 3.9765, 1.928, 0, -4.1058, -2.2316, 5.857);
+		testMethod(2430, 3.9861, 1.928, 0, -4.1169, -2.2013, 6.0563);
+		testMethod(2435, 3.9958, 1.928, 0, -4.1279, -2.17, 6.2556);
+		testMethod(2440, 4.0054, 1.928, 0, -4.1386, -2.1377, 6.4549);
+		testMethod(2445, 4.0151, 1.928, 0, -4.1492, -2.1045, 6.6542);
+		testMethod(2450, 4.0247, 1.928, 0, -4.1597, -2.0702, 6.8535);
+		testMethod(2455, 4.0343, 1.928, 0, -4.1699, -2.0349, 7.0528);
+		testMethod(2460, 4.044, 1.928, 0, -4.18, -1.9987, 7.2521);
+		testMethod(2465, 4.0536, 1.928, 0, -4.1899, -1.9614, 7.4514);
+		testMethod(2470, 4.0633, 1.928, 0, -4.1996, -1.9232, 7.6507);
+		testMethod(2475, 4.0729, 1.928, 0, -4.2091, -1.8839, 7.85);
+		testMethod(2480, 4.0825, 1.928, 0, -4.2185, -1.8437, 8.0493);
+		testMethod(2485, 4.0922, 1.928, 0, -4.2276, -1.8024, 8.2486);
+		testMethod(2490, 4.1018, 1.928, 0, -4.2365, -1.7602, 8.4479);
+		testMethod(2495, 4.1115, 1.928, 0, -4.2452, -1.717, 8.6472);
+		testMethod(2500, 4.1211, 1.928, 0, -4.2537, -1.6727, 8.8465);
+		testMethod(2505, 4.1307, 1.928, 0, -4.2619, -1.6278, 8.9846);
+		testMethod(2510, 4.1404, 1.928, 0, -4.2699, -1.5829, 8.979);
+		testMethod(2515, 4.15, 1.928, 0, -4.2777, -1.538, 8.979);
+		testMethod(2520, 4.1597, 1.928, 0, -4.2853, -1.4931, 8.979);
+		testMethod(2525, 4.1693, 1.928, 0, -4.2927, -1.4482, 8.979);
+		testMethod(2530, 4.1789, 1.928, 0, -4.2998, -1.4033, 8.979);
+		testMethod(2535, 4.1886, 1.928, 0, -4.3067, -1.3584, 8.979);
+		testMethod(2540, 4.1982, 1.928, 0, -4.3134, -1.3135, 8.979);
+		testMethod(2545, 4.2079, 1.928, 0, -4.3198, -1.2686, 8.979);
+		testMethod(2550, 4.2175, 1.928, 0, -4.3261, -1.2237, 8.979);
+		testMethod(2555, 4.2271, 1.928, 0, -4.3321, -1.1788, 8.979);
+		testMethod(2560, 4.2368, 1.928, 0, -4.3379, -1.134, 8.979);
+		testMethod(2565, 4.2464, 1.928, 0, -4.3434, -1.0891, 8.979);
+		testMethod(2570, 4.2561, 1.928, 0, -4.3487, -1.0442, 8.979);
+		testMethod(2575, 4.2657, 1.928, 0, -4.3539, -0.9991, 9.0058);
+		testMethod(2580, 4.2753, 1.928, 0, -4.3587, -0.955, 8.8251);
+		testMethod(2585, 4.285, 1.928, 0, -4.3634, -0.9119, 8.6258);
+		testMethod(2590, 4.2946, 1.928, 0, -4.3679, -0.8697, 8.4265);
+		testMethod(2595, 4.3043, 1.928, 0, -4.3721, -0.8286, 8.2272);
+		testMethod(2600, 4.3139, 1.928, 0, -4.3761, -0.7885, 8.0279);
+		testMethod(2605, 4.3235, 1.928, 0, -4.38, -0.7493, 7.8286);
+		testMethod(2610, 4.3332, 1.928, 0, -4.3836, -0.7112, 7.6293);
+		testMethod(2615, 4.3428, 1.928, 0, -4.3871, -0.674, 7.43);
+		testMethod(2620, 4.3525, 1.928, 0, -4.3904, -0.6379, 7.2307);
+		testMethod(2625, 4.3621, 1.928, 0, -4.3935, -0.6027, 7.0314);
+		testMethod(2630, 4.3717, 1.928, 0, -4.3964, -0.5686, 6.8321);
+		testMethod(2635, 4.3814, 1.928, 0, -4.3992, -0.5354, 6.6328);
+		testMethod(2640, 4.391, 1.928, 0, -4.4018, -0.5032, 6.4335);
+		testMethod(2645, 4.4007, 1.928, 0, -4.4042, -0.4721, 6.2342);
+		testMethod(2650, 4.4103, 1.928, 0, -4.4065, -0.4419, 6.0349);
+		testMethod(2655, 4.4199, 1.928, 0, -4.4086, -0.4127, 5.8356);
+		testMethod(2660, 4.4296, 1.928, 0, -4.4106, -0.3845, 5.6363);
+		testMethod(2665, 4.4392, 1.928, 0, -4.4125, -0.3573, 5.437);
+		testMethod(2670, 4.4489, 1.928, 0, -4.4142, -0.3312, 5.2377);
+		testMethod(2675, 4.4585, 1.928, 0, -4.4158, -0.306, 5.0384);
+		testMethod(2680, 4.4681, 1.928, 0, -4.4173, -0.2818, 4.8391);
+		testMethod(2685, 4.4778, 1.928, 0, -4.4186, -0.2586, 4.6398);
+		testMethod(2690, 4.4874, 1.928, 0, -4.4198, -0.2364, 4.4405);
+		testMethod(2695, 4.4971, 1.928, 0, -4.421, -0.2152, 4.2412);
+		testMethod(2700, 4.5067, 1.928, 0, -4.422, -0.1949, 4.0419);
+		testMethod(2705, 4.5163, 1.928, 0, -4.4229, -0.1757, 3.8426);
+		testMethod(2710, 4.526, 1.928, 0, -4.4238, -0.1575, 3.6433);
+		testMethod(2715, 4.5356, 1.928, 0, -4.4245, -0.1403, 3.444);
+		testMethod(2720, 4.5453, 1.928, 0, -4.4252, -0.1241, 3.2447);
+		testMethod(2725, 4.5549, 1.928, 0, -4.4257, -0.1088, 3.0454);
+		testMethod(2730, 4.5645, 1.928, 0, -4.4263, -0.0946, 2.8461);
+		testMethod(2735, 4.5742, 1.928, 0, -4.4267, -0.0814, 2.6468);
+		testMethod(2740, 4.5838, 1.928, 0, -4.4271, -0.0691, 2.4475);
+		testMethod(2745, 4.5935, 1.928, 0, -4.4274, -0.0579, 2.2482);
+		testMethod(2750, 4.6031, 1.928, 0, -4.4276, -0.0477, 2.0489);
+		testMethod(2755, 4.6127, 1.928, 0, -4.4279, -0.0384, 1.8496);
+		testMethod(2760, 4.6224, 1.928, 0, -4.428, -0.0302, 1.6503);
+		testMethod(2765, 4.632, 1.928, 0, -4.4282, -0.0229, 1.451);
+		testMethod(2770, 4.6417, 1.928, 0, -4.4283, -0.0166, 1.2517);
+		testMethod(2775, 4.6513, 1.928, 0, -4.4283, -0.0114, 1.0524);
+		testMethod(2780, 4.6609, 1.928, 0, -4.4284, -0.0071, 0.8531);
+		testMethod(2785, 4.6706, 1.928, 0, -4.4284, -0.0039, 0.6538);
+		testMethod(2790, 4.6802, 1.928, 0, -4.4284, -0.0016, 0.4545);
+		testMethod(2795, 4.6899, 1.928, 0, -4.4284, -0.0003, 0.2552);
+		testMethod(2800, 4.6995, 1.928, 0, -4.4284, 0, 0.0607);
+		testMethod(2805, 4.7091, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2810, 4.7188, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2815, 4.7284, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2820, 4.7381, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2825, 4.7477, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2830, 4.7574, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2835, 4.767, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2840, 4.7766, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2845, 4.7863, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2850, 4.7959, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2855, 4.8056, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2860, 4.8152, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2865, 4.8248, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2870, 4.8345, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2875, 4.8441, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2880, 4.8538, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2885, 4.8634, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2890, 4.873, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2895, 4.8827, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2900, 4.8923, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2905, 4.902, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2910, 4.9116, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2915, 4.9212, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2920, 4.9309, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2925, 4.9405, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2930, 4.9502, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2935, 4.9598, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2940, 4.9694, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2945, 4.9791, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2950, 4.9887, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2955, 4.9984, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2960, 5.008, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2965, 5.0176, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2970, 5.0273, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2975, 5.0369, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2980, 5.0466, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2985, 5.0562, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2990, 5.0658, 1.928, 0, -4.4284, 0, 0);
+		testMethod(2995, 5.0755, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3000, 5.0851, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3005, 5.0948, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3010, 5.1044, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3015, 5.114, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3020, 5.1237, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3025, 5.1333, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3030, 5.143, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3035, 5.1526, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3040, 5.1622, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3045, 5.1719, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3050, 5.1815, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3055, 5.1912, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3060, 5.2008, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3065, 5.2104, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3070, 5.2201, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3075, 5.2297, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3080, 5.2394, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3085, 5.249, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3090, 5.2586, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3095, 5.2683, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3100, 5.2779, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3105, 5.2876, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3110, 5.2972, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3115, 5.3068, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3120, 5.3165, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3125, 5.3261, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3130, 5.3358, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3135, 5.3454, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3140, 5.355, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3145, 5.3647, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3150, 5.3743, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3155, 5.384, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3160, 5.3936, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3165, 5.4032, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3170, 5.4129, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3175, 5.4225, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3180, 5.4322, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3185, 5.4418, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3190, 5.4514, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3195, 5.4611, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3200, 5.4707, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3205, 5.4804, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3210, 5.49, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3215, 5.4996, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3220, 5.5093, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3225, 5.5189, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3230, 5.5286, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3235, 5.5382, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3240, 5.5478, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3245, 5.5575, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3250, 5.5671, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3255, 5.5768, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3260, 5.5864, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3265, 5.596, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3270, 5.6057, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3275, 5.6153, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3280, 5.625, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3285, 5.6346, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3290, 5.6442, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3295, 5.6539, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3300, 5.6635, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3305, 5.6732, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3310, 5.6828, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3315, 5.6924, 1.928, 0, -4.4284, 0, 0);
+		testMethod(3320, 5.7021, 1.928, 0, -4.4284, 0.0003, 0.0606);
+		testMethod(3325, 5.7117, 1.928, 0, -4.4284, 0.0016, 0.255);
+		testMethod(3330, 5.7214, 1.928, 0, -4.4284, 0.0038, 0.4543);
+		testMethod(3335, 5.731, 1.928, 0, -4.4284, 0.0071, 0.6536);
+		testMethod(3340, 5.7406, 1.928, 0, -4.4283, 0.0114, 0.8529);
+		testMethod(3345, 5.7503, 1.928, 0, -4.4283, 0.0166, 1.0522);
+		testMethod(3350, 5.7599, 1.928, 0, -4.4282, 0.0229, 1.2515);
+		testMethod(3355, 5.7696, 1.928, 0, -4.428, 0.0302, 1.4508);
+		testMethod(3360, 5.7792, 1.928, 0, -4.4279, 0.0384, 1.6501);
+		testMethod(3365, 5.7888, 1.928, 0, -4.4276, 0.0477, 1.8494);
+		testMethod(3370, 5.7985, 1.928, 0, -4.4274, 0.0579, 2.0487);
+		testMethod(3375, 5.8081, 1.928, 0, -4.4271, 0.0691, 2.248);
+		testMethod(3380, 5.8178, 1.928, 0, -4.4267, 0.0814, 2.4473);
+		testMethod(3385, 5.8274, 1.928, 0, -4.4263, 0.0946, 2.6466);
+		testMethod(3390, 5.837, 1.928, 0, -4.4257, 0.1088, 2.8459);
+		testMethod(3395, 5.8467, 1.928, 0, -4.4252, 0.1241, 3.0452);
+		testMethod(3400, 5.8563, 1.928, 0, -4.4245, 0.1403, 3.2445);
+		testMethod(3405, 5.866, 1.928, 0, -4.4238, 0.1575, 3.4438);
+		testMethod(3410, 5.8756, 1.928, 0, -4.4229, 0.1757, 3.6431);
+		testMethod(3415, 5.8852, 1.928, 0, -4.422, 0.1949, 3.8424);
+		testMethod(3420, 5.8949, 1.928, 0, -4.421, 0.2151, 4.0417);
+		testMethod(3425, 5.9045, 1.928, 0, -4.4198, 0.2363, 4.241);
+		testMethod(3430, 5.9142, 1.928, 0, -4.4186, 0.2585, 4.4403);
+		testMethod(3435, 5.9238, 1.928, 0, -4.4173, 0.2817, 4.6396);
+		testMethod(3440, 5.9334, 1.928, 0, -4.4158, 0.3059, 4.8389);
+		testMethod(3445, 5.9431, 1.928, 0, -4.4142, 0.3311, 5.0382);
+		testMethod(3450, 5.9527, 1.928, 0, -4.4125, 0.3573, 5.2375);
+		testMethod(3455, 5.9624, 1.928, 0, -4.4106, 0.3845, 5.4368);
+		testMethod(3460, 5.972, 1.928, 0, -4.4086, 0.4127, 5.6361);
+		testMethod(3465, 5.9816, 1.928, 0, -4.4065, 0.4419, 5.8354);
+		testMethod(3470, 5.9913, 1.928, 0, -4.4042, 0.472, 6.0347);
+		testMethod(3475, 6.0009, 1.928, 0, -4.4018, 0.5032, 6.234);
+		testMethod(3480, 6.0106, 1.928, 0, -4.3992, 0.5354, 6.4333);
+		testMethod(3485, 6.0202, 1.928, 0, -4.3964, 0.5685, 6.6326);
+		testMethod(3490, 6.0298, 1.928, 0, -4.3935, 0.6027, 6.8319);
+		testMethod(3495, 6.0395, 1.928, 0, -4.3904, 0.6378, 7.0312);
+		testMethod(3500, 6.0491, 1.928, 0, -4.3871, 0.674, 7.2305);
+		testMethod(3505, 6.0588, 1.928, 0, -4.3836, 0.7111, 7.4298);
+		testMethod(3510, 6.0684, 1.928, 0, -4.38, 0.7493, 7.6291);
+		testMethod(3515, 6.078, 1.928, 0, -4.3762, 0.7884, 7.8284);
+		testMethod(3520, 6.0877, 1.928, 0, -4.3721, 0.8286, 8.0277);
+		testMethod(3525, 6.0973, 1.928, 0, -4.3679, 0.8697, 8.227);
+		testMethod(3530, 6.107, 1.928, 0, -4.3634, 0.9118, 8.4263);
+		testMethod(3535, 6.1166, 1.928, 0, -4.3587, 0.955, 8.6256);
+		testMethod(3540, 6.1262, 1.928, 0, -4.3539, 0.9991, 8.8249);
+		testMethod(3545, 6.1359, 1.928, 0, -4.3488, 1.044, 8.9799);
+		testMethod(3550, 6.1455, 1.928, 0, -4.3434, 1.0889, 8.979);
+		testMethod(3555, 6.1552, 1.928, 0, -4.3379, 1.1338, 8.979);
+		testMethod(3560, 6.1648, 1.928, 0, -4.3321, 1.1787, 8.979);
+		testMethod(3565, 6.1744, 1.928, 0, -4.3261, 1.2236, 8.979);
+		testMethod(3570, 6.1841, 1.928, 0, -4.3198, 1.2685, 8.979);
+		testMethod(3575, 6.1937, 1.928, 0, -4.3134, 1.3134, 8.979);
+		testMethod(3580, 6.2034, 1.928, 0, -4.3067, 1.3583, 8.979);
+		testMethod(3585, 6.213, 1.928, 0, -4.2998, 1.4032, 8.979);
+		testMethod(3590, 6.2226, 1.928, 0, -4.2927, 1.448, 8.979);
+		testMethod(3595, 6.2323, 1.928, 0, -4.2853, 1.4929, 8.979);
+		testMethod(3600, 6.2419, 1.928, 0, -4.2778, 1.5378, 8.979);
+		testMethod(3605, 6.2516, 1.928, 0, -4.2699, 1.5827, 8.979);
+		testMethod(3610, 6.2612, 1.928, 0, -4.2619, 1.6276, 8.979);
+		testMethod(3615, 6.2708, 1.928, 0, -4.2537, 1.6727, 9.0105);
+		testMethod(3620, 6.2805, 1.928, 0, -4.2452, 1.7169, 8.8467);
+		testMethod(3625, 6.2901, 1.928, 0, -4.2365, 1.7601, 8.6474);
+		testMethod(3630, 6.2998, 1.928, 0, -4.2276, 1.8024, 8.4481);
+		testMethod(3635, 6.3094, 1.928, 0, -4.2185, 1.8436, 8.2488);
+		testMethod(3640, 6.319, 1.928, 0, -4.2092, 1.8839, 8.0495);
+		testMethod(3645, 6.3287, 1.928, 0, -4.1996, 1.9231, 7.8502);
+		testMethod(3650, 6.3383, 1.928, 0, -4.1899, 1.9614, 7.6509);
+		testMethod(3655, 6.348, 1.928, 0, -4.18, 1.9986, 7.4516);
+		testMethod(3660, 6.3576, 1.928, 0, -4.1699, 2.0349, 7.2523);
+		testMethod(3665, 6.3672, 1.928, 0, -4.1597, 2.0702, 7.053);
+		testMethod(3670, 6.3769, 1.928, 0, -4.1492, 2.1044, 6.8537);
+		testMethod(3675, 6.3865, 1.928, 0, -4.1386, 2.1377, 6.6544);
+		testMethod(3680, 6.3962, 1.928, 0, -4.1279, 2.17, 6.4551);
+		testMethod(3685, 6.4058, 1.928, 0, -4.1169, 2.2013, 6.2558);
+		testMethod(3690, 6.4154, 1.928, 0, -4.1059, 2.2315, 6.0565);
+		testMethod(3695, 6.4251, 1.928, 0, -4.0946, 2.2608, 5.8572);
+		testMethod(3700, 6.4347, 1.928, 0, -4.0833, 2.2891, 5.6579);
+		testMethod(3705, 6.4444, 1.928, 0, -4.0717, 2.3164, 5.4586);
+		testMethod(3710, 6.454, 1.928, 0, -4.0601, 2.3427, 5.2593);
+		testMethod(3715, 6.4636, 1.928, 0, -4.0483, 2.368, 5.06);
+		testMethod(3720, 6.4733, 1.928, 0, -4.0364, 2.3923, 4.8607);
+		testMethod(3725, 6.4829, 1.928, 0, -4.0244, 2.4156, 4.6614);
+		testMethod(3730, 6.4926, 1.928, 0, -4.0123, 2.4379, 4.4621);
+		testMethod(3735, 6.5022, 1.928, 0, -4, 2.4592, 4.2628);
+		testMethod(3740, 6.5118, 1.928, 0, -3.9877, 2.4796, 4.0635);
+		testMethod(3745, 6.5215, 1.928, 0, -3.9752, 2.4989, 3.8642);
+		testMethod(3750, 6.5311, 1.928, 0, -3.9627, 2.5172, 3.6649);
+		testMethod(3755, 6.5408, 1.928, 0, -3.9501, 2.5345, 3.4656);
+		testMethod(3760, 6.5504, 1.928, 0, -3.9373, 2.5509, 3.2663);
+		testMethod(3765, 6.56, 1.928, 0, -3.9245, 2.5662, 3.067);
+		testMethod(3770, 6.5697, 1.928, 0, -3.9117, 2.5805, 2.8677);
+		testMethod(3775, 6.5793, 1.928, 0, -3.8987, 2.5939, 2.6684);
+		testMethod(3780, 6.589, 1.928, 0, -3.8857, 2.6062, 2.4691);
+		testMethod(3785, 6.5986, 1.928, 0, -3.8727, 2.6176, 2.2698);
+		testMethod(3790, 6.6082, 1.928, 0, -3.8596, 2.6279, 2.0705);
+		testMethod(3795, 6.6179, 1.928, 0, -3.8464, 2.6373, 1.8712);
+		testMethod(3800, 6.6275, 1.928, 0, -3.8332, 2.6457, 1.6719);
+		testMethod(3805, 6.6372, 1.928, 0, -3.8199, 2.653, 1.4726);
+		testMethod(3810, 6.6468, 1.928, 0, -3.8067, 2.6594, 1.2733);
+		testMethod(3815, 6.6564, 1.928, 0, -3.7934, 2.6648, 1.074);
+		testMethod(3820, 6.6661, 1.928, 0, -3.78, 2.6691, 0.8748);
+		testMethod(3825, 6.6757, 1.928, 0, -3.7667, 2.6725, 0.6755);
+		testMethod(3830, 6.6854, 1.928, 0, -3.7533, 2.6749, 0.4762);
+		testMethod(3835, 6.695, 1.928, 0, -3.7399, 2.6763, 0.2769);
+		testMethod(3840, 6.7046, 1.928, 0, -3.7265, 2.6767, 0.0788);
+		testMethod(3845, 6.7143, 1.928, 0, -3.7132, 2.6767, 0);
+		testMethod(3850, 6.7239, 1.928, 0, -3.6998, 2.6767, 0);
+		testMethod(3855, 6.7336, 1.928, 0, -3.6864, 2.6767, 0);
+		testMethod(3860, 6.7432, 1.928, 0, -3.673, 2.6767, 0);
+		testMethod(3865, 6.7528, 1.928, 0, -3.6596, 2.6767, 0);
+		testMethod(3870, 6.7625, 1.928, 0, -3.6462, 2.6767, 0);
+		testMethod(3875, 6.7721, 1.928, 0, -3.6329, 2.6767, 0);
+		testMethod(3880, 6.7818, 1.928, 0, -3.6195, 2.6767, 0);
+		testMethod(3885, 6.7914, 1.928, 0, -3.6061, 2.6767, 0);
+		testMethod(3890, 6.801, 1.928, 0, -3.5927, 2.6767, 0);
+		testMethod(3895, 6.8107, 1.928, 0, -3.5793, 2.6767, 0);
+		testMethod(3900, 6.8203, 1.928, 0, -3.5659, 2.6767, 0);
+		testMethod(3905, 6.83, 1.928, 0, -3.5526, 2.6767, 0);
+		testMethod(3910, 6.8396, 1.928, 0, -3.5392, 2.6767, 0);
+		testMethod(3915, 6.8492, 1.928, 0, -3.5258, 2.6767, 0);
+		testMethod(3920, 6.8589, 1.928, 0, -3.5124, 2.6767, 0);
+		testMethod(3925, 6.8685, 1.928, 0, -3.499, 2.6767, 0);
+		testMethod(3930, 6.8782, 1.928, 0, -3.4856, 2.6767, 0);
+		testMethod(3935, 6.8878, 1.928, 0, -3.4723, 2.6767, 0);
+		testMethod(3940, 6.8974, 1.928, 0, -3.4589, 2.6767, 0);
+		testMethod(3945, 6.9071, 1.928, 0, -3.4455, 2.6767, 0);
+		testMethod(3950, 6.9167, 1.928, 0, -3.4321, 2.6767, 0);
+		testMethod(3955, 6.9264, 1.928, 0, -3.4187, 2.6767, 0);
+		testMethod(3960, 6.936, 1.928, 0, -3.4053, 2.6767, 0);
+		testMethod(3965, 6.9456, 1.928, 0, -3.392, 2.6767, 0);
+		testMethod(3970, 6.9553, 1.928, 0, -3.3786, 2.6767, 0);
+		testMethod(3975, 6.9649, 1.928, 0, -3.3652, 2.6767, 0);
+		testMethod(3980, 6.9746, 1.928, 0, -3.3518, 2.6767, 0);
+		testMethod(3985, 6.9842, 1.928, 0, -3.3384, 2.6767, 0);
+		testMethod(3990, 6.9938, 1.928, 0, -3.325, 2.6767, 0);
+		testMethod(3995, 7.0035, 1.928, 0, -3.3117, 2.6767, 0);
+		testMethod(4000, 7.0131, 1.928, 0, -3.2983, 2.6767, 0);
+		testMethod(4005, 7.0228, 1.928, 0, -3.2849, 2.6767, 0);
+		testMethod(4010, 7.0324, 1.928, 0, -3.2715, 2.6767, 0);
+		testMethod(4015, 7.042, 1.928, 0, -3.2581, 2.6767, 0);
+		testMethod(4020, 7.0517, 1.928, 0, -3.2447, 2.6767, 0);
+		testMethod(4025, 7.0613, 1.928, 0, -3.2314, 2.6767, 0);
+		testMethod(4030, 7.071, 1.928, 0, -3.218, 2.6767, 0);
+		testMethod(4035, 7.0806, 1.928, 0, -3.2046, 2.6767, 0);
+		testMethod(4040, 7.0902, 1.928, 0, -3.1912, 2.6767, 0);
+		testMethod(4045, 7.0999, 1.928, 0, -3.1778, 2.6767, 0);
+		testMethod(4050, 7.1095, 1.928, 0, -3.1644, 2.6767, 0);
+		testMethod(4055, 7.1192, 1.928, 0, -3.1511, 2.6767, 0);
+		testMethod(4060, 7.1288, 1.928, 0, -3.1377, 2.6767, 0);
+		testMethod(4065, 7.1384, 1.928, 0, -3.1243, 2.6767, 0);
+		testMethod(4070, 7.1481, 1.928, 0, -3.1109, 2.6767, 0);
+		testMethod(4075, 7.1577, 1.928, 0, -3.0975, 2.6767, 0);
+		testMethod(4080, 7.1674, 1.928, 0, -3.0841, 2.6767, 0);
+		testMethod(4085, 7.177, 1.928, 0, -3.0708, 2.6767, 0);
+		testMethod(4090, 7.1866, 1.928, 0, -3.0574, 2.6767, 0);
+		testMethod(4095, 7.1963, 1.928, 0, -3.044, 2.6767, 0);
+		testMethod(4100, 7.2059, 1.928, 0, -3.0306, 2.6767, 0);
+		testMethod(4105, 7.2156, 1.928, 0, -3.0172, 2.6767, 0);
+		testMethod(4110, 7.2252, 1.928, 0, -3.0038, 2.6767, 0);
+		testMethod(4115, 7.2348, 1.928, 0, -2.9905, 2.6767, 0);
+		testMethod(4120, 7.2445, 1.928, 0, -2.9771, 2.6767, 0);
+		testMethod(4125, 7.2541, 1.928, 0, -2.9637, 2.6767, 0);
+		testMethod(4130, 7.2638, 1.928, 0, -2.9503, 2.6767, 0);
+		testMethod(4135, 7.2734, 1.928, 0, -2.9369, 2.6767, 0);
+		testMethod(4140, 7.283, 1.928, 0, -2.9235, 2.6767, 0);
+		testMethod(4145, 7.2927, 1.928, 0, -2.9102, 2.6767, 0);
+		testMethod(4150, 7.3023, 1.928, 0, -2.8968, 2.6767, 0);
+		testMethod(4155, 7.312, 1.928, 0, -2.8834, 2.6767, 0);
+		testMethod(4160, 7.3216, 1.928, 0, -2.87, 2.6767, 0);
+		testMethod(4165, 7.3312, 1.928, 0, -2.8566, 2.6767, 0);
+		testMethod(4170, 7.3409, 1.928, 0, -2.8432, 2.6767, 0);
+		testMethod(4175, 7.3505, 1.928, 0, -2.8299, 2.6767, 0);
+		testMethod(4180, 7.3602, 1.928, 0, -2.8165, 2.6767, 0);
+		testMethod(4185, 7.3698, 1.928, 0, -2.8031, 2.6767, 0);
+		testMethod(4190, 7.3794, 1.928, 0, -2.7897, 2.6767, 0);
+		testMethod(4195, 7.3891, 1.928, 0, -2.7763, 2.6767, 0);
+		testMethod(4200, 7.3987, 1.928, 0, -2.7629, 2.6767, 0);
+		testMethod(4205, 7.4084, 1.928, 0, -2.7496, 2.6767, 0);
+		testMethod(4210, 7.418, 1.928, 0, -2.7362, 2.6767, 0);
+		testMethod(4215, 7.4276, 1.928, 0, -2.7228, 2.6767, 0);
+		testMethod(4220, 7.4373, 1.928, 0, -2.7094, 2.6767, 0);
+		testMethod(4225, 7.4469, 1.928, 0, -2.696, 2.6767, 0);
+		testMethod(4230, 7.4566, 1.928, 0, -2.6826, 2.6767, 0);
+		testMethod(4235, 7.4662, 1.928, 0, -2.6693, 2.6767, 0);
+		testMethod(4240, 7.4758, 1.928, 0, -2.6559, 2.6767, 0);
+		testMethod(4245, 7.4855, 1.928, 0, -2.6425, 2.6767, 0);
+		testMethod(4250, 7.4951, 1.928, 0, -2.6291, 2.6767, 0);
+		testMethod(4255, 7.5048, 1.928, 0, -2.6157, 2.6767, 0);
+		testMethod(4260, 7.5144, 1.928, 0, -2.6023, 2.6767, 0);
+		testMethod(4265, 7.524, 1.928, 0, -2.589, 2.6767, 0);
+		testMethod(4270, 7.5337, 1.928, 0, -2.5756, 2.6767, 0);
+		testMethod(4275, 7.5433, 1.928, 0, -2.5622, 2.6767, 0);
+		testMethod(4280, 7.553, 1.928, 0, -2.5488, 2.6767, 0);
+		testMethod(4285, 7.5626, 1.928, 0, -2.5354, 2.6767, 0);
+		testMethod(4290, 7.5722, 1.928, 0, -2.522, 2.6767, 0);
+		testMethod(4295, 7.5819, 1.928, 0, -2.5087, 2.6767, 0);
+		testMethod(4300, 7.5915, 1.928, 0, -2.4953, 2.6767, 0);
+		testMethod(4305, 7.6012, 1.928, 0, -2.4819, 2.6767, 0);
+		testMethod(4310, 7.6108, 1.928, 0, -2.4685, 2.6767, 0);
+		testMethod(4315, 7.6204, 1.928, 0, -2.4551, 2.6767, 0);
+		testMethod(4320, 7.6301, 1.928, 0, -2.4417, 2.6767, 0);
+		testMethod(4325, 7.6397, 1.928, 0, -2.4284, 2.6767, 0);
+		testMethod(4330, 7.6494, 1.928, 0, -2.415, 2.6767, 0);
+		testMethod(4335, 7.659, 1.928, 0, -2.4016, 2.6767, 0);
+		testMethod(4340, 7.6686, 1.928, 0, -2.3882, 2.6767, 0);
+		testMethod(4345, 7.6783, 1.928, 0, -2.3748, 2.6767, 0);
+		testMethod(4350, 7.6879, 1.928, 0, -2.3614, 2.6767, 0);
+		testMethod(4355, 7.6976, 1.928, 0, -2.3481, 2.6767, 0);
+		testMethod(4360, 7.7072, 1.928, 0, -2.3347, 2.6767, 0);
+		testMethod(4365, 7.7168, 1.928, 0, -2.3213, 2.6767, 0);
+		testMethod(4370, 7.7265, 1.928, 0, -2.3079, 2.6767, 0);
+		testMethod(4375, 7.7361, 1.928, 0, -2.2945, 2.6767, 0);
+		testMethod(4380, 7.7458, 1.928, 0, -2.2811, 2.6767, 0);
+		testMethod(4385, 7.7554, 1.928, 0, -2.2678, 2.6767, 0);
+		testMethod(4390, 7.765, 1.928, 0, -2.2544, 2.6767, 0);
+		testMethod(4395, 7.7747, 1.928, 0, -2.241, 2.6767, 0);
+		testMethod(4400, 7.7843, 1.928, 0, -2.2276, 2.6767, 0);
+		testMethod(4405, 7.794, 1.928, 0, -2.2142, 2.6767, 0);
+		testMethod(4410, 7.8036, 1.928, 0, -2.2008, 2.6767, 0);
+		testMethod(4415, 7.8132, 1.928, 0, -2.1875, 2.6767, 0);
+		testMethod(4420, 7.8229, 1.928, 0, -2.1741, 2.6767, 0);
+		testMethod(4425, 7.8325, 1.928, 0, -2.1607, 2.6767, 0);
+		testMethod(4430, 7.8422, 1.928, 0, -2.1473, 2.6767, 0);
+		testMethod(4435, 7.8518, 1.928, 0, -2.1339, 2.6767, 0);
+		testMethod(4440, 7.8614, 1.928, 0, -2.1205, 2.6767, 0);
+		testMethod(4445, 7.8711, 1.928, 0, -2.1072, 2.6767, 0);
+		testMethod(4450, 7.8807, 1.928, 0, -2.0938, 2.6767, 0);
+		testMethod(4455, 7.8904, 1.928, 0, -2.0804, 2.6767, 0);
+		testMethod(4460, 7.9, 1.928, 0, -2.067, 2.6767, 0);
+		testMethod(4465, 7.9096, 1.928, 0, -2.0536, 2.6767, 0);
+		testMethod(4470, 7.9193, 1.928, 0, -2.0402, 2.6767, 0);
+		testMethod(4475, 7.9289, 1.928, 0, -2.0269, 2.6767, 0);
+		testMethod(4480, 7.9386, 1.928, 0, -2.0135, 2.6767, 0);
+		testMethod(4485, 7.9482, 1.928, 0, -2.0001, 2.6767, 0);
+		testMethod(4490, 7.9578, 1.928, 0, -1.9867, 2.6767, 0);
+		testMethod(4495, 7.9675, 1.928, 0, -1.9733, 2.6767, 0);
+		testMethod(4500, 7.9771, 1.928, 0, -1.9599, 2.6767, 0);
+		testMethod(4505, 7.9868, 1.928, 0, -1.9466, 2.6767, 0);
+		testMethod(4510, 7.9964, 1.928, 0, -1.9332, 2.6767, 0);
+		testMethod(4515, 8.006, 1.928, 0, -1.9198, 2.6767, 0);
+		testMethod(4520, 8.0157, 1.928, 0, -1.9064, 2.6767, 0);
+		testMethod(4525, 8.0253, 1.928, 0, -1.893, 2.6767, 0);
+		testMethod(4530, 8.035, 1.928, 0, -1.8796, 2.6767, 0);
+		testMethod(4535, 8.0446, 1.928, 0, -1.8663, 2.6767, 0);
+		testMethod(4540, 8.0542, 1.928, 0, -1.8529, 2.6767, 0);
+		testMethod(4545, 8.0639, 1.928, 0, -1.8395, 2.6767, 0);
+		testMethod(4550, 8.0735, 1.928, 0, -1.8261, 2.6767, 0);
+		testMethod(4555, 8.0832, 1.928, 0, -1.8127, 2.6767, 0);
+		testMethod(4560, 8.0928, 1.928, 0, -1.7993, 2.6767, 0);
+		testMethod(4565, 8.1024, 1.928, 0, -1.786, 2.6767, 0);
+		testMethod(4570, 8.1121, 1.928, 0, -1.7726, 2.6767, 0);
+		testMethod(4575, 8.1217, 1.928, 0, -1.7592, 2.6767, 0);
+		testMethod(4580, 8.1314, 1.928, 0, -1.7458, 2.6767, 0);
+		testMethod(4585, 8.141, 1.928, 0, -1.7324, 2.6767, 0);
+		testMethod(4590, 8.1506, 1.928, 0, -1.719, 2.6767, 0);
+		testMethod(4595, 8.1603, 1.928, 0, -1.7057, 2.6767, 0);
+		testMethod(4600, 8.1699, 1.928, 0, -1.6923, 2.6767, 0);
+		testMethod(4605, 8.1796, 1.928, 0, -1.6789, 2.6767, 0);
+		testMethod(4610, 8.1892, 1.928, 0, -1.6655, 2.6767, 0);
+		testMethod(4615, 8.1988, 1.928, 0, -1.6521, 2.6767, 0);
+		testMethod(4620, 8.2085, 1.928, 0, -1.6387, 2.6767, 0);
+		testMethod(4625, 8.2181, 1.928, 0, -1.6254, 2.6767, 0);
+		testMethod(4630, 8.2278, 1.928, 0, -1.612, 2.6767, 0);
+		testMethod(4635, 8.2374, 1.928, 0, -1.5986, 2.6767, 0);
+		testMethod(4640, 8.247, 1.928, 0, -1.5852, 2.6767, 0);
+		testMethod(4645, 8.2567, 1.928, 0, -1.5718, 2.6767, 0);
+		testMethod(4650, 8.2663, 1.928, 0, -1.5584, 2.6767, 0);
+		testMethod(4655, 8.276, 1.928, 0, -1.5451, 2.6767, 0);
+		testMethod(4660, 8.2856, 1.928, 0, -1.5317, 2.6767, 0);
+		testMethod(4665, 8.2952, 1.928, 0, -1.5183, 2.6767, 0);
+		testMethod(4670, 8.3049, 1.928, 0, -1.5049, 2.6767, 0);
+		testMethod(4675, 8.3145, 1.928, 0, -1.4915, 2.6767, 0);
+		testMethod(4680, 8.3242, 1.928, 0, -1.4781, 2.6767, 0);
+		testMethod(4685, 8.3338, 1.928, 0, -1.4648, 2.6767, 0);
+		testMethod(4690, 8.3434, 1.928, 0, -1.4514, 2.6767, 0);
+		testMethod(4695, 8.3531, 1.928, 0, -1.438, 2.6767, 0);
+		testMethod(4700, 8.3627, 1.928, 0, -1.4246, 2.6767, 0);
+		testMethod(4705, 8.3724, 1.928, 0, -1.4112, 2.6767, 0);
+		testMethod(4710, 8.382, 1.928, 0, -1.3978, 2.6767, 0);
+		testMethod(4715, 8.3916, 1.928, 0, -1.3845, 2.6767, 0);
+		testMethod(4720, 8.4013, 1.928, 0, -1.3711, 2.6767, 0);
+		testMethod(4725, 8.4109, 1.928, 0, -1.3577, 2.6767, 0);
+		testMethod(4730, 8.4206, 1.928, 0, -1.3443, 2.6767, 0);
+		testMethod(4735, 8.4302, 1.928, 0, -1.3309, 2.6767, 0);
+		testMethod(4740, 8.4398, 1.928, 0, -1.3175, 2.6767, 0);
+		testMethod(4745, 8.4495, 1.928, 0, -1.3042, 2.6767, 0);
+		testMethod(4750, 8.4591, 1.928, 0, -1.2908, 2.6767, 0);
+		testMethod(4755, 8.4688, 1.928, 0, -1.2774, 2.6767, 0);
+		testMethod(4760, 8.4784, 1.928, 0, -1.264, 2.6767, 0);
+		testMethod(4765, 8.488, 1.928, 0, -1.2506, 2.6767, 0);
+		testMethod(4770, 8.4977, 1.928, 0, -1.2372, 2.6767, 0);
+		testMethod(4775, 8.5073, 1.928, 0, -1.2239, 2.6767, 0);
+		testMethod(4780, 8.517, 1.928, 0, -1.2105, 2.6767, 0);
+		testMethod(4785, 8.5266, 1.928, 0, -1.1971, 2.6767, 0);
+		testMethod(4790, 8.5362, 1.928, 0, -1.1837, 2.6767, 0);
+		testMethod(4795, 8.5459, 1.928, 0, -1.1703, 2.6767, 0);
+		testMethod(4800, 8.5555, 1.928, 0, -1.1569, 2.6767, 0);
+		testMethod(4805, 8.5652, 1.928, 0, -1.1436, 2.6767, 0);
+		testMethod(4810, 8.5748, 1.928, 0, -1.1302, 2.6767, 0);
+		testMethod(4815, 8.5844, 1.928, 0, -1.1168, 2.6767, 0);
+		testMethod(4820, 8.5941, 1.928, 0, -1.1034, 2.6767, 0);
+		testMethod(4825, 8.6037, 1.928, 0, -1.09, 2.6767, 0);
+		testMethod(4830, 8.6134, 1.928, 0, -1.0766, 2.6767, 0);
+		testMethod(4835, 8.623, 1.928, 0, -1.0633, 2.6767, 0);
+		testMethod(4840, 8.6326, 1.928, 0, -1.0499, 2.6767, 0);
+		testMethod(4845, 8.6423, 1.928, 0, -1.0365, 2.6767, 0);
+		testMethod(4850, 8.6519, 1.928, 0, -1.0231, 2.6767, 0);
+		testMethod(4855, 8.6616, 1.928, 0, -1.0097, 2.6767, 0);
+		testMethod(4860, 8.6712, 1.928, 0, -0.9963, 2.6767, 0);
+		testMethod(4865, 8.6808, 1.928, 0, -0.983, 2.6767, 0);
+		testMethod(4870, 8.6905, 1.928, 0, -0.9696, 2.6767, 0);
+		testMethod(4875, 8.7001, 1.928, 0, -0.9562, 2.6767, 0);
+		testMethod(4880, 8.7098, 1.928, 0, -0.9428, 2.6767, 0);
+		testMethod(4885, 8.7194, 1.928, 0, -0.9294, 2.6767, 0);
+		testMethod(4890, 8.729, 1.928, 0, -0.916, 2.6767, 0);
+		testMethod(4895, 8.7387, 1.928, 0, -0.9027, 2.6767, 0);
+		testMethod(4900, 8.7483, 1.928, 0, -0.8893, 2.6767, 0);
+		testMethod(4905, 8.758, 1.928, 0, -0.8759, 2.6767, 0);
+		testMethod(4910, 8.7676, 1.928, 0, -0.8625, 2.6767, 0);
+		testMethod(4915, 8.7772, 1.928, 0, -0.8491, 2.6767, 0);
+		testMethod(4920, 8.7869, 1.928, 0, -0.8357, 2.6767, 0);
+		testMethod(4925, 8.7965, 1.928, 0, -0.8224, 2.6767, 0);
+		testMethod(4930, 8.8062, 1.928, 0, -0.809, 2.6767, 0);
+		testMethod(4935, 8.8158, 1.928, 0, -0.7956, 2.6767, 0);
+		testMethod(4940, 8.8254, 1.928, 0, -0.7822, 2.6767, 0);
+		testMethod(4945, 8.8351, 1.928, 0, -0.7688, 2.6767, 0);
+		testMethod(4950, 8.8447, 1.928, 0, -0.7554, 2.6767, 0);
+		testMethod(4955, 8.8544, 1.928, 0, -0.7421, 2.6767, 0);
+		testMethod(4960, 8.864, 1.928, 0, -0.7287, 2.6767, 0);
+		testMethod(4965, 8.8736, 1.928, 0, -0.7153, 2.6767, 0);
+		testMethod(4970, 8.8833, 1.928, 0, -0.7019, 2.6767, 0);
+		testMethod(4975, 8.8929, 1.928, 0, -0.6885, 2.6763, -0.0786);
+		testMethod(4980, 8.9026, 1.928, 0, -0.6751, 2.6749, -0.2767);
+		testMethod(4985, 8.9122, 1.928, 0, -0.6618, 2.6725, -0.476);
+		testMethod(4990, 8.9218, 1.928, 0, -0.6484, 2.6691, -0.6753);
+		testMethod(4995, 8.9315, 1.928, 0, -0.6351, 2.6648, -0.8746);
+		testMethod(5000, 8.9411, 1.928, 0, -0.6218, 2.6594, -1.0739);
+		testMethod(5005, 8.9508, 1.928, 0, -0.6085, 2.653, -1.2732);
+		testMethod(5010, 8.9604, 1.928, 0, -0.5952, 2.6457, -1.4725);
+		testMethod(5015, 8.97, 1.928, 0, -0.582, 2.6373, -1.6718);
+		testMethod(5020, 8.9797, 1.928, 0, -0.5689, 2.6279, -1.8711);
+		testMethod(5025, 8.9893, 1.928, 0, -0.5558, 2.6176, -2.0704);
+		testMethod(5030, 8.999, 1.928, 0, -0.5427, 2.6062, -2.2697);
+		testMethod(5035, 9.0086, 1.928, 0, -0.5297, 2.5939, -2.469);
+		testMethod(5040, 9.0182, 1.928, 0, -0.5168, 2.5806, -2.6683);
+		testMethod(5045, 9.0279, 1.928, 0, -0.5039, 2.5662, -2.8676);
+		testMethod(5050, 9.0375, 1.928, 0, -0.4911, 2.5509, -3.0669);
+		testMethod(5055, 9.0472, 1.928, 0, -0.4784, 2.5346, -3.2662);
+		testMethod(5060, 9.0568, 1.928, 0, -0.4658, 2.5172, -3.4655);
+		testMethod(5065, 9.0664, 1.928, 0, -0.4532, 2.4989, -3.6647);
+		testMethod(5070, 9.0761, 1.928, 0, -0.4408, 2.4796, -3.864);
+		testMethod(5075, 9.0857, 1.928, 0, -0.4284, 2.4593, -4.0633);
+		testMethod(5080, 9.0954, 1.928, 0, -0.4162, 2.438, -4.2626);
+		testMethod(5085, 9.105, 1.928, 0, -0.404, 2.4156, -4.4619);
+		testMethod(5090, 9.1146, 1.928, 0, -0.392, 2.3923, -4.6612);
+		testMethod(5095, 9.1243, 1.928, 0, -0.3801, 2.368, -4.8605);
+		testMethod(5100, 9.1339, 1.928, 0, -0.3684, 2.3427, -5.0598);
+		testMethod(5105, 9.1436, 1.928, 0, -0.3567, 2.3164, -5.2591);
+		testMethod(5110, 9.1532, 1.928, 0, -0.3452, 2.2891, -5.4584);
+		testMethod(5115, 9.1628, 1.928, 0, -0.3338, 2.2609, -5.6577);
+		testMethod(5120, 9.1725, 1.928, 0, -0.3226, 2.2316, -5.857);
+		testMethod(5125, 9.1821, 1.928, 0, -0.3115, 2.2013, -6.0563);
+		testMethod(5130, 9.1918, 1.928, 0, -0.3006, 2.17, -6.2556);
+		testMethod(5135, 9.2014, 1.928, 0, -0.2898, 2.1377, -6.4549);
+		testMethod(5140, 9.211, 1.928, 0, -0.2792, 2.1045, -6.6542);
+		testMethod(5145, 9.2207, 1.928, 0, -0.2688, 2.0702, -6.8535);
+		testMethod(5150, 9.2303, 1.928, 0, -0.2585, 2.0349, -7.0528);
+		testMethod(5155, 9.24, 1.928, 0, -0.2484, 1.9987, -7.2521);
+		testMethod(5160, 9.2496, 1.928, 0, -0.2385, 1.9614, -7.4514);
+		testMethod(5165, 9.2592, 1.928, 0, -0.2288, 1.9232, -7.6507);
+		testMethod(5170, 9.2689, 1.928, 0, -0.2193, 1.8839, -7.85);
+		testMethod(5175, 9.2785, 1.928, 0, -0.21, 1.8437, -8.0493);
+		testMethod(5180, 9.2882, 1.928, 0, -0.2008, 1.8024, -8.2486);
+		testMethod(5185, 9.2978, 1.928, 0, -0.1919, 1.7602, -8.4479);
+		testMethod(5190, 9.3074, 1.928, 0, -0.1832, 1.717, -8.6472);
+		testMethod(5195, 9.3171, 1.928, 0, -0.1748, 1.6727, -8.8465);
+		testMethod(5200, 9.3267, 1.928, 0, -0.1665, 1.6278, -8.9846);
+		testMethod(5205, 9.3364, 1.928, 0, -0.1585, 1.5829, -8.979);
+		testMethod(5210, 9.346, 1.928, 0, -0.1507, 1.538, -8.979);
+		testMethod(5215, 9.3556, 1.928, 0, -0.1431, 1.4931, -8.979);
+		testMethod(5220, 9.3653, 1.928, 0, -0.1358, 1.4482, -8.979);
+		testMethod(5225, 9.3749, 1.928, 0, -0.1286, 1.4033, -8.979);
+		testMethod(5230, 9.3846, 1.928, 0, -0.1217, 1.3584, -8.979);
+		testMethod(5235, 9.3942, 1.928, 0, -0.115, 1.3135, -8.979);
+		testMethod(5240, 9.4038, 1.928, 0, -0.1086, 1.2686, -8.979);
+		testMethod(5245, 9.4135, 1.928, 0, -0.1024, 1.2237, -8.979);
+		testMethod(5250, 9.4231, 1.928, 0, -0.0964, 1.1788, -8.979);
+		testMethod(5255, 9.4328, 1.928, 0, -0.0906, 1.134, -8.979);
+		testMethod(5260, 9.4424, 1.928, 0, -0.085, 1.0891, -8.979);
+		testMethod(5265, 9.452, 1.928, 0, -0.0797, 1.0442, -8.979);
+		testMethod(5270, 9.4617, 1.928, 0, -0.0746, 0.9991, -9.0058);
+		testMethod(5275, 9.4713, 1.928, 0, -0.0697, 0.955, -8.8251);
+		testMethod(5280, 9.481, 1.928, 0, -0.065, 0.9119, -8.6258);
+		testMethod(5285, 9.4906, 1.928, 0, -0.0606, 0.8697, -8.4265);
+		testMethod(5290, 9.5002, 1.928, 0, -0.0563, 0.8286, -8.2272);
+		testMethod(5295, 9.5099, 1.928, 0, -0.0523, 0.7885, -8.0279);
+		testMethod(5300, 9.5195, 1.928, 0, -0.0484, 0.7493, -7.8286);
+		testMethod(5305, 9.5292, 1.928, 0, -0.0448, 0.7112, -7.6293);
+		testMethod(5310, 9.5388, 1.928, 0, -0.0413, 0.674, -7.43);
+		testMethod(5315, 9.5484, 1.928, 0, -0.038, 0.6379, -7.2307);
+		testMethod(5320, 9.5581, 1.928, 0, -0.0349, 0.6027, -7.0314);
+		testMethod(5325, 9.5677, 1.928, 0, -0.032, 0.5686, -6.8321);
+		testMethod(5330, 9.5774, 1.928, 0, -0.0293, 0.5354, -6.6328);
+		testMethod(5335, 9.587, 1.928, 0, -0.0267, 0.5032, -6.4335);
+		testMethod(5340, 9.5966, 1.928, 0, -0.0242, 0.4721, -6.2342);
+		testMethod(5345, 9.6063, 1.928, 0, -0.0219, 0.4419, -6.0349);
+		testMethod(5350, 9.6159, 1.928, 0, -0.0198, 0.4127, -5.8356);
+		testMethod(5355, 9.6256, 1.928, 0, -0.0178, 0.3845, -5.6363);
+		testMethod(5360, 9.6352, 1.928, 0, -0.0159, 0.3573, -5.437);
+		testMethod(5365, 9.6448, 1.928, 0, -0.0142, 0.3312, -5.2377);
+		testMethod(5370, 9.6545, 1.928, 0, -0.0126, 0.306, -5.0384);
+		testMethod(5375, 9.6641, 1.928, 0, -0.0112, 0.2818, -4.8391);
+		testMethod(5380, 9.6738, 1.928, 0, -0.0098, 0.2586, -4.6398);
+		testMethod(5385, 9.6834, 1.928, 0, -0.0086, 0.2364, -4.4405);
+		testMethod(5390, 9.693, 1.928, 0, -0.0075, 0.2152, -4.2412);
+		testMethod(5395, 9.7027, 1.9275, -0.0993, -0.0064, 0.1949, -4.0514);
+		testMethod(5400, 9.7123, 1.9265, -0.1985, -0.0055, 0.1756, -3.8578);
+		testMethod(5405, 9.7219, 1.925, -0.2978, -0.0047, 0.1573, -3.6608);
+		testMethod(5410, 9.7316, 1.923, -0.397, -0.0039, 0.14, -3.4611);
+		testMethod(5415, 9.7412, 1.9206, -0.4963, -0.0033, 0.1237, -3.259);
+		testMethod(5420, 9.7508, 1.9176, -0.5955, -0.0027, 0.1084, -3.0551);
+		testMethod(5425, 9.7603, 1.9141, -0.6948, -0.0022, 0.0942, -2.85);
+		testMethod(5430, 9.7699, 1.9101, -0.794, -0.0017, 0.081, -2.6441);
+		testMethod(5435, 9.7794, 1.9057, -0.8933, -0.0014, 0.0688, -2.4379);
+		testMethod(5440, 9.789, 1.9007, -0.9925, -0.0011, 0.0576, -2.232);
+		testMethod(5445, 9.7985, 1.8953, -1.0918, -0.0008, 0.0475, -2.0269);
+		testMethod(5450, 9.8079, 1.8893, -1.191, -0.0006, 0.0384, -1.823);
+		testMethod(5455, 9.8173, 1.8828, -1.2903, -0.0004, 0.0303, -1.6208);
+		testMethod(5460, 9.8267, 1.8759, -1.3896, -0.0003, 0.0232, -1.4208);
+		testMethod(5465, 9.8361, 1.8685, -1.4888, -0.0002, 0.017, -1.2235);
+		testMethod(5470, 9.8454, 1.8605, -1.5881, -0.0001, 0.0119, -1.0293);
+		testMethod(5475, 9.8547, 1.8521, -1.6873, -0.0001, 0.0077, -0.8387);
+		testMethod(5480, 9.8639, 1.8431, -1.7866, -0, 0.0044, -0.6521);
+		testMethod(5485, 9.8731, 1.8337, -1.8858, -0, 0.0021, -0.47);
+		testMethod(5490, 9.8823, 1.8238, -1.9851, -0, 0.0006, -0.2927);
+		testMethod(5495, 9.8914, 1.8134, -2.0843, -0, 0, -0.1206);
+		testMethod(5500, 9.9004, 1.8024, -2.1836, 0, 0, -0.004);
+		testMethod(5505, 9.9094, 1.791, -2.2828, 0, 0, 0);
+		testMethod(5510, 9.9183, 1.7791, -2.3821, 0, 0, 0);
+		testMethod(5515, 9.9272, 1.7667, -2.4813, 0, 0, 0);
+		testMethod(5520, 9.936, 1.7538, -2.5806, 0, 0, 0);
+		testMethod(5525, 9.9447, 1.7404, -2.6799, 0, 0, 0);
+		testMethod(5530, 9.9534, 1.7265, -2.7791, 0, 0, 0);
+		testMethod(5535, 9.962, 1.7121, -2.8784, 0, 0, 0);
+		testMethod(5540, 9.9705, 1.6972, -2.9776, 0, 0, 0);
+		testMethod(5545, 9.979, 1.6819, -3.0769, 0, 0, 0);
+		testMethod(5550, 9.9873, 1.666, -3.1761, 0, 0, 0);
+		testMethod(5555, 9.9956, 1.6496, -3.2754, 0, 0, 0);
+		testMethod(5560, 10.0038, 1.6327, -3.3746, 0, 0, 0);
+		testMethod(5565, 10.0119, 1.6154, -3.4739, 0, 0, 0);
+		testMethod(5570, 10.02, 1.598, -3.4739, 0, 0, 0);
+		testMethod(5575, 10.0279, 1.5806, -3.4739, 0, 0, 0);
+		testMethod(5580, 10.0358, 1.5632, -3.4739, 0, 0, 0);
+		testMethod(5585, 10.0436, 1.5459, -3.4739, 0, 0, 0);
+		testMethod(5590, 10.0512, 1.5285, -3.4739, 0, 0, 0);
+		testMethod(5595, 10.0588, 1.5111, -3.4739, 0, 0, 0);
+		testMethod(5600, 10.0664, 1.4938, -3.4739, 0, 0, 0);
+		testMethod(5605, 10.0738, 1.4764, -3.4739, 0, 0, 0);
+		testMethod(5610, 10.0811, 1.459, -3.4739, 0, 0, 0);
+		testMethod(5615, 10.0884, 1.4417, -3.4739, 0, 0, 0);
+		testMethod(5620, 10.0955, 1.4243, -3.4739, 0, 0, 0);
+		testMethod(5625, 10.1026, 1.4069, -3.4739, 0, 0, 0);
+		testMethod(5630, 10.1096, 1.3896, -3.4739, 0, 0, 0);
+		testMethod(5635, 10.1165, 1.3722, -3.4739, 0, 0, 0);
+		testMethod(5640, 10.1233, 1.3548, -3.4739, 0, 0, 0);
+		testMethod(5645, 10.1301, 1.3374, -3.4739, 0, 0, 0);
+		testMethod(5650, 10.1367, 1.3201, -3.4739, 0, 0, 0);
+		testMethod(5655, 10.1433, 1.3027, -3.4739, 0, 0, 0);
+		testMethod(5660, 10.1497, 1.2853, -3.4739, 0, 0, 0);
+		testMethod(5665, 10.1561, 1.268, -3.4739, 0, 0, 0);
+		testMethod(5670, 10.1624, 1.2506, -3.4739, 0, 0, 0);
+		testMethod(5675, 10.1686, 1.2332, -3.4739, 0, 0, 0);
+		testMethod(5680, 10.1747, 1.2159, -3.4739, 0, 0, 0);
+		testMethod(5685, 10.1808, 1.1985, -3.4739, 0, 0, 0);
+		testMethod(5690, 10.1867, 1.1811, -3.4739, 0, 0, 0);
+		testMethod(5695, 10.1926, 1.1638, -3.4739, 0, 0, 0);
+		testMethod(5700, 10.1984, 1.1464, -3.4739, 0, 0, 0);
+		testMethod(5705, 10.204, 1.129, -3.4739, 0, 0, 0);
+		testMethod(5710, 10.2096, 1.1116, -3.4739, 0, 0, 0);
+		testMethod(5715, 10.2152, 1.0943, -3.4739, 0, 0, 0);
+		testMethod(5720, 10.2206, 1.0769, -3.4739, 0, 0, 0);
+		testMethod(5725, 10.2259, 1.0595, -3.4739, 0, 0, 0);
+		testMethod(5730, 10.2312, 1.0422, -3.4739, 0, 0, 0);
+		testMethod(5735, 10.2364, 1.0248, -3.4739, 0, 0, 0);
+		testMethod(5740, 10.2414, 1.0074, -3.4739, 0, 0, 0);
+		testMethod(5745, 10.2464, 0.9901, -3.4739, 0, 0, 0);
+		testMethod(5750, 10.2513, 0.9727, -3.4739, 0, 0, 0);
+		testMethod(5755, 10.2562, 0.9553, -3.4739, 0, 0, 0);
+		testMethod(5760, 10.2609, 0.9379, -3.4739, 0, 0, 0);
+		testMethod(5765, 10.2655, 0.9206, -3.4739, 0, 0, 0);
+		testMethod(5770, 10.2701, 0.9032, -3.4739, 0, 0, 0);
+		testMethod(5775, 10.2746, 0.8858, -3.4739, 0, 0, 0);
+		testMethod(5780, 10.279, 0.8685, -3.4739, 0, 0, 0);
+		testMethod(5785, 10.2833, 0.8511, -3.4739, 0, 0, 0);
+		testMethod(5790, 10.2875, 0.8337, -3.4739, 0, 0, 0);
+		testMethod(5795, 10.2916, 0.8164, -3.4739, 0, 0, 0);
+		testMethod(5800, 10.2956, 0.799, -3.4739, 0, 0, 0);
+		testMethod(5805, 10.2996, 0.7816, -3.4739, 0, 0, 0);
+		testMethod(5810, 10.3034, 0.7643, -3.4739, 0, 0, 0);
+		testMethod(5815, 10.3072, 0.7469, -3.4739, 0, 0, 0);
+		testMethod(5820, 10.3109, 0.7295, -3.4739, 0, 0, 0);
+		testMethod(5825, 10.3145, 0.7121, -3.4739, 0, 0, 0);
+		testMethod(5830, 10.318, 0.6948, -3.4739, 0, 0, 0);
+		testMethod(5835, 10.3215, 0.6774, -3.4739, 0, 0, 0);
+		testMethod(5840, 10.3248, 0.66, -3.4739, 0, 0, 0);
+		testMethod(5845, 10.3281, 0.6427, -3.4739, 0, 0, 0);
+		testMethod(5850, 10.3312, 0.6253, -3.4739, 0, 0, 0);
+		testMethod(5855, 10.3343, 0.6079, -3.4739, 0, 0, 0);
+		testMethod(5860, 10.3373, 0.5906, -3.4739, 0, 0, 0);
+		testMethod(5865, 10.3402, 0.5732, -3.4739, 0, 0, 0);
+		testMethod(5870, 10.343, 0.5558, -3.4739, 0, 0, 0);
+		testMethod(5875, 10.3458, 0.5385, -3.4739, 0, 0, 0);
+		testMethod(5880, 10.3484, 0.5211, -3.4739, 0, 0, 0);
+		testMethod(5885, 10.351, 0.5037, -3.4739, 0, 0, 0);
+		testMethod(5890, 10.3535, 0.4863, -3.4739, 0, 0, 0);
+		testMethod(5895, 10.3559, 0.469, -3.4739, 0, 0, 0);
+		testMethod(5900, 10.3582, 0.4516, -3.4739, 0, 0, 0);
+		testMethod(5905, 10.3604, 0.4342, -3.4739, 0, 0, 0);
+		testMethod(5910, 10.3625, 0.4169, -3.4739, 0, 0, 0);
+		testMethod(5915, 10.3645, 0.3995, -3.4739, 0, 0, 0);
+		testMethod(5920, 10.3665, 0.3821, -3.4739, 0, 0, 0);
+		testMethod(5925, 10.3684, 0.3648, -3.4739, 0, 0, 0);
+		testMethod(5930, 10.3701, 0.3474, -3.4739, 0, 0, 0);
+		testMethod(5935, 10.3718, 0.33, -3.4739, 0, 0, 0);
+		testMethod(5940, 10.3734, 0.3126, -3.4739, 0, 0, 0);
+		testMethod(5945, 10.375, 0.2953, -3.4739, 0, 0, 0);
+		testMethod(5950, 10.3764, 0.2784, -3.3746, 0, 0, 0);
+		testMethod(5955, 10.3777, 0.262, -3.2754, 0, 0, 0);
+		testMethod(5960, 10.379, 0.2461, -3.1761, 0, 0, 0);
+		testMethod(5965, 10.3802, 0.2308, -3.0769, 0, 0, 0);
+		testMethod(5970, 10.3813, 0.2159, -2.9776, 0, 0, 0);
+		testMethod(5975, 10.3824, 0.2015, -2.8784, 0, 0, 0);
+		testMethod(5980, 10.3833, 0.1876, -2.7791, 0, 0, 0);
+		testMethod(5985, 10.3842, 0.1742, -2.6799, 0, 0, 0);
+		testMethod(5990, 10.3851, 0.1613, -2.5806, 0, 0, 0);
+		testMethod(5995, 10.3859, 0.1489, -2.4813, 0, 0, 0);
+		testMethod(6000, 10.3866, 0.137, -2.3821, 0, 0, 0);
+		testMethod(6005, 10.3872, 0.1256, -2.2828, 0, 0, 0);
+		testMethod(6010, 10.3878, 0.1146, -2.1836, 0, 0, 0);
+		testMethod(6015, 10.3884, 0.1042, -2.0843, 0, 0, 0);
+		testMethod(6020, 10.3889, 0.0943, -1.9851, 0, 0, 0);
+		testMethod(6025, 10.3893, 0.0849, -1.8858, 0, 0, 0);
+		testMethod(6030, 10.3897, 0.0759, -1.7866, 0, 0, 0);
+		testMethod(6035, 10.3901, 0.0675, -1.6873, 0, 0, 0);
+		testMethod(6040, 10.3904, 0.0596, -1.5881, 0, 0, 0);
+		testMethod(6045, 10.3907, 0.0521, -1.4888, 0, 0, 0);
+		testMethod(6050, 10.3909, 0.0452, -1.3896, 0, 0, 0);
+		testMethod(6055, 10.3911, 0.0387, -1.2903, 0, 0, 0);
+		testMethod(6060, 10.3913, 0.0328, -1.191, 0, 0, 0);
+		testMethod(6065, 10.3915, 0.0273, -1.0918, 0, 0, 0);
+		testMethod(6070, 10.3916, 0.0223, -0.9925, 0, 0, 0);
+		testMethod(6075, 10.3917, 0.0179, -0.8933, 0, 0, 0);
+		testMethod(6080, 10.3918, 0.0139, -0.794, 0, 0, 0);
+		testMethod(6085, 10.3918, 0.0104, -0.6948, 0, 0, 0);
+		testMethod(6090, 10.3919, 0.0074, -0.5955, 0, 0, 0);
+		testMethod(6095, 10.3919, 0.005, -0.4963, 0, 0, 0);
+		testMethod(6100, 10.3919, 0.003, -0.397, 0, 0, 0);
+		testMethod(6105, 10.3919, 0.0015, -0.2978, 0, 0, 0);
+		testMethod(6110, 10.3919, 0.0005, -0.1985, 0, 0, 0);
+		testMethod(6115, 10.3919, 0, -0.0993, 0, 0, 0);
+		testMethod(6120, 10.3919, 0, 0, 0, 0, 0);
+		testMethod(6120, 10.3919, 0, 0, 0, 0, 0);
 	}
+	public void testMethod(int t, double pos, double vel, double acc, double hed, double omg, double alf) {
+		time.add((long) t);
+		translation.add(new MotionState1D(pos, vel, acc));
+		rotation.add(new MotionState1D(hed, omg, alf));
+	}
+
 }

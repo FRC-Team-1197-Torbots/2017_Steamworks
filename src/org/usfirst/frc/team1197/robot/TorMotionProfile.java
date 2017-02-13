@@ -29,14 +29,14 @@ public enum TorMotionProfile
 	private final double kI = 3.0;  //3.0
 	private final double kD = 0.01;  //0.0
 
-	private final double kpv = 0.75; //1.0
+	private final double kpv = 0.4; //1.0
 	private final double ka = 0.05; //0.05
-	private final double kp = 5.0; //25.0
-	private final double ki = 2.5; //20.0
-	private final double kd = 0.01; //0.0
+	private final double kp = 20.0; //25.0
+	private final double ki = 3.5; //20.0
+	private final double kd = 0.025; //0.0
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.5; //0.5
+	private final double minTurnOutput = 0.7; //0.5
 
 	private double dt = 0.005;
 	
@@ -81,7 +81,7 @@ public enum TorMotionProfile
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.0125); //0.015
+		headingPID.setPositionTolerance(0.01); //0.015
 		headingPID.setVelocityTolerance(0.01);
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);

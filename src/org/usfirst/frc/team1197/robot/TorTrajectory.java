@@ -18,20 +18,14 @@ public abstract class TorTrajectory {
 	protected double max_alf;
 	protected double max_jeta;
 	
-	protected Vector<Double> position;
-	protected Vector<Double> velocity;
-	protected Vector<Double> acceleration;
-	
-	protected Vector<Double> omega;
-	protected Vector<Double> alpha;
-	protected Vector<Double> heading;
-	
 	protected List<MotionState1D> translation;
 	protected List<MotionState1D> rotation;
 	protected List<Long> time;
 	
 	protected static long startTime;
 	protected double dt = 0.005;
+	
+	protected boolean isComplete;
 	
 	public class Motion {
 		public double pos;
@@ -63,6 +57,8 @@ public abstract class TorTrajectory {
 		rotation = new ArrayList<MotionState1D>();
 		translation.add(new MotionState1D(0.0, 0.0, 0.0));
 		rotation.add(new MotionState1D(0.0, 0.0, 0.0));
+		
+		isComplete = false;
 	}
 	
 	public TorTrajectory(){
@@ -247,5 +243,11 @@ public abstract class TorTrajectory {
 		}
 		avg /= list.size();
 		return avg;
+	}
+	public void setComplete(boolean b){
+		isComplete = b;
+	}
+	public boolean isComplete(){
+		return isComplete;
 	}
 }

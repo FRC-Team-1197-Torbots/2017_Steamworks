@@ -49,8 +49,8 @@ public class TorDrive
 		joystickProfile = new TorJoystickProfiles();
 		forwardTrajectory = new LinearTrajectory(1.0);
 		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(-90);
-		leftTrajectory = new PivotTrajectory(90);
+		rightTrajectory = new PivotTrajectory(-180);
+		leftTrajectory = new PivotTrajectory(180);
 		
 		testspline = new testSpline();
 		
@@ -218,14 +218,14 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-			rightTrajectory.execute();
+//			rightTrajectory.execute();
 		}
 		else if(buttonX && !buttonXlast){
-			leftTrajectory.execute();
+//			leftTrajectory.execute();
 		}
 		else if(buttonY && !buttonYlast){
 //			forwardTrajectory.execute();
-//			testspline.execute();
+			testspline.execute();
 		}
 		else if(buttonA && !buttonAlast){
 //			backwardTrajectory.execute();

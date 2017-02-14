@@ -66,8 +66,10 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
+    	drive.shiftToHighGearMotion();
     	auto.initialize();
     	auto.run();
+    	System.out.println("FINISH");
     }
 
     public void operatorControl() {

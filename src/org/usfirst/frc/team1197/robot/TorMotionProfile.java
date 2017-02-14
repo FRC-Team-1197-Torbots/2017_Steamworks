@@ -190,11 +190,11 @@ public enum TorMotionProfile
 		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 			startTime = currentTime;
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
-//				System.out.println("IS ON TARGET!!!!");
 				if(usingWaypoint){
 					positionWaypoint = targetPosition;
 					headingWaypoint = targetHeading;
 				}
+				activeTrajectory.setComplete(true);
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;
 			}

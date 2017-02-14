@@ -26,7 +26,8 @@ public class TorDrive
 	private static TorTrajectory backwardTrajectory;
 	private static TorTrajectory leftTrajectory;
 	
-	private testSpline testspline;
+	private boilerPos1 boilerPos1;
+	private boilerPos2 boilerPos2;
 	
 	private boolean buttonYlast;
 	private boolean buttonBlast;
@@ -52,7 +53,8 @@ public class TorDrive
 		rightTrajectory = new PivotTrajectory(-180);
 		leftTrajectory = new PivotTrajectory(180);
 		
-		testspline = new testSpline();
+		boilerPos1 = new boilerPos1();
+		boilerPos2 = new boilerPos2();
 		
 		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
@@ -216,6 +218,25 @@ public class TorDrive
 		TorCAN.INSTANCE.SetDrive(rightMotorSpeed, -leftMotorSpeed);
 	}
 	
+	public void autoTrajExecutor(int trajNum){
+		if(trajNum == 1){
+			boilerPos1.execute();
+		}
+		else if(trajNum == 2){
+			boilerPos2.execute();
+		}
+	}
+	
+	public boolean autoTrajChecker(int trajNum){
+		if(trajNum == 1){
+			return boilerPos1.isComplete();
+		}
+		else if(trajNum == 2){
+			return boilerPos2.isComplete();
+		}
+		return true;
+	}
+	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
 //			rightTrajectory.execute();
@@ -225,7 +246,7 @@ public class TorDrive
 		}
 		else if(buttonY && !buttonYlast){
 //			forwardTrajectory.execute();
-			testspline.execute();
+			boilerPos1.execute();
 		}
 		else if(buttonA && !buttonAlast){
 //			backwardTrajectory.execute();

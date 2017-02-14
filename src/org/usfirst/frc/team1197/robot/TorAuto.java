@@ -9,6 +9,13 @@ public class TorAuto {
 	private TorDrive drive;
 	private Joystick cypress;
 	
+	public static enum BOILERAUTO
+	{
+		IDLE, POS1, POS2, POS3, POS4;
+
+		private BOILERAUTO() {}
+	}
+	public BOILERAUTO boilerAutoState = BOILERAUTO.IDLE;
 	
 	public TorAuto(TorIntake intake, TorDrive drive, Joystick cypress) {
 		this.intake = intake;
@@ -50,7 +57,6 @@ public class TorAuto {
 		}
 	}
 	
-	
 	/*****************************************************
 	 * BELOW ARE THE THREE AUTO CODE SITUATIONS
 	 *****************************************************/
@@ -63,8 +69,8 @@ public class TorAuto {
 	
 	public void right() {
 		//drive to gear
-		
-		intake.DumpBalls();
+
+//		intake.DumpBalls();
 		
 		//drive to boiler
 		
@@ -72,8 +78,24 @@ public class TorAuto {
 	}
 	
 	public void left() {
-		//drive to gear
-		
-		//drive past baseline
+		boilerAutoState = BOILERAUTO.POS1;
+		while(boilerAutoState != BOILERAUTO.IDLE){
+			switch(boilerAutoState){
+			case IDLE:
+				break;
+			case POS1:
+				drive.autoTrajExecutor(1);
+				if(drive.autoTrajChecker(1)){
+					boilerAutoState = BOILERAUTO.POS2;	
+				}
+				break;
+			case POS2:
+				drive.autoTrajExecutor(2);
+				if(drive.autoTrajChecker(2)){
+					boilerAutoState = BOILERAUTO.IDLE;
+				}
+				break;
+			}
+		}
 	}
 }

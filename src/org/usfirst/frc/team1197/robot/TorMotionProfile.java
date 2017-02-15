@@ -25,7 +25,7 @@ public enum TorMotionProfile
 
 	private final double kPv = 0.35; //0.6
 	private final double kA = 0.03; //0.05
-	private final double kP = 6.0;  //7.0
+	private final double kP = 7.0;  //7.0
 	private final double kI = 3.0;  //3.0
 	private final double kD = 0.0075;  //0.0075
 
@@ -221,6 +221,11 @@ public enum TorMotionProfile
 		SmartDashboard.putNumber("currentHeading", headingPID.position());
 		SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
 		SmartDashboard.putNumber("headingError", headingPID.error());
+	}
+	
+	public void executeTrajectory(TorTrajectory traj){
+		loadTrajectory(traj);
+		traj.setComplete(false);
 	}
 	
 	public void executeDefault(){

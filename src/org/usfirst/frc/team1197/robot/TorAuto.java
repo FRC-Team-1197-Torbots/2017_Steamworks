@@ -9,15 +9,20 @@ public class TorAuto {
 	private TorDrive drive;
 	private Joystick cypress;
 	
+	private boilerPos1 boilerPos1;
+	private boilerPos2 boilerPos2;
+	
 	public static enum BOILERAUTO
 	{
-		IDLE, POS1, POS2, POS3, POS4;
+		IDLE, POS0, POS1, POS2, POS3, POS4;
 
 		private BOILERAUTO() {}
 	}
 	public BOILERAUTO boilerAutoState = BOILERAUTO.IDLE;
 	
 	public TorAuto(TorIntake intake, TorDrive drive, Joystick cypress) {
+		boilerPos1 = new boilerPos1();
+		boilerPos2 = new boilerPos2();
 		this.intake = intake;
 		this.cypress = cypress;
 		this.drive = drive;
@@ -68,30 +73,27 @@ public class TorAuto {
 	}
 	
 	public void right() {
-		//drive to gear
-
-//		intake.DumpBalls();
 		
-		//drive to boiler
-		
-		//drive past baseline
 	}
 	
 	public void left() {
-		boilerAutoState = BOILERAUTO.POS1;
+		boilerAutoState = BOILERAUTO.POS0;
 		while(boilerAutoState != BOILERAUTO.IDLE){
 			switch(boilerAutoState){
 			case IDLE:
 				break;
+			case POS0:
+				TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
+				boilerAutoState = BOILERAUTO.POS1;
+				break;
 			case POS1:
-				drive.autoTrajExecutor(1);
-				if(drive.autoTrajChecker(1)){
+				if(boilerPos1.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
 				}
 				break;
 			case POS2:
-				drive.autoTrajExecutor(2);
-				if(drive.autoTrajChecker(2)){
+				if(boilerPos2.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;
 				}
 				break;

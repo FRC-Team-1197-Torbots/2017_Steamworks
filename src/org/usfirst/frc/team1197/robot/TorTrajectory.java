@@ -167,6 +167,7 @@ public abstract class TorTrajectory {
 		startTime = System.currentTimeMillis();
 		startTime = startTime - (startTime % 10);
 		TorMotionProfile.INSTANCE.loadTrajectory(this);
+		setComplete(false);
 	}
 	
 	public double goalPos(){

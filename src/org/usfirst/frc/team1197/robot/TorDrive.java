@@ -26,13 +26,12 @@ public class TorDrive
 	private static TorTrajectory backwardTrajectory;
 	private static TorTrajectory leftTrajectory;
 	
-	private boilerPos1 boilerPos1;
-	private boilerPos2 boilerPos2;
-	
 	private boolean buttonYlast;
 	private boolean buttonBlast;
 	private boolean buttonXlast;
 	private boolean buttonAlast;
+	
+	private boilerPos1 boilerPos1;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
@@ -43,6 +42,7 @@ public class TorDrive
 
 	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
+		boilerPos1 = new boilerPos1();
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
 		this.cypress = cypress;
@@ -52,9 +52,6 @@ public class TorDrive
 		backwardTrajectory = new LinearTrajectory(-1.0);
 		rightTrajectory = new PivotTrajectory(-180);
 		leftTrajectory = new PivotTrajectory(180);
-		
-		boilerPos1 = new boilerPos1();
-		boilerPos2 = new boilerPos2();
 		
 		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
@@ -218,25 +215,6 @@ public class TorDrive
 		TorCAN.INSTANCE.SetDrive(rightMotorSpeed, -leftMotorSpeed);
 	}
 	
-	public void autoTrajExecutor(int trajNum){
-		if(trajNum == 1){
-			boilerPos1.execute();
-		}
-		else if(trajNum == 2){
-			boilerPos2.execute();
-		}
-	}
-	
-	public boolean autoTrajChecker(int trajNum){
-		if(trajNum == 1){
-			return boilerPos1.isComplete();
-		}
-		else if(trajNum == 2){
-			return boilerPos2.isComplete();
-		}
-		return true;
-	}
-	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
 //			rightTrajectory.execute();
@@ -245,8 +223,8 @@ public class TorDrive
 //			leftTrajectory.execute();
 		}
 		else if(buttonY && !buttonYlast){
+			TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
 //			forwardTrajectory.execute();
-			boilerPos1.execute();
 		}
 		else if(buttonA && !buttonAlast){
 //			backwardTrajectory.execute();

@@ -20,18 +20,13 @@ public class TorDrive
 	private double halfTrackWidth = trackWidth / 2.0;
 	private double centerRadius = 0.0;
 	private double maxThrottle;
-
-	private static TorTrajectory forwardTrajectory;
-	private static TorTrajectory rightTrajectory;
-	private static TorTrajectory backwardTrajectory;
-	private static TorTrajectory leftTrajectory;
 	
 	private boolean buttonYlast;
 	private boolean buttonBlast;
 	private boolean buttonXlast;
 	private boolean buttonAlast;
 	
-	private boilerPos1 boilerPos1;
+	private BoilerPos1 boilerPos1;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
@@ -42,16 +37,12 @@ public class TorDrive
 
 	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
-		boilerPos1 = new boilerPos1();
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
-		this.cypress = cypress;
 		
+		this.cypress = cypress;
+		boilerPos1 = new BoilerPos1();
 		joystickProfile = new TorJoystickProfiles();
-		forwardTrajectory = new LinearTrajectory(1.0);
-		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(-180);
-		leftTrajectory = new PivotTrajectory(180);
 		
 		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
@@ -72,8 +63,8 @@ public class TorDrive
 				}
 			}
 			else{
-//				ackermanDrive(throttleAxis, carSteerAxis);
-				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+				ackermanDrive(throttleAxis, carSteerAxis);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 				
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
 				if(shiftButton){
@@ -108,7 +99,6 @@ public class TorDrive
 			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
-//			TorMotionProfile.INSTANCE.joystickTraj.execute();
 			TorMotionProfile.INSTANCE.setActive();
 		}
 	}
@@ -244,7 +234,6 @@ public class TorDrive
 		carSteeringAxis = -carSteeringAxis;
 
 		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * TorCAN.INSTANCE.absoluteMaxSpeed();
-//		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * 4.405;
 		targetSpeed *= maxThrottle;
 
 		/* The centerRadius is the value we gain from findRadiusExponential method in the joystickProfile class.

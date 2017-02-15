@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1197.robot;
 
-public class boilerPos2 extends TorTrajectory {
+public class BoilerPos2 extends TorTrajectory {
 
-	public boilerPos2() {
+	public BoilerPos2() {
 		super(0.5, 0);
 		time.clear();
 		translation.clear();

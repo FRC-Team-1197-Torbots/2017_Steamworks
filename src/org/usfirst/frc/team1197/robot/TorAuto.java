@@ -6,11 +6,11 @@ public class TorAuto {
 
 	private int position; //position goes from left to right
 	private TorIntake intake;
-	private TorDrive drive;
 	private Joystick cypress;
 	
-	private boilerPos1 boilerPos1;
-	private boilerPos2 boilerPos2;
+	private BoilerPos1 boilerPos1;
+	private BoilerPos2 boilerPos2;
+	private BoilerPos3 boilerPos3;
 	
 	public static enum BOILERAUTO
 	{
@@ -20,12 +20,12 @@ public class TorAuto {
 	}
 	public BOILERAUTO boilerAutoState = BOILERAUTO.IDLE;
 	
-	public TorAuto(TorIntake intake, TorDrive drive, Joystick cypress) {
-		boilerPos1 = new boilerPos1();
-		boilerPos2 = new boilerPos2();
+	public TorAuto(TorIntake intake, Joystick cypress) {
+		boilerPos1 = new BoilerPos1();
+		boilerPos2 = new BoilerPos2();
+		boilerPos3 = new BoilerPos3();
 		this.intake = intake;
 		this.cypress = cypress;
-		this.drive = drive;
 	}
 	
 	public void initialize()
@@ -52,13 +52,13 @@ public class TorAuto {
 			//something bad
 		}
 		else if(position == 1){
-			left();
+			boiler();
 		}
 		else if(position == 2){
 			center();
 		}
 		else if(position == 3){
-			right();
+			loadStation();
 		}
 	}
 	
@@ -72,11 +72,11 @@ public class TorAuto {
 		//drive past baseline
 	}
 	
-	public void right() {
+	public void loadStation() {
 		
 	}
 	
-	public void left() {
+	public void boiler() {
 		boilerAutoState = BOILERAUTO.POS0;
 		while(boilerAutoState != BOILERAUTO.IDLE){
 			switch(boilerAutoState){
@@ -88,12 +88,19 @@ public class TorAuto {
 				break;
 			case POS1:
 				if(boilerPos1.isComplete()){
+					//deploy gear
 					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
 				}
 				break;
 			case POS2:
 				if(boilerPos2.isComplete()){
+					//dump balls
+					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
+					boilerAutoState = BOILERAUTO.POS3;
+				}
+			case POS3:
+				if(boilerPos3.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;
 				}
 				break;

@@ -1,7 +1,5 @@
 
 package org.usfirst.frc.team1197.robot;
-
-import java.util.Vector;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,9 +20,7 @@ public abstract class TorTrajectory {
 	protected List<MotionState1D> rotation;
 	protected List<Long> time;
 	
-	protected static long startTime;
 	protected double dt = 0.005;
-	
 	protected boolean isComplete;
 	
 	public class Motion {
@@ -60,11 +56,7 @@ public abstract class TorTrajectory {
 		
 		isComplete = false;
 	}
-	
-	public TorTrajectory(){
-		
-	}
-	
+	public TorTrajectory(){}
 	// The following magic was adapted from 254's TrajectoryLib.
 	protected void build(double goal_pos, double max_vel, double max_acc, double max_jerk, List<MotionState1D> motion){
 		time.clear();
@@ -162,21 +154,6 @@ public abstract class TorTrajectory {
 			time.add(new Long(t));
 		}
 	}
-	
-	public void execute(){
-		startTime = System.currentTimeMillis();
-		startTime = startTime - (startTime % 10);
-		TorMotionProfile.INSTANCE.loadTrajectory(this);
-		setComplete(false);
-	}
-	
-	public double goalPos(){
-		return goal_pos;
-	}
-	public double goalHead(){
-		return goal_head;
-	}
-	
 	public double lookUpPosition(long t){
 		if(t < time.get(0)){
 			return 0.0;

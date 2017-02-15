@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.SampleRobot;
+
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
@@ -62,14 +62,13 @@ public class Robot extends SampleRobot {
     	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
-    	auto = new TorAuto(intake, drive, autoBox);
+    	auto = new TorAuto(intake, autoBox);
     }
 
     public void autonomous() {
     	drive.shiftToHighGearMotion();
     	auto.initialize();
     	auto.run();
-    	System.out.println("FINISH");
     }
 
     public void operatorControl() {
@@ -78,8 +77,8 @@ public class Robot extends SampleRobot {
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
-//    		intake.update();
-//    		gear.update();
+    		intake.update();
+    		gear.update();
     	}
     }
 

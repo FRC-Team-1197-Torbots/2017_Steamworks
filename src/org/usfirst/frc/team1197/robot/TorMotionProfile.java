@@ -29,8 +29,8 @@ public enum TorMotionProfile
 	private final double kI = 3.0;  //3.0
 	private final double kD = 0.0075;  //0.0075
 
-	private final double kpv = 0.0; //0.25
-	private final double ka = 0.0; //0.0
+	private final double kpv = 0.01; //0.25
+	private final double ka = 0.01; //0.0
 	private final double kp = 19.75; //20.75
 	private final double ki = 8.0; //5.0
 	private final double kd = 0.03; //0.025
@@ -46,7 +46,6 @@ public enum TorMotionProfile
 	private long startTime;
 	
 	public final JoystickTrajectory joystickTraj;
-	private final StationaryTrajectory stationaryTraj;
 	private final TorPID positionPID;
 	private final TorPID headingPID;
 	
@@ -57,7 +56,6 @@ public enum TorMotionProfile
 	
 	private TorMotionProfile(){
 		joystickTraj = new JoystickTrajectory();
-		stationaryTraj = new StationaryTrajectory();
 		positionPID = new TorPID(dt);
 		headingPID = new TorPID(dt);
 		
@@ -103,9 +101,6 @@ public enum TorMotionProfile
 	public void setActive(){
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
-//		resetWaypoints();
-//		TorCAN.INSTANCE.resetEncoder();
-//		TorCAN.INSTANCE.resetHeading();
 		resetPID();
 		isActive = true;
 	}
@@ -226,15 +221,6 @@ public enum TorMotionProfile
 	public void executeTrajectory(TorTrajectory traj){
 		loadTrajectory(traj);
 		traj.setComplete(false);
-	}
-	
-	public void executeDefault(){
-		if(defaultTrajectory == stationaryTraj){
-			stationaryTraj.execute();
-		}
-		else{
-			joystickTraj.execute();
-		}
 	}
 	
 	public boolean isComplete(){

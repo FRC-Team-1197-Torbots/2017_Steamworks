@@ -38,12 +38,12 @@ public class Robot extends SampleRobot {
 	private TorLidar lidar;
 	
     public Robot() {
-    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
+//    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
     	
-    	climbTalon = new CANTalon(7);
-    	dumperTalon = new CANTalon(8);
-    	elevatorTalon1 = new CANTalon(9);
-    	elevatorTalon2 = new CANTalon(10);
+    	climbTalon = new CANTalon(10);
+    	dumperTalon = new CANTalon(4);
+    	elevatorTalon1 = new CANTalon(5);
+    	elevatorTalon2 = new CANTalon(6);
     	
     	compressor = new Compressor();
     	
@@ -72,13 +72,13 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-    	drive.shiftToHighGearMotion();
+//    	drive.shiftToHighGearMotion();
     	while(isEnabled()){
-    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
-    		intake.update();
-    		gear.update();
+//    		intake.update();
+//    		gear.update();
     	}
     }
 
@@ -86,6 +86,9 @@ public class Robot extends SampleRobot {
 		while(isEnabled()){
 			compressor.start();
 			if(player1.getRawButton(1)){
+				climbTalon.set(0.8);
+			}
+			else if(player1.getRawButton(2)){
 				climbTalon.set(-0.8);
 			}
 			else{

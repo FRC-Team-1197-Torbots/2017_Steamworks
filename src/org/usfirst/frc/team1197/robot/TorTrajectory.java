@@ -228,4 +228,9 @@ public abstract class TorTrajectory {
 	public boolean isComplete(){
 		return isComplete;
 	}
+	public void flipSign(List<MotionState1D> trans){
+		for(MotionState1D element : trans){
+			element.set(-element.pos, -element.vel, -element.acc);
+		}
+	}
 }

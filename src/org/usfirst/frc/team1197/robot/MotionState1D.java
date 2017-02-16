@@ -14,4 +14,9 @@ public class MotionState1D {
 		vel = v;
 		acc = a;
 	}
+	public void set(double p, double v, double a){
+		pos = p;
+		vel = v;
+		acc = a;
+	}
 }

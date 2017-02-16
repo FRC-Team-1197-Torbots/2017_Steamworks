@@ -37,12 +37,12 @@ public enum TorCAN
 	private TorCAN(){
 		gyro = new AHRS(SerialPort.Port.kMXP);
 		
-		m_Ltalon1 = new CANTalon(1);
-		m_Ltalon2 = new CANTalon(2);
-		m_Ltalon3 = new CANTalon(3);
-		m_Rtalon1 = new CANTalon(4);
-		m_Rtalon2 = new CANTalon(5);
-		m_Rtalon3 = new CANTalon(6);
+		m_Ltalon1 = new CANTalon(7);
+		m_Ltalon2 = new CANTalon(8);
+		m_Ltalon3 = new CANTalon(9);
+		m_Rtalon1 = new CANTalon(1);
+		m_Rtalon2 = new CANTalon(2);
+		m_Rtalon3 = new CANTalon(3);
 		
 		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_Rtalon2.reverseSensor(false);

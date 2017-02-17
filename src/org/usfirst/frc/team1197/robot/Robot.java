@@ -40,10 +40,10 @@ public class Robot extends SampleRobot {
     public Robot() {
 //    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
     	
-    	climbTalon = new CANTalon(10);
-    	dumperTalon = new CANTalon(4);
-    	elevatorTalon1 = new CANTalon(5);
-    	elevatorTalon2 = new CANTalon(6);
+    	climbTalon = new CANTalon(10); //10
+    	dumperTalon = new CANTalon(7); //4
+    	elevatorTalon1 = new CANTalon(8); //5
+    	elevatorTalon2 = new CANTalon(9); //6
     	
     	compressor = new Compressor();
     	
@@ -72,10 +72,10 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-//    	drive.shiftToHighGearMotion();
+    	drive.shiftToHighGearMotion();
     	while(isEnabled()){
-//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
 //    		intake.update();
 //    		gear.update();

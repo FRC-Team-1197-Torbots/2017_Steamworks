@@ -63,7 +63,7 @@ public class TorDrive
 				}
 			}
 			else{
-				ackermanDrive(throttleAxis, carSteerAxis);
+				carDrive(throttleAxis, carSteerAxis);
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 				
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
@@ -75,6 +75,7 @@ public class TorDrive
 		
 		//Only switch to ArcadeDrive in low gear
 		else{
+	
 			if(cypress.getRawButton(1)){
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 				
@@ -173,37 +174,6 @@ public class TorDrive
 		}
 		TorCAN.INSTANCE.SetDrive(rightMotorSpeed, leftMotorSpeed);
 	}
-
-	
-	public void carDrive(double throttleAxis, double carSteeringAxis){
-		
-		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
-		carSteeringAxis = -carSteeringAxis;
-		
-		targetSpeed = joystickProfile.findSpeed(throttleAxis) * TorCAN.INSTANCE.getSensorSpeed();
-		
-		targetSpeed *= maxThrottle;
-		
-		/* The centerRadius is the value we gain from findRadiusExponential method in the joystickProfile class.
-		   The Math.abs(throttleAxis) / throttleAxis is to make sure the sign of the centerRadius is right. */
-		centerRadius = (Math.abs(throttleAxis) / throttleAxis) * joystickProfile.findRadiusExponential(carSteeringAxis);
-		
-		//If the centerRadius is greater than the maxTurnRadius or the centerRadius is 0, then drive forward and vice versa.
-		if (Math.abs(centerRadius) > joystickProfile.getMaxTurnRadius() || Math.abs(centerRadius) == 0.0)
-		{
-			leftMotorSpeed = targetSpeed;
-			rightMotorSpeed = targetSpeed;
-		}
-		
-		//Else, steer
-		else {
-			rightMotorSpeed = targetSpeed * ((centerRadius - halfTrackWidth) / centerRadius);
-			leftMotorSpeed = targetSpeed * ((centerRadius + halfTrackWidth) / centerRadius);
-		}
-
-		//Setting the rightMotorSpeed and the leftMotorSpeed so that it actually drives.
-		TorCAN.INSTANCE.SetDrive(rightMotorSpeed, -leftMotorSpeed);
-	}
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
@@ -228,7 +198,7 @@ public class TorDrive
 		buttonAlast = buttonA;
 	}
 	
-	public void ackermanDrive(double throttleAxis, double carSteeringAxis){
+	public void carDrive(double throttleAxis, double carSteeringAxis){
 		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
 		throttleAxis = -throttleAxis;
 		carSteeringAxis = -carSteeringAxis;

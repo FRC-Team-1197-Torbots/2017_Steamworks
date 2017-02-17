@@ -87,22 +87,22 @@ public class TorAuto {
 				boilerAutoState = BOILERAUTO.POS1;
 				break;
 			case POS1:
-				if(boilerPos1.isComplete()){
+//				if(boilerPos1.isComplete()){
 					//deploy gear
-					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
+//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
-				}
+//				}
 				break;
 			case POS2:
-				if(boilerPos2.isComplete()){
+//				if(boilerPos2.isComplete()){
 					//dump balls
-					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
+//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS3;
-				}
+//				}
 			case POS3:
-				if(boilerPos3.isComplete()){
+//				if(boilerPos3.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;
-				}
+//				}
 				break;
 			}
 		}

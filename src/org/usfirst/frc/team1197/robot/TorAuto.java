@@ -19,6 +19,22 @@ public class TorAuto {
 	}
 	public BOILERAUTO boilerAutoState = BOILERAUTO.IDLE;
 	
+	public static enum LOADSTATIONAUTO
+	{
+		IDLE, POS0, POS1, POS2;
+		
+		private LOADSTATIONAUTO() {}
+	}
+	public LOADSTATIONAUTO loadAutoState = LOADSTATIONAUTO.IDLE;
+	
+	public static enum CENTERAUTO
+	{
+		IDLE, POS0, POS1, POS2, POS3, POS4;
+		
+		private CENTERAUTO() {}
+	}
+	public CENTERAUTO centerAutoState = CENTERAUTO.IDLE;
+	
 	public TorAuto(TorIntake intake, Joystick cypress, int isRed) {
 		this.cypress = cypress;
 		boilerPos1 = new BoilerPos1(isRed);
@@ -66,13 +82,46 @@ public class TorAuto {
 	 *****************************************************/
 	
 	public void center() {
-		//drive to gear 
-		
-		//drive past baseline
+		centerAutoState = CENTERAUTO.POS0;
+		while(centerAutoState != CENTERAUTO.IDLE){
+			switch(centerAutoState){
+			case IDLE:
+				
+				break;
+			case POS0:
+				
+				break;
+			case POS1:
+				
+				break;
+			case POS2:
+				
+				break;
+			case POS3:
+
+				break;
+			}
+		}
 	}
 	
 	public void loadStation() {
-		
+		loadAutoState = LOADSTATIONAUTO.POS0;
+		while(loadAutoState != LOADSTATIONAUTO.IDLE){
+			switch(loadAutoState){
+			case IDLE:
+				
+				break;
+			case POS0:
+				
+				break;
+			case POS1:
+				
+				break;
+			case POS2:
+				
+				break;
+			}
+		}
 	}
 	
 	public void boiler() {

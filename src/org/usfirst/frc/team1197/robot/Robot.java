@@ -62,7 +62,7 @@ public class Robot extends SampleRobot {
     	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
-    	auto = new TorAuto(intake, autoBox);
+    	auto = new TorAuto(intake, autoBox, isRed());
     }
 
     public void autonomous() {
@@ -86,10 +86,10 @@ public class Robot extends SampleRobot {
 		while(isEnabled()){
 			compressor.start();
 			if(player1.getRawButton(1)){
-				climbTalon.set(0.8);
+				climbTalon.set(1.0);
 			}
 			else if(player1.getRawButton(2)){
-				climbTalon.set(-0.8);
+				climbTalon.set(-1.0);
 			}
 			else{
 				climbTalon.set(0.0);
@@ -149,4 +149,14 @@ public class Robot extends SampleRobot {
 	public boolean getButtonY(){
 		return player1.getRawButton(4);
 	}
+	
+	public int isRed(){
+		if(autoBox.getRawButton(4)){
+			return -1;
+		}
+		else{
+			return 1;
+		}
+	}
+
 }

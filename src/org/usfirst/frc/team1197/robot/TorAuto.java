@@ -3,7 +3,6 @@ package org.usfirst.frc.team1197.robot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class TorAuto {
-
 	private int position; //position goes from left to right
 	private TorIntake intake;
 	private Joystick cypress;
@@ -20,12 +19,12 @@ public class TorAuto {
 	}
 	public BOILERAUTO boilerAutoState = BOILERAUTO.IDLE;
 	
-	public TorAuto(TorIntake intake, Joystick cypress) {
-		boilerPos1 = new BoilerPos1();
+	public TorAuto(TorIntake intake, Joystick cypress, int isRed) {
+		this.cypress = cypress;
+		boilerPos1 = new BoilerPos1(isRed);
 		boilerPos2 = new BoilerPos2();
 		boilerPos3 = new BoilerPos3();
 		this.intake = intake;
-		this.cypress = cypress;
 	}
 	
 	public void initialize()

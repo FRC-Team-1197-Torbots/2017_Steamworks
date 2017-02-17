@@ -3,7 +3,7 @@ package org.usfirst.frc.team1197.robot;
 public class BoilerPos3 extends TorTrajectory {
 
 	public BoilerPos3() {
-		super(0.5, 0);
+		super(-0.5, 0);
 		time.clear();
 		translation.clear();
 		rotation.clear();

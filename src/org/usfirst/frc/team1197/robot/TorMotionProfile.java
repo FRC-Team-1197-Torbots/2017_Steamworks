@@ -25,14 +25,14 @@ public enum TorMotionProfile
 
 	private final double kPv = 0.35; //0.6
 	private final double kA = 0.03; //0.05
-	private final double kP = 7.0;  //7.0
+	private final double kP = 8.0;  //7.0
 	private final double kI = 3.0;  //3.0
 	private final double kD = 0.0075;  //0.0075
 
 	private final double kpv = 0.01; //0.25
 	private final double ka = 0.01; //0.0
-	private final double kp = 19.75; //20.75
-	private final double ki = 8.0; //5.0
+	private final double kp = 20.75; //20.75
+	private final double ki = 9.0; //5.0
 	private final double kd = 0.03; //0.025
 	
 	private final double minLineOutput = 0.0; //0.0
@@ -243,5 +243,9 @@ public enum TorMotionProfile
 	public void resetPID(){
 		headingPID.reset();
 		positionPID.reset();
+	}
+	
+	public void isRed(){
+		
 	}
 }

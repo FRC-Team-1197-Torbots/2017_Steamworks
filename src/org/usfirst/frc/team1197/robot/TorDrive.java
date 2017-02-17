@@ -41,7 +41,7 @@ public class TorDrive
 		TorCAN.INSTANCE.resetHeading();
 		
 		this.cypress = cypress;
-		boilerPos1 = new BoilerPos1();
+		boilerPos1 = new BoilerPos1(1);
 		joystickProfile = new TorJoystickProfiles();
 		
 		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));

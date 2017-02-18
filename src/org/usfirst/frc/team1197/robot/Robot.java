@@ -150,13 +150,8 @@ public class Robot extends SampleRobot {
 		return player1.getRawButton(4);
 	}
 	
-	public int isRed(){
-		if(autoBox.getRawButton(4)){
-			return -1;
-		}
-		else{
-			return 1;
-		}
+	public boolean isRed(){
+		return autoBox.getRawButton(4);
 	}
 
 }

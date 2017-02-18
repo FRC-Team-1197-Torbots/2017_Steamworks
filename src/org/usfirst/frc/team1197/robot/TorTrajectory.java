@@ -23,6 +23,8 @@ public abstract class TorTrajectory {
 	protected double dt = 0.005;
 	protected boolean isComplete;
 	
+	protected boolean isRed;
+	
 	public class Motion {
 		public double pos;
 		public double vel;
@@ -38,6 +40,33 @@ public abstract class TorTrajectory {
 	public TorTrajectory(double goal_pos, double goal_head){
 		this.goal_pos = goal_pos;
 		this.goal_head = goal_head;
+		
+		max_vel = 4.5; //4.5
+		max_acc = 3.5; //3.5 
+		max_jerk = 20.0; //20.0
+		
+		max_omg = 8.0; //8.0
+		max_alf = 7.0; //7.0
+		max_jeta = 40.0; //40.0
+		
+		time = new ArrayList<Long>();
+		time.add((long) 0);
+		translation = new ArrayList<MotionState1D>();
+		rotation = new ArrayList<MotionState1D>();
+		translation.add(new MotionState1D(0.0, 0.0, 0.0));
+		rotation.add(new MotionState1D(0.0, 0.0, 0.0));
+		
+		isComplete = false;
+	}
+	public TorTrajectory(double goal_pos, double goal_head, boolean isRed){
+		this.isRed = isRed;
+		this.goal_pos = goal_pos;
+		if(isRed){
+			this.goal_head = -goal_head;
+		}
+		else{
+			this.goal_head = goal_head;
+		}
 		
 		max_vel = 4.5; //4.5
 		max_acc = 3.5; //3.5 

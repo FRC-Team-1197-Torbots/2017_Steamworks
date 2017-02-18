@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1197.robot;
 
 public class BoilerPos1 extends TorTrajectory {
-	public BoilerPos1(boolean isRed) {
-		super(1.7947, 1.0385, isRed);	
+	public BoilerPos1() {
+		super(1.7947, 1.0385);	
 		time.clear();
 		translation.clear();
 		rotation.clear();
@@ -340,9 +340,6 @@ public class BoilerPos1 extends TorTrajectory {
 		testMethod(1655, 1.7947, 0, -0.0997, 1.0385, 0, -0.0122);
 		testMethod(1660, 1.7947, 0, 0, 1.0385, 0, 0);
 		testMethod(1660, 1.7947, 0, 0, 1.0385, 0, 0);
-		if(isRed){
-			flipSign(rotation);
-		}
 	}
 	public void testMethod(int t, double pos, double vel, double acc, double hed, double omg, double alf) {
 		time.add((long) t);

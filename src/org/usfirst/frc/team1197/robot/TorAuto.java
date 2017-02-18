@@ -35,9 +35,9 @@ public class TorAuto {
 	}
 	public CENTERAUTO centerAutoState = CENTERAUTO.IDLE;
 	
-	public TorAuto(TorIntake intake, Joystick cypress, boolean isRed) {
+	public TorAuto(TorIntake intake, Joystick cypress) {
 		this.cypress = cypress;
-		boilerPos1 = new BoilerPos1(isRed);
+		boilerPos1 = new BoilerPos1();
 		boilerPos2 = new BoilerPos2();
 		boilerPos3 = new BoilerPos3();
 		this.intake = intake;

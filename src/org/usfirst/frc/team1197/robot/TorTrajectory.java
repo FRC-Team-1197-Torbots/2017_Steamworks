@@ -23,7 +23,8 @@ public abstract class TorTrajectory {
 	protected double dt = 0.005;
 	protected boolean isComplete;
 	
-	protected boolean isRed;
+	protected static boolean rotationIsMirrored;
+	protected static int rotationSign;
 	
 	public class Motion {
 		public double pos;
@@ -59,14 +60,9 @@ public abstract class TorTrajectory {
 		isComplete = false;
 	}
 	public TorTrajectory(double goal_pos, double goal_head, boolean isRed){
-		this.isRed = isRed;
+		rotationIsMirrored = isRed;
 		this.goal_pos = goal_pos;
-		if(isRed){
-			this.goal_head = -goal_head;
-		}
-		else{
-			this.goal_head = goal_head;
-		}
+		this.goal_head = goal_head;
 		
 		max_vel = 4.5; //4.5
 		max_acc = 3.5; //3.5 
@@ -85,7 +81,19 @@ public abstract class TorTrajectory {
 		
 		isComplete = false;
 	}
+	
 	public TorTrajectory(){}
+	
+	public static void setRotationMirrored(boolean set){
+		rotationIsMirrored = set;
+		if(set){
+			rotationSign = -1;
+		}
+		else{
+			rotationSign = 1;
+		}
+	}
+	
 	// The following magic was adapted from 254's TrajectoryLib.
 	protected void build(double goal_pos, double max_vel, double max_acc, double max_jerk, List<MotionState1D> motion){
 		time.clear();
@@ -213,23 +221,23 @@ public abstract class TorTrajectory {
 		}
 		int i = time.indexOf(t);
 		if(i == -1){
-			return goal_head;
+			return goal_head * rotationSign;
 		}
-		return rotation.get(i).pos;
+		return rotation.get(i).pos * rotationSign;
 	}
 	public double lookUpOmega(long t){
 		int i = time.indexOf(t);
 		if(i == -1){
 			return 0.0;
 		}
-		return rotation.get(i).vel;
+		return rotation.get(i).vel * rotationSign;
 	}
 	public double lookUpAlpha(long t){
 		int i = time.indexOf(t);
 		if(i == -1){
 			return 0.0;
 		}
-		return rotation.get(i).acc;
+		return rotation.get(i).acc * rotationSign;
 	}
 	
 	public boolean lookUpIsLast(long t){

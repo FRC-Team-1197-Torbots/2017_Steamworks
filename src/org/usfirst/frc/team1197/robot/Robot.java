@@ -62,11 +62,12 @@ public class Robot extends SampleRobot {
     	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
-    	auto = new TorAuto(intake, autoBox, isRed());
+    	auto = new TorAuto(intake, autoBox);
     }
 
     public void autonomous() {
     	drive.shiftToHighGearMotion();
+    	TorTrajectory.setRotationMirrored(!isRed());
     	auto.initialize();
     	auto.run();
     }

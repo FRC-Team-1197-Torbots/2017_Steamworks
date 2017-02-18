@@ -27,6 +27,7 @@ public class TorDrive
 	private boolean buttonAlast;
 	
 	private BoilerPos1 boilerPos1;
+	private GearBackTraj traj;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
@@ -41,6 +42,7 @@ public class TorDrive
 		TorCAN.INSTANCE.resetHeading();
 		
 		this.cypress = cypress;
+		traj = new GearBackTraj();
 		boilerPos1 = new BoilerPos1();
 		joystickProfile = new TorJoystickProfiles();
 		
@@ -183,7 +185,7 @@ public class TorDrive
 //			leftTrajectory.execute();
 		}
 		else if(buttonY && !buttonYlast){
-			TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
+			TorMotionProfile.INSTANCE.executeTrajectory(traj);
 //			forwardTrajectory.execute();
 		}
 		else if(buttonA && !buttonAlast){

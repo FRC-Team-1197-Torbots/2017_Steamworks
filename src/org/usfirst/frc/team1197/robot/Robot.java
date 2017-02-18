@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.SampleRobot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
@@ -40,8 +41,8 @@ public class Robot extends SampleRobot {
     public Robot() {
 //    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
     	
-    	climbTalon = new CANTalon(10); //10
-    	dumperTalon = new CANTalon(7); //4
+    	climbTalon = new CANTalon(7); //10
+    	dumperTalon = new CANTalon(10); //4
     	elevatorTalon1 = new CANTalon(8); //5
     	elevatorTalon2 = new CANTalon(9); //6
     	
@@ -59,17 +60,17 @@ public class Robot extends SampleRobot {
     	
     	lidar = new TorLidar(port);
     	drive = new TorDrive(player1, shift, autoBox);
-    	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar);
+    	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar, drive);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
-    	gear = new TorGear(gearPiston, gearSwitch, player1);
+    	gear = new TorGear(gearPiston, gearSwitch, player1, drive);
     	auto = new TorAuto(intake, autoBox);
     }
 
     public void autonomous() {
-    	drive.shiftToHighGearMotion();
-    	TorTrajectory.setRotationMirrored(!isRed());
-    	auto.initialize();
-    	auto.run();
+//    	drive.shiftToHighGearMotion();
+//    	TorTrajectory.setRotationMirrored(!isRed());
+//    	auto.initialize();
+//    	auto.run();
     }
 
     public void operatorControl() {
@@ -79,22 +80,15 @@ public class Robot extends SampleRobot {
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
 //    		intake.update();
-//    		gear.update();
+    		climb.manualClimb();
+    		gear.Gear();
     	}
     }
 
     public void test() {
 		while(isEnabled()){
 			compressor.start();
-			if(player1.getRawButton(1)){
-				climbTalon.set(1.0);
-			}
-			else if(player1.getRawButton(2)){
-				climbTalon.set(-1.0);
-			}
-			else{
-				climbTalon.set(0.0);
-			}
+			climb.manualClimb();
 		}
 	}
 

@@ -10,18 +10,23 @@ public class TorGear {
 	private Solenoid gearPiston;
 	private DigitalInput gearSwitch;
 	private Joystick stick;
+	private GearBackTraj gearBack;
+	private TorDrive drive;
 
 
-	public TorGear(Solenoid gearPiston, DigitalInput gearSwitch, Joystick stick){
+	public TorGear(Solenoid gearPiston, DigitalInput gearSwitch, Joystick stick, TorDrive drive){
 		this.gearPiston = gearPiston;
 		this.gearSwitch = gearSwitch;
 		this.stick = stick;
+		this.drive = drive;
+		gearBack = new GearBackTraj();
 	}
 
 	public void Gear(){
 		if(gearSwitch.get()){
+//			drive.shiftToHighGearMotion();
+//			TorMotionProfile.INSTANCE.executeTrajectory(gearBack);
 			gearOpen();
-			Timer.delay(0.5);
 		}
 		else{
 			gearClosed();
@@ -34,6 +39,7 @@ public class TorGear {
 	}
 
 	public void gearClosed(){
+		
 		gearPiston.set(false);
 		//determine if true or false for closed position
 	}

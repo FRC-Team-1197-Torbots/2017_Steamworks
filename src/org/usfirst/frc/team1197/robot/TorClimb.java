@@ -17,12 +17,14 @@ public class TorClimb {
 	private double error = finalDist - initDist;
 	private double speed = 1.0;
 	private TorLidar lidar;
+	private TorDrive drive;
 
-	public TorClimb(CANTalon climbTalon, DigitalInput climbSwitch, Joystick stick, TorLidar lidar){
+	public TorClimb(CANTalon climbTalon, DigitalInput climbSwitch, Joystick stick, TorLidar lidar, TorDrive drive){
 		this.climbTalon = climbTalon;
 		this.climbSwitch= climbSwitch;
 		this.stick = stick;
 		this.lidar = lidar;
+		this.drive = drive;
 	}
 
 	public void switchClimb(){
@@ -69,6 +71,16 @@ public class TorClimb {
 		else{
 			switchClimb();
 			override();
+		}
+	}
+	
+	public void manualClimb(){
+		if(stick.getRawButton(2)){
+			drive.shiftToLowGear();
+			climbTalon.set(1.0); //- for final, + for proto
+		}
+		else{
+			climbTalon.set(0.0);
 		}
 	}
 	

@@ -183,6 +183,7 @@ public enum TorMotionProfile
 				System.out.println("active" + activeTrajectory);
 				System.out.println("next" + nextTrajectory);
 				activeTrajectory.setComplete(true);
+				nextTrajectory.setComplete(false);
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;
 			}

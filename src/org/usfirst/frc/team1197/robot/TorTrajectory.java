@@ -24,7 +24,7 @@ public abstract class TorTrajectory {
 	protected boolean isComplete;
 	
 	protected static boolean rotationIsMirrored;
-	protected static int rotationSign;
+	protected static int rotationSign = 1;
 	
 	public class Motion {
 		public double pos;
@@ -231,7 +231,7 @@ public abstract class TorTrajectory {
 		if(i == -1){
 			return 0.0;
 		}
-//		System.out.println(rotation.get(i).vel);
+		System.out.println(rotationSign);
 		return rotation.get(i).vel * rotationSign;
 	}
 	public double lookUpAlpha(long t){

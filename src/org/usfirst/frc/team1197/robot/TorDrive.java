@@ -43,7 +43,7 @@ public class TorDrive
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
 		
-		rightTraj = new PivotTrajectory(180);
+		rightTraj = new PivotTrajectory(90);
 		
 		this.cypress = cypress;
 		forTraj = new forwardTrajectory();

@@ -18,7 +18,7 @@ public class PivotTrajectory extends TorTrajectory {
 	}
 	
 	public String toString(){
-		return "Joystick Trajectory \n" +
+		return "Pivot Trajectory \n" +
 			   "GoalPos: " + goal_pos + "\n" +
 			   "GoalHead: " + goal_head + "\n";
 	}

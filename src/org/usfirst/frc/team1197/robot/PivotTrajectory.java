@@ -16,4 +16,10 @@ public class PivotTrajectory extends TorTrajectory {
 	public double lookUpAcceleration(long t){
 		return 0;
 	}
+	
+	public String toString(){
+		return "Joystick Trajectory \n" +
+			   "GoalPos: " + goal_pos + "\n" +
+			   "GoalHead: " + goal_head + "\n";
+	}
 }

@@ -191,6 +191,7 @@ public abstract class TorTrajectory {
 			time.add(new Long(t));
 		}
 	}
+	
 	public double lookUpPosition(long t){
 		if(t < time.get(0)){
 			return 0.0;
@@ -230,6 +231,7 @@ public abstract class TorTrajectory {
 		if(i == -1){
 			return 0.0;
 		}
+//		System.out.println(rotation.get(i).vel);
 		return rotation.get(i).vel * rotationSign;
 	}
 	public double lookUpAlpha(long t){
@@ -269,5 +271,10 @@ public abstract class TorTrajectory {
 		for(MotionState1D element : trans){
 			element.set(-element.pos, -element.vel, -element.acc);
 		}
+	}
+	public String toString(){
+		return "Default Trajectory \n" +
+				   "GoalPos: " + goal_pos + "\n" +
+				   "GoalHead: " + goal_head + "\n";
 	}
 }

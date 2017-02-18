@@ -26,6 +26,8 @@ public class TorDrive
 	private boolean buttonXlast;
 	private boolean buttonAlast;
 	
+	private static TorTrajectory rightTraj;
+	private forwardTrajectory forTraj;
 	private BoilerPos1 boilerPos1;
 	private GearBackTraj traj;
 	
@@ -41,7 +43,10 @@ public class TorDrive
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
 		
+		rightTraj = new PivotTrajectory(180);
+		
 		this.cypress = cypress;
+		forTraj = new forwardTrajectory();
 		traj = new GearBackTraj();
 		boilerPos1 = new BoilerPos1();
 		joystickProfile = new TorJoystickProfiles();
@@ -65,8 +70,9 @@ public class TorDrive
 				}
 			}
 			else{
-				carDrive(throttleAxis, carSteerAxis);
-//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+//				carDrive(throttleAxis, carSteerAxis);
+//				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 				
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
 				if(shiftButton){
@@ -89,7 +95,7 @@ public class TorDrive
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 				
 				//When you release the shiftButton (left bumper), then shift to high gear.
-				if(!shiftButton ){
+				if(!shiftButton){
 					shiftToHighGearMotion();
 				}
 			}		
@@ -99,7 +105,7 @@ public class TorDrive
 	//Shifts the robot to high gear and change the talon's control mode to speed.
 	public void shiftToHighGearMotion(){
 		if (!isHighGear){
-			m_solenoidshift.set(false);
+			m_solenoidshift.set(true);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
 			TorMotionProfile.INSTANCE.setActive();
@@ -108,7 +114,7 @@ public class TorDrive
 	
 	public void shiftToHighGearNoMotion(){
 		if(!isHighGear){
-			m_solenoidshift.set(false);
+			m_solenoidshift.set(true);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
 			TorMotionProfile.INSTANCE.setInactive();
@@ -179,14 +185,16 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-//			rightTrajectory.execute();
+			
 		}
 		else if(buttonX && !buttonXlast){
-//			leftTrajectory.execute();
+			
 		}
 		else if(buttonY && !buttonYlast){
-			TorMotionProfile.INSTANCE.executeTrajectory(traj);
+//			TorMotionProfile.INSTANCE.executeTrajectory(traj);
 //			forwardTrajectory.execute();
+//			System.out.println("AOIJDOIAJSDO");
+			TorMotionProfile.INSTANCE.executeTrajectory(rightTraj);
 		}
 		else if(buttonA && !buttonAlast){
 //			backwardTrajectory.execute();

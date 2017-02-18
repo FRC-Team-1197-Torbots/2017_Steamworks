@@ -41,15 +41,15 @@ public class Robot extends SampleRobot {
     public Robot() {
 //    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
     	
-    	climbTalon = new CANTalon(7); //10
-    	dumperTalon = new CANTalon(10); //4
-    	elevatorTalon1 = new CANTalon(8); //5
-    	elevatorTalon2 = new CANTalon(9); //6
+    	climbTalon = new CANTalon(10); //10
+    	dumperTalon = new CANTalon(4); //4
+    	elevatorTalon1 = new CANTalon(5); //5
+    	elevatorTalon2 = new CANTalon(6); //6
     	
     	compressor = new Compressor();
     	
     	shift = new Solenoid(0);
-    	gearPiston = new Solenoid(1);
+//    	gearPiston = new Solenoid(0);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
@@ -80,8 +80,9 @@ public class Robot extends SampleRobot {
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
 //    		intake.update();
-    		climb.manualClimb();
-    		gear.Gear();
+//    		climb.manualClimb();
+//    		gear.Gear();
+//    		System.out.println(TorCAN.INSTANCE.getAverageRawVelocity());
     	}
     }
 

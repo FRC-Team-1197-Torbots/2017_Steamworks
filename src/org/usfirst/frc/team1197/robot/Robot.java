@@ -88,8 +88,8 @@ public class Robot extends SampleRobot {
 
     public void test() {
 		while(isEnabled()){
-			compressor.start();
-			climb.manualClimb();
+//			compressor.start();
+//			climb.manualClimb();
 		}
 	}
 

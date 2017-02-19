@@ -3,6 +3,7 @@ package org.usfirst.frc.team1197.robot;
 import com.ctre.CANTalon;
 
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.FeedbackDeviceStatus;
 import com.ctre.CANTalon.StatusFrameRate;
 import com.kauailabs.navx.frc.AHRS;
 

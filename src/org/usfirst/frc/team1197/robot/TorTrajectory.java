@@ -47,7 +47,7 @@ public abstract class TorTrajectory {
 		max_jerk = 20.0; //20.0
 		
 		max_omg = 8.0; //8.0
-		max_alf = 7.0; //7.0
+		max_alf = 9.0; //7.0
 		max_jeta = 40.0; //40.0
 		
 		time = new ArrayList<Long>();
@@ -231,7 +231,6 @@ public abstract class TorTrajectory {
 		if(i == -1){
 			return 0.0;
 		}
-		System.out.println(rotationSign);
 		return rotation.get(i).vel * rotationSign;
 	}
 	public double lookUpAlpha(long t){

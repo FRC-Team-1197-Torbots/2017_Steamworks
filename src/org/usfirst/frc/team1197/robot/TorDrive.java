@@ -26,8 +26,11 @@ public class TorDrive
 	private boolean buttonXlast;
 	private boolean buttonAlast;
 	
+	private static TorTrajectory forTraj;
+	private static TorTrajectory backTraj;
 	private static TorTrajectory rightTraj;
-	private forwardTrajectory forTraj;
+	private static TorTrajectory leftTraj;
+
 	private BoilerPos1 boilerPos1;
 	private GearBackTraj traj;
 	
@@ -43,7 +46,10 @@ public class TorDrive
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
 		
+		forTraj = new LinearTrajectory(1.0);
+		backTraj = new LinearTrajectory(-1.0);
 		rightTraj = new PivotTrajectory(90);
+		leftTraj = new PivotTrajectory(-90);
 		
 		this.cypress = cypress;
 		forTraj = new forwardTrajectory();
@@ -185,19 +191,16 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-			
-		}
-		else if(buttonX && !buttonXlast){
-			
-		}
-		else if(buttonY && !buttonYlast){
-//			TorMotionProfile.INSTANCE.executeTrajectory(traj);
-//			forwardTrajectory.execute();
-//			System.out.println("AOIJDOIAJSDO");
 			TorMotionProfile.INSTANCE.executeTrajectory(rightTraj);
 		}
+		else if(buttonX && !buttonXlast){
+			TorMotionProfile.INSTANCE.executeTrajectory(leftTraj);
+		}
+		else if(buttonY && !buttonYlast){
+			TorMotionProfile.INSTANCE.executeTrajectory(forTraj);
+		}
 		else if(buttonA && !buttonAlast){
-//			backwardTrajectory.execute();
+			TorMotionProfile.INSTANCE.executeTrajectory(backTraj);
 		}
 		else{
 			

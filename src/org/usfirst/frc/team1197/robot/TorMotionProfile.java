@@ -23,20 +23,20 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 
-	private final double kPv = 0.6; //0.6
-	private final double kA = 0.05; //0.05
-	private final double kP = 7.0;  //7.0
-	private final double kI = 3.0;  //3.0
-	private final double kD = 0.0075;  //0.0075
+	private final double kPv = 0.0; //0.6
+	private final double kA = 0.0; //0.05
+	private final double kP = 0.0;  //7.0
+	private final double kI = 0.0;  //3.0
+	private final double kD = 0.0;  //0.0075
 
-	private final double kpv = 0.25; //0.25
+	private final double kpv = 0.0; //0.25
 	private final double ka = 0.0; //0.0
-	private final double kp = 20.75; //20.75
-	private final double ki = 5.0; //5.0
-	private final double kd = 0.025; //0.025
+	private final double kp = 0.0; //20.75
+	private final double ki = 0.0; //5.0
+	private final double kd = 0.0; //0.025
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.8; //0.8
+	private final double minTurnOutput = 0.0; //0.8
 
 	private double dt = 0.005;
 	

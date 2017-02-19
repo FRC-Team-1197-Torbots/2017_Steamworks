@@ -8,9 +8,9 @@ public abstract class TorTrajectory {
 	protected double goal_pos = 0.0;
 	protected double goal_head = 0.0;
 	
-	protected double max_vel = 1000.0;
-	protected double max_acc = 1000.0;
-	protected double max_jerk = 1000.0;
+	protected double max_vel;
+	protected double max_acc;
+	protected double max_jerk;
 	
 	protected double max_omg;
 	protected double max_alf;

@@ -3,7 +3,6 @@ package org.usfirst.frc.team1197.robot;
 import com.ctre.CANTalon;
 
 import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.FeedbackDeviceStatus;
 import com.ctre.CANTalon.StatusFrameRate;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -21,11 +20,11 @@ public enum TorCAN
 	private final CANTalon m_Ltalon3;
 	
 	private final AHRS gyro;
-	private final double encoderTicksPerMeter = 7353.5; // (units: ticks per meter) 7110.6
+	private final double encoderTicksPerMeter = 7110.6; // (units: ticks per meter) 
 	private final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 0.7; //0.7
+	private final double kP = 0.0; //0.7
 	private final double kI = 0.0; //0.0
 	private final double kD = 0.0; //35.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
@@ -50,8 +49,8 @@ public enum TorCAN
 //		m_Ltalon1.configEncoderCodesPerRev(128);
  
 		m_Rtalon3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Rtalon3.reverseSensor(false);
-		m_Rtalon3.reverseOutput(false);
+		m_Rtalon3.reverseSensor(true);
+		m_Rtalon3.reverseOutput(true);
 		m_Rtalon3.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Rtalon3.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Rtalon3.setProfile(0);
@@ -66,8 +65,8 @@ public enum TorCAN
 		m_Rtalon1.set(m_Rtalon3.getDeviceID());
 			
 		m_Ltalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Ltalon1.reverseSensor(true);
-		m_Ltalon1.reverseOutput(true);
+		m_Ltalon1.reverseSensor(false);
+		m_Ltalon1.reverseOutput(false);
 		m_Ltalon1.configNominalOutputVoltage(+0.0f, -0.0f);
 		m_Ltalon1.configPeakOutputVoltage(+12.0f, -12.0f);
 		m_Ltalon1.setProfile(0);

@@ -152,7 +152,7 @@ public enum TorMotionProfile
 		if(activeTrajectory != joystickTraj){
 			targetHeading += headingWaypoint;
 		}
-//		System.out.println(activeTrajectory);
+		
 		targetOmega = activeTrajectory.lookUpOmega(lookupTime);
 		targetAlpha = activeTrajectory.lookUpAlpha(lookupTime);
 		

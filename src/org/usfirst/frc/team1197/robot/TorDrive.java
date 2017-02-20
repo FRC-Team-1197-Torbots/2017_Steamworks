@@ -64,48 +64,29 @@ public class TorDrive
 		mpNotifier.startPeriodic(0.005);
 	}
 	
-	
+
 	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton, boolean rightBumper,
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			if(cypress.getRawButton(1)){
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				if(shiftButton){
-					shiftToLowGear();
-				}
-			}
-			else{
-//				carDrive(throttleAxis, carSteerAxis);
-//				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				buttonDrive(buttonA, buttonB, buttonX, buttonY);
-				
-				//When you hold down the shiftButton (left bumper), then shift to low gear.
-				if(shiftButton){
-					shiftToLowGear();
-				}
+			//carDrive(throttleAxis, carSteerAxis);
+			buttonDrive(buttonA, buttonB, buttonX, buttonY);
+
+			//When you hold down the shiftButton (left bumper), then shift to low gear.
+			if(shiftButton){
+				shiftToLowGear();
 			}
 		}
-		
+
 		//Only switch to ArcadeDrive in low gear
 		else{
-	
-			if(cypress.getRawButton(1)){
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				if(!shiftButton){
-					shiftToHighGearNoMotion();
-				}
+			ArcadeDrive(throttleAxis, arcadeSteerAxis);
+
+			//When you release the shiftButton (left bumper), then shift to high gear.
+			if(!shiftButton){
+				shiftToHighGearMotion();
 			}
-			else{
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				//When you release the shiftButton (left bumper), then shift to high gear.
-				if(!shiftButton){
-					shiftToHighGearMotion();
-				}
-			}		
+
 		}
 	}
 	

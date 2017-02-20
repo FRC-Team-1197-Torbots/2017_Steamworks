@@ -74,7 +74,7 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-    	drive.shiftToHighGearMotion();
+    	drive.shiftToHighGear();
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
@@ -82,7 +82,6 @@ public class Robot extends SampleRobot {
 //    		intake.update();
 //    		climb.manualClimb();
 //    		gear.Gear();
-//    		System.out.println(TorCAN.INSTANCE.getAverageRawVelocity());
     		SmartDashboard.putNumber("right Encoder", TorCAN.INSTANCE.getRightEncoder());
     		SmartDashboard.putNumber("left Encoder", TorCAN.INSTANCE.getLeftEncoder());
     	}

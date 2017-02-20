@@ -47,8 +47,8 @@ public class TorDrive
 		TorCAN.INSTANCE.resetHeading();
 		TorMotionProfile.INSTANCE.resetWaypoints();
 		
-		forTraj = new LinearTrajectory(1.0);
-		backTraj = new LinearTrajectory(-1.0);
+		forTraj = new LinearTrajectory(0.5);
+		backTraj = new LinearTrajectory(-0.5);
 		rightTraj = new PivotTrajectory(90);
 		leftTraj = new PivotTrajectory(-90);
 		
@@ -84,28 +84,19 @@ public class TorDrive
 
 			//When you release the shiftButton (left bumper), then shift to high gear.
 			if(!shiftButton){
-				shiftToHighGearMotion();
+				shiftToHighGear();
 			}
 
 		}
 	}
 	
 	//Shifts the robot to high gear and change the talon's control mode to speed.
-	public void shiftToHighGearMotion(){
+	public void shiftToHighGear(){
 		if (!isHighGear){
-			m_solenoidshift.set(true);
+			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
 			TorMotionProfile.INSTANCE.setActive();
-		}
-	}
-	
-	public void shiftToHighGearNoMotion(){
-		if(!isHighGear){
-			m_solenoidshift.set(true);
-			TorCAN.INSTANCE.chooseVelocityControl();
-			isHighGear = true;
-			TorMotionProfile.INSTANCE.setInactive();
 		}
 	}
 	

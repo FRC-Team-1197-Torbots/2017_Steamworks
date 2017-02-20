@@ -25,9 +25,9 @@ public enum TorCAN
 	private final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 1.0; //0.7
+	private final double kP = 2.3; //0.7
 	private final double kI = 0.0; //0.0
-	private final double kD = 35.0; //35.0
+	private final double kD = 50.0; //35.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
 	private final double trackWidth = 0.5786; // (units: meters (14.5 in inches))
@@ -149,9 +149,7 @@ public enum TorCAN
 	
 	public void setTargets(double v, double omega){ 
 		rightMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		SmartDashboard.putNumber("right output", (v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
 		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		SmartDashboard.putNumber("left output", (v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
 	}
 	
 	public void resetEncoder(){

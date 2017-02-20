@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public abstract class TorTrajectory {
 	protected double goal_pos = 0.0;
 	protected double goal_head = 0.0;
@@ -200,6 +202,7 @@ public abstract class TorTrajectory {
 		if(i == -1){
 			return goal_pos;
 		}
+		SmartDashboard.putNumber("translation", translation.get(i).pos);
 		return translation.get(i).pos;
 	}
 	public double lookUpVelocity(long t){

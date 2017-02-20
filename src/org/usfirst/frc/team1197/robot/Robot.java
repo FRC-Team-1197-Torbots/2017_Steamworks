@@ -82,8 +82,6 @@ public class Robot extends SampleRobot {
 //    		intake.update();
 //    		climb.manualClimb();
 //    		gear.Gear();
-    		SmartDashboard.putNumber("right Encoder", TorCAN.INSTANCE.getRightEncoder());
-    		SmartDashboard.putNumber("left Encoder", TorCAN.INSTANCE.getLeftEncoder());
     	}
     }
 

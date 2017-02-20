@@ -23,9 +23,9 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 
-	private final double kPv = 0.0; //0.6
+	private final double kPv = 0.1; //0.6
 	private final double kA = 0.0; //0.05
-	private final double kP = 0.0;  //7.0
+	private final double kP = 0.3;  //7.0
 	private final double kI = 0.0;  //3.0
 	private final double kD = 0.0;  //0.0075
 
@@ -36,7 +36,7 @@ public enum TorMotionProfile
 	private final double kd = 0.0; //0.025
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.; //0.8
+	private final double minTurnOutput = 0.0; //0.8
 
 	private double dt = 0.005;
 	
@@ -66,7 +66,7 @@ public enum TorMotionProfile
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
 		positionPID.setPositionTolerance(0.01); 
-		positionPID.setVelocityTolerance(0.0125);
+		positionPID.setVelocityTolerance(0.01);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
 		positionPID.setkI(kI);
@@ -77,8 +77,8 @@ public enum TorMotionProfile
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.0115); //0.015
-		headingPID.setVelocityTolerance(0.0125);
+		headingPID.setPositionTolerance(0.01); //0.015
+		headingPID.setVelocityTolerance(0.01);
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);
 		headingPID.setkI(ki);
@@ -228,8 +228,8 @@ public enum TorMotionProfile
 	}
 	
 	public void resetWaypoints(){
-		positionWaypoint = TorCAN.INSTANCE.getPosition();
-		headingWaypoint = TorCAN.INSTANCE.getHeading();
+		positionWaypoint = 0;
+		headingWaypoint = 0;
 	}
 	
 	public void resetPID(){

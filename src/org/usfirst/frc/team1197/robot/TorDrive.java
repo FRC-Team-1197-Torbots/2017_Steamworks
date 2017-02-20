@@ -45,6 +45,7 @@ public class TorDrive
 	{
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
+		TorMotionProfile.INSTANCE.resetWaypoints();
 		
 		forTraj = new LinearTrajectory(1.0);
 		backTraj = new LinearTrajectory(-1.0);

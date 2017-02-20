@@ -83,6 +83,8 @@ public class Robot extends SampleRobot {
 //    		climb.manualClimb();
 //    		gear.Gear();
 //    		System.out.println(TorCAN.INSTANCE.getAverageRawVelocity());
+    		SmartDashboard.putNumber("right Encoder", TorCAN.INSTANCE.getRightEncoder());
+    		SmartDashboard.putNumber("left Encoder", TorCAN.INSTANCE.getLeftEncoder());
     	}
     }
 

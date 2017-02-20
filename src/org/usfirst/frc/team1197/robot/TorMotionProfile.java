@@ -52,8 +52,6 @@ public enum TorMotionProfile
 	protected static double positionWaypoint;
 	protected static double headingWaypoint;
 	
-	private final boolean usingWaypoint = true;
-	
 	private TorMotionProfile(){
 		joystickTraj = new JoystickTrajectory();
 		positionPID = new TorPID(dt);
@@ -90,11 +88,6 @@ public enum TorMotionProfile
 	}
 	
 	public void loadTrajectory(TorTrajectory traj){
-		if(!usingWaypoint){
-			TorCAN.INSTANCE.resetEncoder();
-			TorCAN.INSTANCE.resetHeading();
-			resetPID();
-		}
 		nextTrajectory = traj;
 	}
 	
@@ -185,11 +178,10 @@ public enum TorMotionProfile
 		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 			startTime = currentTime;
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
-				if(usingWaypoint){
-					positionWaypoint = targetPosition;
-					headingWaypoint = targetHeading;
-				}
+				positionWaypoint = targetPosition;
+				headingWaypoint = targetHeading;
 				activeTrajectory.setComplete(true);
+				nextTrajectory.setComplete(false);
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;
 			}
@@ -236,8 +228,8 @@ public enum TorMotionProfile
 	}
 	
 	public void resetWaypoints(){
-		positionWaypoint = 0;
-		headingWaypoint = 0;
+		positionWaypoint = TorCAN.INSTANCE.getPosition();
+		headingWaypoint = TorCAN.INSTANCE.getHeading();
 	}
 	
 	public void resetPID(){

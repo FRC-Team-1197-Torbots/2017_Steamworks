@@ -49,13 +49,9 @@ public abstract class TorTrajectory {
 		max_jerk = 15.0; //20.0
 		
 		max_omg = 8.0; //8.0
-<<<<<<< HEAD
 		max_alf = 7.0; //7.0
 		max_jeta = 20.0; //40.0
-=======
-		max_alf = 9.0; //7.0
-		max_jeta = 40.0; //40.0
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
+
 		
 		time = new ArrayList<Long>();
 		time.add((long) 0);

@@ -23,40 +23,23 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 
-<<<<<<< HEAD
+
 	private final double kPv = 0.001; //0.6
 	private final double kA = 0.0; //0.05
 	private final double kP = 1.2;  //7.0
 	private final double kI = 20.0;  //3.0
 	private final double kD = 0.05;  //0.0075
-=======
-	private final double kPv = 0.1; //0.6
-	private final double kA = 0.0; //0.05
-	private final double kP = 0.3;  //7.0
-	private final double kI = 0.0;  //3.0
-	private final double kD = 0.0;  //0.0075
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 
-<<<<<<< HEAD
+
 	private final double kpv = 0.015; //0.25
 	private final double ka = 0.0; //0.0
 	private final double kp = 9.0; //20.75
 	private final double ki = 20.0; //5.0
 	private final double kd = 0.2; //0.025
-=======
-	private final double kpv = 0.0; //0.25
-	private final double ka = 0.0; //0.0
-	private final double kp = 0.0; //20.75
-	private final double ki = 0.0; //5.0
-	private final double kd = 0.0; //0.025
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
+
 	
 	private final double minLineOutput = 0.0; //0.0
-<<<<<<< HEAD
 	private final double minTurnOutput = 0.2; //0.8
-=======
-	private final double minTurnOutput = 0.0; //0.8
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 
 	private double dt = 0.005;
 	

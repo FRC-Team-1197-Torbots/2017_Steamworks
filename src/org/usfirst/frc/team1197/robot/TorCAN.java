@@ -25,17 +25,13 @@ public enum TorCAN
 	private final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-<<<<<<< HEAD
+
 	private final double kP = 3.0; //3.0
-=======
-	private final double kP = 2.3; //0.7
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
+
 	private final double kI = 0.0; //0.0
-<<<<<<< HEAD
+
 	private final double kD = 50.0; //50.0
-=======
-	private final double kD = 50.0; //35.0
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
+
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
 	private final double trackWidth = 0.5786; // (units: meters (14.5 in inches))
@@ -45,38 +41,20 @@ public enum TorCAN
 	
 	private TorCAN(){
 		gyro = new AHRS(SerialPort.Port.kMXP);
-		leftMaster = new CANTalon(8);//master
-		leftSlave1 = new CANTalon(7);
-		leftSlave2 = new CANTalon(9);
-		rightMaster = new CANTalon(2);//master
-		rightSlave1 = new CANTalon(1);
-		rightSlave2 = new CANTalon(3);
-		
-<<<<<<< HEAD
+
 		leftSlave1 = new CANTalon(7);
 		leftMaster = new CANTalon(8);
 		leftSlave2 = new CANTalon(9);
 		rightSlave1 = new CANTalon(1);
 		rightMaster = new CANTalon(2);
 		rightSlave2 = new CANTalon(3);
-=======
+
 		//use only when testing to get approximate sensor speed
 //		rightSlave2.configEncoderCodesPerRev(128);
 //		leftMaster.configEncoderCodesPerRev(128);
- 
-		rightMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightMaster.reverseSensor(true);
-		rightMaster.reverseOutput(true);
-		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
-		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
-		rightMaster.setProfile(0);
-		rightMaster.setF(kF); 
-		rightMaster.setP(kP); 
-		rightMaster.setI(kI); 
-		rightMaster.setD(kD);
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
+
 		
-<<<<<<< HEAD
+
 		rightMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightMaster.reverseSensor(false);
 		rightMaster.reverseOutput(false);
@@ -87,25 +65,7 @@ public enum TorCAN
 		rightMaster.setP(kP); 
 		rightMaster.setI(kI); 
 		rightMaster.setD(kD);
-=======
-		rightSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
-		rightSlave1.set(rightMaster.getDeviceID());
-		rightSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		rightSlave2.set(rightMaster.getDeviceID());
-			
-		leftMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftMaster.reverseSensor(false);
-		leftMaster.reverseOutput(false);
-		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
-		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
-		leftMaster.setProfile(0);
-		leftMaster.setF(kF);  
-		leftMaster.setP(kP); 
-		leftMaster.setI(kI); 
-		leftMaster.setD(kD); 
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
-		
-<<<<<<< HEAD
+
 		rightSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
 		rightSlave1.set(rightMaster.getDeviceID());
 		rightSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -122,8 +82,6 @@ public enum TorCAN
 		leftMaster.setI(kI); 
 		leftMaster.setD(kD); 
 		
-=======
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		leftSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
 		leftSlave1.set(leftMaster.getDeviceID());
 		leftSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -175,15 +133,6 @@ public enum TorCAN
 	}
 	public double getAverageEncoderPosition(){
 		return (rightMaster.getPosition() + leftMaster.getPosition()) * 0.5;
-<<<<<<< HEAD
-=======
-	}
-	public double getRightEncoder(){
-		return rightMaster.getPosition();
-	}
-	public double getLeftEncoder(){
-		return leftMaster.getPosition();
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 	}
 	public double getPosition(){
 		return (rightMaster.getPosition() + leftMaster.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
@@ -200,13 +149,8 @@ public enum TorCAN
 	}
 	
 	public void setTargets(double v, double omega){ 
-<<<<<<< HEAD
 		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
 		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
-=======
-		rightMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
->>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 	}
 	
 	public void resetEncoder(){

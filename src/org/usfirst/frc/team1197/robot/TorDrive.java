@@ -32,7 +32,7 @@ public class TorDrive
 	private TorTrajectory leftTrajectory;
 	
 	private BoilerPos1 boilerPos1;
-//	private GearBackTraj traj;
+	private GearBackTraj traj;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
@@ -47,17 +47,18 @@ public class TorDrive
 		TorCAN.INSTANCE.resetHeading();
 //		TorMotionProfile.INSTANCE.resetWaypoints();
 		
-		forwardTrajectory = new LinearTrajectory(1.0);
+//		forwardTrajectory = new LinearTrajectory(1.0);
+		forwardTrajectory = new Figure8();
 		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(90);
-		leftTrajectory = new PivotTrajectory(-90);
+		rightTrajectory = new PivotTrajectory(36.87);
+		leftTrajectory = new PivotTrajectory(-36.87);
 		
 		this.cypress = cypress;
 
 		boilerPos1 = new BoilerPos1();
 		joystickProfile = new TorJoystickProfiles();
 		
-		maxThrottle = (0.6) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
+		maxThrottle = (0.75) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
 		
 		m_solenoidshift = shift;
 		mpNotifier.startPeriodic(0.005);
@@ -68,7 +69,7 @@ public class TorDrive
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			//carDrive(throttleAxis, carSteerAxis);
+//			carDrive(throttleAxis, carSteerAxis);
 			buttonDrive(buttonA, buttonB, buttonX, buttonY);
 
 			//When you hold down the shiftButton (left bumper), then shift to low gear.

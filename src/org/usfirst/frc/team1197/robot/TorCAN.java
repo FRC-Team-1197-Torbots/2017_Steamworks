@@ -26,11 +26,9 @@ public enum TorCAN
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
 
-	private final double kP = 3.0; //3.0
-
+	private final double kP = 1.5; //1.5
 	private final double kI = 0.0; //0.0
-
-	private final double kD = 50.0; //50.0
+	private final double kD = 30.0; //30.0
 
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
@@ -142,15 +140,15 @@ public enum TorCAN
 	}
 	
 	public double getHeading(){
-		return (gyro.getAngle() * (Math.PI / 180)); // (units: radians)
+		return (-gyro.getAngle() * (Math.PI / 180)); // (units: radians)
 	}
 	public double getOmega(){
-		return (gyro.getRate()); // (units: radians (contrary to navX documentation))
+		return (-gyro.getRate()); // (units: radians (contrary to navX documentation))
 	}
 	
 	public void setTargets(double v, double omega){ 
-		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+		rightMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
 	public void resetEncoder(){

@@ -11,6 +11,10 @@ public class TorAuto {
 	private BoilerPos2 boilerPos2;
 	private BoilerPos3 boilerPos3;
 	
+	private TorGear gear;
+	
+	private GearBackTraj gearback;
+	
 	public static enum BOILERAUTO
 	{
 		IDLE, POS0, POS1, POS2, POS3, POS4;
@@ -35,12 +39,14 @@ public class TorAuto {
 	}
 	public CENTERAUTO centerAutoState = CENTERAUTO.IDLE;
 	
-	public TorAuto(TorIntake intake, Joystick cypress) {
+	public TorAuto(TorIntake intake, Joystick cypress, TorGear gear) {
 		this.cypress = cypress;
 		boilerPos1 = new BoilerPos1();
 		boilerPos2 = new BoilerPos2();
 		boilerPos3 = new BoilerPos3();
+		gearback = new GearBackTraj();
 		this.intake = intake;
+		this.gear = gear;
 	}
 	
 	public void initialize()
@@ -134,18 +140,19 @@ public class TorAuto {
 				boilerAutoState = BOILERAUTO.POS1;
 				break;
 			case POS1:
-//				if(boilerPos1.isComplete()){
+				gear.Gear();
+				if(boilerPos1.isComplete()){
 					//deploy gear
-//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
+					TorMotionProfile.INSTANCE.executeTrajectory(gearback);
 					boilerAutoState = BOILERAUTO.POS2;	
-//				}
+				}
 				break;
 			case POS2:
-//				if(boilerPos2.isComplete()){
+				if(gearback.isComplete()){
 					//dump balls
 //					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS3;
-//				}
+				}
 			case POS3:
 //				if(boilerPos3.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;

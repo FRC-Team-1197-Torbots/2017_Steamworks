@@ -32,6 +32,10 @@ public class TorGear {
 			gearClosed();
 		}
 	}
+	
+	public boolean gearOn(){
+		return gearSwitch.get();
+	}
 
 	public void gearOpen(){
 		gearPiston.set(true);

@@ -49,7 +49,7 @@ public class Robot extends SampleRobot {
     	compressor = new Compressor();
     	
     	shift = new Solenoid(0);
-//    	gearPiston = new Solenoid(0);
+    	gearPiston = new Solenoid(1);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
@@ -63,14 +63,14 @@ public class Robot extends SampleRobot {
     	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar, drive);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1, drive);
-    	auto = new TorAuto(intake, autoBox);
+    	auto = new TorAuto(intake, autoBox, gear);
     }
 
     public void autonomous() {
-//    	drive.shiftToHighGearMotion();
-//    	TorTrajectory.setRotationMirrored(!isRed());
-//    	auto.initialize();
-//    	auto.run();
+    	drive.shiftToHighGear();
+    	TorTrajectory.setRotationMirrored(!isRed());
+    	auto.initialize();
+    	auto.run();
     }
 
     public void operatorControl() {
@@ -81,7 +81,7 @@ public class Robot extends SampleRobot {
 //    		climb.update();
 //    		intake.update();
 //    		climb.manualClimb();
-//    		gear.Gear();
+    		gear.Gear();
     	}
     }
 

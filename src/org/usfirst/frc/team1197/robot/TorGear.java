@@ -10,7 +10,7 @@ public class TorGear {
 	private Solenoid gearPiston;
 	private DigitalInput gearSwitch;
 	private Joystick stick;
-	private GearBackTraj gearBack;
+//	private GearBackTraj gearBack;
 	private TorDrive drive;
 
 
@@ -19,7 +19,7 @@ public class TorGear {
 		this.gearSwitch = gearSwitch;
 		this.stick = stick;
 		this.drive = drive;
-		gearBack = new GearBackTraj();
+//		gearBack = new GearBackTraj();
 	}
 
 	public void Gear(){

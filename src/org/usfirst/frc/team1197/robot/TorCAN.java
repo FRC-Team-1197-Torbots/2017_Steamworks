@@ -12,21 +12,21 @@ public enum TorCAN
 {
 	INSTANCE;
 	
-	private final CANTalon m_Rtalon1;
-	private final CANTalon m_Rtalon2;
-	private final CANTalon m_Rtalon3;
-	private final CANTalon m_Ltalon1;
-	private final CANTalon m_Ltalon2;
-	private final CANTalon m_Ltalon3;
+	private final CANTalon rightMaster;
+	private final CANTalon rightSlave1;
+	private final CANTalon rightSlave2;
+	private final CANTalon leftMaster;
+	private final CANTalon leftSlave1;
+	private final CANTalon leftSlave2;
 	
 	private final AHRS gyro;
 	private final double encoderTicksPerMeter = 7353.5; // (units: ticks per meter)
 	private final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 0.7; //0.7
+	private final double kP = 3.0; //3.0
 	private final double kI = 0.0; //0.0
-	private final double kD = 35.0; //35.0
+	private final double kD = 50.0; //50.0
 	// absoluteMaxSpeed is in meters per second. Right now it comes out to about 4.405 m/s
 	private final double absoluteMaxSpeed = (approximateSensorSpeed*quadEncNativeUnits)/(60*encoderTicksPerMeter);
 	private final double trackWidth = 0.5786; // (units: meters (14.5 in inches))
@@ -37,47 +37,47 @@ public enum TorCAN
 	private TorCAN(){
 		gyro = new AHRS(SerialPort.Port.kMXP);
 		
-		m_Ltalon1 = new CANTalon(1);
-		m_Ltalon2 = new CANTalon(2);
-		m_Ltalon3 = new CANTalon(3);
-		m_Rtalon1 = new CANTalon(4);
-		m_Rtalon2 = new CANTalon(5);
-		m_Rtalon3 = new CANTalon(6);
+		leftSlave1 = new CANTalon(7);
+		leftMaster = new CANTalon(8);
+		leftSlave2 = new CANTalon(9);
+		rightSlave1 = new CANTalon(1);
+		rightMaster = new CANTalon(2);
+		rightSlave2 = new CANTalon(3);
 		
-		m_Rtalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Rtalon2.reverseSensor(false);
-		m_Rtalon2.reverseOutput(false);
-		m_Rtalon2.configNominalOutputVoltage(+0.0f, -0.0f);
-		m_Rtalon2.configPeakOutputVoltage(+12.0f, -12.0f);
-		m_Rtalon2.setProfile(0);
-		m_Rtalon2.setF(kF); 
-		m_Rtalon2.setP(kP); 
-		m_Rtalon2.setI(kI); 
-		m_Rtalon2.setD(kD);
+		rightMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightMaster.reverseSensor(false);
+		rightMaster.reverseOutput(false);
+		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
+		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
+		rightMaster.setProfile(0);
+		rightMaster.setF(kF); 
+		rightMaster.setP(kP); 
+		rightMaster.setI(kI); 
+		rightMaster.setD(kD);
 		
-		m_Rtalon1.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Rtalon1.set(m_Rtalon2.getDeviceID());
-		m_Rtalon3.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Rtalon3.set(m_Rtalon2.getDeviceID());
+		rightSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
+		rightSlave1.set(rightMaster.getDeviceID());
+		rightSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
+		rightSlave2.set(rightMaster.getDeviceID());
 		
-		m_Ltalon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_Ltalon2.reverseSensor(true);
-		m_Ltalon2.reverseOutput(true);
-		m_Ltalon2.configNominalOutputVoltage(+0.0f, -0.0f);
-		m_Ltalon2.configPeakOutputVoltage(+12.0f, -12.0f);
-		m_Ltalon2.setProfile(0);
-		m_Ltalon2.setF(kF);  
-		m_Ltalon2.setP(kP); 
-		m_Ltalon2.setI(kI); 
-		m_Ltalon2.setD(kD); 
+		leftMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftMaster.reverseSensor(true);
+		leftMaster.reverseOutput(true);
+		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
+		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
+		leftMaster.setProfile(0);
+		leftMaster.setF(kF);  
+		leftMaster.setP(kP); 
+		leftMaster.setI(kI); 
+		leftMaster.setD(kD); 
 		
-		m_Ltalon1.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Ltalon1.set(m_Ltalon2.getDeviceID());
-		m_Ltalon3.changeControlMode(CANTalon.TalonControlMode.Follower);
-		m_Ltalon3.set(m_Ltalon2.getDeviceID());
+		leftSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
+		leftSlave1.set(leftMaster.getDeviceID());
+		leftSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
+		leftSlave2.set(leftMaster.getDeviceID());
 
-		m_Rtalon2.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
-		m_Ltalon2.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
+		rightMaster.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
+		leftMaster.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
 	}
 
 	public void SetDrive(double leftSpeed, double rightSpeed)
@@ -89,63 +89,63 @@ public enum TorCAN
 	//Setting the left master Talon's speed to the given parameter
 	public void SetLeft(double speed)
 	{
-		m_Ltalon2.set(speed);
+		leftMaster.set(speed);
 	}
 
 	//Setting the right master Talon's speed to the given parameter
 	public void SetRight(double speed)
 	{
-		m_Rtalon2.set(speed);
+		rightMaster.set(speed);
 	}
 	
 	/* A method to change the right and left master Talon's control mode
 	   to percentVbus, so we can use it when the robot is in low gear. */
 	public void choosePercentVbus(){
-		m_Rtalon2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		m_Ltalon2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 	}
 	
 	/* A method to change the right and left master Talon's control mode
 	   to speed, so we can use it when the robot is in high gear. */
 	public void chooseVelocityControl(){
-		m_Rtalon2.changeControlMode(CANTalon.TalonControlMode.Speed);
-		m_Ltalon2.changeControlMode(CANTalon.TalonControlMode.Speed);
+		rightMaster.changeControlMode(CANTalon.TalonControlMode.Speed);
+		leftMaster.changeControlMode(CANTalon.TalonControlMode.Speed);
 	}
 	
 	public void chooseMotionProfileControl(){
-		m_Rtalon2.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
-		m_Ltalon2.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
+		rightMaster.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
+		leftMaster.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
 	}
 	
 	public double getAverageRawVelocity(){
-		return (m_Rtalon2.getSpeed() + m_Ltalon2.getSpeed()) * 0.5;
+		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5;
 	}
 	public double getAverageEncoderPosition(){
-		return (m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5;
+		return (rightMaster.getPosition() + leftMaster.getPosition()) * 0.5;
 	}
 	public double getPosition(){
-		return (m_Rtalon2.getPosition() + m_Ltalon2.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
+		return (rightMaster.getPosition() + leftMaster.getPosition()) * 0.5 / encoderTicksPerMeter; // (units: meters)
 	}
 	public double getVelocity(){
-		return (m_Rtalon2.getSpeed() + m_Ltalon2.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // (units: meters)
+		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // (units: meters)
 	}
 	
 	public double getHeading(){
-		return (-gyro.getAngle() * (Math.PI / 180)); // (units: radians)
+		return (gyro.getAngle() * (Math.PI / 180)); // (units: radians)
 	}
 	public double getOmega(){
-		return (-gyro.getRate()); // (units: radians (contrary to navX documentation))
+		return (gyro.getRate()); // (units: radians (contrary to navX documentation))
 	}
 	
 	//1.555 is the conversion factor that we found experimentally.
 	public void setTargets(double v, double omega){ 
-		m_Rtalon2.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		m_Ltalon2.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
 	public void resetEncoder(){
-		m_Rtalon2.setPosition(0);
-		m_Ltalon2.setPosition(0);
+		rightMaster.setPosition(0);
+		leftMaster.setPosition(0);
 	}
 	
 	public void resetHeading(){

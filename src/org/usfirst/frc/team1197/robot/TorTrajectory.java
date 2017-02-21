@@ -24,7 +24,7 @@ public abstract class TorTrajectory {
 	protected boolean isComplete;
 	
 	protected static boolean rotationIsMirrored;
-	protected static int rotationSign;
+	protected static int rotationSign = 1;
 	
 	public class Motion {
 		public double pos;
@@ -44,11 +44,11 @@ public abstract class TorTrajectory {
 		
 		max_vel = 4.5; //4.5
 		max_acc = 3.5; //3.5 
-		max_jerk = 20.0; //20.0
+		max_jerk = 15.0; //20.0
 		
 		max_omg = 8.0; //8.0
 		max_alf = 7.0; //7.0
-		max_jeta = 40.0; //40.0
+		max_jeta = 20.0; //40.0
 		
 		time = new ArrayList<Long>();
 		time.add((long) 0);
@@ -66,11 +66,11 @@ public abstract class TorTrajectory {
 		
 		max_vel = 4.5; //4.5
 		max_acc = 3.5; //3.5 
-		max_jerk = 20.0; //20.0
+		max_jerk = 15.0; //20.0
 		
 		max_omg = 8.0; //8.0
 		max_alf = 7.0; //7.0
-		max_jeta = 40.0; //40.0
+		max_jeta = 20.0; //40.0
 		
 		time = new ArrayList<Long>();
 		time.add((long) 0);

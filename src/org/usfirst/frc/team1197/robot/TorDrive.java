@@ -26,8 +26,13 @@ public class TorDrive
 	private boolean buttonXlast;
 	private boolean buttonAlast;
 	
+	private TorTrajectory forwardTrajectory;
+	private TorTrajectory backwardTrajectory;
+	private TorTrajectory rightTrajectory;
+	private TorTrajectory leftTrajectory;
+	
 	private BoilerPos1 boilerPos1;
-	private GearBackTraj traj;
+//	private GearBackTraj traj;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
@@ -41,8 +46,13 @@ public class TorDrive
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
 		
+		forwardTrajectory = new LinearTrajectory(1.0);
+		backwardTrajectory = new LinearTrajectory(-1.0);
+		rightTrajectory = new PivotTrajectory(90);
+		leftTrajectory = new PivotTrajectory(-90);
+		
 		this.cypress = cypress;
-		traj = new GearBackTraj();
+//		traj = new GearBackTraj();
 		boilerPos1 = new BoilerPos1();
 		joystickProfile = new TorJoystickProfiles();
 		
@@ -179,17 +189,17 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-//			rightTrajectory.execute();
+			TorMotionProfile.INSTANCE.executeTrajectory(rightTrajectory);
 		}
 		else if(buttonX && !buttonXlast){
-//			leftTrajectory.execute();
+			TorMotionProfile.INSTANCE.executeTrajectory(leftTrajectory);
 		}
 		else if(buttonY && !buttonYlast){
-			TorMotionProfile.INSTANCE.executeTrajectory(traj);
+			TorMotionProfile.INSTANCE.executeTrajectory(forwardTrajectory);
 //			forwardTrajectory.execute();
 		}
 		else if(buttonA && !buttonAlast){
-//			backwardTrajectory.execute();
+			TorMotionProfile.INSTANCE.executeTrajectory(backwardTrajectory);
 		}
 		else{
 			

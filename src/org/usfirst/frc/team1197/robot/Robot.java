@@ -49,7 +49,7 @@ public class Robot extends SampleRobot {
     	compressor = new Compressor();
     	
     	shift = new Solenoid(0);
-    	gearPiston = new Solenoid(1);
+//    	gearPiston = new Solenoid(0);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
@@ -74,21 +74,21 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-    	drive.shiftToHighGearMotion();
+    	drive.shiftToHighGear();
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		climb.update();
 //    		intake.update();
-    		climb.manualClimb();
-    		gear.Gear();
+//    		climb.manualClimb();
+//    		gear.Gear();
     	}
     }
 
     public void test() {
 		while(isEnabled()){
-			compressor.start();
-			climb.manualClimb();
+//			compressor.start();
+//			climb.manualClimb();
 		}
 	}
 

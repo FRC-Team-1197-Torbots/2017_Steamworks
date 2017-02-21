@@ -69,11 +69,11 @@ public class JoystickTrajectory extends TorTrajectory{
 		rotationalMotion.vel = w_init;
 		rotationalMotion.acc = 0.0;
 		
-		TorMotionProfile.INSTANCE.loadTrajectory(this);
+		TorMotionProfile.INSTANCE.executeTrajectory(this);
 	}
 	
 	public void execute(){
-		TorMotionProfile.INSTANCE.loadTrajectory(this);
+		TorMotionProfile.INSTANCE.executeTrajectory(this);
 	}
 	
 	public void update(double tgt_vel, Motion m, double max_acc){
@@ -102,5 +102,11 @@ public class JoystickTrajectory extends TorTrajectory{
 		else{
 			this.dt = dt;
 		}
+	}
+	
+	public String toString(){
+		return "Joystick Trajectory \n" +
+			   "GoalPos: " + goal_pos + "\n" +
+			   "GoalHead: " + goal_head + "\n";
 	}
 }

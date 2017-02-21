@@ -23,20 +23,40 @@ public enum TorMotionProfile
 	private double targetAlpha;
 	private double targetHeading;
 
+<<<<<<< HEAD
 	private final double kPv = 0.001; //0.6
 	private final double kA = 0.0; //0.05
 	private final double kP = 1.2;  //7.0
 	private final double kI = 20.0;  //3.0
 	private final double kD = 0.05;  //0.0075
+=======
+	private final double kPv = 0.1; //0.6
+	private final double kA = 0.0; //0.05
+	private final double kP = 0.3;  //7.0
+	private final double kI = 0.0;  //3.0
+	private final double kD = 0.0;  //0.0075
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 
+<<<<<<< HEAD
 	private final double kpv = 0.015; //0.25
 	private final double ka = 0.0; //0.0
 	private final double kp = 9.0; //20.75
 	private final double ki = 20.0; //5.0
 	private final double kd = 0.2; //0.025
+=======
+	private final double kpv = 0.0; //0.25
+	private final double ka = 0.0; //0.0
+	private final double kp = 0.0; //20.75
+	private final double ki = 0.0; //5.0
+	private final double kd = 0.0; //0.025
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 	
 	private final double minLineOutput = 0.0; //0.0
+<<<<<<< HEAD
 	private final double minTurnOutput = 0.2; //0.8
+=======
+	private final double minTurnOutput = 0.0; //0.8
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 
 	private double dt = 0.005;
 	
@@ -52,8 +72,6 @@ public enum TorMotionProfile
 	protected static double positionWaypoint;
 	protected static double headingWaypoint;
 	
-	private final boolean usingWaypoint = true;
-	
 	private TorMotionProfile(){
 		joystickTraj = new JoystickTrajectory();
 		positionPID = new TorPID(dt);
@@ -68,7 +86,7 @@ public enum TorMotionProfile
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
 		positionPID.setPositionTolerance(0.01); 
-		positionPID.setVelocityTolerance(0.0125);
+		positionPID.setVelocityTolerance(0.01);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
 		positionPID.setkI(kI);
@@ -79,8 +97,8 @@ public enum TorMotionProfile
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.0115); //0.015
-		headingPID.setVelocityTolerance(0.0125);
+		headingPID.setPositionTolerance(0.01); //0.015
+		headingPID.setVelocityTolerance(0.01);
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);
 		headingPID.setkI(ki);
@@ -90,11 +108,6 @@ public enum TorMotionProfile
 	}
 	
 	public void loadTrajectory(TorTrajectory traj){
-		if(!usingWaypoint){
-			TorCAN.INSTANCE.resetEncoder();
-			TorCAN.INSTANCE.resetHeading();
-			resetPID();
-		}
 		nextTrajectory = traj;
 	}
 	
@@ -185,11 +198,10 @@ public enum TorMotionProfile
 		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 			startTime = currentTime;
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
-				if(usingWaypoint){
-					positionWaypoint = targetPosition;
-					headingWaypoint = targetHeading;
-				}
+				positionWaypoint = targetPosition;
+				headingWaypoint = targetHeading;
 				activeTrajectory.setComplete(true);
+				nextTrajectory.setComplete(false);
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;
 			}

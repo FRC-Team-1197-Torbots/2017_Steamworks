@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public abstract class TorTrajectory {
 	protected double goal_pos = 0.0;
 	protected double goal_head = 0.0;
 	
-	protected double max_vel = 1000.0;
-	protected double max_acc = 1000.0;
-	protected double max_jerk = 1000.0;
+	protected double max_vel;
+	protected double max_acc;
+	protected double max_jerk;
 	
 	protected double max_omg;
 	protected double max_alf;
@@ -47,8 +49,13 @@ public abstract class TorTrajectory {
 		max_jerk = 15.0; //20.0
 		
 		max_omg = 8.0; //8.0
+<<<<<<< HEAD
 		max_alf = 7.0; //7.0
 		max_jeta = 20.0; //40.0
+=======
+		max_alf = 9.0; //7.0
+		max_jeta = 40.0; //40.0
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		
 		time = new ArrayList<Long>();
 		time.add((long) 0);
@@ -191,6 +198,7 @@ public abstract class TorTrajectory {
 			time.add(new Long(t));
 		}
 	}
+	
 	public double lookUpPosition(long t){
 		if(t < time.get(0)){
 			return 0.0;
@@ -199,6 +207,7 @@ public abstract class TorTrajectory {
 		if(i == -1){
 			return goal_pos;
 		}
+		SmartDashboard.putNumber("translation", translation.get(i).pos);
 		return translation.get(i).pos;
 	}
 	public double lookUpVelocity(long t){
@@ -269,5 +278,10 @@ public abstract class TorTrajectory {
 		for(MotionState1D element : trans){
 			element.set(-element.pos, -element.vel, -element.acc);
 		}
+	}
+	public String toString(){
+		return "Default Trajectory \n" +
+				   "GoalPos: " + goal_pos + "\n" +
+				   "GoalHead: " + goal_head + "\n";
 	}
 }

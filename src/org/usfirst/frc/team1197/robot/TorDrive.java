@@ -26,11 +26,19 @@ public class TorDrive
 	private boolean buttonXlast;
 	private boolean buttonAlast;
 	
+<<<<<<< HEAD
 	private TorTrajectory forwardTrajectory;
 	private TorTrajectory backwardTrajectory;
 	private TorTrajectory rightTrajectory;
 	private TorTrajectory leftTrajectory;
 	
+=======
+	private static TorTrajectory forTraj;
+	private static TorTrajectory backTraj;
+	private static TorTrajectory rightTraj;
+	private static TorTrajectory leftTraj;
+
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 	private BoilerPos1 boilerPos1;
 //	private GearBackTraj traj;
 	
@@ -45,6 +53,12 @@ public class TorDrive
 	{
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
+//		TorMotionProfile.INSTANCE.resetWaypoints();
+		
+		forTraj = new LinearTrajectory(0.5);
+		backTraj = new LinearTrajectory(-0.5);
+		rightTraj = new PivotTrajectory(90);
+		leftTraj = new PivotTrajectory(-90);
 		
 		forwardTrajectory = new LinearTrajectory(1.0);
 		backwardTrajectory = new LinearTrajectory(-1.0);
@@ -52,7 +66,12 @@ public class TorDrive
 		leftTrajectory = new PivotTrajectory(-90);
 		
 		this.cypress = cypress;
+<<<<<<< HEAD
 //		traj = new GearBackTraj();
+=======
+		forTraj = new forwardTrajectory();
+		traj = new GearBackTraj();
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		boilerPos1 = new BoilerPos1();
 		joystickProfile = new TorJoystickProfiles();
 		
@@ -62,66 +81,39 @@ public class TorDrive
 		mpNotifier.startPeriodic(0.005);
 	}
 	
-	
+
 	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton, boolean rightBumper,
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			if(cypress.getRawButton(1)){
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				if(shiftButton){
-					shiftToLowGear();
-				}
-			}
-			else{
-				carDrive(throttleAxis, carSteerAxis);
-//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
-				
-				//When you hold down the shiftButton (left bumper), then shift to low gear.
-				if(shiftButton){
-					shiftToLowGear();
-				}
+			//carDrive(throttleAxis, carSteerAxis);
+			buttonDrive(buttonA, buttonB, buttonX, buttonY);
+
+			//When you hold down the shiftButton (left bumper), then shift to low gear.
+			if(shiftButton){
+				shiftToLowGear();
 			}
 		}
-		
+
 		//Only switch to ArcadeDrive in low gear
 		else{
-	
-			if(cypress.getRawButton(1)){
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				if(!shiftButton){
-					shiftToHighGearNoMotion();
-				}
+			ArcadeDrive(throttleAxis, arcadeSteerAxis);
+
+			//When you release the shiftButton (left bumper), then shift to high gear.
+			if(!shiftButton){
+				shiftToHighGear();
 			}
-			else{
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				//When you release the shiftButton (left bumper), then shift to high gear.
-				if(!shiftButton ){
-					shiftToHighGearMotion();
-				}
-			}		
+
 		}
 	}
 	
 	//Shifts the robot to high gear and change the talon's control mode to speed.
-	public void shiftToHighGearMotion(){
+	public void shiftToHighGear(){
 		if (!isHighGear){
 			m_solenoidshift.set(false);
 			TorCAN.INSTANCE.chooseVelocityControl();
 			isHighGear = true;
 			TorMotionProfile.INSTANCE.setActive();
-		}
-	}
-	
-	public void shiftToHighGearNoMotion(){
-		if(!isHighGear){
-			m_solenoidshift.set(false);
-			TorCAN.INSTANCE.chooseVelocityControl();
-			isHighGear = true;
-			TorMotionProfile.INSTANCE.setInactive();
 		}
 	}
 	
@@ -189,17 +181,33 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
+<<<<<<< HEAD
 			TorMotionProfile.INSTANCE.executeTrajectory(rightTrajectory);
+=======
+			TorMotionProfile.INSTANCE.executeTrajectory(rightTraj);
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		}
 		else if(buttonX && !buttonXlast){
+<<<<<<< HEAD
 			TorMotionProfile.INSTANCE.executeTrajectory(leftTrajectory);
+=======
+			TorMotionProfile.INSTANCE.executeTrajectory(leftTraj);
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		}
 		else if(buttonY && !buttonYlast){
+<<<<<<< HEAD
 			TorMotionProfile.INSTANCE.executeTrajectory(forwardTrajectory);
 //			forwardTrajectory.execute();
+=======
+			TorMotionProfile.INSTANCE.executeTrajectory(forTraj);
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		}
 		else if(buttonA && !buttonAlast){
+<<<<<<< HEAD
 			TorMotionProfile.INSTANCE.executeTrajectory(backwardTrajectory);
+=======
+			TorMotionProfile.INSTANCE.executeTrajectory(backTraj);
+>>>>>>> branch 'master' of https://github.com/FRC-Team-1197-Torbots/2017_Steamworks.git
 		}
 		else{
 			

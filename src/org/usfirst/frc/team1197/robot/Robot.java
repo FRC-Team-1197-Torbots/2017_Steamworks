@@ -41,10 +41,10 @@ public class Robot extends SampleRobot {
     public Robot() {
 //    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
     	
-    	climbTalon = new CANTalon(10); //10
-    	dumperTalon = new CANTalon(4); //4
-    	elevatorTalon1 = new CANTalon(5); //5
-    	elevatorTalon2 = new CANTalon(6); //6
+    	climbTalon = new CANTalon(10); 
+    	dumperTalon = new CANTalon(4); 
+    	elevatorTalon1 = new CANTalon(5); 
+    	elevatorTalon2 = new CANTalon(6); 
     	
     	compressor = new Compressor();
     	
@@ -78,17 +78,15 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		climb.update();
-//    		intake.update();
-//    		climb.manualClimb();
+    		intake.update();
+    		climb.manualClimb();
     		gear.Gear();
     	}
     }
 
     public void test() {
 		while(isEnabled()){
-//			compressor.start();
-//			climb.manualClimb();
+			compressor.start();
 		}
 	}
 

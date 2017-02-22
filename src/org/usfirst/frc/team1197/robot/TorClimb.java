@@ -75,9 +75,8 @@ public class TorClimb {
 	}
 	
 	public void manualClimb(){
-		if(stick.getRawButton(2)){
-			drive.shiftToLowGear();
-			climbTalon.set(1.0); //- for final, + for proto
+		if(stick.getRawButton(6)){
+			climbTalon.set(-1.0); //- for final, + for proto
 		}
 		else{
 			climbTalon.set(0.0);

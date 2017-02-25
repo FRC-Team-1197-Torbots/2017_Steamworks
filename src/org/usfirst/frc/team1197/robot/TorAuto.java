@@ -11,6 +11,13 @@ public class TorAuto {
 	private BoilerPos2 boilerPos2;
 	private BoilerPos3 boilerPos3;
 	
+	private LoadingPos1 loadingPos1;
+	private LoadingPos2 loadingPos2;
+	private LoadingPos3 loadingPos3;
+	
+	private CenterPos1 centerPos1;
+	private CenterPos2 centerPos2;
+	
 	private TorGear gear;
 	
 	private GearBackTraj gearback;
@@ -41,9 +48,18 @@ public class TorAuto {
 	
 	public TorAuto(TorIntake intake, Joystick cypress, TorGear gear) {
 		this.cypress = cypress;
+		
 		boilerPos1 = new BoilerPos1();
 		boilerPos2 = new BoilerPos2();
 		boilerPos3 = new BoilerPos3();
+		
+		loadingPos1 = new LoadingPos1();
+		loadingPos2 = new LoadingPos2();
+		loadingPos3 = new LoadingPos3();
+		
+		centerPos1 = new CenterPos1();
+		centerPos2 = new CenterPos2();
+		
 		gearback = new GearBackTraj();
 		this.intake = intake;
 		this.gear = gear;
@@ -92,18 +108,21 @@ public class TorAuto {
 		while(centerAutoState != CENTERAUTO.IDLE){
 			switch(centerAutoState){
 			case IDLE:
-				
 				break;
 			case POS0:
-				
+				TorMotionProfile.INSTANCE.executeTrajectory(centerPos1);
+				centerAutoState = CENTERAUTO.POS1;
 				break;
 			case POS1:
-				
+				if(centerPos1.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
+					centerAutoState = CENTERAUTO.POS2;
+				}
 				break;
 			case POS2:
-				
-				break;
-			case POS3:
+				if(centerPos2.isComplete()){
+					centerAutoState = CENTERAUTO.IDLE;
+				}
 				break;
 			}
 		}
@@ -114,16 +133,21 @@ public class TorAuto {
 		while(loadAutoState != LOADSTATIONAUTO.IDLE){
 			switch(loadAutoState){
 			case IDLE:
-				
 				break;
 			case POS0:
-				
+				TorMotionProfile.INSTANCE.executeTrajectory(loadingPos1);
+				loadAutoState = LOADSTATIONAUTO.POS1;
 				break;
 			case POS1:
-				
+				if(loadingPos1.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos2);
+					loadAutoState = LOADSTATIONAUTO.POS2;
+				}
 				break;
 			case POS2:
-				
+				if(loadingPos2.isComplete()){
+					loadAutoState = LOADSTATIONAUTO.IDLE;
+				}
 				break;
 			}
 		}

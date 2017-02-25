@@ -43,7 +43,6 @@ public class TorGear {
 	}
 
 	public void gearClosed(){
-		
 		gearPiston.set(false);
 		//determine if true or false for closed position
 	}

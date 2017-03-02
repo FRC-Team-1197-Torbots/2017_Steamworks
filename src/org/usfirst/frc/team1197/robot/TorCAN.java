@@ -40,11 +40,11 @@ public enum TorCAN
 	private TorCAN(){
 		gyro = new AHRS(SerialPort.Port.kMXP);
 
-		leftSlave1 = new CANTalon(7);
-		leftMaster = new CANTalon(8);
+		leftSlave1 = new CANTalon(8);
+		leftMaster = new CANTalon(7);
 		leftSlave2 = new CANTalon(9);
-		rightSlave1 = new CANTalon(1);
-		rightMaster = new CANTalon(2);
+		rightSlave1 = new CANTalon(2);
+		rightMaster = new CANTalon(1);
 		rightSlave2 = new CANTalon(3);
 
 		//use only when testing to get approximate sensor speed

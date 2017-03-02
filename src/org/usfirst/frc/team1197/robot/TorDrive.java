@@ -69,24 +69,35 @@ public class TorDrive
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			carDrive(throttleAxis, carSteerAxis);
-//			buttonDrive(buttonA, buttonB, buttonX, buttonY);
-
-			//When you hold down the shiftButton (left bumper), then shift to low gear.
-			if(shiftButton){
+			if(cypress.getRawButton(1)){
 				shiftToLowGear();
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+			}
+			else{
+//				carDrive(throttleAxis, carSteerAxis);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+
+				//When you hold down the shiftButton (left bumper), then shift to low gear.
+				if(shiftButton){
+					shiftToLowGear();
+				}
 			}
 		}
 
 		//Only switch to ArcadeDrive in low gear
 		else{
-			ArcadeDrive(throttleAxis, arcadeSteerAxis);
-
-			//When you release the shiftButton (left bumper), then shift to high gear.
-			if(!shiftButton){
-				shiftToHighGear();
+			if(cypress.getRawButton(1)){
+				shiftToLowGear();
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
+			else{
+//				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 
+				//When you release the shiftButton (left bumper), then shift to high gear.
+				if(!shiftButton){
+					shiftToHighGear();
+				}
+			}
 		}
 	}
 	

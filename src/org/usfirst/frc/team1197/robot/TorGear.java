@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TorGear {
 
@@ -12,7 +13,8 @@ public class TorGear {
 	private Joystick stick;
 //	private GearBackTraj gearBack;
 	private TorDrive drive;
-
+	private long endTime = System.currentTimeMillis() - 10;
+	private long currentTime;
 
 	public TorGear(Solenoid gearPiston, DigitalInput gearSwitch, Joystick stick, TorDrive drive){
 		this.gearPiston = gearPiston;
@@ -23,12 +25,12 @@ public class TorGear {
 	}
 
 	public void Gear(){
+		currentTime = System.currentTimeMillis();
 		if(gearSwitch.get()){
-//			drive.shiftToHighGearMotion();
-//			TorMotionProfile.INSTANCE.executeTrajectory(gearBack);
 			gearOpen();
+			endTime = System.currentTimeMillis() + 500;
 		}
-		else{
+		else if(endTime < currentTime){
 			gearClosed();
 		}
 	}

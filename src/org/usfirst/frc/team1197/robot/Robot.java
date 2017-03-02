@@ -78,7 +78,7 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-    		intake.update();
+//    		intake.update();
     		climb.manualClimb();
     		gear.Gear();
     	}

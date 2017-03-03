@@ -51,11 +51,9 @@ public enum TorCAN
 //		rightSlave2.configEncoderCodesPerRev(128);
 //		leftMaster.configEncoderCodesPerRev(128);
 
-		
-
 		rightMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightMaster.reverseSensor(false);
-		rightMaster.reverseOutput(false);
+		rightMaster.reverseSensor(true); //don't forget to change!
+		rightMaster.reverseOutput(false); //don't forget to change!
 		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
 		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
 		rightMaster.setProfile(0);
@@ -70,8 +68,8 @@ public enum TorCAN
 		rightSlave2.set(rightMaster.getDeviceID());
 		
 		leftMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftMaster.reverseSensor(true);
-		leftMaster.reverseOutput(true);
+		leftMaster.reverseSensor(false); //don't forget to change!
+		leftMaster.reverseOutput(true); //don't forget to change!
 		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
 		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
 		leftMaster.setProfile(0);
@@ -126,6 +124,13 @@ public enum TorCAN
 		leftMaster.changeControlMode(CANTalon.TalonControlMode.MotionProfile);
 	}
 	
+	public double getRightEncoder(){
+		return rightMaster.getPosition();
+	}
+	public double getLeftEncoder(){
+		return leftMaster.getPosition();
+	}
+	
 	public double getAverageRawVelocity(){
 		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5;
 	}
@@ -140,15 +145,15 @@ public enum TorCAN
 	}
 	
 	public double getHeading(){
-		return (-gyro.getAngle() * (Math.PI / 180)); // (units: radians)
+		return (gyro.getAngle() * (Math.PI / 180)); // (units: radians)
 	}
 	public double getOmega(){
-		return (-gyro.getRate()); // (units: radians (contrary to navX documentation))
+		return (gyro.getRate()); // (units: radians (contrary to navX documentation))
 	}
 	
 	public void setTargets(double v, double omega){ 
-		rightMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
 	public void resetEncoder(){

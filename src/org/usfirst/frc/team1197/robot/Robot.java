@@ -67,10 +67,10 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-    	drive.shiftToHighGear();
-    	TorTrajectory.setRotationMirrored(!isRed());
-    	auto.initialize();
-    	auto.run();
+//    	drive.shiftToHighGear();
+//    	TorTrajectory.setRotationMirrored(!isRed());
+//    	auto.initialize();
+//    	auto.run();
     }
 
     public void operatorControl() {
@@ -78,15 +78,36 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		intake.update();
+    		intake.update();
     		climb.manualClimb();
     		gear.Gear();
+//    		SmartDashboard.putNumber("right encoder", TorCAN.INSTANCE.getRightEncoder());
+//    		SmartDashboard.putNumber("left encoder", TorCAN.INSTANCE.getLeftEncoder());
+//    		SmartDashboard.putNumber("gyro", TorCAN.INSTANCE.getHeading());
     	}
     }
 
     public void test() {
 		while(isEnabled()){
 			compressor.start();
+			if(player2.getRawButton(1)){
+				elevatorTalon1.set(1.0);
+			}
+			else if(player2.getRawButton(2)){
+				elevatorTalon2.set(1.0);
+			}
+			else if(player2.getRawButton(3)){
+				dumperTalon.set(1.0);
+			}
+			else if(player2.getRawButton(5)){
+				climbTalon.set(-1.0);
+			}
+			else{
+				elevatorTalon1.set(0.0);
+				elevatorTalon2.set(0.0);
+				dumperTalon.set(0.0);
+				climbTalon.set(0.0);
+			}
 		}
 	}
 

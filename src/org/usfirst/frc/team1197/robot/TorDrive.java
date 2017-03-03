@@ -47,11 +47,12 @@ public class TorDrive
 		TorCAN.INSTANCE.resetHeading();
 //		TorMotionProfile.INSTANCE.resetWaypoints();
 		
-//		forwardTrajectory = new LinearTrajectory(1.0);
-		forwardTrajectory = new Figure8();
+		forwardTrajectory = new LinearTrajectory(1.0);
 		backwardTrajectory = new LinearTrajectory(-1.0);
-		rightTrajectory = new PivotTrajectory(36.87);
-		leftTrajectory = new PivotTrajectory(-36.87);
+		rightTrajectory = new PivotTrajectory(90);
+		leftTrajectory = new PivotTrajectory(-90);
+		
+		boilerPos1 = new BoilerPos1();
 		
 		this.cypress = cypress;
 
@@ -74,7 +75,7 @@ public class TorDrive
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			else{
-//				carDrive(throttleAxis, carSteerAxis);
+				carDrive(throttleAxis, carSteerAxis);
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
@@ -91,7 +92,7 @@ public class TorDrive
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			else{
-//				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 
 				//When you release the shiftButton (left bumper), then shift to high gear.
 				if(!shiftButton){
@@ -175,20 +176,16 @@ public class TorDrive
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-
-			TorMotionProfile.INSTANCE.executeTrajectory(rightTrajectory);
+//			TorMotionProfile.INSTANCE.executeTrajectory(rightTrajectory);
 		}
 		else if(buttonX && !buttonXlast){
-
-			TorMotionProfile.INSTANCE.executeTrajectory(leftTrajectory);
+//			TorMotionProfile.INSTANCE.executeTrajectory(leftTrajectory);
 		}
 		else if(buttonY && !buttonYlast){
-
-			TorMotionProfile.INSTANCE.executeTrajectory(forwardTrajectory);
-//			forwardTrajectory.execute();
+			TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
 		}
 		else if(buttonA && !buttonAlast){
-			TorMotionProfile.INSTANCE.executeTrajectory(backwardTrajectory);
+//			TorMotionProfile.INSTANCE.executeTrajectory(backwardTrajectory);
 		}
 		else{
 			

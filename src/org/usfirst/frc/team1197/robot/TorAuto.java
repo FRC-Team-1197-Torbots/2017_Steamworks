@@ -167,12 +167,12 @@ public class TorAuto {
 				gear.Gear();
 				if(boilerPos1.isComplete()){
 					//deploy gear
-					TorMotionProfile.INSTANCE.executeTrajectory(gearback);
+					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
 				}
 				break;
 			case POS2:
-				if(gearback.isComplete()){
+				if(boilerPos2.isComplete()){
 					//dump balls
 //					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS3;

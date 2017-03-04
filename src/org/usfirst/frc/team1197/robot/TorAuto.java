@@ -19,12 +19,14 @@ public class TorAuto {
 	private CenterPos2 centerPos2;
 	
 	private TorGear gear;
-	
 	private GearBackTraj gearback;
+	
+	private long currentTime;
+	private long endTime = System.currentTimeMillis() - 10;
 	
 	public static enum BOILERAUTO
 	{
-		IDLE, POS0, POS1, POS2, POS3, POS4;
+		IDLE, POS0, POS1, POS2, POS3, POS4, POS5;
 
 		private BOILERAUTO() {}
 	}
@@ -173,14 +175,24 @@ public class TorAuto {
 				break;
 			case POS2:
 				if(boilerPos2.isComplete()){
-					//dump balls
+					endTime = System.currentTimeMillis() + 2000;
 //					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS3;
 				}
+				break;
 			case POS3:
-//				if(boilerPos3.isComplete()){
+				currentTime = System.currentTimeMillis();
+				intake.DumpBalls();
+				if(endTime < currentTime){
+					intake.IntakeOff();
+					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
+					boilerAutoState = BOILERAUTO.POS4;
+				}
+				break;
+			case POS4:
+				if(boilerPos3.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;
-//				}
+				}
 				break;
 			}
 		}

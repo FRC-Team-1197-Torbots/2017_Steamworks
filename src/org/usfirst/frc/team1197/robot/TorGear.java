@@ -28,7 +28,7 @@ public class TorGear {
 		currentTime = System.currentTimeMillis();
 		if(gearSwitch.get()){
 			gearOpen();
-			endTime = System.currentTimeMillis() + 500;
+			endTime = System.currentTimeMillis() + 1500;
 		}
 		else if(endTime < currentTime){
 			gearClosed();

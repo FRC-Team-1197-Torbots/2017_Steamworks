@@ -67,10 +67,10 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-//    	drive.shiftToHighGear();
-//    	TorTrajectory.setRotationMirrored(!isRed());
-//    	auto.initialize();
-//    	auto.run();
+    	drive.shiftToHighGear();
+    	TorTrajectory.setRotationMirrored(!isRed());
+    	auto.initialize();
+    	auto.run();
     }
 
     public void operatorControl() {

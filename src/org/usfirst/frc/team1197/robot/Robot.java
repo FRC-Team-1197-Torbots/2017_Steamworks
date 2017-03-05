@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.SampleRobot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -28,7 +26,6 @@ public class Robot extends SampleRobot {
 	private Joystick player2;
 	private Joystick autoBox;
 	
-	private DigitalInput climbSwitch;
 	private DigitalInput gearSwitch;
 	
 	private TorDrive drive;
@@ -36,11 +33,8 @@ public class Robot extends SampleRobot {
 	private TorIntake intake;
 	private TorGear gear;
 	private TorAuto auto;
-	private TorLidar lidar;
 	
     public Robot() {
-//    	port = new SerialPort(9600, SerialPort.Port.kOnboard);
-    	
     	climbTalon = new CANTalon(10); 
     	dumperTalon = new CANTalon(4); 
     	elevatorTalon1 = new CANTalon(5); 
@@ -55,22 +49,20 @@ public class Robot extends SampleRobot {
     	player2 = new Joystick(1);
     	autoBox = new Joystick(2);
     	
-    	climbSwitch = new DigitalInput(1);
     	gearSwitch = new DigitalInput(0);
     	
-    	lidar = new TorLidar(port);
     	drive = new TorDrive(player1, shift, autoBox);
-    	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar, drive);
+    	climb = new TorClimb(climbTalon, player2);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
-    	gear = new TorGear(gearPiston, gearSwitch, player1, drive);
+    	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(intake, autoBox, gear);
     }
 
     public void autonomous() {
-    	drive.shiftToHighGear();
-    	TorTrajectory.setRotationMirrored(!isRed());
-    	auto.initialize();
-    	auto.run();
+//    	drive.shiftToHighGear();
+//    	TorTrajectory.setRotationMirrored(!isRed());
+//    	auto.initialize();
+//    	auto.run();
     }
 
     public void operatorControl() {
@@ -81,9 +73,6 @@ public class Robot extends SampleRobot {
     		intake.update();
     		climb.manualClimb();
     		gear.Gear();
-//    		SmartDashboard.putNumber("right encoder", TorCAN.INSTANCE.getRightEncoder());
-//    		SmartDashboard.putNumber("left encoder", TorCAN.INSTANCE.getLeftEncoder());
-//    		SmartDashboard.putNumber("gyro", TorCAN.INSTANCE.getHeading());
     	}
     }
 
@@ -113,7 +102,6 @@ public class Robot extends SampleRobot {
 
 	//Low-gear software wise, High-gear mechanically
 	public void disabled() {
-		climb.resetClimb();
 		drive.shiftToLowGear();
 		shift.set(false); 
 		TorCAN.INSTANCE.SetDrive(0.0, 0.0);

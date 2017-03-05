@@ -62,6 +62,7 @@ public abstract class TorTrajectory {
 		
 		isComplete = false;
 	}
+	
 	public TorTrajectory(double goal_pos, double goal_head, boolean isRed){
 		rotationIsMirrored = isRed;
 		this.goal_pos = goal_pos;

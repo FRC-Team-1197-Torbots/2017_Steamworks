@@ -81,7 +81,7 @@ public enum TorMotionProfile
 		positionPID.setLimitMode(sensorLimitMode.Default);
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
-		positionPID.setPositionTolerance(0.05); //0.0125
+		positionPID.setPositionTolerance(0.05); 
 		positionPID.setVelocityTolerance(0.0125);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
@@ -93,8 +93,8 @@ public enum TorMotionProfile
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.0125); //0.011
-		headingPID.setVelocityTolerance(0.0125); //0.0125
+		headingPID.setPositionTolerance(0.0125); 
+		headingPID.setVelocityTolerance(0.0125); 
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);
 		headingPID.setkI(ki);
@@ -144,7 +144,6 @@ public enum TorMotionProfile
 		headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
 		headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
 		
-		//TODO: Set the joystick trajectory's acceleration equal to the active trajectory's acceleration
 		if(isActive){
 			if(activeTrajectory == joystickTraj){
 				joystickTraj.updateVelocity();
@@ -184,13 +183,10 @@ public enum TorMotionProfile
 			if(activeTrajectory != joystickTraj){
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
-			graphLinear();
-			graphRotational();
+//			graphLinear();
+//			graphRotational();
 			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
 		}
-		SmartDashboard.putBoolean("lookUpIsLast(currentTime)", activeTrajectory.lookUpIsLast(currentTime));
-		SmartDashboard.putBoolean("positionPID.isOnTarget()", positionPID.isOnTarget());
-		SmartDashboard.putBoolean("headingPID.isOnTarget()", headingPID.isOnTarget());
 		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
 			startTime = currentTime;
 			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){

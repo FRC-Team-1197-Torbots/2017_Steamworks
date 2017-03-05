@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1197.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class TorPID {
 	private double v;
 	private double kP;

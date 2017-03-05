@@ -19,7 +19,6 @@ public class TorAuto {
 	private CenterPos2 centerPos2;
 	
 	private TorGear gear;
-	private GearBackTraj gearback;
 	
 	private long currentTime;
 	private long endTime = System.currentTimeMillis() - 10;
@@ -62,7 +61,6 @@ public class TorAuto {
 		centerPos1 = new CenterPos1();
 		centerPos2 = new CenterPos2();
 		
-		gearback = new GearBackTraj();
 		this.intake = intake;
 		this.gear = gear;
 	}
@@ -176,7 +174,6 @@ public class TorAuto {
 			case POS1:
 				gear.Gear();
 				if(boilerPos1.isComplete()){
-					//deploy gear
 					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
 				}
@@ -184,7 +181,6 @@ public class TorAuto {
 			case POS2:
 				if(boilerPos2.isComplete()){
 					endTime = System.currentTimeMillis() + 1500;
-//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS3;
 				}
 				break;

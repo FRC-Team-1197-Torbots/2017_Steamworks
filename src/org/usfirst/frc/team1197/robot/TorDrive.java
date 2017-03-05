@@ -69,11 +69,14 @@ public class TorDrive
 		//Only switch to carDrive in high gear
 		if(isHighGear){
 			if(cypress.getRawButton(1)){
-				shiftToLowGear();
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				
+				if(shiftButton){
+					shiftToLowGear();
+				}
 			}
 			else{
-				carDrive(throttleAxis, carSteerAxis);
+//				carDrive(throttleAxis, carSteerAxis);
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
@@ -86,8 +89,11 @@ public class TorDrive
 		//Only switch to ArcadeDrive in low gear
 		else{
 			if(cypress.getRawButton(1)){
-				shiftToLowGear();
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				
+				if(!shiftButton){
+					shiftToArcadeHigh();
+				}
 			}
 			else{
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
@@ -116,6 +122,15 @@ public class TorDrive
 			m_solenoidshift.set(true);
 			TorCAN.INSTANCE.choosePercentVbus();
 			isHighGear = false;
+			TorMotionProfile.INSTANCE.setInactive();
+		}
+	}
+	
+	public void shiftToArcadeHigh(){
+		if (!isHighGear){
+			m_solenoidshift.set(false);
+			TorCAN.INSTANCE.choosePercentVbus();
+			isHighGear = true;
 			TorMotionProfile.INSTANCE.setInactive();
 		}
 	}

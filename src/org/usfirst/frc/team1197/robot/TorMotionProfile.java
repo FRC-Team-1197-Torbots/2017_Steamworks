@@ -25,34 +25,34 @@ public enum TorMotionProfile
 
 
 	//auto
-//	private final double kPv = 0.01; //0.01
-//	private final double kA = 0.0; //0.0
-//	private final double kP = 17.0;  //17.0
-//	private final double kI = 9.0;  //9.0
-//	private final double kD = 0.8;  //0.4
-//
-//	private final double kpv = 0.01; //0.01
-//	private final double ka = 0.02; //0.02
-//	private final double kp = 20.0; //20.0
-//	private final double ki = 17.0; //17.0
-//	private final double kd = 0.8; //0.3
+	private final double kPv = 0.0; //0.01
+	private final double kA = 0.0; //0.0
+	private final double kP = 17.0;  //17.0
+	private final double kI = 6.0;  //9.0
+	private final double kD = 0.5;  //0.4
+
+	private final double kpv = 0.0; //0.01
+	private final double ka = 0.0; //0.02
+	private final double kp = 22.0; //20.0
+	private final double ki = 10.0; //17.0
+	private final double kd = 0.5; //0.3
 	
 	//joystick
-	private final double kPv = 0.01; //0.01
-	private final double kA = 0.0; //0.0
-	private final double kP = 1.5;  //1.5
-	private final double kI = 5.0;  //5.0
-	private final double kD = 0.1;  //0.1
-
-	private final double kpv = 0.01; //0.01
-	private final double ka = 0.0; //0.0
-	private final double kp = 9.0; //9.0
-	private final double ki = 5.0; //5.0
-	private final double kd = 0.1; //0.1
+//	private final double kPv = 0.01; //0.01
+//	private final double kA = 0.0; //0.0
+//	private final double kP = 2.0;  //1.5
+//	private final double kI = 5.0;  //5.0
+//	private final double kD = 0.1;  //0.1
+//
+//	private final double kpv = 0.01; //0.01
+//	private final double ka = 0.0; //0.0
+//	private final double kp = 9.0; //9.0
+//	private final double ki = 5.0; //5.0
+//	private final double kd = 0.1; //0.1
 
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.1; //0.1
+	private final double minTurnOutput = 0.0; //0.1
 
 	private double dt = 0.005;
 	
@@ -93,7 +93,7 @@ public enum TorMotionProfile
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.011); //0.011
+		headingPID.setPositionTolerance(0.0125); //0.011
 		headingPID.setVelocityTolerance(0.0125); //0.0125
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);

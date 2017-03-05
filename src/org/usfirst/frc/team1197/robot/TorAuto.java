@@ -34,7 +34,7 @@ public class TorAuto {
 	
 	public static enum LOADSTATIONAUTO
 	{
-		IDLE, POS0, POS1, POS2;
+		IDLE, POS0, POS1, POS2, POS3;
 		
 		private LOADSTATIONAUTO() {}
 	}
@@ -118,14 +118,14 @@ public class TorAuto {
 			case POS1:
 				gear.Gear();
 				if(centerPos1.isComplete()){
-//					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
+					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
 					centerAutoState = CENTERAUTO.POS2;
 				}
 				break;
 			case POS2:
-//				if(centerPos2.isComplete()){
+				if(centerPos2.isComplete()){
 					centerAutoState = CENTERAUTO.IDLE;
-//				}
+				}
 				break;
 			}
 		}
@@ -150,6 +150,12 @@ public class TorAuto {
 				break;
 			case POS2:
 				if(loadingPos2.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos3);
+					loadAutoState = LOADSTATIONAUTO.POS3;
+				}
+				break;
+			case POS3:
+				if(loadingPos3.isComplete()){
 					loadAutoState = LOADSTATIONAUTO.IDLE;
 				}
 				break;

@@ -24,9 +24,23 @@ public enum TorMotionProfile
 	private double targetHeading;
 
 
+	//auto
+//	private final double kPv = 0.01; //0.01
+//	private final double kA = 0.0; //0.0
+//	private final double kP = 17.0;  //17.0
+//	private final double kI = 9.0;  //9.0
+//	private final double kD = 0.8;  //0.4
+//
+//	private final double kpv = 0.01; //0.01
+//	private final double ka = 0.02; //0.02
+//	private final double kp = 20.0; //20.0
+//	private final double ki = 17.0; //17.0
+//	private final double kd = 0.8; //0.3
+	
+	//joystick
 	private final double kPv = 0.01; //0.01
 	private final double kA = 0.0; //0.0
-	private final double kP = 6.5;  //1.5
+	private final double kP = 1.5;  //1.5
 	private final double kI = 5.0;  //5.0
 	private final double kD = 0.1;  //0.1
 
@@ -67,7 +81,7 @@ public enum TorMotionProfile
 		positionPID.setLimitMode(sensorLimitMode.Default);
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
-		positionPID.setPositionTolerance(0.0135); //0.0125
+		positionPID.setPositionTolerance(0.05); //0.0125
 		positionPID.setVelocityTolerance(0.0125);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
@@ -237,9 +251,5 @@ public enum TorMotionProfile
 	public void resetPID(){
 		headingPID.reset();
 		positionPID.reset();
-	}
-	
-	public void isRed(){
-		
 	}
 }

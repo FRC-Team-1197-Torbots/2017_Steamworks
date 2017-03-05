@@ -70,13 +70,13 @@ public class TorAuto {
 	public void initialize()
 	{
 		//determine the position of the robot
-		if(!cypress.getRawButton(1)  && cypress.getRawButton(2)){
+		if(!cypress.getRawButton(3)  && cypress.getRawButton(2)){
 			position = 1;
 		}
-		else if(!cypress.getRawButton(1) && !cypress.getRawButton(2)){
+		else if(!cypress.getRawButton(3) && !cypress.getRawButton(2)){
 			position = 2;
 		}
-		else if(cypress.getRawButton(1) && !cypress.getRawButton(2)){
+		else if(cypress.getRawButton(3) && !cypress.getRawButton(2)){
 			position = 3;
 		}
 		else{
@@ -116,15 +116,16 @@ public class TorAuto {
 				centerAutoState = CENTERAUTO.POS1;
 				break;
 			case POS1:
+				gear.Gear();
 				if(centerPos1.isComplete()){
-					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
+//					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
 					centerAutoState = CENTERAUTO.POS2;
 				}
 				break;
 			case POS2:
-				if(centerPos2.isComplete()){
+//				if(centerPos2.isComplete()){
 					centerAutoState = CENTERAUTO.IDLE;
-				}
+//				}
 				break;
 			}
 		}
@@ -141,6 +142,7 @@ public class TorAuto {
 				loadAutoState = LOADSTATIONAUTO.POS1;
 				break;
 			case POS1:
+				gear.Gear();
 				if(loadingPos1.isComplete()){
 					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos2);
 					loadAutoState = LOADSTATIONAUTO.POS2;
@@ -175,7 +177,7 @@ public class TorAuto {
 				break;
 			case POS2:
 				if(boilerPos2.isComplete()){
-					endTime = System.currentTimeMillis() + 2000;
+					endTime = System.currentTimeMillis() + 1500;
 //					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS3;
 				}

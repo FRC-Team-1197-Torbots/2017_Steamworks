@@ -31,7 +31,7 @@ public class TorDrive
 	private TorTrajectory rightTrajectory;
 	private TorTrajectory leftTrajectory;
 	
-	private BoilerPos3 boilerPos1;
+	private CenterPos2 loadingPos2;
 	private GearBackTraj traj;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
@@ -52,7 +52,7 @@ public class TorDrive
 		rightTrajectory = new PivotTrajectory(90);
 		leftTrajectory = new PivotTrajectory(-90);
 		
-		boilerPos1 = new BoilerPos3();
+		loadingPos2 = new CenterPos2();
 		
 		this.cypress = cypress;
 		joystickProfile = new TorJoystickProfiles();
@@ -73,8 +73,8 @@ public class TorDrive
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			else{
-//				carDrive(throttleAxis, carSteerAxis);
-				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+				carDrive(throttleAxis, carSteerAxis);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 
 				//When you hold down the shiftButton (left bumper), then shift to low gear.
 				if(shiftButton){
@@ -180,7 +180,7 @@ public class TorDrive
 //			TorMotionProfile.INSTANCE.executeTrajectory(leftTrajectory);
 		}
 		else if(buttonY && !buttonYlast){
-			TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
+			TorMotionProfile.INSTANCE.executeTrajectory(loadingPos2);
 		}
 		else if(buttonA && !buttonAlast){
 //			TorMotionProfile.INSTANCE.executeTrajectory(backwardTrajectory);

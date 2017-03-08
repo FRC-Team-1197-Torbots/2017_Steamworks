@@ -40,11 +40,11 @@ public enum TorCAN
 	private TorCAN(){
 		gyro = new AHRS(SerialPort.Port.kMXP);
 
-		leftSlave1 = new CANTalon(8); //7
-		leftMaster = new CANTalon(7); //8
+		leftSlave1 = new CANTalon(7); //7
+		leftMaster = new CANTalon(8); //8
 		leftSlave2 = new CANTalon(9); //9
-		rightSlave1 = new CANTalon(2); //1
-		rightMaster = new CANTalon(1); //2
+		rightSlave1 = new CANTalon(1); //1
+		rightMaster = new CANTalon(2); //2
 		rightSlave2 = new CANTalon(3); //3
 
 		//use only when testing to get approximate sensor speed
@@ -52,8 +52,8 @@ public enum TorCAN
 //		leftMaster.configEncoderCodesPerRev(128);
 
 		rightMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightMaster.reverseSensor(true); //don't forget to change!
-		rightMaster.reverseOutput(false); //don't forget to change!
+		rightMaster.reverseSensor(false); //don't forget to change! false - final, true - proto
+		rightMaster.reverseOutput(false); //don't forget to change! false - final, false - proto
 		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
 		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
 		rightMaster.setProfile(0);
@@ -68,8 +68,8 @@ public enum TorCAN
 		rightSlave2.set(rightMaster.getDeviceID());
 		
 		leftMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftMaster.reverseSensor(false); //don't forget to change!
-		leftMaster.reverseOutput(true); //don't forget to change!
+		leftMaster.reverseSensor(true); //don't forget to change! true - final, false - proto
+		leftMaster.reverseOutput(true); //don't forget to change! true - final, true - proto
 		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
 		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
 		leftMaster.setProfile(0);
@@ -145,15 +145,15 @@ public enum TorCAN
 	}
 	
 	public double getHeading(){
-		return (gyro.getAngle() * (Math.PI / 180)); // (units: radians)
+		return (-gyro.getAngle() * (Math.PI / 180)); // (units: radians)
 	}
 	public double getOmega(){
-		return (gyro.getRate()); // (units: radians (contrary to navX documentation))
+		return (-gyro.getRate()); // (units: radians (contrary to navX documentation))
 	}
 	
 	public void setTargets(double v, double omega){ 
-		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+		rightMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
 	public void resetEncoder(){

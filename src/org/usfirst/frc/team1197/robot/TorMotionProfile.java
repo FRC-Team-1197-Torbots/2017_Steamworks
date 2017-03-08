@@ -22,8 +22,7 @@ public enum TorMotionProfile
 	private double targetOmega;
 	private double targetAlpha;
 	private double targetHeading;
-
-
+	
 	//auto
 	private final double kPv = 0.0; //0.01
 	private final double kA = 0.0; //0.0
@@ -37,10 +36,10 @@ public enum TorMotionProfile
 	private final double ki = 10.0; //17.0
 	private final double kd = 0.5; //0.3
 	
-	//joystick
+	//maybe final bot's constants
 //	private final double kPv = 0.01; //0.01
 //	private final double kA = 0.0; //0.0
-//	private final double kP = 2.0;  //1.5
+//	private final double kP = 4.5;  //1.5
 //	private final double kI = 5.0;  //5.0
 //	private final double kD = 0.1;  //0.1
 //
@@ -49,7 +48,10 @@ public enum TorMotionProfile
 //	private final double kp = 9.0; //9.0
 //	private final double ki = 5.0; //5.0
 //	private final double kd = 0.1; //0.1
-
+//
+//	
+//	private final double minLineOutput = 0.0; //0.0
+//	private final double minTurnOutput = 0.1; //0.1
 	
 	private final double minLineOutput = 0.0; //0.0
 	private final double minTurnOutput = 0.0; //0.1

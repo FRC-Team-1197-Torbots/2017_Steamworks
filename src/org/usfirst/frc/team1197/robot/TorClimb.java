@@ -27,7 +27,7 @@ public class TorClimb {
 	
 	public void manualClimb(){
 		if(stick.getRawButton(6)){
-			climbTalon.set(1.0); //- for final, + for proto
+			climbTalon.set(-1.0); //- for final, + for proto
 		}
 		else{
 			climbTalon.set(0.0);
@@ -35,11 +35,11 @@ public class TorClimb {
 	}
 	
 	public void startClimb(){
-		climbTalon.set(1.0);
+		climbTalon.set(-1.0);
 	}
 	
 	public void reverseClimb(){
-		climbTalon.set(-1.0);
+		climbTalon.set(1.0);
 	}
 
 	public void stopClimb(){

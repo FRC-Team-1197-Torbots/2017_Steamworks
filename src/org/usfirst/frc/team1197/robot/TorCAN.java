@@ -149,6 +149,18 @@ public enum TorCAN
 		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
 	}
 	
+//	public double getHeading(){
+//		return (gyro.getAngle() * (Math.PI / 180)); // (units: radians)
+//	}
+//	public double getOmega(){
+//		return (gyro.getRate()); // (units: radians (contrary to navX documentation))
+//	}
+//	
+//	public void setTargets(double v, double omega){ 
+//		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+//		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);		
+//	}
+	
 	public void resetEncoder(){
 		rightMaster.setPosition(0);
 		leftMaster.setPosition(0);

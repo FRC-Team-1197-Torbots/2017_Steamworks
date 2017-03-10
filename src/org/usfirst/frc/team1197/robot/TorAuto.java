@@ -8,7 +8,7 @@ public class TorAuto {
 	private TorIntake intake;
 	private Joystick cypress;
 	
-	private TestAuto1 testAuto1;
+	//private TestAuto1 testAuto1;
 	
 	private BoilerPos1 boilerPos1;
 	private BoilerPos2 boilerPos2;
@@ -69,7 +69,7 @@ public class TorAuto {
 		centerPos1 = new CenterPos1();
 		centerPos2 = new CenterPos2();
 		
-		testAuto1 = new TestAuto1();
+		//testAuto1 = new TestAuto1();
 		
 		this.intake = intake;
 		this.gear = gear;
@@ -124,27 +124,28 @@ public class TorAuto {
 		float currentspeed = 0.0f;
 		float maxspeed = 0.6f;
 		
-		//float time = System.currentTimeMillis() + 12.0f;
-		//!!!!!!!!!!!!!!u ouhhhhhhhhhhmhleft faster than right
-		while(!end ) { // || time > System.currentTimeMillis()) {
+		float time = System.currentTimeMillis() + 12000;
+		//!!!!!!!!!!!!!!left faster than right
+		while(!end || time > System.currentTimeMillis()) { // || time > System.currentTimeMillis()) {
 			if(speedingup) {
 				
-				currentspeed += 0.0005f;
+				currentspeed += 0.0009f;
 				if(currentspeed >= maxspeed) {
 					speedingup = false;
 				}
 				
 			} else {
-				currentspeed -= 0.0005f;
+				currentspeed -= 0.0009f;
 				if(currentspeed <= 0.0f) {
 					currentspeed = 0.0f;
 				}
 			}
 			
-			TorCAN.INSTANCE.SetDrive(currentspeed, currentspeed);
+			TorCAN.INSTANCE.SetDrive(currentspeed * 0.95f, currentspeed);
 			
 			if(gear.gearOn()) {
 				gear.gearOpen();
+				Timer.delay(0.2);
 				//back up small amount
 				TorCAN.INSTANCE.SetDrive(-0.5f, -0.5f);
 				Timer.delay(0.5);

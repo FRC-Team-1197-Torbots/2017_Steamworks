@@ -12,20 +12,27 @@ public class TorGear {
 	private Joystick stick;
 	private long endTime = System.currentTimeMillis() - 10;
 	private long currentTime;
+	private boolean isOpen;
 
 	public TorGear(Solenoid gearPiston, DigitalInput gearSwitch, Joystick stick){
 		this.gearPiston = gearPiston;
 		this.gearSwitch = gearSwitch;
 		this.stick = stick;
+		isOpen = false;
 	}
 
-	public void Gear(){
+	public void Gear(){		
 		currentTime = System.currentTimeMillis();
-		if(gearSwitch.get()){
+		
+		
+		if(gearSwitch.get() && !isOpen){
 			gearOpen();
+			isOpen = true;
 			endTime = System.currentTimeMillis() + 1500;
 		}
-		else if(endTime < currentTime){
+		
+		if(endTime < currentTime){
+			isOpen = false;
 			gearClosed();
 		}
 	}

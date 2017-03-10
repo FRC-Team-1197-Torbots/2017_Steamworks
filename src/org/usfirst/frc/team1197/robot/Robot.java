@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.SampleRobot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -59,7 +61,7 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-    	drive.shiftToHighGear();
+    	drive.shiftToHighGear(); 
     	TorTrajectory.setRotationMirrored(!isRed());
     	auto.initialize();
     	auto.run();
@@ -79,7 +81,11 @@ public class Robot extends SampleRobot {
     public void test() {
 		while(isEnabled()){
 			compressor.start();
-			if(player2.getRawButton(1)){
+			
+			//System.out.println("R " + TorCAN.INSTANCE.getVelocity());
+			//System.out.println("L " + TorCAN.INSTANCE.getRightEncoder());
+			
+			/*if(player2.getRawButton(1)){
 				elevatorTalon1.set(1.0);
 			}
 			else if(player2.getRawButton(2)){
@@ -96,14 +102,14 @@ public class Robot extends SampleRobot {
 				elevatorTalon2.set(0.0);
 				dumperTalon.set(0.0);
 				climbTalon.set(0.0);
-			}
+			}*/
 		}
 	}
 
 	//Low-gear software wise, High-gear mechanically
 	public void disabled() {
 		drive.shiftToLowGear();
-		shift.set(false); 
+		shift.set(true); 
 		TorCAN.INSTANCE.SetDrive(0.0, 0.0);
 	}
 

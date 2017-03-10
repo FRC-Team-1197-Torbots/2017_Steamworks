@@ -24,17 +24,17 @@ public enum TorMotionProfile
 	private double targetHeading;
 	
 	//auto
-	private final double kPv = 0.0; //0.01
+	private final double kPv = 0.01; //0.01
 	private final double kA = 0.0; //0.0
-	private final double kP = 17.0;  //17.0
-	private final double kI = 6.0;  //9.0
-	private final double kD = 0.5;  //0.4
+	private final double kP = 4.5;  //17.0
+	private final double kI = 5.0;  //9.0
+	private final double kD = 0.1;  //0.4
 
-	private final double kpv = 0.0; //0.01
+	private final double kpv = 0.01; //0.01
 	private final double ka = 0.0; //0.02
-	private final double kp = 22.0; //20.0
-	private final double ki = 10.0; //17.0
-	private final double kd = 0.5; //0.3
+	private final double kp = 9.0; //20.0
+	private final double ki = 5.0; //17.0
+	private final double kd = 0.1; //0.3
 	
 	//maybe final bot's constants
 //	private final double kPv = 0.01; //0.01
@@ -54,7 +54,7 @@ public enum TorMotionProfile
 //	private final double minTurnOutput = 0.1; //0.1
 	
 	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.0; //0.1
+	private final double minTurnOutput = 0.1; //0.1
 
 	private double dt = 0.005;
 	
@@ -83,7 +83,7 @@ public enum TorMotionProfile
 		positionPID.setLimitMode(sensorLimitMode.Default);
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
-		positionPID.setPositionTolerance(0.05); 
+		positionPID.setPositionTolerance(0.0125); 
 		positionPID.setVelocityTolerance(0.0125);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
@@ -185,8 +185,8 @@ public enum TorMotionProfile
 			if(activeTrajectory != joystickTraj){
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
-//			graphLinear();
-//			graphRotational();
+			graphLinear();
+			graphRotational();
 			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
 		}
 		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){

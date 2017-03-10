@@ -10,7 +10,7 @@ public class TorDrive
 	private boolean isHighGear = true;
 	private Solenoid m_solenoidshift;
 	private Joystick cypress;
-	
+
 	private TorJoystickProfiles joystickProfile;
 	private double targetSpeed;
 	private double targetOmega;
@@ -18,12 +18,12 @@ public class TorDrive
 	private double halfTrackWidth = trackWidth / 2.0;
 	private double centerRadius = 0.0;
 	private double maxThrottle;
-	
+
 	private boolean buttonYlast;
 	private boolean buttonBlast;
 	private boolean buttonXlast;
 	private boolean buttonAlast;
-	
+
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
 			TorMotionProfile.INSTANCE.run();
@@ -35,36 +35,46 @@ public class TorDrive
 	{
 		TorCAN.INSTANCE.resetEncoder();
 		TorCAN.INSTANCE.resetHeading();
-		
+
 		this.cypress = cypress;
 		joystickProfile = new TorJoystickProfiles();
-		
+
 		maxThrottle = (0.75) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
-		
+
 		m_solenoidshift = shift;
 		mpNotifier.startPeriodic(0.005);
 	}
-	
+
 
 	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton, boolean rightBumper,
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
+		
 		//Only switch to carDrive in high gear
-		if(isHighGear){
+		if(isHighGear) {
+			ArcadeDrive(throttleAxis, arcadeSteerAxis);
+
+			if(shiftButton){
+				shiftToLowGear();
+			}	
+		} else {
+			
+			ArcadeDrive(throttleAxis, arcadeSteerAxis);
+			//When you hold down the shiftButton (left bumper), then shift to low gear.
+			if(!shiftButton){
+				shiftToArcadeHigh();
+			}
+		}
+	}
+		
+		
+		/*if(isHighGear){
 			if(cypress.getRawButton(1)){
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 				
-				if(shiftButton){
-					shiftToLowGear();
-				}
 			}
 			else{
-//				carDrive(throttleAxis, carSteerAxis);
-//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
-
-				//When you hold down the shiftButton (left bumper), then shift to low gear.
-				if(shiftButton){
-					shiftToLowGear();
-				}
+				//				carDrive(throttleAxis, carSteerAxis);
+				//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+				
 			}
 		}
 
@@ -72,7 +82,7 @@ public class TorDrive
 		else{
 			if(cypress.getRawButton(1)){
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
+
 				if(!shiftButton){
 					shiftToArcadeHigh();
 				}
@@ -85,9 +95,8 @@ public class TorDrive
 					shiftToHighGear();
 				}
 			}
-		}
-	}
-	
+		}*/
+
 	//Shifts the robot to high gear and change the talon's control mode to speed.
 	public void shiftToHighGear(){
 		if (!isHighGear){
@@ -97,7 +106,7 @@ public class TorDrive
 			TorMotionProfile.INSTANCE.setActive();
 		}
 	}
-	
+
 	//Shifts the robot to low gear and change the talon's control mode to percentVbus.
 	public void shiftToLowGear(){
 		if (isHighGear){
@@ -107,7 +116,7 @@ public class TorDrive
 			TorMotionProfile.INSTANCE.setInactive();
 		}
 	}
-	
+
 	public void shiftToArcadeHigh(){
 		if (!isHighGear){
 			m_solenoidshift.set(false);
@@ -136,7 +145,7 @@ public class TorDrive
 		} else {
 			throttleAxis = -(throttleAxis * throttleAxis);
 		}
-		
+
 		double rightMotorSpeed;
 		double leftMotorSpeed;
 
@@ -168,29 +177,29 @@ public class TorDrive
 		}
 		TorCAN.INSTANCE.SetDrive(rightMotorSpeed, leftMotorSpeed);
 	}
-	
+
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-			
+
 		}
 		else if(buttonX && !buttonXlast){
-			
+
 		}
 		else if(buttonY && !buttonYlast){
-			
+
 		}
 		else if(buttonA && !buttonAlast){
-			
+
 		}
 		else{
-			
+
 		}
 		buttonBlast = buttonB;
 		buttonYlast = buttonY;
 		buttonXlast = buttonX;
 		buttonAlast = buttonA;
 	}
-	
+
 	public void carDrive(double throttleAxis, double carSteeringAxis){
 		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
 		throttleAxis = -throttleAxis;

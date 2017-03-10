@@ -1,11 +1,14 @@
 package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class TorAuto {
 	private int position; //position goes from left to right
 	private TorIntake intake;
 	private Joystick cypress;
+	
+	private TestAuto1 testAuto1;
 	
 	private BoilerPos1 boilerPos1;
 	private BoilerPos2 boilerPos2;
@@ -18,11 +21,16 @@ public class TorAuto {
 	private CenterPos1 centerPos1;
 	private CenterPos2 centerPos2;
 	
+	
 	private TorGear gear;
 	
 	private long currentTime;
 	private long endTime = System.currentTimeMillis() - 10;
-	
+	public static enum TestAuto
+	{
+	IDLE,testAuto1;	
+	}
+	public TestAuto testAutoState = TestAuto.IDLE;
 	public static enum BOILERAUTO
 	{
 		IDLE, POS0, POS1, POS2, POS3, POS4, POS5;
@@ -46,7 +54,7 @@ public class TorAuto {
 		private CENTERAUTO() {}
 	}
 	public CENTERAUTO centerAutoState = CENTERAUTO.IDLE;
-	
+
 	public TorAuto(TorIntake intake, Joystick cypress, TorGear gear) {
 		this.cypress = cypress;
 		
@@ -60,6 +68,8 @@ public class TorAuto {
 		
 		centerPos1 = new CenterPos1();
 		centerPos2 = new CenterPos2();
+		
+		testAuto1 = new TestAuto1();
 		
 		this.intake = intake;
 		this.gear = gear;
@@ -84,6 +94,9 @@ public class TorAuto {
 	}
 	
 	public void run() {
+		
+//		center();
+//		System.out.println("center");
 		//use position to determine which auto to run
 		if(position < 0) {
 			//something bad
@@ -92,7 +105,7 @@ public class TorAuto {
 			boiler();
 		}
 		else if(position == 2){
-			center();
+//			center();
 		}
 		else if(position == 3){
 			loadStation();
@@ -104,14 +117,52 @@ public class TorAuto {
 	 *****************************************************/
 	
 	public void center() {
-		centerAutoState = CENTERAUTO.POS0;
+		boolean end = false;
+		
+		boolean speedingup = true;
+		
+		float currentspeed = 0.0f;
+		float maxspeed = 0.6f;
+		
+		//float time = System.currentTimeMillis() + 12.0f;
+		//!!!!!!!!!!!!!!u ouhhhhhhhhhhmhleft faster than right
+		while(!end ) { // || time > System.currentTimeMillis()) {
+			if(speedingup) {
+				
+				currentspeed += 0.0005f;
+				if(currentspeed >= maxspeed) {
+					speedingup = false;
+				}
+				
+			} else {
+				currentspeed -= 0.0005f;
+				if(currentspeed <= 0.0f) {
+					currentspeed = 0.0f;
+				}
+			}
+			
+			TorCAN.INSTANCE.SetDrive(currentspeed, currentspeed);
+			
+			if(gear.gearOn()) {
+				gear.gearOpen();
+				//back up small amount
+				TorCAN.INSTANCE.SetDrive(-0.5f, -0.5f);
+				Timer.delay(0.5);
+				TorCAN.INSTANCE.SetDrive(-0.0f, -0.0f);
+				gear.gearClosed();
+				end = false;
+			}
+		}
+
+		
+		/*centerAutoState = CENTERAUTO.POS0;
 		while(centerAutoState != CENTERAUTO.IDLE){
 			switch(centerAutoState){
 			case IDLE:
 				break;
 			case POS0:
-				TorMotionProfile.INSTANCE.executeTrajectory(centerPos1);
-				centerAutoState = CENTERAUTO.POS1;
+				TorMotionProfile.INSTANCE.executeTrajectory(testAuto1);
+				centerAutoState = CENTERAUTO.IDLE;
 				break;
 			case POS1:
 				gear.Gear();
@@ -126,7 +177,7 @@ public class TorAuto {
 				}
 				break;
 			}
-		}
+		}*/
 	}
 	
 	public void loadStation() {

@@ -11,13 +11,21 @@ public class TorAuto {
 	private BoilerPos2 boilerPos2;
 	private BoilerPos3 boilerPos3;
 	
+	private LoadingPos1 loadingPos1;
+	private LoadingPos2 loadingPos2;
+	private LoadingPos3 loadingPos3;
+	
+	private CenterPos1 centerPos1;
+	private CenterPos2 centerPos2;
+	
 	private TorGear gear;
 	
-	private GearBackTraj gearback;
+	private long currentTime;
+	private long endTime = System.currentTimeMillis() - 10;
 	
 	public static enum BOILERAUTO
 	{
-		IDLE, POS0, POS1, POS2, POS3, POS4;
+		IDLE, POS0, POS1, POS2, POS3, POS4, POS5;
 
 		private BOILERAUTO() {}
 	}
@@ -25,7 +33,7 @@ public class TorAuto {
 	
 	public static enum LOADSTATIONAUTO
 	{
-		IDLE, POS0, POS1, POS2;
+		IDLE, POS0, POS1, POS2, POS3;
 		
 		private LOADSTATIONAUTO() {}
 	}
@@ -41,10 +49,18 @@ public class TorAuto {
 	
 	public TorAuto(TorIntake intake, Joystick cypress, TorGear gear) {
 		this.cypress = cypress;
+		
 		boilerPos1 = new BoilerPos1();
 		boilerPos2 = new BoilerPos2();
 		boilerPos3 = new BoilerPos3();
-		gearback = new GearBackTraj();
+		
+		loadingPos1 = new LoadingPos1();
+		loadingPos2 = new LoadingPos2();
+		loadingPos3 = new LoadingPos3();
+		
+		centerPos1 = new CenterPos1();
+		centerPos2 = new CenterPos2();
+		
 		this.intake = intake;
 		this.gear = gear;
 	}
@@ -52,13 +68,13 @@ public class TorAuto {
 	public void initialize()
 	{
 		//determine the position of the robot
-		if(!cypress.getRawButton(1)  && cypress.getRawButton(2)){
+		if(!cypress.getRawButton(3)  && cypress.getRawButton(2)){
 			position = 1;
 		}
-		else if(!cypress.getRawButton(1) && !cypress.getRawButton(2)){
+		else if(!cypress.getRawButton(3) && !cypress.getRawButton(2)){
 			position = 2;
 		}
-		else if(cypress.getRawButton(1) && !cypress.getRawButton(2)){
+		else if(cypress.getRawButton(3) && !cypress.getRawButton(2)){
 			position = 3;
 		}
 		else{
@@ -92,18 +108,22 @@ public class TorAuto {
 		while(centerAutoState != CENTERAUTO.IDLE){
 			switch(centerAutoState){
 			case IDLE:
-				
 				break;
 			case POS0:
-				
+				TorMotionProfile.INSTANCE.executeTrajectory(centerPos1);
+				centerAutoState = CENTERAUTO.POS1;
 				break;
 			case POS1:
-				
+				gear.Gear();
+				if(centerPos1.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
+					centerAutoState = CENTERAUTO.POS2;
+				}
 				break;
 			case POS2:
-				
-				break;
-			case POS3:
+				if(centerPos2.isComplete()){
+					centerAutoState = CENTERAUTO.IDLE;
+				}
 				break;
 			}
 		}
@@ -114,16 +134,28 @@ public class TorAuto {
 		while(loadAutoState != LOADSTATIONAUTO.IDLE){
 			switch(loadAutoState){
 			case IDLE:
-				
 				break;
 			case POS0:
-				
+				TorMotionProfile.INSTANCE.executeTrajectory(loadingPos1);
+				loadAutoState = LOADSTATIONAUTO.POS1;
 				break;
 			case POS1:
-				
+				gear.Gear();
+				if(loadingPos1.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos2);
+					loadAutoState = LOADSTATIONAUTO.POS2;
+				}
 				break;
 			case POS2:
-				
+				if(loadingPos2.isComplete()){
+					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos3);
+					loadAutoState = LOADSTATIONAUTO.POS3;
+				}
+				break;
+			case POS3:
+				if(loadingPos3.isComplete()){
+					loadAutoState = LOADSTATIONAUTO.IDLE;
+				}
 				break;
 			}
 		}
@@ -142,21 +174,29 @@ public class TorAuto {
 			case POS1:
 				gear.Gear();
 				if(boilerPos1.isComplete()){
-					//deploy gear
-					TorMotionProfile.INSTANCE.executeTrajectory(gearback);
+					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
 				}
 				break;
 			case POS2:
-				if(gearback.isComplete()){
-					//dump balls
-//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
+				if(boilerPos2.isComplete()){
+					endTime = System.currentTimeMillis() + 1500;
 					boilerAutoState = BOILERAUTO.POS3;
 				}
+				break;
 			case POS3:
-//				if(boilerPos3.isComplete()){
+				currentTime = System.currentTimeMillis();
+				intake.DumpBalls();
+				if(endTime < currentTime){
+					intake.IntakeOff();
+					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
+					boilerAutoState = BOILERAUTO.POS4;
+				}
+				break;
+			case POS4:
+				if(boilerPos3.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;
-//				}
+				}
 				break;
 			}
 		}

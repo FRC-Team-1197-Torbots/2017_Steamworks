@@ -62,7 +62,7 @@ public class Robot extends SampleRobot {
     	drive = new TorDrive(player1, shift, autoBox);
     	climb = new TorClimb(climbTalon, climbSwitch, player2, lidar, drive);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
-    	gear = new TorGear(gearPiston, gearSwitch, player1, drive);
+    	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(intake, autoBox, gear);
     }
 

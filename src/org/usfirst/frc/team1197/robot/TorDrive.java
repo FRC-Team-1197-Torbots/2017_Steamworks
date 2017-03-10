@@ -69,24 +69,41 @@ public class TorDrive
 			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		//Only switch to carDrive in high gear
 		if(isHighGear){
-			carDrive(throttleAxis, carSteerAxis);
-//			buttonDrive(buttonA, buttonB, buttonX, buttonY);
+			if(cypress.getRawButton(1)){
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				
+				if(shiftButton){
+					shiftToLowGear();
+				}
+			}
+			else{
+//				carDrive(throttleAxis, carSteerAxis);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 
-			//When you hold down the shiftButton (left bumper), then shift to low gear.
-			if(shiftButton){
-				shiftToLowGear();
+				//When you hold down the shiftButton (left bumper), then shift to low gear.
+				if(shiftButton){
+					shiftToLowGear();
+				}
 			}
 		}
 
 		//Only switch to ArcadeDrive in low gear
 		else{
-			ArcadeDrive(throttleAxis, arcadeSteerAxis);
-
-			//When you release the shiftButton (left bumper), then shift to high gear.
-			if(!shiftButton){
-				shiftToHighGear();
+			if(cypress.getRawButton(1)){
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+				
+				if(!shiftButton){
+					shiftToArcadeHigh();
+				}
 			}
+			else{
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 
+				//When you release the shiftButton (left bumper), then shift to high gear.
+				if(!shiftButton){
+					shiftToHighGear();
+				}
+			}
 		}
 	}
 	
@@ -106,6 +123,15 @@ public class TorDrive
 			m_solenoidshift.set(true);
 			TorCAN.INSTANCE.choosePercentVbus();
 			isHighGear = false;
+			TorMotionProfile.INSTANCE.setInactive();
+		}
+	}
+	
+	public void shiftToArcadeHigh(){
+		if (!isHighGear){
+			m_solenoidshift.set(false);
+			TorCAN.INSTANCE.choosePercentVbus();
+			isHighGear = true;
 			TorMotionProfile.INSTANCE.setInactive();
 		}
 	}

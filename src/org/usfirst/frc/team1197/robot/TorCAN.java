@@ -8,6 +8,7 @@ import com.ctre.CANTalon.StatusFrameRate;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public enum TorCAN
 {
@@ -175,5 +176,123 @@ public enum TorCAN
 	
 	public double getSensorSpeed(){
 		return approximateSensorSpeed;
+	}
+	
+	public void testModeEnable(){
+		
+		rightMaster.reverseOutput(false); //don't forget to change! false - final, false - proto
+		rightSlave1.reverseOutput(false);
+		rightSlave2.reverseOutput(false);
+		leftMaster.reverseOutput(true); //don't forget to change! true - final, true - proto
+		leftSlave1.reverseOutput(true);
+		leftSlave1.reverseOutput(true);
+		
+		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
+		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
+		rightSlave1.configNominalOutputVoltage(+0.0f, -0.0f);
+		rightSlave1.configPeakOutputVoltage(+12.0f, -12.0f);
+		rightSlave2.configNominalOutputVoltage(+0.0f, -0.0f);
+		rightSlave2.configPeakOutputVoltage(+12.0f, -12.0f);
+		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
+		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
+		leftSlave1.configNominalOutputVoltage(+0.0f, -0.0f);
+		leftSlave1.configPeakOutputVoltage(+12.0f, -12.0f);
+		leftSlave2.configNominalOutputVoltage(+0.0f, -0.0f);
+		leftSlave2.configPeakOutputVoltage(+12.0f, -12.0f);
+
+		rightMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightSlave1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightSlave2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftSlave1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftSlave2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+	}
+	
+	public void testModeDisable(){
+		rightMaster.set(0.0);
+		rightSlave1.set(0.0);
+		rightSlave2.set(0.0);
+		leftMaster.set(0.0);
+		leftSlave1.set(0.0);
+		leftSlave2.set(0.0);
+		
+		rightMaster.reverseOutput(false); //don't forget to change! false - final, false - proto
+		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
+		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
+		rightMaster.setProfile(0);
+		rightMaster.setF(kF); 
+		rightMaster.setP(kP); 
+		rightMaster.setI(kI); 
+		rightMaster.setD(kD);
+
+		rightSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
+		rightSlave1.set(rightMaster.getDeviceID());
+		rightSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
+		rightSlave2.set(rightMaster.getDeviceID());
+		
+		leftMaster.reverseOutput(true); //don't forget to change! true - final, true - proto
+		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
+		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
+		leftMaster.setProfile(0);
+		leftMaster.setF(kF);  
+		leftMaster.setP(kP); 
+		leftMaster.setI(kI); 
+		leftMaster.setD(kD); 
+		
+		leftSlave1.changeControlMode(CANTalon.TalonControlMode.Follower);
+		leftSlave1.set(leftMaster.getDeviceID());
+		leftSlave2.changeControlMode(CANTalon.TalonControlMode.Follower);
+		leftSlave2.set(leftMaster.getDeviceID());
+	}
+	
+	public void testDrive(boolean leftMasterButton, boolean leftSlave1Button, boolean leftSlave2Button,
+			boolean rightMasterButton, boolean rightSlave1Button, boolean rightSlave2Button, double throttle) {
+		if (leftMasterButton)
+			leftMaster.set(throttle);
+		else
+			leftMaster.set(0.0);
+		if (leftSlave1Button)
+			leftSlave1.set(throttle);
+		else
+			leftSlave1.set(0.0);
+		
+		if (leftSlave2Button)
+			leftSlave2.set(throttle);
+		else
+			leftSlave2.set(0.0);
+		
+		if (rightMasterButton)
+			rightMaster.set(throttle);
+		else
+			rightMaster.set(0.0);
+		if (rightSlave1Button)
+			rightSlave1.set(throttle);
+		else
+			rightSlave1.set(0.0);
+		if (rightSlave2Button)
+			rightSlave2.set(throttle);
+		else
+			rightSlave2.set(0.0);
+		
+		double outputV,busV;
+		outputV = leftMaster.getOutputVoltage();
+		busV = leftMaster.getBusVoltage();
+		SmartDashboard.putNumber("leftMaster Output Percent", 100.0*outputV/busV);
+		outputV = leftSlave1.getOutputVoltage();
+		busV = leftSlave1.getBusVoltage();
+		SmartDashboard.putNumber("leftSlave1 Output Percent", 100.0*outputV/busV);
+		outputV = leftSlave2.getOutputVoltage();
+		busV = leftSlave2.getBusVoltage();
+		SmartDashboard.putNumber("leftSlave2 Output Percent", 100.0*outputV/busV);
+		
+		outputV = rightMaster.getOutputVoltage();
+		busV = rightMaster.getBusVoltage();
+		SmartDashboard.putNumber("rightMaster Output Percent", 100.0*outputV/busV);
+		outputV = rightSlave1.getOutputVoltage();
+		busV = rightSlave1.getBusVoltage();
+		SmartDashboard.putNumber("rightSlave1 Output Percent", 100.0*outputV/busV);
+		outputV = rightSlave2.getOutputVoltage();
+		busV = rightSlave2.getBusVoltage();
+		SmartDashboard.putNumber("rightSlave2 Output Percent", 100.0*outputV/busV);
 	}
 }

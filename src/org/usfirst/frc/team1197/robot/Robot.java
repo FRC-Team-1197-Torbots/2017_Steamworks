@@ -79,8 +79,18 @@ public class Robot extends SampleRobot {
     }
 
     public void test() {
+//    	TorCAN.INSTANCE.testModeEnable();
 		while(isEnabled()){
 			compressor.start();
+			// Throttle: left analog Y-axis
+			// leftMaster: left bumper
+			// leftSlave1: Y
+			// leftSlave2: X
+			// rightMaster: right bumper
+			// rightSlave1: A
+			// rightSlave2: B
+//			TorCAN.INSTANCE.testDrive(getShiftButton(), getButtonY(), getButtonX(), 
+//					getRightBumper(), getButtonB(), getButtonA(), getLeftY());
 			
 			//System.out.println("R " + TorCAN.INSTANCE.getVelocity());
 			//System.out.println("L " + TorCAN.INSTANCE.getRightEncoder());
@@ -104,6 +114,7 @@ public class Robot extends SampleRobot {
 				climbTalon.set(0.0);
 			}*/
 		}
+//    	TorCAN.INSTANCE.testModeDisable();
 	}
 
 	//Low-gear software wise, High-gear mechanically

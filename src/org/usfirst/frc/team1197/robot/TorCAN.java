@@ -283,8 +283,8 @@ public enum TorCAN
 		outputV = leftSlave2.getOutputVoltage();
 		busV = leftSlave2.getBusVoltage();
 		SmartDashboard.putNumber("leftSlave2 Output Percent", 100.0*outputV/busV);
-		SmartDashboard.putNumber("Left Encoder Position", leftMaster.getPosition() * 0.5 / encoderTicksPerMeter);
-		SmartDashboard.putNumber("Left Encoder Velocity", leftMaster.getSpeed() * 0.5 * 10 / encoderTicksPerMeter);
+		SmartDashboard.putNumber("Left Encoder Position", leftMaster.getPosition() / encoderTicksPerMeter);
+		SmartDashboard.putNumber("Left Encoder Velocity", leftMaster.getSpeed() * 10 / encoderTicksPerMeter);
 		
 		outputV = rightMaster.getOutputVoltage();
 		busV = rightMaster.getBusVoltage();
@@ -295,8 +295,8 @@ public enum TorCAN
 		outputV = rightSlave2.getOutputVoltage();
 		busV = rightSlave2.getBusVoltage();
 		SmartDashboard.putNumber("rightSlave2 Output Percent", 100.0*outputV/busV);
-		SmartDashboard.putNumber("Right Encoder Position", rightMaster.getPosition() * 0.5 / encoderTicksPerMeter);
-		SmartDashboard.putNumber("Right Encoder Velocity", rightMaster.getSpeed() * 0.5 * 10 / encoderTicksPerMeter);
+		SmartDashboard.putNumber("Right Encoder Position", rightMaster.getPosition() / encoderTicksPerMeter);
+		SmartDashboard.putNumber("Right Encoder Velocity", rightMaster.getSpeed() * 10 / encoderTicksPerMeter);
 		
 	}
 }

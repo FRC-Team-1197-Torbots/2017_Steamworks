@@ -79,6 +79,7 @@ public class Robot extends SampleRobot {
     }
 
     public void test() {
+//    	TorCAN.INSTANCE.resetEncoder();
 //    	TorCAN.INSTANCE.testModeEnable();
 		while(isEnabled()){
 			compressor.start();

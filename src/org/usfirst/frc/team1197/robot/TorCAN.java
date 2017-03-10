@@ -179,6 +179,12 @@ public enum TorCAN
 	}
 	
 	public void testModeEnable(){
+		rightMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightSlave1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightSlave2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftSlave1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftSlave2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		
 		rightMaster.reverseOutput(false); //don't forget to change! false - final, false - proto
 		rightSlave1.reverseOutput(false);
@@ -199,13 +205,6 @@ public enum TorCAN
 		leftSlave1.configPeakOutputVoltage(+12.0f, -12.0f);
 		leftSlave2.configNominalOutputVoltage(+0.0f, -0.0f);
 		leftSlave2.configPeakOutputVoltage(+12.0f, -12.0f);
-
-		rightMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		rightSlave1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		rightSlave2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		leftMaster.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		leftSlave1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		leftSlave2.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 	}
 	
 	public void testModeDisable(){
@@ -284,6 +283,8 @@ public enum TorCAN
 		outputV = leftSlave2.getOutputVoltage();
 		busV = leftSlave2.getBusVoltage();
 		SmartDashboard.putNumber("leftSlave2 Output Percent", 100.0*outputV/busV);
+		SmartDashboard.putNumber("Left Encoder Position", leftMaster.getPosition() * 0.5 / encoderTicksPerMeter);
+		SmartDashboard.putNumber("Left Encoder Velocity", leftMaster.getSpeed() * 0.5 * 10 / encoderTicksPerMeter);
 		
 		outputV = rightMaster.getOutputVoltage();
 		busV = rightMaster.getBusVoltage();
@@ -294,5 +295,8 @@ public enum TorCAN
 		outputV = rightSlave2.getOutputVoltage();
 		busV = rightSlave2.getBusVoltage();
 		SmartDashboard.putNumber("rightSlave2 Output Percent", 100.0*outputV/busV);
+		SmartDashboard.putNumber("Right Encoder Position", rightMaster.getPosition() * 0.5 / encoderTicksPerMeter);
+		SmartDashboard.putNumber("Right Encoder Velocity", rightMaster.getSpeed() * 0.5 * 10 / encoderTicksPerMeter);
+		
 	}
 }

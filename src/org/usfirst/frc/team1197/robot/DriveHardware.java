@@ -7,6 +7,7 @@ import com.ctre.CANTalon.StatusFrameRate;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class DriveHardware {
 
@@ -16,26 +17,26 @@ public class DriveHardware {
 	private final CANTalon leftMaster;
 	private final CANTalon leftSlave1;
 	private final CANTalon leftSlave2;
-
+	private final Solenoid solenoid;
 	private final AHRS gyro;
-	private final double encoderTicksPerMeter = 7110.6; // (units: ticks per meter)
-	private final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
-	private final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
+	private static final double encoderTicksPerMeter = 7110.6; // (units: ticks per meter)
+	private static final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
+	private static final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
+	
+	public static final double absoluteMaxSpeed = (approximateSensorSpeed * quadEncNativeUnits) 
+											/ (60 * encoderTicksPerMeter); // [meters/sec] (2017 robot: ~4.405 m/s)
+	public static final double trackWidth = 0.5786; // [meters] (0.5786m = 23.13")
+	public static final double halfTrackWidth = trackWidth / 2.0; // [meters]
+	public static final double backlash = 0.015; // [meters]
+	
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-
 	private final double kP = 1.0; // 1.5
 	private final double kI = 0.0; // 0.0
 	private final double kD = 50.0; // 30.0
 
-	private final double absoluteMaxSpeed = (approximateSensorSpeed * quadEncNativeUnits) 
-											/ (60 * encoderTicksPerMeter); // [meters/sec] (2017 robot: ~4.405 m/s)
-	private final double trackWidth = 0.5786; // [meters] (0.5786m = 23.13")
-	private final double halfTrackWidth = trackWidth / 2.0; // [meters]
-	private final double backlash = 0.015; // [meters]
-
 	public DriveHardware() {
 		gyro = new AHRS(SerialPort.Port.kMXP);
-
+		solenoid = new Solenoid(0);
 		leftSlave1 = new CANTalon(7); // 7
 		leftMaster = new CANTalon(8); // 8
 		leftSlave2 = new CANTalon(9); // 9
@@ -81,11 +82,14 @@ public class DriveHardware {
 
 		rightMaster.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
 		leftMaster.setStatusFrameRateMs(StatusFrameRate.QuadEncoder, 2);
+		
+		resetEncoder();
+		resetGyro();
 	}
 
-	public void SetDrive(double leftSpeed, double rightSpeed) {
-		SetLeft(-leftSpeed);
-		SetRight(rightSpeed);
+	public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
+		leftMaster.set(-leftSpeed);
+		rightMaster.set(rightSpeed);
 	}
 
 	// Setting the left master Talon's speed to the given parameter
@@ -163,7 +167,7 @@ public class DriveHardware {
 		leftMaster.setPosition(0);
 	}
 
-	public void resetHeading() {
+	public void resetGyro() {
 		gyro.reset();
 	}
 
@@ -177,5 +181,13 @@ public class DriveHardware {
 
 	public double getSensorSpeed() {
 		return approximateSensorSpeed;
+	}
+	
+	public void shiftToLowGear() {
+		solenoid.set(true);
+	}
+	
+	public void shiftToHighGear() {
+		solenoid.set(true);
 	}
 }

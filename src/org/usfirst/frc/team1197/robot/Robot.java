@@ -33,8 +33,11 @@ public class Robot extends SampleRobot {
 	private TorIntake intake;
 	private TorGear gear;
 	private TorAuto auto;
+	protected static RobotMode mode;
 	
     public Robot() {
+    	mode = RobotMode.DISABLED;
+    	
     	climbTalon = new CANTalon(10); 
     	dumperTalon = new CANTalon(4); 
     	elevatorTalon1 = new CANTalon(5); 
@@ -42,7 +45,6 @@ public class Robot extends SampleRobot {
     	
     	compressor = new Compressor();
     	
-    	shift = new Solenoid(0);
     	gearPiston = new Solenoid(1);
     	
     	player1 = new Joystick(0);
@@ -55,10 +57,12 @@ public class Robot extends SampleRobot {
     	climb = new TorClimb(climbTalon, player2);
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
-    	auto = new TorAuto(intake, autoBox, gear);
+    	auto = new TorAuto(drive, intake, autoBox, gear);
     }
 
     public void autonomous() {
+    	mode = RobotMode.AUTO;
+    	drive.enable();
 //    	drive.shiftToHighGear();
 //    	TorTrajectory.setRotationMirrored(!isRed());
 //    	auto.initialize();
@@ -66,7 +70,8 @@ public class Robot extends SampleRobot {
     }
 
     public void operatorControl() {
-    	drive.shiftToHighGear();
+    	mode = RobotMode.TELEOP;
+    	drive.enable();
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
@@ -77,6 +82,8 @@ public class Robot extends SampleRobot {
     }
 
     public void test() {
+    	mode = RobotMode.TELEOP;
+    	drive.enable();
 		while(isEnabled()){
 			compressor.start();
 			if(player2.getRawButton(1)){
@@ -102,10 +109,8 @@ public class Robot extends SampleRobot {
 
 	//Low-gear software wise, High-gear mechanically
 	public void disabled() {
-		// TODO: Replace with TorDrive.disable();
-//		drive.shiftToLowGear();
-//		shift.set(false); 
-//		DriveHardware.INSTANCE.SetDrive(0.0, 0.0);
+		mode = RobotMode.DISABLED;
+		drive.disable();
 	}
 
 	// Getting the left analog stick X-axis value from the xbox controller. 

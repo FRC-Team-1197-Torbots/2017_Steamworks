@@ -9,14 +9,17 @@ public class DriveController {
 	
 	public final DriveHardware hardware;
 	public final JoystickTrajectory joystickTraj;
-	private final TorPID positionPID;
-	private final TorPID headingPID;
+	private final TorPID translationPID;
+	private final TorPID rotationPID;
 
-	private boolean isActive = false;
+	private boolean enabled = true; // Safer to assume we're enabled
+	private boolean motionProfilingActive = false; 
+	protected boolean isHighGear;
+	protected boolean usingCarDriveForHighGear = false;
+	private TorTrajectory defaultTrajectory = null;
 	private TorTrajectory activeTrajectory = null;
 	private TorTrajectory nextTrajectory = null;
-	private TorTrajectory defaultTrajectory = null;
-	private final double timeInterval = 0.005;
+	
 
 	private double targetVelocity;
 	private double targetAcceleration;
@@ -59,103 +62,82 @@ public class DriveController {
 	private final double minLineOutput = 0.0; // 0.0
 	private final double minTurnOutput = 0.0; // 0.1
 
-	private double dt = 0.005;
-
+	private final double timeInterval = 0.005;
+	private double dt = timeInterval;
 	private long currentTime;
 	private long lastTime;
 	private long lookupTime;
 	private long startTime;
 
-	protected static double positionWaypoint;
-	protected static double headingWaypoint;
+	protected double positionWaypoint;
+	protected double headingWaypoint;
 
 	public DriveController() {
 		hardware = new DriveHardware();
 		joystickTraj = new JoystickTrajectory();
-		positionPID = new TorPID(dt);
-		headingPID = new TorPID(dt);
+		translationPID = new TorPID(dt);
+		rotationPID = new TorPID(dt);
 
 		defaultTrajectory = joystickTraj;
 
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 
-		positionPID.setLimitMode(sensorLimitMode.Default);
-		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
-		positionPID.setBacklash(0.0);
-		positionPID.setPositionTolerance(0.05);
-		positionPID.setVelocityTolerance(0.0125);
-		positionPID.setMinimumOutput(minLineOutput);
-		positionPID.setkP(kP);
-		positionPID.setkI(kI);
-		positionPID.setkD(kD);
-		positionPID.setkPv(kPv);
-		positionPID.setkA(kA);
+		translationPID.setLimitMode(sensorLimitMode.Default);
+		translationPID.setNoiseMode(sensorNoiseMode.Noisy);
+		translationPID.setBacklash(0.0);
+		translationPID.setPositionTolerance(0.05);
+		translationPID.setVelocityTolerance(0.0125);
+		translationPID.setMinimumOutput(minLineOutput);
+		translationPID.setkP(kP);
+		translationPID.setkI(kI);
+		translationPID.setkD(kD);
+		translationPID.setkPv(kPv);
+		translationPID.setkA(kA);
 
-		headingPID.setLimitMode(sensorLimitMode.Coterminal);
-		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
-		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.0125);
-		headingPID.setVelocityTolerance(0.0125);
-		headingPID.setMinimumOutput(minTurnOutput);
-		headingPID.setkP(kp);
-		headingPID.setkI(ki);
-		headingPID.setkD(kd);
-		headingPID.setkPv(kpv);
-		headingPID.setkA(ka);
-	}
-
-	public void loadTrajectory(TorTrajectory traj) {
-		nextTrajectory = traj;
-	}
-
-	public void setActive() {
-		activeTrajectory = defaultTrajectory;
-		nextTrajectory = defaultTrajectory;
+		rotationPID.setLimitMode(sensorLimitMode.Coterminal);
+		rotationPID.setNoiseMode(sensorNoiseMode.Noisy);
+		rotationPID.setBacklash(0.0);
+		rotationPID.setPositionTolerance(0.0125);
+		rotationPID.setVelocityTolerance(0.0125);
+		rotationPID.setMinimumOutput(minTurnOutput);
+		rotationPID.setkP(kp);
+		rotationPID.setkI(ki);
+		rotationPID.setkD(kd);
+		rotationPID.setkPv(kpv);
+		rotationPID.setkA(ka);
+		
 		resetPID();
-		isActive = true;
+		resetWaypoints();
+		disable();
 	}
-
-	public void setInactive() {
-		isActive = false;
-		activeTrajectory = defaultTrajectory;
-		nextTrajectory = defaultTrajectory;
-	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public double getTimeInterval() {
-		return timeInterval;
-	}
-
+	
 	public void run() {
 		currentTime = System.currentTimeMillis();
 		dt = (currentTime - lastTime) * 0.001;
 		lastTime = currentTime;
-		currentTime = (currentTime - (currentTime % ((long) (getTimeInterval() * 1000))));
+		currentTime = (currentTime - (currentTime % ((long) (timeInterval * 1000))));
 		lookupTime = currentTime - startTime;
-		positionPID.updateDt(dt);
-		headingPID.updateDt(dt);
+		translationPID.updateDt(dt);
+		rotationPID.updateDt(dt);
 		joystickTraj.updateDt(dt);
 
-		// Position
-		positionPID.updatePosition(hardware.getPosition());
-		positionPID.updateVelocity(hardware.getVelocity());
+		// Translation
+		translationPID.updatePosition(hardware.getPosition());
+		translationPID.updateVelocity(hardware.getVelocity());
 
-		// Heading
-		headingPID.updatePosition(hardware.getHeading());
-		headingPID.updateVelocity(hardware.getOmega());
+		// Rotaion
+		rotationPID.updatePosition(hardware.getHeading());
+		rotationPID.updateVelocity(hardware.getOmega());
 
-		if (isActive) {
+		if (motionProfilingActive) {
 			if (activeTrajectory == joystickTraj) {
 				joystickTraj.updateVelocity();
 				joystickTraj.updateOmega();
 			}
 		} else {
-			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(),
-					headingPID.velocity());
+			joystickTraj.setState(translationPID.position(), translationPID.velocity(),
+					rotationPID.position(), rotationPID.velocity());
 		}
 
 		targetPosition = activeTrajectory.lookUpPosition(lookupTime);
@@ -165,9 +147,9 @@ public class DriveController {
 		targetVelocity = activeTrajectory.lookUpVelocity(lookupTime);
 		targetAcceleration = activeTrajectory.lookUpAcceleration(lookupTime);
 
-		positionPID.updatePositionTarget(targetPosition);
-		positionPID.updateVelocityTarget(targetVelocity);
-		positionPID.updateAccelerationTarget(targetAcceleration);
+		translationPID.updatePositionTarget(targetPosition);
+		translationPID.updateVelocityTarget(targetVelocity);
+		translationPID.updateAccelerationTarget(targetAcceleration);
 
 		targetHeading = activeTrajectory.lookUpHeading(lookupTime);
 		if (activeTrajectory != joystickTraj) {
@@ -176,22 +158,22 @@ public class DriveController {
 		targetOmega = activeTrajectory.lookUpOmega(lookupTime);
 		targetAlpha = activeTrajectory.lookUpAlpha(lookupTime);
 
-		headingPID.updatePositionTarget(targetHeading);
-		headingPID.updateVelocityTarget(targetOmega);
-		headingPID.updateAccelerationTarget(targetAlpha);
+		rotationPID.updatePositionTarget(targetHeading);
+		rotationPID.updateVelocityTarget(targetOmega);
+		rotationPID.updateAccelerationTarget(targetAlpha);
 
-		positionPID.update();
-		headingPID.update();
+		translationPID.update();
+		rotationPID.update();
 
-		if (isActive) {
+		if (motionProfilingActive) {
 			if (activeTrajectory != joystickTraj) {
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
-			// graphLinear();
-			// graphRotational();
-			hardware.setTargets(positionPID.output(), headingPID.output());
+			// graphTranslation();
+			// graphRotationl();
+			hardware.setTargets(translationPID.output(), rotationPID.output());
 		}
-		if (activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()) {
+		if (activeTrajectory.lookUpIsLast(lookupTime) && translationPID.isOnTarget() && rotationPID.isOnTarget()) {
 			startTime = currentTime;
 			if (!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)) {
 				positionWaypoint = targetPosition;
@@ -204,43 +186,131 @@ public class DriveController {
 		}
 	}
 
-	public void graphLinear() {
+	public void loadTrajectory(TorTrajectory traj) {
+		nextTrajectory = traj;
+		traj.setComplete(false);
+	}
+	
+	public void setTargets(double a, double b) {
+		if (motionProfilingActive) {
+			if(activeTrajectory == joystickTraj) {
+				joystickTraj.setTargets(a, b);
+			}
+		} else {
+			hardware.setMotorSpeeds(a, b);
+		}
+	}
+
+	public void setMotionProfilingActive() {
+		motionProfilingActive = true;
+		activeTrajectory = defaultTrajectory;
+		nextTrajectory = defaultTrajectory;
+		resetPID();
+		hardware.chooseVelocityControl();
+	}
+
+	public void setMotionProfilingInactive() {
+		motionProfilingActive = false;
+		activeTrajectory = defaultTrajectory;
+		nextTrajectory = defaultTrajectory;
+		hardware.choosePercentVbus();
+	}
+
+	public boolean motionProfilingActive() {
+		return motionProfilingActive;
+	}
+
+	// Shifts the robot to high gear and sets motion profiling to active.
+	public void shiftToHighGear(){
+		if (!isHighGear){
+			isHighGear = true;
+			hardware.shiftToHighGear();
+			if (motionProfilingActive) {
+				System.err.println("Error: expected inactive motion profiling before transition to high gear.");
+				// If this happens, something went wrong.
+			} else {
+				if (!usingCarDriveForHighGear && Robot.mode == RobotMode.TELEOP) {
+					// If we're in teleop but we're not supposed to be using
+					// carDrive for high gear, don't turn on motion profiling.
+				} else {
+					setMotionProfilingActive();
+				}
+			}
+		}
+	}
+	
+	// Shifts the robot to low gear and sets motion profiling to inactive.
+	public void shiftToLowGear(){
+		if (isHighGear){
+			isHighGear = false;
+			hardware.shiftToLowGear();
+			if (motionProfilingActive) {
+				setMotionProfilingInactive();
+			}
+		}
+	}
+	
+	public void useCarDriveInHighGear(boolean b){
+		usingCarDriveForHighGear = b;
+		if (usingCarDriveForHighGear 
+				&& Robot.mode == RobotMode.TELEOP 
+				&& isHighGear 
+				&& !motionProfilingActive) {
+			setMotionProfilingActive();
+		} else if (!usingCarDriveForHighGear 
+				&& Robot.mode == RobotMode.TELEOP 
+				&& isHighGear 
+				&& motionProfilingActive) {
+			setMotionProfilingInactive();
+		}
+	}
+	
+	public void enable() {
+		if (enabled) {
+			disable(); //Guarantee safe transition between AUTO/TELEOP/TEST.
+		}
+		enabled  = true;
+		isHighGear = false;
+		shiftToHighGear();
+	}
+
+	public void disable() {
+		enabled = false;
+		if (motionProfilingActive) {
+			setMotionProfilingInactive();
+		}
+		hardware.shiftToHighGear(); // Stay in high gear mechanically since that's the default.
+		hardware.setMotorSpeeds(0.0, 0.0);
+	}
+
+	public void graphTranslation() {
 		SmartDashboard.putNumber("targetVelocity", targetVelocity);
 		SmartDashboard.putNumber("targetAcceleration", targetAcceleration);
 		SmartDashboard.putNumber("targetPosition", targetPosition);
-		SmartDashboard.putNumber("currentVelocity", positionPID.velocity());
-		SmartDashboard.putNumber("currentAcceleration", positionPID.acceleration());
-		SmartDashboard.putNumber("currentPosition", positionPID.position());
-		SmartDashboard.putNumber("dDispErrordt", positionPID.dErrodt());
-		SmartDashboard.putNumber("positionError", positionPID.error());
+		SmartDashboard.putNumber("currentVelocity", translationPID.velocity());
+		SmartDashboard.putNumber("currentAcceleration", translationPID.acceleration());
+		SmartDashboard.putNumber("currentPosition", translationPID.position());
+		SmartDashboard.putNumber("dDispErrordt", translationPID.dErrodt());
+		SmartDashboard.putNumber("positionError", translationPID.error());
 	}
 
-	public void graphRotational() {
+	public void graphRotation() {
 		SmartDashboard.putNumber("targetOmega", targetOmega);
 		SmartDashboard.putNumber("targetAlpha", targetAlpha);
 		SmartDashboard.putNumber("targetHeading", targetHeading);
-		SmartDashboard.putNumber("currentOmega", headingPID.velocity());
-		SmartDashboard.putNumber("currentAlpha", headingPID.acceleration());
-		SmartDashboard.putNumber("currentHeading", headingPID.position());
+		SmartDashboard.putNumber("currentOmega", rotationPID.velocity());
+		SmartDashboard.putNumber("currentAlpha", rotationPID.acceleration());
+		SmartDashboard.putNumber("currentHeading", rotationPID.position());
 		SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
-		SmartDashboard.putNumber("headingError", headingPID.error());
+		SmartDashboard.putNumber("headingError", rotationPID.error());
 	}
 
-	public void executeTrajectory(TorTrajectory traj) {
-		loadTrajectory(traj);
-		traj.setComplete(false);
+	public boolean onTargetTranslation() {
+		return translationPID.isOnTarget();
 	}
 
-	public boolean isComplete() {
-		return (activeTrajectory == defaultTrajectory);
-	}
-
-	public boolean dispOnTarget() {
-		return positionPID.isOnTarget();
-	}
-
-	public boolean headOnTarget() {
-		return headingPID.isOnTarget();
+	public boolean onTargetRotation() {
+		return rotationPID.isOnTarget();
 	}
 
 	public void resetWaypoints() {
@@ -249,7 +319,7 @@ public class DriveController {
 	}
 
 	public void resetPID() {
-		headingPID.reset();
-		positionPID.reset();
+		rotationPID.reset();
+		translationPID.reset();
 	}
 }

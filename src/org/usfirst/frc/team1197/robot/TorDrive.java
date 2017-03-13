@@ -8,16 +8,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TorDrive
 {	
 	public final DriveController controller;
-	private boolean isHighGear = true;
-	private Solenoid m_solenoidshift;
 	private Joystick cypress;
-	
 	private TorJoystickProfiles joystickProfile;
+
 	private double targetSpeed;
 	private double targetOmega;
-	private double trackWidth = 0.5715; //meters, in inches 22.5
-	private double halfTrackWidth = trackWidth / 2.0;
-	private double centerRadius = 0.0;
+	private double centerRadius;
 	private double maxThrottle;
 	
 	private boolean buttonYlast;
@@ -34,95 +30,49 @@ public class TorDrive
 
 	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
-		// DriveHardware.INSTANCE.resetEncoder(); TODO: move to DriveController
-		// DriveHardware.INSTANCE.resetHeading(); TODO: move to DriveController
 		controller = new DriveController();
 		this.cypress = cypress;
 		joystickProfile = new TorJoystickProfiles();
-		
-		maxThrottle = (0.75) * (joystickProfile.getMinTurnRadius() / (joystickProfile.getMinTurnRadius() + halfTrackWidth));
-		
-		m_solenoidshift = shift;
+		//TODO: Use static final in TorJoystickProfile, then remove maxThrottle initialization from the constructor.
+		maxThrottle = (0.75) * (joystickProfile.getMinTurnRadius() 
+				/ (joystickProfile.getMinTurnRadius() + DriveHardware.halfTrackWidth));
 		mpNotifier.startPeriodic(0.005);
 	}
-	
 
-	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton, boolean rightBumper,
-			boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
-		//Only switch to carDrive in high gear
-		if(isHighGear){
-			if(cypress.getRawButton(1)){
+	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton,
+			boolean rightBumper, boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY) {
+		// Tell the drive controller whether to use car drive in high gear.
+		controller.useCarDriveInHighGear(cypress.getRawButton(1));
+		if (controller.isHighGear) {
+			if (!controller.usingCarDriveForHighGear) {
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				if(shiftButton){
-					shiftToLowGear();
-				}
-			}
-			else{
-//				carDrive(throttleAxis, carSteerAxis);
+			} else {
+				carDrive(throttleAxis, carSteerAxis);
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
-
-				//When you hold down the shiftButton (left bumper), then shift to low gear.
-				if(shiftButton){
-					shiftToLowGear();
-				}
 			}
-		}
-
-		//Only switch to ArcadeDrive in low gear
-		else{
-			if(cypress.getRawButton(1)){
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-				
-				if(!shiftButton){
-					shiftToArcadeHigh();
-				}
+			// When you hold down the shiftButton (left bumper), then shift to low gear.
+			if (shiftButton) {
+				controller.shiftToLowGear();
 			}
-			else{
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-
-				//When you release the shiftButton (left bumper), then shift to high gear.
-				if(!shiftButton){
-					shiftToHighGear();
-				}
+		} else {
+			ArcadeDrive(throttleAxis, arcadeSteerAxis);
+			// When you release the shiftButton (left bumper), then shift to high gear.
+			if (!shiftButton) {
+				controller.shiftToHighGear();
 			}
 		}
 	}
 	
-	//Shifts the robot to high gear and change the talon's control mode to speed.
-	public void shiftToHighGear(){
-		if (!isHighGear){
-			// TODO: Replace with DriveController.shiftToHighGear()
-//			m_solenoidshift.set(false);
-//			DriveHardware.INSTANCE.chooseVelocityControl();
-//			isHighGear = true;
-//			controller.setActive();
-		}
+	public void enable() {
+		controller.enable();
 	}
-	
-	//Shifts the robot to low gear and change the talon's control mode to percentVbus.
-	public void shiftToLowGear(){
-		if (isHighGear){
-			// TODO: Replace with DriveController.shiftToLowGear()
-//			m_solenoidshift.set(true);
-//			DriveHardware.INSTANCE.choosePercentVbus();
-//			isHighGear = false;
-//			controller.setInactive();
-		}
-	}
-	
-	public void shiftToArcadeHigh(){
-		if (!isHighGear){
-			// TODO: replace with DriveController.shiftToHighGear()
-//			m_solenoidshift.set(false);
-//			DriveHardware.INSTANCE.choosePercentVbus();
-//			isHighGear = true;
-//			controller.setInactive();
-		}
+
+	public void disable() {
+		controller.disable();
 	}
 
 	public void ArcadeDrive(double throttleAxis, double arcadeSteerAxis){
-		throttleAxis = -throttleAxis;
+		throttleAxis = -throttleAxis; // TODO: see below.
 		if (Math.abs(arcadeSteerAxis) <= 0.1) {
 			arcadeSteerAxis = 0.0D;
 		}
@@ -170,10 +120,10 @@ public class TorDrive
 				rightMotorSpeed = -Math.max(-throttleAxis, -arcadeSteerAxis);
 			}
 		}
-		// TODO: Replace with DriveController.setTargets();
-//		DriveHardware.INSTANCE.SetDrive(rightMotorSpeed, leftMotorSpeed);
+		controller.setTargets(rightMotorSpeed, leftMotorSpeed); // TODO: This is what it was till now. Fix sign issue pls?
+//		controller.setTargets(leftMotorSpeed, rightMotorSpeed); // (Let's switch to this and use TorJoystickProfiles if we can)
 	}
-	
+
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
 			
@@ -198,11 +148,10 @@ public class TorDrive
 	
 	public void carDrive(double throttleAxis, double carSteeringAxis){
 		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
+		//TODO: Shouldn't the signs be settled before we get to this point??? (fix in TorJoystickProfiles, not here)
 		throttleAxis = -throttleAxis;
 		carSteeringAxis = -carSteeringAxis;
-
-		// TODO: since this is linear, move it to DriveController.
-//		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * DriveHardware.INSTANCE.absoluteMaxSpeed();
+		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * DriveHardware.absoluteMaxSpeed;
 		targetSpeed *= maxThrottle;
 
 		/* The centerRadius is the value we gain from findRadiusExponential method in the joystickProfile class.
@@ -220,8 +169,15 @@ public class TorDrive
 		}
 
 		// Setting the joystick trajectory targets so that it actually drives:
-		controller.joystickTraj.setTargets(targetSpeed, targetOmega); // TODO: repace with controller.setTargets()
-		SmartDashboard.putNumber("targetSpeed", targetSpeed);
+		controller.setTargets(targetSpeed, targetOmega); // TODO: replace with controller.setTargets()
+	}
+
+	public void executeTrajectory(TorTrajectory traj) {
+		if (controller.motionProfilingActive()) {
+			controller.loadTrajectory(traj);
+		} else {
+			System.err.println("ERROR: Could not execute trajectory with motion profiling inactive.");
+		}
 	}
 
 }

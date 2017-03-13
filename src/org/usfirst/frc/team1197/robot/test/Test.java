@@ -4,7 +4,7 @@ public abstract class Test {
 	
 	enum Result {PASS, FAIL};
 
-	public Test(Object objectToTest) {
+	public Test() {
 	}
 	
 	public abstract Result run();

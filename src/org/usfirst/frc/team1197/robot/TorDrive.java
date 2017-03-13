@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TorDrive
 {	
+	public final DriveController controller;
 	private boolean isHighGear = true;
 	private Solenoid m_solenoidshift;
 	private Joystick cypress;
@@ -26,16 +27,16 @@ public class TorDrive
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
-			TorMotionProfile.INSTANCE.run();
+			controller.run();
 		}
 	}
 	Notifier mpNotifier = new Notifier(new PeriodicRunnable());
 
 	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
-		TorCAN.INSTANCE.resetEncoder();
-		TorCAN.INSTANCE.resetHeading();
-		
+		// DriveHardware.INSTANCE.resetEncoder(); TODO: move to DriveController
+		// DriveHardware.INSTANCE.resetHeading(); TODO: move to DriveController
+		controller = new DriveController();
 		this.cypress = cypress;
 		joystickProfile = new TorJoystickProfiles();
 		
@@ -91,29 +92,32 @@ public class TorDrive
 	//Shifts the robot to high gear and change the talon's control mode to speed.
 	public void shiftToHighGear(){
 		if (!isHighGear){
-			m_solenoidshift.set(false);
-			TorCAN.INSTANCE.chooseVelocityControl();
-			isHighGear = true;
-			TorMotionProfile.INSTANCE.setActive();
+			// TODO: Replace with DriveController.shiftToHighGear()
+//			m_solenoidshift.set(false);
+//			DriveHardware.INSTANCE.chooseVelocityControl();
+//			isHighGear = true;
+//			controller.setActive();
 		}
 	}
 	
 	//Shifts the robot to low gear and change the talon's control mode to percentVbus.
 	public void shiftToLowGear(){
 		if (isHighGear){
-			m_solenoidshift.set(true);
-			TorCAN.INSTANCE.choosePercentVbus();
-			isHighGear = false;
-			TorMotionProfile.INSTANCE.setInactive();
+			// TODO: Replace with DriveController.shiftToLowGear()
+//			m_solenoidshift.set(true);
+//			DriveHardware.INSTANCE.choosePercentVbus();
+//			isHighGear = false;
+//			controller.setInactive();
 		}
 	}
 	
 	public void shiftToArcadeHigh(){
 		if (!isHighGear){
-			m_solenoidshift.set(false);
-			TorCAN.INSTANCE.choosePercentVbus();
-			isHighGear = true;
-			TorMotionProfile.INSTANCE.setInactive();
+			// TODO: replace with DriveController.shiftToHighGear()
+//			m_solenoidshift.set(false);
+//			DriveHardware.INSTANCE.choosePercentVbus();
+//			isHighGear = true;
+//			controller.setInactive();
 		}
 	}
 
@@ -166,7 +170,8 @@ public class TorDrive
 				rightMotorSpeed = -Math.max(-throttleAxis, -arcadeSteerAxis);
 			}
 		}
-		TorCAN.INSTANCE.SetDrive(rightMotorSpeed, leftMotorSpeed);
+		// TODO: Replace with DriveController.setTargets();
+//		DriveHardware.INSTANCE.SetDrive(rightMotorSpeed, leftMotorSpeed);
 	}
 	
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
@@ -196,7 +201,8 @@ public class TorDrive
 		throttleAxis = -throttleAxis;
 		carSteeringAxis = -carSteeringAxis;
 
-		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * TorCAN.INSTANCE.absoluteMaxSpeed();
+		// TODO: since this is linear, move it to DriveController.
+//		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * DriveHardware.INSTANCE.absoluteMaxSpeed();
 		targetSpeed *= maxThrottle;
 
 		/* The centerRadius is the value we gain from findRadiusExponential method in the joystickProfile class.
@@ -214,7 +220,7 @@ public class TorDrive
 		}
 
 		// Setting the joystick trajectory targets so that it actually drives:
-		TorMotionProfile.INSTANCE.joystickTraj.setTargets(targetSpeed, targetOmega);
+		controller.joystickTraj.setTargets(targetSpeed, targetOmega); // TODO: repace with controller.setTargets()
 		SmartDashboard.putNumber("targetSpeed", targetSpeed);
 	}
 

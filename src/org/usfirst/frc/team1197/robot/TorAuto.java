@@ -110,13 +110,15 @@ public class TorAuto {
 			case IDLE:
 				break;
 			case POS0:
-				TorMotionProfile.INSTANCE.executeTrajectory(centerPos1);
+				// TODO: replace with drive.executeTrajectory()
+//				TorMotionProfile.INSTANCE.executeTrajectory(centerPos1);
 				centerAutoState = CENTERAUTO.POS1;
 				break;
 			case POS1:
 				gear.Gear();
 				if(centerPos1.isComplete()){
-					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
+					// TODO: replace with drive.executeTrajectory()
+//					TorMotionProfile.INSTANCE.executeTrajectory(centerPos2);
 					centerAutoState = CENTERAUTO.POS2;
 				}
 				break;
@@ -136,19 +138,22 @@ public class TorAuto {
 			case IDLE:
 				break;
 			case POS0:
-				TorMotionProfile.INSTANCE.executeTrajectory(loadingPos1);
+				// TODO: replace with drive.executeTrajectory()
+//				TorMotionProfile.INSTANCE.executeTrajectory(loadingPos1);
 				loadAutoState = LOADSTATIONAUTO.POS1;
 				break;
 			case POS1:
 				gear.Gear();
 				if(loadingPos1.isComplete()){
-					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos2);
+					// TODO: replace with drive.executeTrajectory()
+//					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos2);
 					loadAutoState = LOADSTATIONAUTO.POS2;
 				}
 				break;
 			case POS2:
 				if(loadingPos2.isComplete()){
-					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos3);
+					// TODO: replace with drive.executeTrajectory()
+//					TorMotionProfile.INSTANCE.executeTrajectory(loadingPos3);
 					loadAutoState = LOADSTATIONAUTO.POS3;
 				}
 				break;
@@ -168,13 +173,15 @@ public class TorAuto {
 			case IDLE:
 				break;
 			case POS0:
-				TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
+				// TODO: replace with drive.executeTrajectory()
+//				TorMotionProfile.INSTANCE.executeTrajectory(boilerPos1);
 				boilerAutoState = BOILERAUTO.POS1;
 				break;
 			case POS1:
 				gear.Gear();
 				if(boilerPos1.isComplete()){
-					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
+					// TODO: replace with drive.executeTrajectory()
+//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
 				}
 				break;
@@ -189,7 +196,8 @@ public class TorAuto {
 				intake.DumpBalls();
 				if(endTime < currentTime){
 					intake.IntakeOff();
-					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
+					// TODO: replace with drive.executeTrajectory()
+//					TorMotionProfile.INSTANCE.executeTrajectory(boilerPos3);
 					boilerAutoState = BOILERAUTO.POS4;
 				}
 				break;

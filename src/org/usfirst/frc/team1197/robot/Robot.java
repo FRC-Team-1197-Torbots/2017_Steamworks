@@ -102,9 +102,10 @@ public class Robot extends SampleRobot {
 
 	//Low-gear software wise, High-gear mechanically
 	public void disabled() {
-		drive.shiftToLowGear();
-		shift.set(false); 
-		TorCAN.INSTANCE.SetDrive(0.0, 0.0);
+		// TODO: Replace with TorDrive.disable();
+//		drive.shiftToLowGear();
+//		shift.set(false); 
+//		DriveHardware.INSTANCE.SetDrive(0.0, 0.0);
 	}
 
 	// Getting the left analog stick X-axis value from the xbox controller. 

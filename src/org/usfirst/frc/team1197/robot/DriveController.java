@@ -5,85 +5,85 @@ import org.usfirst.frc.team1197.robot.TorPID.sensorNoiseMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public enum TorMotionProfile 
-{
-	INSTANCE;
+public class DriveController {
 	
+	public final DriveHardware hardware;
+	public final JoystickTrajectory joystickTraj;
+	private final TorPID positionPID;
+	private final TorPID headingPID;
+
 	private boolean isActive = false;
 	private TorTrajectory activeTrajectory = null;
 	private TorTrajectory nextTrajectory = null;
 	private TorTrajectory defaultTrajectory = null;
 	private final double timeInterval = 0.005;
-	
+
 	private double targetVelocity;
 	private double targetAcceleration;
 	private double targetPosition;
-	
+
 	private double targetOmega;
 	private double targetAlpha;
 	private double targetHeading;
-	
-	//auto
-	private final double kPv = 0.0; //0.01
-	private final double kA = 0.0; //0.0
-	private final double kP = 17.0;  //17.0
-	private final double kI = 6.0;  //9.0
-	private final double kD = 0.5;  //0.4
 
-	private final double kpv = 0.0; //0.01
-	private final double ka = 0.0; //0.02
-	private final double kp = 22.0; //20.0
-	private final double ki = 10.0; //17.0
-	private final double kd = 0.5; //0.3
-	
-	//maybe final bot's constants
-//	private final double kPv = 0.01; //0.01
-//	private final double kA = 0.0; //0.0
-//	private final double kP = 4.5;  //1.5
-//	private final double kI = 5.0;  //5.0
-//	private final double kD = 0.1;  //0.1
-//
-//	private final double kpv = 0.01; //0.01
-//	private final double ka = 0.0; //0.0
-//	private final double kp = 9.0; //9.0
-//	private final double ki = 5.0; //5.0
-//	private final double kd = 0.1; //0.1
-//
-//	
-//	private final double minLineOutput = 0.0; //0.0
-//	private final double minTurnOutput = 0.1; //0.1
-	
-	private final double minLineOutput = 0.0; //0.0
-	private final double minTurnOutput = 0.0; //0.1
+	// auto
+	private final double kPv = 0.0; // 0.01
+	private final double kA = 0.0; // 0.0
+	private final double kP = 17.0; // 17.0
+	private final double kI = 6.0; // 9.0
+	private final double kD = 0.5; // 0.4
+
+	private final double kpv = 0.0; // 0.01
+	private final double ka = 0.0; // 0.02
+	private final double kp = 22.0; // 20.0
+	private final double ki = 10.0; // 17.0
+	private final double kd = 0.5; // 0.3
+
+	// maybe final bot's constants
+	// private final double kPv = 0.01; //0.01
+	// private final double kA = 0.0; //0.0
+	// private final double kP = 4.5; //1.5
+	// private final double kI = 5.0; //5.0
+	// private final double kD = 0.1; //0.1
+	//
+	// private final double kpv = 0.01; //0.01
+	// private final double ka = 0.0; //0.0
+	// private final double kp = 9.0; //9.0
+	// private final double ki = 5.0; //5.0
+	// private final double kd = 0.1; //0.1
+	//
+	//
+	// private final double minLineOutput = 0.0; //0.0
+	// private final double minTurnOutput = 0.1; //0.1
+
+	private final double minLineOutput = 0.0; // 0.0
+	private final double minTurnOutput = 0.0; // 0.1
 
 	private double dt = 0.005;
-	
+
 	private long currentTime;
 	private long lastTime;
 	private long lookupTime;
 	private long startTime;
-	
-	public final JoystickTrajectory joystickTraj;
-	private final TorPID positionPID;
-	private final TorPID headingPID;
-	
+
 	protected static double positionWaypoint;
 	protected static double headingWaypoint;
-	
-	private TorMotionProfile(){
+
+	public DriveController() {
+		hardware = new DriveHardware();
 		joystickTraj = new JoystickTrajectory();
 		positionPID = new TorPID(dt);
 		headingPID = new TorPID(dt);
-		
+
 		defaultTrajectory = joystickTraj;
-		
+
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
-		
+
 		positionPID.setLimitMode(sensorLimitMode.Default);
 		positionPID.setNoiseMode(sensorNoiseMode.Noisy);
 		positionPID.setBacklash(0.0);
-		positionPID.setPositionTolerance(0.05); 
+		positionPID.setPositionTolerance(0.05);
 		positionPID.setVelocityTolerance(0.0125);
 		positionPID.setMinimumOutput(minLineOutput);
 		positionPID.setkP(kP);
@@ -91,12 +91,12 @@ public enum TorMotionProfile
 		positionPID.setkD(kD);
 		positionPID.setkPv(kPv);
 		positionPID.setkA(kA);
-		
+
 		headingPID.setLimitMode(sensorLimitMode.Coterminal);
 		headingPID.setNoiseMode(sensorNoiseMode.Noisy);
 		headingPID.setBacklash(0.0);
-		headingPID.setPositionTolerance(0.0125); 
-		headingPID.setVelocityTolerance(0.0125); 
+		headingPID.setPositionTolerance(0.0125);
+		headingPID.setVelocityTolerance(0.0125);
 		headingPID.setMinimumOutput(minTurnOutput);
 		headingPID.setkP(kp);
 		headingPID.setkI(ki);
@@ -104,94 +104,96 @@ public enum TorMotionProfile
 		headingPID.setkPv(kpv);
 		headingPID.setkA(ka);
 	}
-	
-	public void loadTrajectory(TorTrajectory traj){
+
+	public void loadTrajectory(TorTrajectory traj) {
 		nextTrajectory = traj;
 	}
-	
-	public void setActive(){
+
+	public void setActive() {
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 		resetPID();
 		isActive = true;
 	}
-	public void setInactive(){
+
+	public void setInactive() {
 		isActive = false;
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 	}
-	public boolean isActive(){
+
+	public boolean isActive() {
 		return isActive;
 	}
-	
-	public double getTimeInterval(){
+
+	public double getTimeInterval() {
 		return timeInterval;
 	}
-	
-	public void run(){
+
+	public void run() {
 		currentTime = System.currentTimeMillis();
 		dt = (currentTime - lastTime) * 0.001;
-		lastTime = currentTime; 
-		currentTime = (currentTime - (currentTime % ((long)(getTimeInterval() * 1000))));
+		lastTime = currentTime;
+		currentTime = (currentTime - (currentTime % ((long) (getTimeInterval() * 1000))));
 		lookupTime = currentTime - startTime;
 		positionPID.updateDt(dt);
 		headingPID.updateDt(dt);
-		joystickTraj.updateDt(dt); 
+		joystickTraj.updateDt(dt);
 
-		//Position
-		positionPID.updatePosition(TorCAN.INSTANCE.getPosition());
-		positionPID.updateVelocity(TorCAN.INSTANCE.getVelocity());
+		// Position
+		positionPID.updatePosition(hardware.getPosition());
+		positionPID.updateVelocity(hardware.getVelocity());
 
-		//Heading
-		headingPID.updatePosition(TorCAN.INSTANCE.getHeading());
-		headingPID.updateVelocity(TorCAN.INSTANCE.getOmega());
-		
-		if(isActive){
-			if(activeTrajectory == joystickTraj){
+		// Heading
+		headingPID.updatePosition(hardware.getHeading());
+		headingPID.updateVelocity(hardware.getOmega());
+
+		if (isActive) {
+			if (activeTrajectory == joystickTraj) {
 				joystickTraj.updateVelocity();
 				joystickTraj.updateOmega();
 			}
+		} else {
+			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(),
+					headingPID.velocity());
 		}
-		else{
-			joystickTraj.setState(positionPID.position(), positionPID.velocity(), headingPID.position(), headingPID.velocity());
-		}
-		
+
 		targetPosition = activeTrajectory.lookUpPosition(lookupTime);
-		if(activeTrajectory != joystickTraj){
+		if (activeTrajectory != joystickTraj) {
 			targetPosition += positionWaypoint;
 		}
 		targetVelocity = activeTrajectory.lookUpVelocity(lookupTime);
 		targetAcceleration = activeTrajectory.lookUpAcceleration(lookupTime);
-		
+
 		positionPID.updatePositionTarget(targetPosition);
 		positionPID.updateVelocityTarget(targetVelocity);
 		positionPID.updateAccelerationTarget(targetAcceleration);
-		
+
 		targetHeading = activeTrajectory.lookUpHeading(lookupTime);
-		if(activeTrajectory != joystickTraj){
+		if (activeTrajectory != joystickTraj) {
 			targetHeading += headingWaypoint;
 		}
 		targetOmega = activeTrajectory.lookUpOmega(lookupTime);
 		targetAlpha = activeTrajectory.lookUpAlpha(lookupTime);
-		
+
 		headingPID.updatePositionTarget(targetHeading);
 		headingPID.updateVelocityTarget(targetOmega);
 		headingPID.updateAccelerationTarget(targetAlpha);
-		
+
 		positionPID.update();
 		headingPID.update();
-		
-		if(isActive){
-			if(activeTrajectory != joystickTraj){
+
+		if (isActive) {
+			if (activeTrajectory != joystickTraj) {
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
-//			graphLinear();
-//			graphRotational();
-			TorCAN.INSTANCE.setTargets(positionPID.output(), headingPID.output());
+			// graphLinear();
+			// graphRotational();
+			hardware.setTargets(positionPID.output(), headingPID.output());
 		}
-		if(activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()){
+		if (activeTrajectory.lookUpIsLast(lookupTime) && positionPID.isOnTarget() && headingPID.isOnTarget()) {
 			startTime = currentTime;
-			if(!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)){
+			if (!(activeTrajectory == defaultTrajectory && nextTrajectory == defaultTrajectory)) {
 				positionWaypoint = targetPosition;
 				headingWaypoint = targetHeading;
 				activeTrajectory.setComplete(true);
@@ -201,8 +203,8 @@ public enum TorMotionProfile
 			}
 		}
 	}
-	
-	public void graphLinear(){
+
+	public void graphLinear() {
 		SmartDashboard.putNumber("targetVelocity", targetVelocity);
 		SmartDashboard.putNumber("targetAcceleration", targetAcceleration);
 		SmartDashboard.putNumber("targetPosition", targetPosition);
@@ -212,8 +214,8 @@ public enum TorMotionProfile
 		SmartDashboard.putNumber("dDispErrordt", positionPID.dErrodt());
 		SmartDashboard.putNumber("positionError", positionPID.error());
 	}
-	
-	public void graphRotational(){
+
+	public void graphRotational() {
 		SmartDashboard.putNumber("targetOmega", targetOmega);
 		SmartDashboard.putNumber("targetAlpha", targetAlpha);
 		SmartDashboard.putNumber("targetHeading", targetHeading);
@@ -223,30 +225,30 @@ public enum TorMotionProfile
 		SmartDashboard.putNumber("dHeadErrordt", headingWaypoint);
 		SmartDashboard.putNumber("headingError", headingPID.error());
 	}
-	
-	public void executeTrajectory(TorTrajectory traj){
+
+	public void executeTrajectory(TorTrajectory traj) {
 		loadTrajectory(traj);
 		traj.setComplete(false);
 	}
-	
-	public boolean isComplete(){
+
+	public boolean isComplete() {
 		return (activeTrajectory == defaultTrajectory);
 	}
-	
-	public boolean dispOnTarget(){
+
+	public boolean dispOnTarget() {
 		return positionPID.isOnTarget();
 	}
-	
-	public boolean headOnTarget(){
+
+	public boolean headOnTarget() {
 		return headingPID.isOnTarget();
 	}
-	
-	public void resetWaypoints(){
+
+	public void resetWaypoints() {
 		positionWaypoint = 0;
 		headingWaypoint = 0;
 	}
-	
-	public void resetPID(){
+
+	public void resetPID() {
 		headingPID.reset();
 		positionPID.reset();
 	}

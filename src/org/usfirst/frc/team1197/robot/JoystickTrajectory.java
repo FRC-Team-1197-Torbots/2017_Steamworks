@@ -60,22 +60,6 @@ public class JoystickTrajectory extends TorTrajectory{
 		tgt_omg = w;
 	}
 	
-	public void execute(double p_init, double v_init, double h_init, double w_init){
-		linearMotion.pos = p_init;
-		linearMotion.vel = v_init;
-		linearMotion.acc = 0.0;
-		
-		rotationalMotion.pos = h_init;
-		rotationalMotion.vel = w_init;
-		rotationalMotion.acc = 0.0;
-		
-		TorMotionProfile.INSTANCE.executeTrajectory(this);
-	}
-	
-	public void execute(){
-		TorMotionProfile.INSTANCE.executeTrajectory(this);
-	}
-	
 	public void update(double tgt_vel, Motion m, double max_acc){
 		// Target (requested) acceleration:
 		tgt_acc = (tgt_vel - m.vel) / dt;

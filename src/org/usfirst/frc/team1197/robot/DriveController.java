@@ -20,7 +20,6 @@ public class DriveController {
 	private TorTrajectory activeTrajectory = null;
 	private TorTrajectory nextTrajectory = null;
 	
-
 	private double targetVelocity;
 	private double targetAcceleration;
 	private double targetPosition;
@@ -30,37 +29,37 @@ public class DriveController {
 	private double targetHeading;
 
 	// auto
-	private final double kPv = 0.0; // 0.01
-	private final double kA = 0.0; // 0.0
-	private final double kP = 17.0; // 17.0
-	private final double kI = 6.0; // 9.0
-	private final double kD = 0.5; // 0.4
+	private double kPv = 0.0; // 0.01
+	private double kA = 0.0; // 0.0
+	private double kP = 17.0; // 17.0
+	private double kI = 6.0; // 9.0
+	private double kD = 0.5; // 0.4
 
-	private final double kpv = 0.0; // 0.01
-	private final double ka = 0.0; // 0.02
-	private final double kp = 22.0; // 20.0
-	private final double ki = 10.0; // 17.0
-	private final double kd = 0.5; // 0.3
+	private double kpv = 0.0; // 0.01
+	private double ka = 0.0; // 0.02
+	private double kp = 22.0; // 20.0
+	private double ki = 10.0; // 17.0
+	private double kd = 0.5; // 0.3
 
-	// maybe final bot's constants
-	// private final double kPv = 0.01; //0.01
-	// private final double kA = 0.0; //0.0
-	// private final double kP = 4.5; //1.5
-	// private final double kI = 5.0; //5.0
-	// private final double kD = 0.1; //0.1
+	// maybe  bot's constants
+	// private double kPv = 0.01; //0.01
+	// private double kA = 0.0; //0.0
+	// private double kP = 4.5; //1.5
+	// private double kI = 5.0; //5.0
+	// private double kD = 0.1; //0.1
 	//
-	// private final double kpv = 0.01; //0.01
-	// private final double ka = 0.0; //0.0
-	// private final double kp = 9.0; //9.0
-	// private final double ki = 5.0; //5.0
-	// private final double kd = 0.1; //0.1
+	// private double kpv = 0.01; //0.01
+	// private double ka = 0.0; //0.0
+	// private double kp = 9.0; //9.0
+	// private double ki = 5.0; //5.0
+	// private double kd = 0.1; //0.1
 	//
 	//
-	// private final double minLineOutput = 0.0; //0.0
-	// private final double minTurnOutput = 0.1; //0.1
+	// private double minLineOutput = 0.0; //0.0
+	// private double minTurnOutput = 0.1; //0.1
 
-	private final double minLineOutput = 0.0; // 0.0
-	private final double minTurnOutput = 0.0; // 0.1
+	private double minLineOutput = 0.0; // 0.0
+	private double minTurnOutput = 0.0; // 0.1
 
 	private final double timeInterval = 0.005;
 	private double dt = timeInterval;
@@ -72,7 +71,7 @@ public class DriveController {
 	protected double positionWaypoint;
 	protected double headingWaypoint;
 
-	public DriveController() {
+	public DriveController(boolean testMode) {
 		hardware = new DriveHardware();
 		joystickTraj = new JoystickTrajectory();
 		translationPID = new TorPID(dt);
@@ -83,29 +82,46 @@ public class DriveController {
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 
+		if(testMode){
+			translationPID.setMinimumOutput(0.0);
+			translationPID.setkP(0.0);
+			translationPID.setkI(0.0);
+			translationPID.setkD(0.0);
+			translationPID.setkPv(0.0);
+			translationPID.setkA(0.0);
+			rotationPID.setMinimumOutput(0.0);
+			rotationPID.setkP(0.0);
+			rotationPID.setkI(0.0);
+			rotationPID.setkD(0.0);
+			rotationPID.setkPv(0.0);
+			rotationPID.setkA(0.0);
+		}
+		else{
+			rotationPID.setMinimumOutput(minTurnOutput);
+			rotationPID.setkP(kp);
+			rotationPID.setkI(ki);
+			rotationPID.setkD(kd);
+			rotationPID.setkPv(kpv);
+			rotationPID.setkA(ka);
+			translationPID.setMinimumOutput(minLineOutput);
+			translationPID.setkP(kP);
+			translationPID.setkI(kI);
+			translationPID.setkD(kD);
+			translationPID.setkPv(kPv);
+			translationPID.setkA(kA);
+		}
+		
 		translationPID.setLimitMode(sensorLimitMode.Default);
 		translationPID.setNoiseMode(sensorNoiseMode.Noisy);
 		translationPID.setBacklash(0.0);
 		translationPID.setPositionTolerance(0.05);
 		translationPID.setVelocityTolerance(0.0125);
-		translationPID.setMinimumOutput(minLineOutput);
-		translationPID.setkP(kP);
-		translationPID.setkI(kI);
-		translationPID.setkD(kD);
-		translationPID.setkPv(kPv);
-		translationPID.setkA(kA);
 
 		rotationPID.setLimitMode(sensorLimitMode.Coterminal);
 		rotationPID.setNoiseMode(sensorNoiseMode.Noisy);
 		rotationPID.setBacklash(0.0);
 		rotationPID.setPositionTolerance(0.0125);
 		rotationPID.setVelocityTolerance(0.0125);
-		rotationPID.setMinimumOutput(minTurnOutput);
-		rotationPID.setkP(kp);
-		rotationPID.setkI(ki);
-		rotationPID.setkD(kd);
-		rotationPID.setkPv(kpv);
-		rotationPID.setkA(ka);
 		
 		resetPID();
 		resetWaypoints();

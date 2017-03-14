@@ -30,7 +30,7 @@ public class TorDrive
 
 	public TorDrive(Joystick stick, Solenoid shift, Joystick cypress)
 	{
-		controller = new DriveController();
+		controller = new DriveController(false);
 		this.cypress = cypress;
 		joystickProfile = new TorJoystickProfiles();
 		//TODO: Use static final in TorJoystickProfile, then remove maxThrottle initialization from the constructor.
@@ -38,6 +38,17 @@ public class TorDrive
 				/ (joystickProfile.getMinTurnRadius() + DriveHardware.halfTrackWidth));
 		mpNotifier.startPeriodic(0.005);
 	}
+	
+	public TorDrive()
+	{
+		controller = new DriveController(true);
+		joystickProfile = new TorJoystickProfiles();
+		//TODO: Use static final in TorJoystickProfile, then remove maxThrottle initialization from the constructor.
+		maxThrottle = (0.75) * (joystickProfile.getMinTurnRadius() 
+				/ (joystickProfile.getMinTurnRadius() + DriveHardware.halfTrackWidth));
+		mpNotifier.startPeriodic(0.005);
+	}
+
 
 	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton,
 			boolean rightBumper, boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY) {

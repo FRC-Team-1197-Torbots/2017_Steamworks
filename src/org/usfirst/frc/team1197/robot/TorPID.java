@@ -242,6 +242,14 @@ public class TorPID {
 		return acc;
 	}
 	
+	public double positionTolerance(){
+		return posTolerance;
+	}
+	
+	public double velocityTolerance(){
+		return velTolerance;
+	}
+	
 	public void reset(){
 //		PositionDerivative.reset();
 		errorIntegral = 0;

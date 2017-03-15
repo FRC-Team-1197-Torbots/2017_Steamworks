@@ -328,6 +328,25 @@ public class DriveController {
 	public boolean onTargetRotation() {
 		return rotationPID.isOnTarget();
 	}
+	
+	public double getPositionError(){
+		return translationPID.error();
+	}
+	public double getVelocityError(){
+		return translationPID.velocity();
+	}
+	public double getHeadingError(){
+		return rotationPID.error();
+	}
+	public double getPositionTolerance(){
+		return translationPID.positionTolerance();
+	}
+	public double getVelocityTolernace(){
+		return translationPID.velocityTolerance();
+	}
+	public double getHeadingTolernace(){
+		return rotationPID.positionTolerance();
+	}
 
 	public void resetWaypoints() {
 		positionWaypoint = 0;

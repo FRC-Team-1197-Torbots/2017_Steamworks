@@ -176,6 +176,7 @@ public class DriveHardwareTest extends Test {
 				System.err.println("TEST FAILED (encoder sides): Right encoder is disconnected.");
 				System.err.println("TEST FAILED (encoder direction): Right encoder is disconnected.");
 			} else {
+				System.out.println("TEST PASSED (encoder connection): Both encoders are connected.");
 				numberOfSubtestsPassed++;
 				// Test 2: Are both encoders on the correct sides?
 				if (leftEncoderActuallyOnLeft && rightEncoderActuallyOnRight) {

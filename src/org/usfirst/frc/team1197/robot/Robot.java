@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.SampleRobot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+
+import org.usfirst.frc.team1197.robot.test.DriveHardwareTest;
+
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -27,6 +30,8 @@ public class Robot extends SampleRobot {
 	private Joystick autoBox;
 	
 	private DigitalInput gearSwitch;
+	
+	private DriveHardwareTest hardwareTest;
 	
 	private TorDrive drive;
 	private TorClimb climb;
@@ -58,6 +63,8 @@ public class Robot extends SampleRobot {
     	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(drive, intake, autoBox, gear);
+    	
+    	hardwareTest = new DriveHardwareTest(drive.controller.hardware);
     }
 
     public void autonomous() {
@@ -85,25 +92,26 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
 		while(isEnabled()){
-			compressor.start();
-			if(player2.getRawButton(1)){
-				elevatorTalon1.set(1.0);
-			}
-			else if(player2.getRawButton(2)){
-				elevatorTalon2.set(1.0);
-			}
-			else if(player2.getRawButton(3)){
-				dumperTalon.set(1.0);
-			}
-			else if(player2.getRawButton(5)){
-				climbTalon.set(-1.0);
-			}
-			else{
-				elevatorTalon1.set(0.0);
-				elevatorTalon2.set(0.0);
-				dumperTalon.set(0.0);
-				climbTalon.set(0.0);
-			}
+			hardwareTest.run(getButtonA(), getButtonB());
+//			compressor.start();
+//			if(player2.getRawButton(1)){
+//				elevatorTalon1.set(1.0);
+//			}
+//			else if(player2.getRawButton(2)){
+//				elevatorTalon2.set(1.0);
+//			}
+//			else if(player2.getRawButton(3)){
+//				dumperTalon.set(1.0);
+//			}
+//			else if(player2.getRawButton(5)){
+//				climbTalon.set(-1.0);
+//			}
+//			else{
+//				elevatorTalon1.set(0.0);
+//				elevatorTalon2.set(0.0);
+//				dumperTalon.set(0.0);
+//				climbTalon.set(0.0);
+//			}
 		}
 	}
 

@@ -20,7 +20,7 @@ public class TorMotionProfileTest extends Test{
 		leftTurn = new PivotTrajectory(-90);
 	}
 
-	public Result run() {
+	public void run() {
 		testTrajectory(forward);
 		//don't run the next testTrajectory until the previous one is over
 		testTrajectory(backward);
@@ -28,7 +28,6 @@ public class TorMotionProfileTest extends Test{
 		testTrajectory(rightTurn);
 		//don't run the next testTrajectory until the previous one is over
 		testTrajectory(leftTurn);
-		return null;
 	}
 	
 	public void testTrajectory(TorTrajectory traj){

@@ -8,7 +8,7 @@ public abstract class Test {
 	public Test() {
 	}
 	
-	public abstract Result run();
+	protected abstract void run();
 	
 	protected Result testResult() {
 		if (numberOfSubtestsPassed == numberOfSubtests) {

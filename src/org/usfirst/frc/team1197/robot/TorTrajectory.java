@@ -276,6 +276,12 @@ public abstract class TorTrajectory {
 			element.set(-element.pos, -element.vel, -element.acc);
 		}
 	}
+	public double getGoalPos(){
+		return goal_pos;
+	}
+	public double getGoalHeading(){
+		return goal_head;
+	}
 	public String toString(){
 		return "Default Trajectory \n" +
 				   "GoalPos: " + goal_pos + "\n" +

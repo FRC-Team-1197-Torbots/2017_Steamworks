@@ -3,12 +3,13 @@ package org.usfirst.frc.team1197.robot.test;
 import org.usfirst.frc.team1197.robot.DriveHardware;
 
 class EncoderTest extends Test {
-	
+
 	private DriveHardware hardware;
 
 	private enum TestPhase {
 		BEGIN, CHECKING_LEFT, CHECKING_RIGHT, COMPLETE
 	}
+
 	private TestPhase testPhase;
 
 	private boolean leftEncoderActuallyOnLeft;
@@ -16,18 +17,18 @@ class EncoderTest extends Test {
 
 	private boolean leftEncoderOnBoth = false;
 	private boolean rightEncoderOnBoth = false;
-	
+
 	private boolean actualLeftSensorReversed;
 	private boolean actualRightSensorReversed;
 
 	private boolean leftEncoderDisconnected;
 	private boolean rightEncoderDisconnected;
-	
+
 	public EncoderTest(DriveHardware dh) {
 		hardware = dh;
 		setNumberOfSubtests(3);
 	}
-	
+
 	@Override
 	protected void setup() {
 		hardware.choosePercentVbus();
@@ -49,27 +50,35 @@ class EncoderTest extends Test {
 				hardware.resetEncoder();
 				System.out.println("Encoder reset. You can now try again.");
 			} else if (enterButton && !enterButtonLast) {
-				if (Math.abs(hardware.getLeftEncoder()) > Math.abs(hardware.getRightEncoder())) {
-					leftEncoderActuallyOnLeft = true;
-					if (hardware.getLeftEncoder() > 0) {
-						actualLeftSensorReversed = false;
-						leftEncoderDisconnected = false;
-					} else if (hardware.getLeftEncoder() < 0) {
-						actualLeftSensorReversed = true;
-						leftEncoderDisconnected = false;
+				if (Math.abs(hardware.getLeftEncoder()) < 0.01 && Math.abs(hardware.getRightEncoder()) < 0.01) {
+					leftEncoderDisconnected = true;
+				} else {
+					leftEncoderDisconnected = false;
+					if (Math.abs(hardware.getLeftEncoder()) > Math.abs(hardware.getRightEncoder())) {
+						leftEncoderActuallyOnLeft = true;
+						if (hardware.getLeftEncoder() > 0) {
+							actualLeftSensorReversed = false;
+						} else if (hardware.getLeftEncoder() < 0) {
+							actualLeftSensorReversed = true;
+						}
+					} else if (Math.abs(hardware.getLeftEncoder()) < Math.abs(hardware.getRightEncoder())) {
+						leftEncoderActuallyOnLeft = false;
+						rightEncoderActuallyOnRight = false; // Could be still be true, we'll check in the next step.
+						if (hardware.getRightEncoder() > 0) {
+							actualLeftSensorReversed = false;
+						} else if (hardware.getRightEncoder() < 0) {
+							actualLeftSensorReversed = true;
+						}
 					} else {
-						leftEncoderDisconnected = true;
-					}
-				} else if (Math.abs(hardware.getLeftEncoder()) < Math.abs(hardware.getRightEncoder())) {
-					rightEncoderActuallyOnRight = false;
-					if (hardware.getRightEncoder() > 0) {
-						actualLeftSensorReversed = false;
-						leftEncoderDisconnected = false;
-					} else if (hardware.getRightEncoder() < 0) {
-						actualLeftSensorReversed = true;
-						leftEncoderDisconnected = false;
-					} else {
-						leftEncoderDisconnected = true;
+						leftEncoderActuallyOnLeft = true;
+						leftEncoderOnBoth = true;
+						if (hardware.getLeftEncoder() > 0.01) {
+							actualLeftSensorReversed = false;
+						} else if (hardware.getLeftEncoder() < -0.01) {
+							actualLeftSensorReversed = true;
+						} else {
+							leftEncoderDisconnected = true;
+						}
 					}
 				}
 				hardware.resetEncoder();
@@ -83,33 +92,40 @@ class EncoderTest extends Test {
 				hardware.resetEncoder();
 				System.out.println("Encoder reset. You can now try again.");
 			} else if (enterButton && !enterButtonLast) {
-				if (Math.abs(hardware.getLeftEncoder()) < Math.abs(hardware.getRightEncoder())) {
-					if (!rightEncoderActuallyOnRight) {
+				if (Math.abs(hardware.getRightEncoder()) < 0.01 && Math.abs(hardware.getLeftEncoder()) < 0.01) {
+					rightEncoderDisconnected = true;
+				} else {
+					rightEncoderDisconnected = false;
+					if (Math.abs(hardware.getRightEncoder()) > Math.abs(hardware.getLeftEncoder())) {
+						if (!rightEncoderActuallyOnRight) {
+							rightEncoderOnBoth = true;
+						}
+						rightEncoderActuallyOnRight = true; // This MUST be true if we've gotten here.
+						if (hardware.getRightEncoder() > 0) {
+							actualRightSensorReversed = false;
+						} else if (hardware.getRightEncoder() < 0) {
+							actualRightSensorReversed = true;
+						}
+					} else if (Math.abs(hardware.getRightEncoder()) < Math.abs(hardware.getLeftEncoder())) {
+						rightEncoderActuallyOnRight = false;
+						if (leftEncoderActuallyOnLeft) {
+							leftEncoderOnBoth = true;
+						}
+						if (hardware.getLeftEncoder() > 0) {
+							actualRightSensorReversed = false;
+						} else if (hardware.getLeftEncoder() < 0) {
+							actualRightSensorReversed = true;
+						}
+					} else {
+						rightEncoderActuallyOnRight = true;
 						rightEncoderOnBoth = true;
-					}
-					rightEncoderActuallyOnRight = true;
-					if (hardware.getRightEncoder() > 0) {
-						actualRightSensorReversed = false;
-						rightEncoderDisconnected = false;
-					} else if (hardware.getRightEncoder() < 0) {
-						actualRightSensorReversed = true;
-						rightEncoderDisconnected = false;
-					} else {
-						rightEncoderDisconnected = true;
-					}
-				} else if (Math.abs(hardware.getLeftEncoder()) > Math.abs(hardware.getRightEncoder())) {
-					if (leftEncoderActuallyOnLeft) {
-						leftEncoderOnBoth = true;
-					}
-					leftEncoderActuallyOnLeft = false;
-					if (hardware.getLeftEncoder() > 0) {
-						actualRightSensorReversed = false;
-						rightEncoderDisconnected = false;
-					} else if (hardware.getLeftEncoder() < 0) {
-						actualRightSensorReversed = true;
-						rightEncoderDisconnected = false;
-					} else {
-						rightEncoderDisconnected = true;
+						if (hardware.getRightEncoder() > 0.01) {
+							actualRightSensorReversed = false;
+						} else if (hardware.getLeftEncoder() < -0.01) {
+							actualRightSensorReversed = true;
+						} else {
+							rightEncoderDisconnected = true;
+						}
 					}
 				}
 			}
@@ -127,9 +143,9 @@ class EncoderTest extends Test {
 	@Override
 	protected void reset() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	private void printResults() {
 		// Test 1: Are both encoders are connected?
 		if (leftEncoderDisconnected && rightEncoderDisconnected) {
@@ -153,8 +169,7 @@ class EncoderTest extends Test {
 						"TEST PASSED (encoder sides): Both encoders' software labels match their actual sides.");
 				incrementSubtestsPassed();
 			} else if (leftEncoderOnBoth || rightEncoderOnBoth) {
-				System.err
-						.println("TEST FAILED (encoder sides): One or both encoders are hooked up to both sides.");
+				System.err.println("TEST FAILED (encoder sides): One or both encoders are hooked up to both sides.");
 			} else if (!leftEncoderActuallyOnLeft && !rightEncoderActuallyOnRight) {
 				System.err.println("TEST FAILED (encoder sides): Left and right encoders are swapped.");
 			} else if (leftEncoderActuallyOnLeft && !rightEncoderActuallyOnRight) {

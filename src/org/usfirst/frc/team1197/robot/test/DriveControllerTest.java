@@ -31,9 +31,9 @@ public class DriveControllerTest extends Test{
 	private boolean velWithinTolerance;
 	private boolean hedWithinTolerance;
 	
-	public DriveControllerTest(DriveController dc){
+	public DriveControllerTest(DriveController dc, TorDrive drive){
 		controller = dc;
-		drive = new TorDrive();
+		this.drive = drive;
 		forward = new LinearTrajectory(1.0);
 		backward = new LinearTrajectory(-1.0);
 		rightTurn = new PivotTrajectory(90);
@@ -41,7 +41,7 @@ public class DriveControllerTest extends Test{
 	}
 	
 	protected void setup(){
-		testPhase = TestPhase.FORWARDTRAJ;
+		testPhase = TestPhase.BEGIN;
 		posWithinTolerance = true;
 		velWithinTolerance = true;
 	}
@@ -71,6 +71,7 @@ public class DriveControllerTest extends Test{
 			testPhase = TestPhase.FORWARDTRAJ;
 			break;
 		case FORWARDTRAJ:
+			controller.setMotionProfilingActive();
 			if(executeButton && !executeButtonLast){
 				testLinearTrajectory(forward);
 				testPhase = TestPhase.FORWARDSTALL;

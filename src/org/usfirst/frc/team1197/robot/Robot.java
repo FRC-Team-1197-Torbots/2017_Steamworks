@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 
+import org.usfirst.frc.team1197.robot.test.DriveControllerTest;
 import org.usfirst.frc.team1197.robot.test.DriveHardwareTest;
 
 import com.ctre.CANTalon;
@@ -32,6 +33,7 @@ public class Robot extends SampleRobot {
 	private DigitalInput gearSwitch;
 	
 	private DriveHardwareTest hardwareTest;
+	private DriveControllerTest controllerTest;
 	
 	private TorDrive drive;
 	private TorClimb climb;
@@ -65,6 +67,7 @@ public class Robot extends SampleRobot {
     	auto = new TorAuto(drive, intake, autoBox, gear);
     	
     	hardwareTest = new DriveHardwareTest(drive.controller.hardware);
+    	controllerTest = new DriveControllerTest(drive.controller, drive);
     }
 
     public void autonomous() {
@@ -92,7 +95,8 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
 		while(isEnabled()){
-			hardwareTest.run(getButtonA(), getButtonB());
+			controllerTest.run(getButtonA());
+//			hardwareTest.run(getButtonA(), getButtonB());
 //			compressor.start();
 //			if(player2.getRawButton(1)){
 //				elevatorTalon1.set(1.0);

@@ -341,10 +341,10 @@ public class DriveController {
 	public double getPositionTolerance(){
 		return translationPID.positionTolerance();
 	}
-	public double getVelocityTolernace(){
+	public double getVelocityTolerance(){
 		return translationPID.velocityTolerance();
 	}
-	public double getHeadingTolernace(){
+	public double getHeadingTolerance(){
 		return rotationPID.positionTolerance();
 	}
 

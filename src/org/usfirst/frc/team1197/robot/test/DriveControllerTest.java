@@ -38,12 +38,12 @@ public class DriveControllerTest extends Test{
 		backward = new LinearTrajectory(-1.0);
 		rightTurn = new PivotTrajectory(90);
 		leftTurn = new PivotTrajectory(-90);
-		numberOfSubtests = 8;
 	}
 	
-	private void setup() {
-		numberOfSubtestsPassed = 0;
+	protected void setup(){
 		testPhase = TestPhase.FORWARDTRAJ;
+		posWithinTolerance = true;
+		velWithinTolerance = true;
 	}
 
 	public void run(boolean execute) {
@@ -89,7 +89,6 @@ public class DriveControllerTest extends Test{
 				}
 				else{
 					System.out.println("TEST PASSED (Forward: Encoder): Both encoders are going the right direction.");
-					numberOfSubtestsPassed++;
 				}
 				if(!posWithinTolerance && velWithinTolerance){
 					System.err.println("TEST FAILED (Forward: Position): The position is not within the tolerance");
@@ -102,11 +101,10 @@ public class DriveControllerTest extends Test{
 				}
 				else{
 					System.out.println("TEST PASSED (Forward: Translation): The position and velocity is within the tolerance.");
-					numberOfSubtestsPassed++;
 				}
 				System.out.println("Ready to test backward trajectory.");
 				System.out.println("> press A to execute the test.");
-				testPhase = TestPhase.BACKWARDTRAJ;
+				testPhase = TestPhase.IDLE;
 			}
 			break;
 		case BACKWARDTRAJ:
@@ -156,21 +154,55 @@ public class DriveControllerTest extends Test{
 			}
 		}
 		//Compare the difference between target and current and see if its within the tolerance
-		if(Math.abs(controller.getPositionError()) <= controller.getPositionTolerance()){
-			posWithinTolerance = true;
-		}
-		else{
+		if(Math.abs(controller.getPositionError()) >= controller.getPositionTolerance()){
 			posWithinTolerance = false;
 		}
-		if(Math.abs(controller.getVelocityError()) <= controller.getVelocityTolernace()){
-			velWithinTolerance = true;
-		}
-		else{
+		if(Math.abs(controller.getVelocityError()) >= controller.getVelocityTolerance()){
 			velWithinTolerance = false;
 		}
 	}
 	
 	public void testPivotTrajectory(TorTrajectory traj){
+		//Execute trajectory
+				drive.executeTrajectory(traj);
+				//Check if the encoders are going the right direction
+				if(traj.getGoalHeading() > 0){
+					if(controller.hardware.getRightEncoder() < 0){
+						rightEncoderDirection = true;
+					}
+					else{
+						rightEncoderDirection = false;
+					}
+					if(controller.hardware.getLeftEncoder() > 0){
+						leftEncoderDirection = true;
+					}
+					else{
+						leftEncoderDirection = false;
+					}
+				}
+				else{
+					if(controller.hardware.getRightEncoder() > 0){
+						rightEncoderDirection = true;
+					}
+					else{
+						rightEncoderDirection = false;
+					}
+					if(controller.hardware.getLeftEncoder() < 0){
+						leftEncoderDirection = true;
+					}
+					else{
+						leftEncoderDirection = false;
+					}
+				}
+				//Compare the difference between target and current and see if its within the tolerance
+				if(Math.abs(controller.getHeadingError()) >= controller.getHeadingTolerance()){
+					hedWithinTolerance = false;
+				}
+	}
+
+	@Override
+	protected void reset() {
+		// TODO Auto-generated method stub
 		
 	}
 }

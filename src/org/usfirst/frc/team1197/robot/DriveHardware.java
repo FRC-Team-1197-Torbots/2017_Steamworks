@@ -149,27 +149,17 @@ public class DriveHardware {
 		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // [meters/second]
 	}
 
-	public double getHeading(boolean encoder) {
-		if(encoder){
-			return (rightMaster.getPosition() - leftMaster.getPosition()) / trackWidth;
-		}
-		else{
-			return (-gyro.getAngle() * (Math.PI / 180)); // [radians]
-		}
+	public double getHeading() {
+		return (gyro.getAngle() * (Math.PI / 180)); // [radians]
 	}
 
-	public double getOmega(boolean encoder) {
-		if(encoder){
-			return (rightMaster.getSpeed() - leftMaster.getSpeed()) / trackWidth;
-		}
-		else{
-			return (-gyro.getRate()); // [radians/second] (contrary to navX documentation)
-		}
+	public double getOmega() {
+		return (gyro.getRate()); // [radians/second] (contrary to navX documentation)
 	}
 
 	public void setTargets(double v, double omega) {
-		rightMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
-		leftMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		rightMaster.set((v - omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
+		leftMaster.set((v + omega * halfTrackWidth) * 0.1 * encoderTicksPerMeter);
 	}
 
 	public void resetEncoder() {

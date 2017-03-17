@@ -28,6 +28,8 @@ public class DriveControllerTest extends Test{
 	private boolean rightEncoderDirection;
 	private boolean leftEncoderDirection;
 	
+	private boolean gyroDirection;
+	
 	private boolean posWithinTolerance;
 	private boolean velWithinTolerance;
 	private boolean hedWithinTolerance;
@@ -101,9 +103,10 @@ public class DriveControllerTest extends Test{
 				printEncoderError();
 				printLinearToleranceError();
 				System.out.println();
+				System.out.println("For testing the pivot trajectories, place the robot on the ground.");
 				System.out.println("Ready to test right trajectory.");
 				System.out.println("> press A to execute the test.");
-				testPhase = TestPhase.COMPLETE;
+				testPhase = TestPhase.RIGHTTRAJ;
 			}
 			break;
 		case RIGHTTRAJ:
@@ -114,7 +117,7 @@ public class DriveControllerTest extends Test{
 			break;
 		case RIGHTSTALL:
 			if(rightTurn.isComplete()){
-				printEncoderError();
+				printGyroError();
 				printPivotToleranceError();
 				System.out.println();
 				System.out.println("Ready to test left trajectory.");
@@ -130,9 +133,8 @@ public class DriveControllerTest extends Test{
 			break;
 		case LEFTSTALL:
 			if(leftTurn.isComplete()){
-				printEncoderError();
+				printGyroError();
 				printPivotToleranceError();
-				reset();
 				System.out.println();
 				testPhase = TestPhase.COMPLETE;
 			}
@@ -187,31 +189,19 @@ public class DriveControllerTest extends Test{
 	public void testPivotTrajectory(TorTrajectory traj){
 		drive.executeTrajectory(traj);
 		if(traj.getGoalHeading() > 0){
-			if(controller.hardware.getRightEncoder() < 0){
-				rightEncoderDirection = true;
+			if(controller.hardware.getHeading() > 0){
+				gyroDirection = true;
 			}
 			else{
-				rightEncoderDirection = false;
-			}
-			if(controller.hardware.getLeftEncoder() > 0){
-				leftEncoderDirection = true;
-			}
-			else{
-				leftEncoderDirection = false;
+				gyroDirection = false;
 			}
 		}
 		else{
-			if(controller.hardware.getRightEncoder() > 0){
-				rightEncoderDirection = true;
+			if(controller.hardware.getHeading() < 0){
+				gyroDirection = true;
 			}
 			else{
-				rightEncoderDirection = false;
-			}
-			if(controller.hardware.getLeftEncoder() < 0){
-				leftEncoderDirection = true;
-			}
-			else{
-				leftEncoderDirection = false;
+				gyroDirection = false;
 			}
 		}
 		if(Math.abs(controller.getHeadingError()) >= controller.getHeadingTolerance()){
@@ -232,6 +222,16 @@ public class DriveControllerTest extends Test{
 		else{
 			System.out.println("TEST PASSED (Encoder): Both encoders are going the right direction.");
 			incrementSubtestsPassed();
+		}
+	}
+	
+	public void printGyroError(){
+		if(gyroDirection){
+			System.out.println("TEST PASSED (Gyro): The gyro is going the right direction.");
+			incrementSubtestsPassed();
+		}
+		else{
+			System.err.println("TEST FAILED (Gyro): The gyro is not going the right direction.");
 		}
 	}
 	
@@ -263,6 +263,7 @@ public class DriveControllerTest extends Test{
 	
 	protected void reset() {
 		controller.hardware.resetEncoder();
+		controller.hardware.resetGyro();
 		posWithinTolerance = true;
 		velWithinTolerance = true;
 		hedWithinTolerance = true;

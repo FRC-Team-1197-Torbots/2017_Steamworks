@@ -33,7 +33,7 @@ public class DriveControllerTest extends Test{
 	private boolean hedWithinTolerance;
 	
 	public DriveControllerTest(DriveController dc, TorDrive drive){
-		setNumberOfSubtests(8);
+		setNumberOfSubtests(4);
 		controller = dc;
 		this.drive = drive;
 		forward = new LinearTrajectory(1.0);
@@ -84,7 +84,6 @@ public class DriveControllerTest extends Test{
 			if(forward.isComplete()){
 				printEncoderError();
 				printLinearToleranceError();
-				reset();
 				System.out.println();
 				System.out.println("Ready to test backward trajectory.");
 				System.out.println("> press A to execute the test.");
@@ -101,11 +100,10 @@ public class DriveControllerTest extends Test{
 			if(backward.isComplete()){
 				printEncoderError();
 				printLinearToleranceError();
-				reset();
 				System.out.println();
 				System.out.println("Ready to test right trajectory.");
 				System.out.println("> press A to execute the test.");
-				testPhase = TestPhase.RIGHTTRAJ;
+				testPhase = TestPhase.COMPLETE;
 			}
 			break;
 		case RIGHTTRAJ:
@@ -118,7 +116,6 @@ public class DriveControllerTest extends Test{
 			if(rightTurn.isComplete()){
 				printEncoderError();
 				printPivotToleranceError();
-				reset();
 				System.out.println();
 				System.out.println("Ready to test left trajectory.");
 				System.out.println("> press A to execute the test.");
@@ -144,6 +141,7 @@ public class DriveControllerTest extends Test{
 			System.out.println("Completed DriveController test. Result: " + result());
 			reset();
 			controller.setMotionProfilingInactive();
+			testPhase = TestPhase.IDLE;
 			break;
 		}
 	}

@@ -30,9 +30,9 @@ public class DriveHardware {
 	public static final double backlash = 0.015; // [meters]
 	
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 1.0; // 1.5
+	private final double kP = 0.0; // 1.0
 	private final double kI = 0.0; // 0.0
-	private final double kD = 50.0; // 30.0
+	private final double kD = 0.0; // 50.0
 
 	public DriveHardware() {
 		gyro = new AHRS(SerialPort.Port.kMXP);
@@ -149,12 +149,22 @@ public class DriveHardware {
 		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // [meters/second]
 	}
 
-	public double getHeading() {
-		return (-gyro.getAngle() * (Math.PI / 180)); // [radians]
+	public double getHeading(boolean encoder) {
+		if(encoder){
+			return (rightMaster.getPosition() - leftMaster.getPosition()) / trackWidth;
+		}
+		else{
+			return (-gyro.getAngle() * (Math.PI / 180)); // [radians]
+		}
 	}
 
-	public double getOmega() {
-		return (-gyro.getRate()); // [radians/second] (contrary to navX documentation)
+	public double getOmega(boolean encoder) {
+		if(encoder){
+			return (rightMaster.getSpeed() - leftMaster.getSpeed()) / trackWidth;
+		}
+		else{
+			return (-gyro.getRate()); // [radians/second] (contrary to navX documentation)
+		}
 	}
 
 	public void setTargets(double v, double omega) {

@@ -70,6 +70,8 @@ public class DriveController {
 
 	protected double positionWaypoint;
 	protected double headingWaypoint;
+	
+	private boolean isTest;
 
 	public DriveController(boolean testMode) {
 		hardware = new DriveHardware();
@@ -82,6 +84,7 @@ public class DriveController {
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 
+		isTest = testMode;
 		if(testMode){
 			translationPID.setMinimumOutput(0.0);
 			translationPID.setkP(0.0);
@@ -143,8 +146,8 @@ public class DriveController {
 		translationPID.updateVelocity(hardware.getVelocity());
 
 		// Rotaion
-		rotationPID.updatePosition(hardware.getHeading());
-		rotationPID.updateVelocity(hardware.getOmega());
+		rotationPID.updatePosition(hardware.getHeading(isTest));
+		rotationPID.updateVelocity(hardware.getOmega(isTest));
 
 		if (motionProfilingActive) {
 			if (activeTrajectory == joystickTraj) {

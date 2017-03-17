@@ -37,7 +37,7 @@ class EncoderTest extends Test {
 	}
 
 	@Override
-	protected void run() {
+	protected void runTest() {
 		switch (testPhase) {
 		case BEGIN:
 			hardware.resetEncoder();
@@ -46,10 +46,10 @@ class EncoderTest extends Test {
 			testPhase = TestPhase.CHECKING_LEFT;
 			break;
 		case CHECKING_LEFT:
-			if (resetButton && !resetButtonLast) {
+			if (resetButtonDownEvent()) {
 				hardware.resetEncoder();
 				System.out.println("Encoder reset. You can now try again.");
-			} else if (enterButton && !enterButtonLast) {
+			} else if (enterButtonDownEvent()) {
 				if (Math.abs(hardware.getLeftEncoder()) < 0.01 && Math.abs(hardware.getRightEncoder()) < 0.01) {
 					leftEncoderDisconnected = true;
 				} else {
@@ -88,10 +88,10 @@ class EncoderTest extends Test {
 			}
 			break;
 		case CHECKING_RIGHT:
-			if (resetButton && !resetButtonLast) {
+			if (resetButtonDownEvent()) {
 				hardware.resetEncoder();
 				System.out.println("Encoder reset. You can now try again.");
-			} else if (enterButton && !enterButtonLast) {
+			} else if (enterButtonDownEvent()) {
 				if (Math.abs(hardware.getRightEncoder()) < 0.01 && Math.abs(hardware.getLeftEncoder()) < 0.01) {
 					rightEncoderDisconnected = true;
 				} else {

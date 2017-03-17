@@ -15,8 +15,8 @@ public class DriveControllerTest extends Test{
 	TestPhase testPhase = TestPhase.IDLE;
 	
 	private boolean isFirstPass = true;
-	private boolean executeButton;
-	private boolean executeButtonLast;
+//	private boolean executeButton;
+//	private boolean executeButtonLast;
 	
 	private TorTrajectory forward;
 	private TorTrajectory backward;
@@ -53,21 +53,22 @@ public class DriveControllerTest extends Test{
 		reset();
 	}
 
-	public void run(boolean execute) {
-		executeButtonLast = executeButton;
-		executeButton = execute;
-		run();
-	}
+//	public void run(boolean execute) {
+//		executeButtonLast = executeButton;
+//		executeButton = execute;
+//		run();
+//	}
 	
-	protected void run(){
-		if (isFirstPass) {
-			isFirstPass = false;
-			setup();
-		}
-		testMotionProfile();
-	}
+//	protected void runTest(){
+//		if (isFirstPass) {
+//			isFirstPass = false;
+//			setup();
+//		}
+//		testMotionProfile();
+//	}
 	
-	public void testMotionProfile(){
+//	public void testMotionProfile(){
+	protected void runTest(){
 		switch(testPhase){
 		case IDLE:
 			break;
@@ -77,7 +78,8 @@ public class DriveControllerTest extends Test{
 			testPhase = TestPhase.FORWARDTRAJ;
 			break;
 		case FORWARDTRAJ:
-			if(executeButton && !executeButtonLast){
+//			if(executeButton && !executeButtonLast){
+			if(enterButtonDownEvent()){
 				testLinearTrajectory(forward);
 				testPhase = TestPhase.FORWARDSTALL;
 			}
@@ -93,7 +95,8 @@ public class DriveControllerTest extends Test{
 			}
 			break;
 		case BACKWARDTRAJ:
-			if(executeButton && !executeButtonLast){
+//			if(executeButton && !executeButtonLast){
+			if(enterButtonDownEvent()){
 				testLinearTrajectory(backward);
 				testPhase = TestPhase.BACKWARDSTALL;
 			}
@@ -110,7 +113,8 @@ public class DriveControllerTest extends Test{
 			}
 			break;
 		case RIGHTTRAJ:
-			if(executeButton && !executeButtonLast){
+//			if(executeButton && !executeButtonLast){
+			if(enterButtonDownEvent()){
 				testPivotTrajectory(rightTurn);
 				testPhase = TestPhase.RIGHTSTALL;
 			}
@@ -126,7 +130,8 @@ public class DriveControllerTest extends Test{
 			}
 			break;
 		case LEFTTRAJ:
-			if(executeButton && !executeButtonLast){
+//			if(executeButton && !executeButtonLast){
+			if(enterButtonDownEvent()){
 				testPivotTrajectory(leftTurn);
 				testPhase = TestPhase.LEFTSTALL;
 			}

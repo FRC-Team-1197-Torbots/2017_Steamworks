@@ -26,12 +26,12 @@ public class DriveHardwareTest extends Test {
 		testPhase = TestPhase.ENCODER_TEST;
 	}
 	
-	protected void run() {
+	protected void runTest() {
 		switch(testPhase){
 		case ENCODER_TEST:
 			// Test that encoder direction matches physical direction, and that
 			// both encoders are hooked up to the correct sides of the robot.
-			encoderTest.run(enterButton, resetButton);
+			encoderTest.run();
 			if (encoderTest.isComplete()) {
 				testPhase = TestPhase.MOTOR_TEST;
 			}

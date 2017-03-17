@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 import org.usfirst.frc.team1197.robot.test.DriveControllerTest;
 import org.usfirst.frc.team1197.robot.test.DriveHardwareTest;
+import org.usfirst.frc.team1197.robot.test.Test;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
@@ -95,7 +96,8 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
 		while(isEnabled()){
-			controllerTest.run(getButtonA());
+			Test.setButtons(getButtonA(), getButtonB());
+			controllerTest.run();
 //			hardwareTest.run(getButtonA(), getButtonB());
 //			compressor.start();
 //			if(player2.getRawButton(1)){

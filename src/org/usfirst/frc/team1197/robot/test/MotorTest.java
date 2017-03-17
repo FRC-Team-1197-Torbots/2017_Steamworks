@@ -27,7 +27,7 @@ public class MotorTest extends Test {
 	}
 
 	@Override
-	protected void run() {
+	protected void runTest() {
 		// TODO Auto-generated method stub
 
 	}

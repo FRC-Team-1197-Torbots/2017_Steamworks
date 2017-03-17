@@ -188,6 +188,6 @@ public class DriveHardware {
 	}
 	
 	public void shiftToHighGear() {
-		solenoid.set(true);
+		solenoid.set(false);
 	}
 }

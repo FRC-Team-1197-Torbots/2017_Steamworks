@@ -53,13 +53,13 @@ public class TorDrive
 	public void driving(double throttleAxis, double arcadeSteerAxis, double carSteerAxis, boolean shiftButton,
 			boolean rightBumper, boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY) {
 		// Tell the drive controller whether to use car drive in high gear.
-		controller.useCarDriveInHighGear(cypress.getRawButton(1));
+		controller.useCarDriveInHighGear(!cypress.getRawButton(1));
 		if (controller.isHighGear) {
 			if (controller.usingCarDriveForHighGear) {
-				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-			} else {
 				carDrive(throttleAxis, carSteerAxis);
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+			} else {
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			// When you hold down the shiftButton (left bumper), then shift to low gear.
 			if (shiftButton) {
@@ -75,6 +75,7 @@ public class TorDrive
 	}
 	
 	public void enable() {
+		controller.useCarDriveInHighGear(!cypress.getRawButton(1));
 		controller.enable();
 	}
 
@@ -84,6 +85,7 @@ public class TorDrive
 
 	public void ArcadeDrive(double throttleAxis, double arcadeSteerAxis){
 		throttleAxis = -throttleAxis; // TODO: see below.
+		arcadeSteerAxis = -arcadeSteerAxis;
 		if (Math.abs(arcadeSteerAxis) <= 0.1) {
 			arcadeSteerAxis = 0.0D;
 		}
@@ -131,8 +133,8 @@ public class TorDrive
 				rightMotorSpeed = -Math.max(-throttleAxis, -arcadeSteerAxis);
 			}
 		}
-		controller.setTargets(rightMotorSpeed, leftMotorSpeed); // TODO: This is what it was till now. Fix sign issue pls?
-//		controller.setTargets(leftMotorSpeed, rightMotorSpeed); // (Let's switch to this and use TorJoystickProfiles if we can)
+//		controller.setTargets(rightMotorSpeed, leftMotorSpeed); // TODO: This is what it was till now. Fix sign issue pls?
+		controller.setTargets(leftMotorSpeed, rightMotorSpeed); // (Let's switch to this and use TorJoystickProfiles if we can)
 	}
 
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
@@ -161,7 +163,7 @@ public class TorDrive
 		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
 		//TODO: Shouldn't the signs be settled before we get to this point??? (fix in TorJoystickProfiles, not here)
 		throttleAxis = -throttleAxis;
-		carSteeringAxis = -carSteeringAxis;
+//		carSteeringAxis = -carSteeringAxis;
 		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * DriveHardware.absoluteMaxSpeed;
 		targetSpeed *= maxThrottle;
 
@@ -180,6 +182,8 @@ public class TorDrive
 		}
 
 		// Setting the joystick trajectory targets so that it actually drives:
+		SmartDashboard.putNumber("targetSpeed", targetSpeed);
+		SmartDashboard.putNumber("targetOmega", targetOmega);
 		controller.setTargets(targetSpeed, targetOmega); // TODO: replace with controller.setTargets()
 	}
 

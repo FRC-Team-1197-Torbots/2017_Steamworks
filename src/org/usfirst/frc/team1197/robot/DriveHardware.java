@@ -8,7 +8,6 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveHardware {
 
@@ -31,11 +30,12 @@ public class DriveHardware {
 	public static final double backlash = 0.015; // [meters]
 	
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 0.0; // 1.0
+	private final double kP = 1.0; // 1.0
 	private final double kI = 0.0; // 0.0
-	private final double kD = 0.0; // 50.0
+	private final double kD = 50.0; // 50.0
 	
-	private double headingOffset;
+	private boolean leftOutputReversed = true;
+	private boolean rightOutputReversed = false;
 
 	public DriveHardware() {
 		gyro = new AHRS(SerialPort.Port.kMXP);
@@ -53,7 +53,7 @@ public class DriveHardware {
 
 		rightMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightMaster.reverseSensor(false); // don't forget to change! false - final, true - proto
-		rightMaster.reverseOutput(false); // don't forget to change! false - final, false - proto
+		rightMaster.reverseOutput(rightOutputReversed); // don't forget to change! false - final, false - proto
 		rightMaster.configNominalOutputVoltage(+0.0f, -0.0f);
 		rightMaster.configPeakOutputVoltage(+12.0f, -12.0f);
 		rightMaster.setProfile(0);
@@ -69,7 +69,7 @@ public class DriveHardware {
 
 		leftMaster.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		leftMaster.reverseSensor(true); // don't forget to change! true - final, false - proto
-		leftMaster.reverseOutput(true); // don't forget to change! true - final, true - proto
+		leftMaster.reverseOutput(leftOutputReversed); // don't forget to change! true - final, true - proto
 		leftMaster.configNominalOutputVoltage(+0.0f, -0.0f);
 		leftMaster.configPeakOutputVoltage(+12.0f, -12.0f);
 		leftMaster.setProfile(0);
@@ -91,8 +91,18 @@ public class DriveHardware {
 	}
 
 	public void setMotorSpeeds(double leftSpeed, double rightSpeed) {
-		leftMaster.set(-leftSpeed);
-		rightMaster.set(rightSpeed);
+		if(leftOutputReversed){
+			SetLeft(-leftSpeed);
+		}
+		else{
+			SetLeft(leftSpeed);
+		}
+		if(rightOutputReversed){
+			SetRight(-rightSpeed);
+		}
+		else{
+			SetRight(rightSpeed);
+		}
 	}
 
 	// Setting the left master Talon's speed to the given parameter
@@ -149,25 +159,15 @@ public class DriveHardware {
 	}
 
 	public double getVelocity() {
-		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // [meters/second]	
+		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // [meters/second]
 	}
 
-	public double getHeading(boolean testMode) {
-		if(testMode){
-			return (rightMaster.getPosition() - leftMaster.getPosition()) / 2;
-		}
-		else{
-			return (gyro.getAngle() * (Math.PI / 180)); // [radians]
-		}
+	public double getHeading() {
+		return (gyro.getAngle() * (Math.PI / 180)); // [radians]
 	}
 
-	public double getOmega(boolean testMode) {
-		if(testMode){
-			return (rightMaster.getSpeed() + leftMaster.getSpeed()) / trackWidth;
-		}
-		else{
-			return (gyro.getRate()); // [radians/second] (contrary to navX documentation)
-		}
+	public double getOmega() {
+		return (gyro.getRate()); // [radians/second] (contrary to navX documentation)
 	}
 
 	public void setTargets(double v, double omega) {
@@ -176,13 +176,11 @@ public class DriveHardware {
 	}
 
 	public void resetEncoder() {
-		headingOffset = getHeading(true);
 		rightMaster.setPosition(0);
 		leftMaster.setPosition(0);
 	}
 
 	public void resetGyro() {
-		headingOffset = -getHeading(true);
 		gyro.reset();
 	}
 

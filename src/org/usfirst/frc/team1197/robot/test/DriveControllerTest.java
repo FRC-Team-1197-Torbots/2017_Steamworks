@@ -46,7 +46,7 @@ public class DriveControllerTest extends Test{
 		posWithinTolerance = true;
 		velWithinTolerance = true;
 		hedWithinTolerance = true;
-//		reset();
+		reset();
 	}
 
 	protected void runTest(){
@@ -180,7 +180,7 @@ public class DriveControllerTest extends Test{
 	public void testPivotTrajectory(TorTrajectory traj){
 		drive.executeTrajectory(traj);
 		if(traj.getGoalHeading() > 0){
-			if(controller.hardware.getHeading(true) > 0){
+			if(controller.hardware.getHeading() > 0){
 				gyroDirection = true;
 			}
 			else{
@@ -188,7 +188,7 @@ public class DriveControllerTest extends Test{
 			}
 		}
 		else{
-			if(controller.hardware.getHeading(true) < 0){
+			if(controller.hardware.getHeading() < 0){
 				gyroDirection = true;
 			}
 			else{

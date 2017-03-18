@@ -85,13 +85,13 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
     	while(isEnabled()){
-    		Test.setButtons(getButtonA(), getButtonB());
-			controllerTest.run();
-//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		intake.update();
-//    		climb.manualClimb();
-//    		gear.Gear();
+//    		Test.setButtons(getButtonA(), getButtonB());
+//			controllerTest.run();
+    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+    		intake.update();
+    		climb.manualClimb();
+    		gear.Gear();
     	}
     }
 

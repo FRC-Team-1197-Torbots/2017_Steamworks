@@ -70,6 +70,8 @@ public class DriveController {
 
 	protected double positionWaypoint;
 	protected double headingWaypoint;
+	
+	private boolean testMode;
 
 	public DriveController(boolean testMode) {
 		hardware = new DriveHardware();
@@ -81,6 +83,8 @@ public class DriveController {
 
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
+		
+		this.testMode = testMode;
 
 		if(testMode){
 			translationPID.setMinimumOutput(0.0);
@@ -143,8 +147,8 @@ public class DriveController {
 		translationPID.updateVelocity(hardware.getVelocity());
 
 		// Rotation
-		rotationPID.updatePosition(hardware.getHeading());
-		rotationPID.updateVelocity(hardware.getOmega());
+		rotationPID.updatePosition(hardware.getHeading(testMode));
+		rotationPID.updateVelocity(hardware.getOmega(testMode));
 
 		if (motionProfilingActive) {
 			if (activeTrajectory == joystickTraj) {
@@ -185,8 +189,8 @@ public class DriveController {
 			if (activeTrajectory != joystickTraj) {
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
-			// graphTranslation();
-			// graphRotationl();
+			 graphTranslation();
+			 graphRotation();
 			hardware.setTargets(translationPID.output(), rotationPID.output());
 		}
 		if (activeTrajectory.lookUpIsLast(lookupTime) && translationPID.isOnTarget() && rotationPID.isOnTarget()) {

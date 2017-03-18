@@ -14,10 +14,6 @@ public class DriveControllerTest extends Test{
 	}
 	TestPhase testPhase = TestPhase.IDLE;
 	
-	private boolean isFirstPass = true;
-//	private boolean executeButton;
-//	private boolean executeButtonLast;
-	
 	private TorTrajectory forward;
 	private TorTrajectory backward;
 	private TorTrajectory rightTurn;
@@ -50,24 +46,9 @@ public class DriveControllerTest extends Test{
 		posWithinTolerance = true;
 		velWithinTolerance = true;
 		hedWithinTolerance = true;
-		reset();
+//		reset();
 	}
 
-//	public void run(boolean execute) {
-//		executeButtonLast = executeButton;
-//		executeButton = execute;
-//		run();
-//	}
-	
-//	protected void runTest(){
-//		if (isFirstPass) {
-//			isFirstPass = false;
-//			setup();
-//		}
-//		testMotionProfile();
-//	}
-	
-//	public void testMotionProfile(){
 	protected void runTest(){
 		switch(testPhase){
 		case IDLE:
@@ -78,7 +59,6 @@ public class DriveControllerTest extends Test{
 			testPhase = TestPhase.FORWARDTRAJ;
 			break;
 		case FORWARDTRAJ:
-//			if(executeButton && !executeButtonLast){
 			if(enterButtonDownEvent()){
 				testLinearTrajectory(forward);
 				testPhase = TestPhase.FORWARDSTALL;
@@ -95,7 +75,6 @@ public class DriveControllerTest extends Test{
 			}
 			break;
 		case BACKWARDTRAJ:
-//			if(executeButton && !executeButtonLast){
 			if(enterButtonDownEvent()){
 				testLinearTrajectory(backward);
 				testPhase = TestPhase.BACKWARDSTALL;
@@ -109,11 +88,10 @@ public class DriveControllerTest extends Test{
 				System.out.println("For testing the pivot trajectories, place the robot on the ground.");
 				System.out.println("Ready to test right trajectory.");
 				System.out.println("> press A to execute the test.");
-				testPhase = TestPhase.RIGHTTRAJ;
+				testPhase = TestPhase.COMPLETE;
 			}
 			break;
 		case RIGHTTRAJ:
-//			if(executeButton && !executeButtonLast){
 			if(enterButtonDownEvent()){
 				testPivotTrajectory(rightTurn);
 				testPhase = TestPhase.RIGHTSTALL;
@@ -130,7 +108,6 @@ public class DriveControllerTest extends Test{
 			}
 			break;
 		case LEFTTRAJ:
-//			if(executeButton && !executeButtonLast){
 			if(enterButtonDownEvent()){
 				testPivotTrajectory(leftTurn);
 				testPhase = TestPhase.LEFTSTALL;
@@ -145,6 +122,15 @@ public class DriveControllerTest extends Test{
 			}
 			break;
 		case COMPLETE:
+			if(rightEncoderDirection && leftEncoderDirection){
+				incrementSubtestsPassed();
+			}
+			if(posWithinTolerance && velWithinTolerance){
+				incrementSubtestsPassed();
+			}
+			if(gyroDirection){
+				incrementSubtestsPassed();
+			}
 			System.out.println("Completed DriveController test. Result: " + result());
 			reset();
 			controller.setMotionProfilingInactive();
@@ -194,7 +180,7 @@ public class DriveControllerTest extends Test{
 	public void testPivotTrajectory(TorTrajectory traj){
 		drive.executeTrajectory(traj);
 		if(traj.getGoalHeading() > 0){
-			if(controller.hardware.getHeading() > 0){
+			if(controller.hardware.getHeading(true) > 0){
 				gyroDirection = true;
 			}
 			else{
@@ -202,7 +188,7 @@ public class DriveControllerTest extends Test{
 			}
 		}
 		else{
-			if(controller.hardware.getHeading() < 0){
+			if(controller.hardware.getHeading(true) < 0){
 				gyroDirection = true;
 			}
 			else{
@@ -226,14 +212,12 @@ public class DriveControllerTest extends Test{
 		}
 		else{
 			System.out.println("TEST PASSED (Encoder): Both encoders are going the right direction.");
-			incrementSubtestsPassed();
 		}
 	}
 	
 	public void printGyroError(){
 		if(gyroDirection){
 			System.out.println("TEST PASSED (Gyro): The gyro is going the right direction.");
-			incrementSubtestsPassed();
 		}
 		else{
 			System.err.println("TEST FAILED (Gyro): The gyro is not going the right direction.");
@@ -252,7 +236,6 @@ public class DriveControllerTest extends Test{
 		}
 		else{
 			System.out.println("TEST PASSED (Translation): The position and velocity is within the tolerance.");
-			incrementSubtestsPassed();
 		}
 	}
 	
@@ -262,7 +245,6 @@ public class DriveControllerTest extends Test{
 		}
 		else{
 			System.out.println("TEST PASSED (Rotation): The heading is within the tolerance");
-			incrementSubtestsPassed();
 		}
 	}
 	

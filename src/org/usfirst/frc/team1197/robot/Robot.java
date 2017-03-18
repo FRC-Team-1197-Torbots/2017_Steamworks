@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.SampleRobot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1197.robot.test.DriveControllerTest;
 import org.usfirst.frc.team1197.robot.test.DriveHardwareTest;
@@ -84,11 +85,13 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
     	while(isEnabled()){
-    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-    		intake.update();
-    		climb.manualClimb();
-    		gear.Gear();
+    		Test.setButtons(getButtonA(), getButtonB());
+			controllerTest.run();
+//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+//    		intake.update();
+//    		climb.manualClimb();
+//    		gear.Gear();
     	}
     }
 

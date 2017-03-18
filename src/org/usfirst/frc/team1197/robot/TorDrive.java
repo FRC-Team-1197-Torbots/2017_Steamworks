@@ -55,7 +55,7 @@ public class TorDrive
 		// Tell the drive controller whether to use car drive in high gear.
 		controller.useCarDriveInHighGear(cypress.getRawButton(1));
 		if (controller.isHighGear) {
-			if (!controller.usingCarDriveForHighGear) {
+			if (controller.usingCarDriveForHighGear) {
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			} else {
 				carDrive(throttleAxis, carSteerAxis);

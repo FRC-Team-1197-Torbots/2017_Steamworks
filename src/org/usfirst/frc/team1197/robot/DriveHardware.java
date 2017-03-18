@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveHardware {
 
@@ -33,6 +34,8 @@ public class DriveHardware {
 	private final double kP = 0.0; // 1.0
 	private final double kI = 0.0; // 0.0
 	private final double kD = 0.0; // 50.0
+	
+	private double headingOffset;
 
 	public DriveHardware() {
 		gyro = new AHRS(SerialPort.Port.kMXP);
@@ -146,15 +149,25 @@ public class DriveHardware {
 	}
 
 	public double getVelocity() {
-		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // [meters/second]
+		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5 * 10 / encoderTicksPerMeter; // [meters/second]	
 	}
 
-	public double getHeading() {
-		return (gyro.getAngle() * (Math.PI / 180)); // [radians]
+	public double getHeading(boolean testMode) {
+		if(testMode){
+			return (rightMaster.getPosition() - leftMaster.getPosition()) / 2;
+		}
+		else{
+			return (gyro.getAngle() * (Math.PI / 180)); // [radians]
+		}
 	}
 
-	public double getOmega() {
-		return (gyro.getRate()); // [radians/second] (contrary to navX documentation)
+	public double getOmega(boolean testMode) {
+		if(testMode){
+			return (rightMaster.getSpeed() + leftMaster.getSpeed()) / trackWidth;
+		}
+		else{
+			return (gyro.getRate()); // [radians/second] (contrary to navX documentation)
+		}
 	}
 
 	public void setTargets(double v, double omega) {
@@ -163,11 +176,13 @@ public class DriveHardware {
 	}
 
 	public void resetEncoder() {
+		headingOffset = getHeading(true);
 		rightMaster.setPosition(0);
 		leftMaster.setPosition(0);
 	}
 
 	public void resetGyro() {
+		headingOffset = -getHeading(true);
 		gyro.reset();
 	}
 

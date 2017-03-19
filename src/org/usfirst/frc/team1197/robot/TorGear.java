@@ -12,17 +12,20 @@ public class TorGear {
 	private Joystick stick;
 	private long endTime = System.currentTimeMillis() - 10;
 	private long currentTime;
+	private boolean isOpen;
 
 	public TorGear(Solenoid gearPiston, DigitalInput gearSwitch, Joystick stick){
 		this.gearPiston = gearPiston;
 		this.gearSwitch = gearSwitch;
 		this.stick = stick;
+		isOpen = false;
 	}
 
 	public void autoControl(){
 		currentTime = System.currentTimeMillis();
-		if(gearSwitch.get()){
+		if(gearSwitch.get() && !isOpen){
 			gearOpen();
+			isOpen = true;
 			endTime = System.currentTimeMillis() + 1500;
 		}
 		else if(endTime < currentTime){
@@ -31,10 +34,12 @@ public class TorGear {
 	}
 
 	public void playerControl(){
-		if(stick.getRawButton(6)){
+		if(stick.getRawButton(7)){
+			isOpen = true;
 			gearOpen();
 		}
 		else{
+			isOpen = false;
 			gearClosed();
 		}
 	}
@@ -44,11 +49,17 @@ public class TorGear {
 	}
 
 	public void gearOpen(){
-		gearPiston.set(true);
+		if(!isOpen) {
+			gearPiston.set(true);
+			isOpen = true;
+		}
 	}
-	
+
 	public void gearClosed(){
-		gearPiston.set(false);
+		if(isOpen) {
+			gearPiston.set(false);
+			isOpen = false;
+		}
 	}
 }
 

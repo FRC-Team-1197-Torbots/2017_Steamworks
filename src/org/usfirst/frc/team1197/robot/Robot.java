@@ -11,6 +11,8 @@ import org.usfirst.frc.team1197.robot.test.DriveHardwareTest;
 import org.usfirst.frc.team1197.robot.test.Test;
 
 import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -31,6 +33,7 @@ public class Robot extends SampleRobot {
 	private Joystick autoBox;
 	
 	private DigitalInput gearSwitch;
+	private DigitalInput gearIntakeDetector;
 	
 	private DriveHardwareTest hardwareTest;
 	private DriveControllerTest controllerTest;
@@ -43,25 +46,30 @@ public class Robot extends SampleRobot {
 	protected static RobotMode mode;
 	
     public Robot() {
+    	CameraServer server = CameraServer.getInstance();
+    	server.startAutomaticCapture("cam0", 0);
+    	server.putVideo("Gear Intake", 640, 480);
+    	
     	mode = RobotMode.DISABLED;
     	
     	climbTalon = new CANTalon(10); 
-    	gearIntakeTalon = new CANTalon(4);
+    	gearIntakeTalon = new CANTalon(6);
     	
     	compressor = new Compressor();
     	
-    	gearPiston = new Solenoid(1);
-    	gearIntakePiston = new Solenoid(2);
+    	gearPiston = new Solenoid(2);
+    	gearIntakePiston = new Solenoid(1);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
     	autoBox = new Joystick(2);
     	
     	gearSwitch = new DigitalInput(0);
+    	gearIntakeDetector = new DigitalInput(1);
     	
     	drive = new TorDrive(player1, autoBox);
     	climb = new TorClimb(climbTalon, player2);
-    	gearIntake = new TorGearIntake(player2, gearIntakeTalon, gearIntakePiston);
+    	gearIntake = new TorGearIntake(player2, gearIntakeTalon, gearIntakePiston, gearIntakeDetector);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(drive, autoBox, gear);
     	
@@ -82,10 +90,15 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
     	while(isEnabled()){
-    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		gear.autoControl();
-//    		gearIntake.playerControl();
+//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+//    		if(player2.getRawButton(8)){
+//    			gear.playerControl();
+//    		}
+//    		else{
+//    			gear.autoControl();
+//    		}
+    		gearIntake.autoControl();
 //    		climb.playerControl();
     	}
     }

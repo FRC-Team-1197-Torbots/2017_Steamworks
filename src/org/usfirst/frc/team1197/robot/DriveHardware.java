@@ -23,17 +23,18 @@ public class DriveHardware {
 	private static final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private static final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
 	
-	public static final double absoluteMaxSpeed = (approximateSensorSpeed * quadEncNativeUnits) 
-											/ (60 * encoderTicksPerMeter); // [meters/sec] (2017 robot: ~4.405 m/s)
-	public static final double absoluteMaxOmega = (approximateSensorSpeed * (2*Math.PI)) / 60;
 	public static final double trackWidth = 0.5786; // [meters] (0.5786m = 23.13")
 	public static final double halfTrackWidth = trackWidth / 2.0; // [meters]
 	public static final double backlash = 0.015; // [meters]
 	
+	public static final double absoluteMaxSpeed = (approximateSensorSpeed * quadEncNativeUnits) 
+			/ (60 * encoderTicksPerMeter); // [meters/sec] (2017 robot: ~4.405 m/s)
+	public static final double absoluteMaxOmega = absoluteMaxSpeed / halfTrackWidth;
+	
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 1.0; // 1.0
+	private final double kP = 0.0; // 1.0
 	private final double kI = 0.0; // 0.0
-	private final double kD = 50.0; // 50.0
+	private final double kD = 0.0; // 50.0
 	
 	private boolean leftOutputReversed = true;
 	private boolean rightOutputReversed = false;
@@ -149,6 +150,14 @@ public class DriveHardware {
 
 	public double getAverageRawVelocity() {
 		return (rightMaster.getSpeed() + leftMaster.getSpeed()) * 0.5;
+	}
+	
+	public double getRightVelocity(){
+		return rightMaster.getSpeed();
+	}
+	
+	public double getLeftVelocity(){
+		return leftMaster.getSpeed();
 	}
 
 	public double getAverageEncoderPosition() {

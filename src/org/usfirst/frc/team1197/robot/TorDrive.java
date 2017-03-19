@@ -23,8 +23,8 @@ public class TorDrive
 	
 	private double dangerFactor = 0.75;
 	
-	private double lastThrottle;
-	private double throttleDifference;
+	private double v;
+	private double w;
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
@@ -66,6 +66,7 @@ public class TorDrive
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 			} else {
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
+//				ImprovedArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			// When you hold down the shiftButton (left bumper), then shift to low gear.
 			if (shiftButton) {
@@ -90,16 +91,16 @@ public class TorDrive
 	}
 	
 	public void ImprovedArcadeDrive(double throttleAxis, double arcadeSteerAxis){
-		arcadeSteerAxis = -arcadeSteerAxis;
+		
 		if (Math.abs(arcadeSteerAxis) <= 0.1) {
-			arcadeSteerAxis = 0.0D;
+			arcadeSteerAxis = 0.0;
 		}
-		if (Math.abs(throttleAxis) <= 0.2D) {
-			throttleAxis = 0.0D;
+		if (Math.abs(throttleAxis) <= 0.2) {
+			throttleAxis = 0.0;
 		}
 		
 		if (arcadeSteerAxis >= 0.0D) {
-			arcadeSteerAxis *= arcadeSteerAxis;
+			arcadeSteerAxis *= arcadeSteerAxis * arcadeSteerAxis;
 		} else {
 			arcadeSteerAxis = -(arcadeSteerAxis * arcadeSteerAxis);
 		}
@@ -108,11 +109,46 @@ public class TorDrive
 		} else {
 			throttleAxis = -(throttleAxis * throttleAxis);
 		}
+		SmartDashboard.putNumber("arcadeSteer", dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth);
+		throttleAxis *= dangerFactor * DriveHardware.absoluteMaxSpeed;
+		arcadeSteerAxis *= dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth;
 		
-		targetSpeed = throttleAxis * DriveHardware.absoluteMaxSpeed * dangerFactor;
-		targetOmega = arcadeSteerAxis * DriveHardware.absoluteMaxOmega * dangerFactor;
+		double rightMotorSpeed;
+		double leftMotorSpeed;
 		
-		controller.setTargets(targetSpeed, targetOmega);
+		if (throttleAxis > 0.0D)
+		{
+			if (arcadeSteerAxis > 0.0D)
+			{
+				leftMotorSpeed = throttleAxis - arcadeSteerAxis;
+				rightMotorSpeed = Math.max(throttleAxis, arcadeSteerAxis);
+			}
+			else
+			{
+				leftMotorSpeed = Math.max(throttleAxis, -arcadeSteerAxis);
+				rightMotorSpeed = throttleAxis + arcadeSteerAxis;
+			}
+		}
+		else
+		{
+			if (arcadeSteerAxis > 0.0D)
+			{
+				leftMotorSpeed = -Math.max(-throttleAxis, arcadeSteerAxis);
+				rightMotorSpeed = throttleAxis + arcadeSteerAxis;
+			}
+			else
+			{
+				leftMotorSpeed = throttleAxis - arcadeSteerAxis;
+				rightMotorSpeed = -Math.max(-throttleAxis, -arcadeSteerAxis);
+			}
+		}
+		
+		v = (rightMotorSpeed + leftMotorSpeed) * 0.5;
+		w = (rightMotorSpeed - leftMotorSpeed) / DriveHardware.trackWidth;
+	
+		SmartDashboard.putNumber("v", v);
+		SmartDashboard.putNumber("w", w);
+		controller.setTargets(v, w);
 	}
 
 	public void ArcadeDrive(double throttleAxis, double arcadeSteerAxis){
@@ -136,8 +172,6 @@ public class TorDrive
 		} else {
 			throttleAxis = -(throttleAxis * throttleAxis);
 		}
-		
-		throttleDifference = Math.abs(throttleAxis - lastThrottle);
 		
 		double rightMotorSpeed;
 		double leftMotorSpeed;
@@ -169,7 +203,6 @@ public class TorDrive
 			}
 		}
 		
-		lastThrottle = throttleAxis;
 //		controller.setTargets(rightMotorSpeed, leftMotorSpeed); // TODO: This is what it was till now. Fix sign issue pls?
 		controller.setTargets(leftMotorSpeed, rightMotorSpeed); // (Let's switch to this and use TorJoystickProfiles if we can)
 	}

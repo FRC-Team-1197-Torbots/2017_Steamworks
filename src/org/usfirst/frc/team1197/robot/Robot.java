@@ -19,14 +19,12 @@ public class Robot extends SampleRobot {
 	private SerialPort port;
 	
 	private CANTalon climbTalon;
-	private CANTalon elevatorTalon1;
-	private CANTalon elevatorTalon2;
-	private CANTalon dumperTalon;
+	private CANTalon gearIntakeTalon;
 	
 	private Compressor compressor;
-	
-	private Solenoid shift;
+
 	private Solenoid gearPiston;
+	private Solenoid gearIntakePiston;
 	
 	private Joystick player1;
 	private Joystick player2;
@@ -39,7 +37,7 @@ public class Robot extends SampleRobot {
 	
 	private TorDrive drive;
 	private TorClimb climb;
-	private TorIntake intake;
+	private TorGearIntake gearIntake;
 	private TorGear gear;
 	private TorAuto auto;
 	protected static RobotMode mode;
@@ -48,13 +46,12 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.DISABLED;
     	
     	climbTalon = new CANTalon(10); 
-    	dumperTalon = new CANTalon(4); 
-    	elevatorTalon1 = new CANTalon(5); 
-    	elevatorTalon2 = new CANTalon(6); 
+    	gearIntakeTalon = new CANTalon(4);
     	
     	compressor = new Compressor();
     	
     	gearPiston = new Solenoid(1);
+    	gearIntakePiston = new Solenoid(2);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
@@ -62,11 +59,11 @@ public class Robot extends SampleRobot {
     	
     	gearSwitch = new DigitalInput(0);
     	
-    	drive = new TorDrive(player1, shift, autoBox);
+    	drive = new TorDrive(player1, autoBox);
     	climb = new TorClimb(climbTalon, player2);
-    	intake = new TorIntake(elevatorTalon1, elevatorTalon2, dumperTalon, player2);
+    	gearIntake = new TorGearIntake(player2, gearIntakeTalon, gearIntakePiston);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
-    	auto = new TorAuto(drive, intake, autoBox, gear);
+    	auto = new TorAuto(drive, autoBox, gear);
     	
     	hardwareTest = new DriveHardwareTest(drive.controller.hardware);
     	controllerTest = new DriveControllerTest(drive.controller, drive);
@@ -85,13 +82,11 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
     	while(isEnabled()){
-//    		Test.setButtons(getButtonA(), getButtonB());
-//			controllerTest.run();
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-    		intake.update();
-    		climb.manualClimb();
-    		gear.Gear();
+//    		gear.autoControl();
+//    		gearIntake.playerControl();
+//    		climb.playerControl();
     	}
     }
 
@@ -103,24 +98,6 @@ public class Robot extends SampleRobot {
 			controllerTest.run();
 //			hardwareTest.run(getButtonA(), getButtonB());
 //			compressor.start();
-//			if(player2.getRawButton(1)){
-//				elevatorTalon1.set(1.0);
-//			}
-//			else if(player2.getRawButton(2)){
-//				elevatorTalon2.set(1.0);
-//			}
-//			else if(player2.getRawButton(3)){
-//				dumperTalon.set(1.0);
-//			}
-//			else if(player2.getRawButton(5)){
-//				climbTalon.set(-1.0);
-//			}
-//			else{
-//				elevatorTalon1.set(0.0);
-//				elevatorTalon2.set(0.0);
-//				dumperTalon.set(0.0);
-//				climbTalon.set(0.0);
-//			}
 		}
 	}
 

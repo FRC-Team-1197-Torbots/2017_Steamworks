@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.Joystick;
 public class TorAuto {
 	private int position; //position goes from left to right
 	private TorDrive drive;
-	private TorIntake intake;
 	private Joystick cypress;
 	
 	private BoilerPos1 boilerPos1;
@@ -21,12 +20,9 @@ public class TorAuto {
 	
 	private TorGear gear;
 	
-	private long currentTime;
-	private long endTime = System.currentTimeMillis() - 10;
-	
 	public static enum BOILERAUTO
 	{
-		IDLE, POS0, POS1, POS2, POS3, POS4, POS5;
+		IDLE, POS0, POS1, POS2, POS3;
 
 		private BOILERAUTO() {}
 	}
@@ -42,13 +38,13 @@ public class TorAuto {
 	
 	public static enum CENTERAUTO
 	{
-		IDLE, POS0, POS1, POS2, POS3, POS4;
+		IDLE, POS0, POS1, POS2;
 		
 		private CENTERAUTO() {}
 	}
 	public CENTERAUTO centerAutoState = CENTERAUTO.IDLE;
 	
-	public TorAuto(TorDrive drive, TorIntake intake, Joystick cypress, TorGear gear) {
+	public TorAuto(TorDrive drive, Joystick cypress, TorGear gear) {
 		this.drive = drive;
 		this.cypress = cypress;
 		
@@ -63,7 +59,6 @@ public class TorAuto {
 		centerPos1 = new CenterPos1();
 		centerPos2 = new CenterPos2();
 		
-		this.intake = intake;
 		this.gear = gear;
 	}
 	
@@ -116,7 +111,7 @@ public class TorAuto {
 				centerAutoState = CENTERAUTO.POS1;
 				break;
 			case POS1:
-				gear.Gear();
+				gear.autoControl();
 				if(centerPos1.isComplete()){
 					drive.executeTrajectory(centerPos2);
 					centerAutoState = CENTERAUTO.POS2;
@@ -142,7 +137,7 @@ public class TorAuto {
 				loadAutoState = LOADSTATIONAUTO.POS1;
 				break;
 			case POS1:
-				gear.Gear();
+				gear.autoControl();
 				if(loadingPos1.isComplete()){
 					drive.executeTrajectory(loadingPos2);
 					loadAutoState = LOADSTATIONAUTO.POS2;
@@ -150,8 +145,8 @@ public class TorAuto {
 				break;
 			case POS2:
 				if(loadingPos2.isComplete()){
-					drive.executeTrajectory(loadingPos3);
-					loadAutoState = LOADSTATIONAUTO.POS3;
+//					drive.executeTrajectory(loadingPos3);
+					loadAutoState = LOADSTATIONAUTO.IDLE;
 				}
 				break;
 			case POS3:
@@ -174,7 +169,7 @@ public class TorAuto {
 				boilerAutoState = BOILERAUTO.POS1;
 				break;
 			case POS1:
-				gear.Gear();
+				gear.autoControl();
 				if(boilerPos1.isComplete()){
 					drive.executeTrajectory(boilerPos2);
 					boilerAutoState = BOILERAUTO.POS2;	
@@ -182,20 +177,11 @@ public class TorAuto {
 				break;
 			case POS2:
 				if(boilerPos2.isComplete()){
-					endTime = System.currentTimeMillis() + 1500;
-					boilerAutoState = BOILERAUTO.POS3;
+//					drive.executeTrajectory(boilerPos3);
+					boilerAutoState = BOILERAUTO.IDLE;
 				}
 				break;
 			case POS3:
-				currentTime = System.currentTimeMillis();
-				intake.DumpBalls();
-				if(endTime < currentTime){
-					intake.IntakeOff();
-					drive.executeTrajectory(boilerPos3);
-					boilerAutoState = BOILERAUTO.POS4;
-				}
-				break;
-			case POS4:
 				if(boilerPos3.isComplete()){
 					boilerAutoState = BOILERAUTO.IDLE;
 				}

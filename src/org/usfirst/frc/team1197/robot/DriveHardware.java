@@ -25,6 +25,7 @@ public class DriveHardware {
 	
 	public static final double absoluteMaxSpeed = (approximateSensorSpeed * quadEncNativeUnits) 
 											/ (60 * encoderTicksPerMeter); // [meters/sec] (2017 robot: ~4.405 m/s)
+	public static final double absoluteMaxOmega = (approximateSensorSpeed * (2*Math.PI)) / 60;
 	public static final double trackWidth = 0.5786; // [meters] (0.5786m = 23.13")
 	public static final double halfTrackWidth = trackWidth / 2.0; // [meters]
 	public static final double backlash = 0.015; // [meters]

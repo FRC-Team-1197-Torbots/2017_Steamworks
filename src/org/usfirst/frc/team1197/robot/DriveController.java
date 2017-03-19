@@ -29,37 +29,33 @@ public class DriveController {
 	private double targetHeading;
 
 	// auto
-//	private double kPv = 0.0; // 0.01
-//	private double kA = 0.0; // 0.0
-//	private double kP = 17.0; // 17.0
-//	private double kI = 6.0; // 9.0
-//	private double kD = 0.5; // 0.4
-//
-//	private double kpv = 0.0; // 0.01
-//	private double ka = 0.0; // 0.02
-//	private double kp = 22.0; // 20.0
-//	private double ki = 10.0; // 17.0
-//	private double kd = 0.5; // 0.3
+	private double kPv = 0.0; // 0.01
+	private double kA = 0.0; // 0.0
+	private double kP = 17.0; // 17.0
+	private double kI = 6.0; // 9.0
+	private double kD = 0.5; // 0.4
+
+	private double kpv = 0.0; // 0.01
+	private double ka = 0.0; // 0.02
+	private double kp = 22.0; // 20.0
+	private double ki = 10.0; // 17.0
+	private double kd = 0.5; // 0.3
 
 	// maybe  bot's constants
-	 private double kPv = 0.01; //0.01
-	 private double kA = 0.0; //0.0
-	 private double kP = 4.5; //1.5
-	 private double kI = 5.0; //5.0
-	 private double kD = 0.1; //0.1
-	
-	 private double kpv = 0.01; //0.01
-	 private double ka = 0.0; //0.0
-	 private double kp = 9.0; //9.0
-	 private double ki = 5.0; //5.0
-	 private double kd = 0.1; //0.1
-	//
-	//
-	// private double minLineOutput = 0.0; //0.0
-	// private double minTurnOutput = 0.1; //0.1
+//	 private double kPv = 0.0; //0.01
+//	 private double kA = 0.0; //0.0
+//	 private double kP = 0.0; //1.5
+//	 private double kI = 0.0; //5.0
+//	 private double kD = 0.0; //0.1
+//	
+//	 private double kpv = 0.0; //0.01
+//	 private double ka = 0.0; //0.0
+//	 private double kp = 0.0; //9.0
+//	 private double ki = 0.0; //5.0
+//	 private double kd = 0.0; //0.1
 
 	private double minLineOutput = 0.0; // 0.0
-	private double minTurnOutput = 0.1; // 0.1
+	private double minTurnOutput = 0.0; // 0.1
 
 	private final double timeInterval = 0.005;
 	private double dt = timeInterval;
@@ -144,7 +140,7 @@ public class DriveController {
 
 		// Translation
 		translationPID.updatePosition(hardware.getPosition());
-		translationPID.updateVelocity(hardware.getVelocity());
+//		translationPID.updateVelocity(hardware.getVelocity());
 
 		// Rotation
 		rotationPID.updatePosition(hardware.getHeading());

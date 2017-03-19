@@ -19,13 +19,22 @@ public class TorGear {
 		this.stick = stick;
 	}
 
-	public void Gear(){
+	public void autoControl(){
 		currentTime = System.currentTimeMillis();
 		if(gearSwitch.get()){
 			gearOpen();
 			endTime = System.currentTimeMillis() + 1500;
 		}
 		else if(endTime < currentTime){
+			gearClosed();
+		}
+	}
+
+	public void playerControl(){
+		if(stick.getRawButton(6)){
+			gearOpen();
+		}
+		else{
 			gearClosed();
 		}
 	}
@@ -36,21 +45,10 @@ public class TorGear {
 
 	public void gearOpen(){
 		gearPiston.set(true);
-		//determine if true or false for open position
 	}
-
+	
 	public void gearClosed(){
 		gearPiston.set(false);
-		//determine if true or false for closed position
-	}
-
-	public void update(){
-		if(stick.getRawButton(6)){
-			gearOpen();
-		}
-		else{
-			gearClosed();
-		}
 	}
 }
 

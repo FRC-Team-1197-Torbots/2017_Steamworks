@@ -238,7 +238,7 @@ public class TorDrive
 
 		/* The centerRadius is the value we gain from findRadiusExponential method in the joystickProfile class.
 		   The TorMath.sign(throttleAxis) makes steering work the same when the robot drives backwards. */
-		centerRadius = TorMath.sign(throttleAxis) * joystickProfile.findRadiusExponential(carSteeringAxis);
+		centerRadius = Math.signum(throttleAxis) * joystickProfile.findRadiusExponential(carSteeringAxis);
 
 		// If the centerRadius is greater than the maxTurnRadius or if it is 0, then drive straight:
 		if (Math.abs(centerRadius) > joystickProfile.getMaxTurnRadius() || Math.abs(centerRadius) == 0.0)

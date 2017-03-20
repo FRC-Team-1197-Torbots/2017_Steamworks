@@ -28,7 +28,7 @@ public class TorJoystickProfiles {
 		/* The exponential equation to find the radius.
 		   See https://www.desmos.com/calculator/g0st5i5ajy 
 		   for the turning profile equations */
-		r = (Math.abs(x)/x) * (D * Math.exp(-C * Math.abs(x)));
+		r = Math.signum(x) * (D * Math.exp(-C * Math.abs(x)));
 
 		/* Calculating the negative Steering Inertia.
 		   See the negative inertia section
@@ -44,7 +44,7 @@ public class TorJoystickProfiles {
 	}
 	
 	public double findSpeed(double x){
-		y = (Math.abs(x)/x) * A * ((Math.pow(B, Math.abs(x))) - 1.0);
+		y = Math.signum(x) * A * ((Math.pow(B, Math.abs(x))) - 1.0);
 		negThrottleInertia = (y - previous_y) * (1000 * 0.005);
 		previous_y = y;
 		if(Math.abs(x) >= throttleDeadBand)
@@ -58,7 +58,7 @@ public class TorJoystickProfiles {
 		/* The exponential equation to find the radius.
 		   See https://www.desmos.com/calculator/g0st5i5ajy 
 		   for the turning profile equations */
-		r = TorMath.sign(x) * (D * Math.exp(-C * Math.abs(x)));
+		r = Math.signum(x) * (D * Math.exp(-C * Math.abs(x)));
 		if(x == 0.0)
 			return 0.0; // note: we define "zero radius" as driving straight!
 		else
@@ -67,7 +67,7 @@ public class TorJoystickProfiles {
 	
 	// "Simple" means no negative inertia.
 	public double findSpeedSimple(double x){
-		y = TorMath.sign(x) * A * ((Math.pow(B, Math.abs(x))) - 1.0);
+		y = Math.signum(x) * A * ((Math.pow(B, Math.abs(x))) - 1.0);
 		if(Math.abs(x) >= throttleDeadBand)
 			return y; // output ranges from 0.0 to 1.0
 		else

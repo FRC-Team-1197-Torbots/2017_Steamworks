@@ -28,35 +28,6 @@ public class DriveController {
 	private double targetAlpha;
 	private double targetHeading;
 
-	// auto
-//	private double kPv = 0.0; // 0.01
-//	private double kA = 0.0; // 0.0
-//	private double kP = 17.0; // 17.0
-//	private double kI = 6.0; // 9.0
-//	private double kD = 0.5; // 0.4
-//
-//	private double kpv = 0.0; // 0.01
-//	private double ka = 0.0; // 0.02
-//	private double kp = 22.0; // 20.0
-//	private double ki = 10.0; // 17.0
-//	private double kd = 0.5; // 0.3
-
-	// maybe  bot's constants
-	 private double kPv = 0.0; //0.01
-	 private double kA = 0.0; //0.0
-	 private double kP = 5.0; //1.5
-	 private double kI = 0.0; //5.0
-	 private double kD = 0.1; //0.1
-	
-	 private double kpv = 0.0; //0.01
-	 private double ka = 0.0; //0.0
-	 private double kp = 5.0; //9.0
-	 private double ki = 0.0; //5.0
-	 private double kd = 0.1; //0.1
-
-	private double minLineOutput = 0.0; // 0.0
-	private double minTurnOutput = 0.0; // 0.1
-
 	private final double timeInterval = 0.005;
 	private double dt = timeInterval;
 	private long currentTime;
@@ -66,10 +37,8 @@ public class DriveController {
 
 	protected double positionWaypoint;
 	protected double headingWaypoint;
-	
-	private boolean testMode;
 
-	public DriveController(boolean testMode) {
+	public DriveController() {
 		hardware = new DriveHardware();
 		joystickTraj = new JoystickTrajectory();
 		translationPID = new TorPID(dt);
@@ -80,36 +49,7 @@ public class DriveController {
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 		
-		this.testMode = testMode;
-
-		if(testMode){
-			translationPID.setMinimumOutput(0.0);
-			translationPID.setkP(0.0);
-			translationPID.setkI(0.0);
-			translationPID.setkD(0.0);
-			translationPID.setkPv(0.0);
-			translationPID.setkA(0.0);
-			rotationPID.setMinimumOutput(0.0);
-			rotationPID.setkP(0.0);
-			rotationPID.setkI(0.0);
-			rotationPID.setkD(0.0);
-			rotationPID.setkPv(0.0);
-			rotationPID.setkA(0.0);
-		}
-		else{
-			rotationPID.setMinimumOutput(minTurnOutput);
-			rotationPID.setkP(kp);
-			rotationPID.setkI(ki);
-			rotationPID.setkD(kd);
-			rotationPID.setkPv(kpv);
-			rotationPID.setkA(ka);
-			translationPID.setMinimumOutput(minLineOutput);
-			translationPID.setkP(kP);
-			translationPID.setkI(kI);
-			translationPID.setkD(kD);
-			translationPID.setkPv(kPv);
-			translationPID.setkA(kA);
-		}
+		setClosedLoopConstants(Robot.mode);
 		
 		translationPID.setLimitMode(sensorLimitMode.Default);
 		translationPID.setNoiseMode(sensorNoiseMode.Noisy);
@@ -199,6 +139,51 @@ public class DriveController {
 				activeTrajectory = nextTrajectory;
 				nextTrajectory = defaultTrajectory;
 			}
+		}
+	}
+	
+	public void setClosedLoopConstants(RobotMode state){
+		if(state == RobotMode.AUTO){
+			rotationPID.setMinimumOutput(0.0);
+			rotationPID.setkP(22.0);
+			rotationPID.setkI(10.0);
+			rotationPID.setkD(0.5);
+			rotationPID.setkPv(0.0);
+			rotationPID.setkA(0.0);
+			translationPID.setMinimumOutput(0.0);
+			translationPID.setkP(17.0);
+			translationPID.setkI(6.0);
+			translationPID.setkD(0.5);
+			translationPID.setkPv(0.0);
+			translationPID.setkA(0.0);
+		}
+		else if(state == RobotMode.TELEOP){
+			rotationPID.setMinimumOutput(0.0);
+			rotationPID.setkP(5.0);
+			rotationPID.setkI(0.0);
+			rotationPID.setkD(0.1);
+			rotationPID.setkPv(0.0);
+			rotationPID.setkA(0.0);
+			translationPID.setMinimumOutput(0.0);
+			translationPID.setkP(5.0);
+			translationPID.setkI(0.0);
+			translationPID.setkD(0.1);
+			translationPID.setkPv(0.0);
+			translationPID.setkA(0.0);
+		}
+		else{
+			rotationPID.setMinimumOutput(0.0);
+			rotationPID.setkP(0.0);
+			rotationPID.setkI(0.0);
+			rotationPID.setkD(0.0);
+			rotationPID.setkPv(0.0);
+			rotationPID.setkA(0.0);
+			translationPID.setMinimumOutput(0.0);
+			translationPID.setkP(0.0);
+			translationPID.setkI(0.0);
+			translationPID.setkD(0.0);
+			translationPID.setkPv(0.0);
+			translationPID.setkA(0.0);
 		}
 	}
 

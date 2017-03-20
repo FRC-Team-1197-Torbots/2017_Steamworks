@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+
 import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TorDrive
@@ -35,7 +35,7 @@ public class TorDrive
 
 	public TorDrive(Joystick stick, Joystick cypress)
 	{
-		controller = new DriveController(false);
+		controller = new DriveController();
 		this.cypress = cypress;
 		joystickProfile = new TorJoystickProfiles();
 		//TODO: Use static final in TorJoystickProfile, then remove maxThrottle initialization from the constructor.
@@ -46,7 +46,7 @@ public class TorDrive
 	
 	public TorDrive()
 	{
-		controller = new DriveController(true);
+		controller = new DriveController();
 		joystickProfile = new TorJoystickProfiles();
 		//TODO: Use static final in TorJoystickProfile, then remove maxThrottle initialization from the constructor.
 		maxThrottle = (dangerFactor) * (joystickProfile.getMinTurnRadius() 
@@ -66,7 +66,6 @@ public class TorDrive
 //				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 			} else {
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
-//				ImprovedArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			// When you hold down the shiftButton (left bumper), then shift to low gear.
 			if (shiftButton) {
@@ -99,19 +98,19 @@ public class TorDrive
 			throttleAxis = 0.0;
 		}
 		
-		if (arcadeSteerAxis >= 0.0D) {
-			arcadeSteerAxis *= arcadeSteerAxis * arcadeSteerAxis;
-		} else {
-			arcadeSteerAxis = -(arcadeSteerAxis * arcadeSteerAxis);
-		}
-		if (throttleAxis >= 0.0D) {
-			throttleAxis *= throttleAxis;
-		} else {
-			throttleAxis = -(throttleAxis * throttleAxis);
-		}
-		SmartDashboard.putNumber("arcadeSteer", dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth);
-		throttleAxis *= dangerFactor * DriveHardware.absoluteMaxSpeed;
-		arcadeSteerAxis *= dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth;
+//		if (arcadeSteerAxis >= 0.0D) {
+//			arcadeSteerAxis *= arcadeSteerAxis * arcadeSteerAxis;
+//		} else {
+//			arcadeSteerAxis = -(arcadeSteerAxis * arcadeSteerAxis);
+//		}
+//		if (throttleAxis >= 0.0D) {
+//			throttleAxis *= throttleAxis;
+//		} else {
+//			throttleAxis = -(throttleAxis * throttleAxis);
+//		}
+		
+		throttleAxis = joystickProfile.findSpeed(throttleAxis) * dangerFactor * DriveHardware.absoluteMaxSpeed;
+		arcadeSteerAxis = joystickProfile.findSpeed(arcadeSteerAxis) * dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth;
 		
 		double rightMotorSpeed;
 		double leftMotorSpeed;

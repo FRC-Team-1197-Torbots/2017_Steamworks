@@ -2,7 +2,6 @@ package org.usfirst.frc.team1197.robot;
 
 import edu.wpi.first.wpilibj.SampleRobot;
 
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,8 +17,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends SampleRobot {
-	private SerialPort port;
-	
 	private CANTalon climbTalon;
 	private CANTalon gearIntakeTalon;
 	
@@ -79,6 +76,7 @@ public class Robot extends SampleRobot {
 
     public void autonomous() {
     	mode = RobotMode.AUTO;
+    	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
     	TorTrajectory.setRotationMirrored(!isRed());
     	auto.initialize();
@@ -87,6 +85,7 @@ public class Robot extends SampleRobot {
 
     public void operatorControl() {
     	mode = RobotMode.TELEOP;
+    	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
@@ -103,7 +102,8 @@ public class Robot extends SampleRobot {
     }
 
     public void test() {
-    	mode = RobotMode.TELEOP;
+    	mode = RobotMode.TEST;
+    	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
 		while(isEnabled()){
 			Test.setButtons(getButtonA(), getButtonB());

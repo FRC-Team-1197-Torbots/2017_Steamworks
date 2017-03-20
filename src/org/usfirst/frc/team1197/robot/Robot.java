@@ -80,10 +80,9 @@ public class Robot extends SampleRobot {
     public void autonomous() {
     	mode = RobotMode.AUTO;
     	drive.enable();
-//    	drive.shiftToHighGear();
-//    	TorTrajectory.setRotationMirrored(!isRed());
-//    	auto.initialize();
-//    	auto.run();
+    	TorTrajectory.setRotationMirrored(!isRed());
+    	auto.initialize();
+    	auto.run();
     }
 
     public void operatorControl() {

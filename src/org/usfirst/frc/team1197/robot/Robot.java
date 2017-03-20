@@ -90,15 +90,15 @@ public class Robot extends SampleRobot {
     	mode = RobotMode.TELEOP;
     	drive.enable();
     	while(isEnabled()){
-//    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
-//					getButtonA(), getButtonB(), getButtonX(), getButtonY());
+    		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
+					getButtonA(), getButtonB(), getButtonX(), getButtonY());
 //    		if(player2.getRawButton(8)){
 //    			gear.playerControl();
 //    		}
 //    		else{
 //    			gear.autoControl();
 //    		}
-    		gearIntake.autoControl();
+//    		gearIntake.autoControl();
 //    		climb.playerControl();
     	}
     }

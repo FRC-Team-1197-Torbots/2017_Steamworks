@@ -44,15 +44,15 @@ public class DriveController {
 	// maybe  bot's constants
 	 private double kPv = 0.0; //0.01
 	 private double kA = 0.0; //0.0
-	 private double kP = 0.0; //1.5
+	 private double kP = 5.0; //1.5
 	 private double kI = 0.0; //5.0
-	 private double kD = 0.0; //0.1
+	 private double kD = 0.1; //0.1
 	
 	 private double kpv = 0.0; //0.01
 	 private double ka = 0.0; //0.0
-	 private double kp = 0.0; //9.0
+	 private double kp = 5.0; //9.0
 	 private double ki = 0.0; //5.0
-	 private double kd = 0.0; //0.1
+	 private double kd = 0.1; //0.1
 
 	private double minLineOutput = 0.0; // 0.0
 	private double minTurnOutput = 0.0; // 0.1
@@ -144,7 +144,7 @@ public class DriveController {
 
 		// Rotation
 		rotationPID.updatePosition(hardware.getHeading());
-		rotationPID.updateVelocity(hardware.getOmega());
+//		rotationPID.updateVelocity(hardware.getOmega());
 
 		if (motionProfilingActive) {
 			if (activeTrajectory == joystickTraj) {

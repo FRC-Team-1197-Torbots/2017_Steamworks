@@ -92,7 +92,7 @@ public class TorDrive
 	
 	public void ImprovedArcadeDrive(double throttleAxis, double arcadeSteerAxis){
 		
-		if (Math.abs(arcadeSteerAxis) <= 0.1) {
+		if (Math.abs(arcadeSteerAxis) <= 0.2) {
 			arcadeSteerAxis = 0.0;
 		}
 		if (Math.abs(throttleAxis) <= 0.2) {
@@ -232,7 +232,7 @@ public class TorDrive
 	public void carDrive(double throttleAxis, double carSteeringAxis){
 		//Flipping the sign so it drives forward when you move the analog stick up and vice versa
 		//TODO: Shouldn't the signs be settled before we get to this point??? (fix in TorJoystickProfiles, not here)
-		throttleAxis = -throttleAxis;
+//		throttleAxis = -throttleAxis;
 //		carSteeringAxis = -carSteeringAxis;
 		targetSpeed = joystickProfile.findSpeedSimple(throttleAxis) * DriveHardware.absoluteMaxSpeed;
 		targetSpeed *= maxThrottle;

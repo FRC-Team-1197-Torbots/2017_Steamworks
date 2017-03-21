@@ -43,9 +43,9 @@ public class Robot extends SampleRobot {
 	protected static RobotMode mode;
 	
     public Robot() {
-    	CameraServer server = CameraServer.getInstance();
-    	server.startAutomaticCapture("cam0", 0);
-    	server.putVideo("Gear Intake", 640, 480);
+//    	CameraServer server = CameraServer.getInstance();
+//    	server.startAutomaticCapture("cam0", 0);
+//    	server.putVideo("Gear Intake", 640, 480);
     	
     	mode = RobotMode.DISABLED;
     	
@@ -96,7 +96,7 @@ public class Robot extends SampleRobot {
 //    		else{
 //    			gear.autoControl();
 //    		}
-//    		gearIntake.autoControl();
+    		gearIntake.autoControl();
 //    		climb.playerControl();
     	}
     }
@@ -106,8 +106,8 @@ public class Robot extends SampleRobot {
     	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
 		while(isEnabled()){
-			Test.setButtons(getButtonA(), getButtonB());
-			controllerTest.run();
+//			Test.setButtons(getButtonA(), getButtonB());
+//			controllerTest.run();
 //			hardwareTest.run(getButtonA(), getButtonB());
 //			compressor.start();
 		}

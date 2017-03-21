@@ -98,19 +98,21 @@ public class TorDrive
 			throttleAxis = 0.0;
 		}
 		
-//		if (arcadeSteerAxis >= 0.0D) {
-//			arcadeSteerAxis *= arcadeSteerAxis * arcadeSteerAxis;
-//		} else {
-//			arcadeSteerAxis = -(arcadeSteerAxis * arcadeSteerAxis);
-//		}
-//		if (throttleAxis >= 0.0D) {
-//			throttleAxis *= throttleAxis;
-//		} else {
-//			throttleAxis = -(throttleAxis * throttleAxis);
-//		}
+		if (arcadeSteerAxis >= 0.0D) {
+			arcadeSteerAxis *= arcadeSteerAxis * arcadeSteerAxis;
+		} else {
+			arcadeSteerAxis = -(arcadeSteerAxis * arcadeSteerAxis);
+		}
+		if (throttleAxis >= 0.0D) {
+			throttleAxis *= throttleAxis;
+		} else {
+			throttleAxis = -(throttleAxis * throttleAxis);
+		}
 		
-		throttleAxis = joystickProfile.findSpeed(throttleAxis) * dangerFactor * DriveHardware.absoluteMaxSpeed;
+//		throttleAxis = joystickProfile.findSpeed(throttleAxis) * dangerFactor * DriveHardware.absoluteMaxSpeed;
+		throttleAxis *= dangerFactor * DriveHardware.absoluteMaxSpeed;
 		arcadeSteerAxis = joystickProfile.findSpeed(arcadeSteerAxis) * dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth;
+//		arcadeSteerAxis *= dangerFactor * DriveHardware.absoluteMaxOmega * DriveHardware.halfTrackWidth;
 		
 		double rightMotorSpeed;
 		double leftMotorSpeed;

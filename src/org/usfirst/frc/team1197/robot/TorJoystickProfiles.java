@@ -2,7 +2,7 @@ package org.usfirst.frc.team1197.robot;
 
 public class TorJoystickProfiles {
 	
-	private double k = 0.05; //0.3
+	private double k = 0.1; //0.3
 	private double A = (k * k) / (1 - (2 * k));
 	private double B = (k - 1) * (k - 1) / (k * k);	
 	

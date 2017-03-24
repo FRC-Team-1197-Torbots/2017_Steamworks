@@ -125,8 +125,8 @@ public class DriveController {
 			if (activeTrajectory != joystickTraj) {
 				joystickTraj.setState(targetPosition, targetVelocity, targetHeading, targetOmega);
 			}
-			 graphTranslation();
-			 graphRotation();
+			graphTranslation();
+			graphRotation();
 			hardware.setTargets(translationPID.output(), rotationPID.output());
 		}
 		if (activeTrajectory.lookUpIsLast(lookupTime) && translationPID.isOnTarget() && rotationPID.isOnTarget()) {
@@ -152,7 +152,7 @@ public class DriveController {
 			rotationPID.setkA(0.0);
 			translationPID.setMinimumOutput(0.0);
 			translationPID.setkP(17.0);
-			translationPID.setkI(6.0);
+			translationPID.setkI(1.0);
 			translationPID.setkD(0.5);
 			translationPID.setkPv(0.0);
 			translationPID.setkA(0.0);

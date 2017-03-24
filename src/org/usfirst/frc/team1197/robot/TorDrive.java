@@ -146,9 +146,6 @@ public class TorDrive
 		
 		v = (rightMotorSpeed + leftMotorSpeed) * 0.5;
 		w = (rightMotorSpeed - leftMotorSpeed) / DriveHardware.trackWidth;
-	
-		SmartDashboard.putNumber("v", v);
-		SmartDashboard.putNumber("w", w);
 		controller.setTargets(v, w);
 	}
 
@@ -253,8 +250,6 @@ public class TorDrive
 		}
 
 		// Setting the joystick trajectory targets so that it actually drives:
-		SmartDashboard.putNumber("targetSpeed", targetSpeed);
-		SmartDashboard.putNumber("targetOmega", targetOmega);
 		controller.setTargets(targetSpeed, targetOmega); // TODO: replace with controller.setTargets()
 	}
 

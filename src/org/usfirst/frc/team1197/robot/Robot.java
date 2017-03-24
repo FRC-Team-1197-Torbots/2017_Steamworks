@@ -90,14 +90,14 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		if(player2.getRawButton(8)){
-//    			gear.playerControl();
-//    		}
-//    		else{
-//    			gear.autoControl();
-//    		}
+    		if(player2.getRawButton(8)){
+    			gear.playerControl();
+    		}
+    		else{
+    			gear.autoControl();
+    		}
     		gearIntake.autoControl();
-//    		climb.playerControl();
+    		climb.playerControl();
     	}
     }
 
@@ -108,8 +108,9 @@ public class Robot extends SampleRobot {
 		while(isEnabled()){
 //			Test.setButtons(getButtonA(), getButtonB());
 //			controllerTest.run();
-//			hardwareTest.run(getButtonA(), getButtonB());
-//			compressor.start();
+			Test.setButtons(getButtonA(), getButtonB());
+			hardwareTest.run();
+			compressor.start();
 		}
 	}
 

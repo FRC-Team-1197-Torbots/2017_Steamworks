@@ -54,8 +54,8 @@ public class Robot extends SampleRobot {
     	
     	compressor = new Compressor();
     	
-    	gearPiston = new Solenoid(2);
-    	gearIntakePiston = new Solenoid(1);
+    	gearPiston = new Solenoid(1);
+    	gearIntakePiston = new Solenoid(2);
     	
     	player1 = new Joystick(0);
     	player2 = new Joystick(1);
@@ -111,6 +111,7 @@ public class Robot extends SampleRobot {
 			Test.setButtons(getButtonA(), getButtonB());
 			hardwareTest.run();
 			compressor.start();
+//			SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
 		}
 	}
 
@@ -125,6 +126,7 @@ public class Robot extends SampleRobot {
 		return player1.getRawAxis(0);
 	}
 
+	
 	// Getting the left analog stick Y-axis value from the xbox controller. 
 	public double getLeftY(){
 		return player1.getRawAxis(1);

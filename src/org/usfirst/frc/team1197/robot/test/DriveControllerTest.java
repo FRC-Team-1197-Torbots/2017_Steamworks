@@ -85,9 +85,9 @@ public class DriveControllerTest extends Test{
 				printEncoderError();
 				printLinearToleranceError();
 				System.out.println();
-				System.out.println("For testing the pivot trajectories, place the robot on the ground.");
-				System.out.println("Ready to test right trajectory.");
-				System.out.println("> press A to execute the test.");
+//				System.out.println("For testing the pivot trajectories, place the robot on the ground.");
+//				System.out.println("Ready to test right trajectory.");
+//				System.out.println("> press A to execute the test.");
 				testPhase = TestPhase.COMPLETE;
 			}
 			break;

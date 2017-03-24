@@ -128,10 +128,10 @@ class EncoderTest extends Test {
 						}
 					}
 				}
+				printResults();
+				testPhase = TestPhase.COMPLETE;
+				setComplete(true);
 			}
-			printResults();
-			testPhase = TestPhase.COMPLETE;
-			setComplete(true);
 			break;
 		case COMPLETE:
 			break;

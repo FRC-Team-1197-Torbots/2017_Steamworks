@@ -26,6 +26,11 @@ public class TorDrive
 	private double v;
 	private double w;
 	
+	private TorTrajectory forward;
+	private TorTrajectory backward;
+	private TorTrajectory right;
+	private TorTrajectory left;
+	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
 			controller.run();
@@ -42,6 +47,11 @@ public class TorDrive
 		maxThrottle = (dangerFactor) * (joystickProfile.getMinTurnRadius() 
 				/ (joystickProfile.getMinTurnRadius() + DriveHardware.halfTrackWidth));
 		mpNotifier.startPeriodic(0.005);
+		
+		forward = new LinearTrajectory(1.0);
+		backward = new LinearTrajectory(-1.0);
+		right = new PivotTrajectory(90);
+		left = new PivotTrajectory(-90);
 	}
 	
 	public TorDrive()
@@ -52,6 +62,11 @@ public class TorDrive
 		maxThrottle = (dangerFactor) * (joystickProfile.getMinTurnRadius() 
 				/ (joystickProfile.getMinTurnRadius() + DriveHardware.halfTrackWidth));
 		mpNotifier.startPeriodic(0.005);
+		
+		forward = new LinearTrajectory(1.0);
+		backward = new LinearTrajectory(-1.0);
+		right = new PivotTrajectory(90);
+		left = new PivotTrajectory(-90);
 	}
 
 
@@ -207,16 +222,16 @@ public class TorDrive
 
 	public void buttonDrive(boolean buttonA, boolean buttonB, boolean buttonX, boolean buttonY){
 		if(buttonB && !buttonBlast){
-			
+			executeTrajectory(right);
 		}
 		else if(buttonX && !buttonXlast){
-			
+			executeTrajectory(left);
 		}
 		else if(buttonY && !buttonYlast){
-			
+			executeTrajectory(forward);
 		}
 		else if(buttonA && !buttonAlast){
-			
+			executeTrajectory(backward);
 		}
 		else{
 			

@@ -241,8 +241,8 @@ public class DriveController {
 		motionProfilingActive = true;
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
+		resetWaypoints(); // TODO: remove
 		resetPID();
-		resetWaypoints();
 		hardware.chooseVelocityControl();
 	}
 
@@ -306,6 +306,7 @@ public class DriveController {
 		if (enabled) {
 			disable(); //Guarantee safe transition between AUTO/TELEOP/TEST.
 		}
+//		resetWaypoints(); //TODO: Uncomment
 		enabled  = true;
 		isHighGear = false;
 		shiftToHighGear();
@@ -370,7 +371,11 @@ public class DriveController {
 	}
 
 	public void resetWaypoints() {
-		positionWaypoint = translationPID.position();
+//		hardware.resetEncoder(); TODO: Uncomment
+//		hardware.resetGyro();
+//		positionWaypoint = 0.0;
+//		headingWaypoint = 0.0;
+		positionWaypoint = translationPID.position(); // TODO: remove
 		headingWaypoint = rotationPID.position();
 	}
 

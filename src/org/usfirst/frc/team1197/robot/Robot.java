@@ -43,9 +43,9 @@ public class Robot extends SampleRobot {
 	protected static RobotMode mode;
 	
     public Robot() {
-//    	CameraServer server = CameraServer.getInstance();
-//    	server.startAutomaticCapture("cam0", 0);
-//    	server.putVideo("Gear Intake", 640, 480);
+    	CameraServer server = CameraServer.getInstance();
+    	server.startAutomaticCapture("cam0", 0);
+    	server.putVideo("Gear Intake", 640, 480);
     	
     	mode = RobotMode.DISABLED;
     	
@@ -81,7 +81,9 @@ public class Robot extends SampleRobot {
     	drive.enable();
     	TorTrajectory.setRotationMirrored(!isRed());
     	auto.initialize();
-    	auto.run();
+    	while(isEnabled() && isAutonomous()){
+    		auto.run();
+    	}
     }
 
     public void operatorControl() {
@@ -92,14 +94,14 @@ public class Robot extends SampleRobot {
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-//    		if(player2.getRawButton(8)){
-//    			gear.playerControl();
-//    		}
-//    		else{
-//    			gear.autoControl();
-//    		}
-//    		gearIntake.autoControl();
-//    		climb.playerControl();
+    		if(player2.getRawButton(8)){
+    			gear.playerControl();
+    		}
+    		else{
+    			gear.autoControl();
+    		}
+    		gearIntake.autoControl();
+    		climb.playerControl();
     		
 //    		if(player2.getRawButton(1)){
 //    			gearIntakeTalon.set(-1.0);

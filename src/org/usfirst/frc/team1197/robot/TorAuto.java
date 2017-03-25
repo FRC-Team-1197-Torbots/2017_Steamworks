@@ -64,6 +64,9 @@ public class TorAuto {
 	
 	public void initialize()
 	{
+		boilerAutoState = BOILERAUTO.POS0;
+		loadAutoState = LOADSTATIONAUTO.POS0;
+		centerAutoState = CENTERAUTO.POS0;
 		//determine the position of the robot
 		if(!cypress.getRawButton(3)  && cypress.getRawButton(2)){
 			position = 1;
@@ -101,8 +104,6 @@ public class TorAuto {
 	 *****************************************************/
 	
 	public void center() {
-		centerAutoState = CENTERAUTO.POS0;
-		while(centerAutoState != CENTERAUTO.IDLE){
 			switch(centerAutoState){
 			case IDLE:
 				break;
@@ -124,11 +125,9 @@ public class TorAuto {
 				break;
 			}
 		}
-	}
+	
 	
 	public void loadStation() {
-		loadAutoState = LOADSTATIONAUTO.POS0;
-		while(loadAutoState != LOADSTATIONAUTO.IDLE){
 			switch(loadAutoState){
 			case IDLE:
 				break;
@@ -156,11 +155,9 @@ public class TorAuto {
 				break;
 			}
 		}
-	}
+	
 	
 	public void boiler() {
-		boilerAutoState = BOILERAUTO.POS0;
-		while(boilerAutoState != BOILERAUTO.IDLE){
 			switch(boilerAutoState){
 			case IDLE:
 				break;
@@ -186,7 +183,6 @@ public class TorAuto {
 					boilerAutoState = BOILERAUTO.IDLE;
 				}
 				break;
-			}
 		}
 	}
 }

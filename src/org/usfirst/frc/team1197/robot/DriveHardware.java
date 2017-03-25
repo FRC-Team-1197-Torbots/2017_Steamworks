@@ -42,12 +42,12 @@ public class DriveHardware {
 	public DriveHardware() {
 		gyro = new AHRS(SerialPort.Port.kMXP);
 		solenoid = new Solenoid(0);
-		leftSlave1 = new CANTalon(7); // 7
-		leftMaster = new CANTalon(8); // 8
-		leftSlave2 = new CANTalon(9); // 9
-		rightSlave1 = new CANTalon(1); // 1
-		rightMaster = new CANTalon(2); // 2
-		rightSlave2 = new CANTalon(3); // 3
+		leftSlave1 = new CANTalon(1); // 7
+		leftMaster = new CANTalon(2); // 8
+		leftSlave2 = new CANTalon(3); // 9
+		rightSlave1 = new CANTalon(7); // 1
+		rightMaster = new CANTalon(8); // 2
+		rightSlave2 = new CANTalon(9); // 3
 
 		// use only when testing to get approximate sensor speed
 		// rightSlave2.configEncoderCodesPerRev(128);

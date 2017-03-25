@@ -75,41 +75,53 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-    	mode = RobotMode.AUTO;
-    	drive.controller.setClosedLoopConstants(mode);
-    	drive.enable();
-    	TorTrajectory.setRotationMirrored(!isRed());
-    	auto.initialize();
-    	auto.run();
+//    	gearIntake.enable();
+//    	mode = RobotMode.AUTO;
+//    	drive.controller.setClosedLoopConstants(mode);
+//    	drive.enable();
+//    	TorTrajectory.setRotationMirrored(!isRed());
+//    	auto.initialize();
+//    	auto.run();
     }
 
     public void operatorControl() {
     	mode = RobotMode.TELEOP;
     	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
+    	gearIntake.enable();
     	while(isEnabled()){
     		drive.driving(getLeftY(), getLeftX(), getRightX(), getShiftButton(), getRightBumper(), 
 					getButtonA(), getButtonB(), getButtonX(), getButtonY());
-    		if(player2.getRawButton(8)){
-    			gear.playerControl();
-    		}
-    		else{
-    			gear.autoControl();
-    		}
-    		gearIntake.autoControl();
-    		climb.playerControl();
+//    		if(player2.getRawButton(8)){
+//    			gear.playerControl();
+//    		}
+//    		else{
+//    			gear.autoControl();
+//    		}
+//    		gearIntake.autoControl();
+//    		climb.playerControl();
+    		
+//    		if(player2.getRawButton(1)){
+//    			gearIntakeTalon.set(-1.0);
+//    		}
+//    		else{
+//    			gearIntakeTalon.set(0.0);
+//    		}
+//    		System.out.println(gearIntakeTalon.getOutputCurrent());
+//    		SmartDashboard.putNumber("current", gearIntakeTalon.getOutputCurrent());
+//    		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
     	}
     }
 
     public void test() {
-    	mode = RobotMode.TEST;
-    	drive.controller.setClosedLoopConstants(mode);
-    	drive.enable();
+//    	mode = RobotMode.TEST;
+//    	drive.controller.setClosedLoopConstants(mode);
+//    	drive.enable();
 		while(isEnabled()){
 //			Test.setButtons(getButtonA(), getButtonB());
 //			controllerTest.run();
-			Test.setButtons(getButtonA(), getButtonB());
-			hardwareTest.run();
+//			Test.setButtons(getButtonA(), getButtonB());
+//			hardwareTest.run();
 			compressor.start();
 //			SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
 		}

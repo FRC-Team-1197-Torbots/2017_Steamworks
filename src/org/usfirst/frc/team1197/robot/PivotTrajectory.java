@@ -22,7 +22,6 @@ public class PivotTrajectory extends TorTrajectory {
 	
 	public String toString(){
 		return "Pivot Trajectory \n" +
-			   "GoalPos: " + goal_pos + "\n" +
-			   "GoalHead: " + goal_head + "\n";
+				   "GoalHead: " + goal_head + "\n";
 	}
 }

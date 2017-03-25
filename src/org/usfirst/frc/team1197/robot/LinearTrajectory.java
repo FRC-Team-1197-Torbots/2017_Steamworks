@@ -19,4 +19,9 @@ public class LinearTrajectory extends TorTrajectory{
 	public double lookUpHeading(long t){
 		return 0;
 	}
+	
+	public String toString(){
+		return "Linear Trajectory \n" +
+				   "GoalPos: " + goal_pos + "\n";
+	}
 }

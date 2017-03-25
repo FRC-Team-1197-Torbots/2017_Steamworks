@@ -77,8 +77,8 @@ public class TorDrive
 		if (controller.isHighGear) {
 			if (controller.usingCarDriveForHighGear) {
 //				carDrive(throttleAxis, carSteerAxis);
-				ImprovedArcadeDrive(throttleAxis, arcadeSteerAxis);
-//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+//				ImprovedArcadeDrive(throttleAxis, arcadeSteerAxis);
+				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 			} else {
 				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
@@ -165,7 +165,7 @@ public class TorDrive
 	}
 
 	public void ArcadeDrive(double throttleAxis, double arcadeSteerAxis){
-//		throttleAxis = -throttleAxis; // TODO: see below.
+		throttleAxis = -throttleAxis; // TODO: see below.
 		arcadeSteerAxis = -arcadeSteerAxis;
 		
 		if (Math.abs(arcadeSteerAxis) <= 0.1) {
@@ -228,10 +228,10 @@ public class TorDrive
 			executeTrajectory(left);
 		}
 		else if(buttonY && !buttonYlast){
-			executeTrajectory(forward);
+//			executeTrajectory(forward);
 		}
 		else if(buttonA && !buttonAlast){
-			executeTrajectory(backward);
+//			executeTrajectory(backward);
 		}
 		else{
 			

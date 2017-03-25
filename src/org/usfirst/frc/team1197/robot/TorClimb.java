@@ -15,7 +15,7 @@ public class TorClimb {
 	
 	public void playerControl(){
 		if(stick.getRawButton(6)){
-			climbTalon.set(1.0); //- for final, + for proto
+			climbTalon.set(1.0); //+ for final, + for proto
 		}
 		else{
 			climbTalon.set(0.0);

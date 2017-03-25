@@ -17,8 +17,8 @@ public class DriveController {
 	protected boolean isHighGear;
 	protected boolean usingCarDriveForHighGear = false;
 	private TorTrajectory defaultTrajectory = null;
-	private TorTrajectory activeTrajectory = null;
-	private TorTrajectory nextTrajectory = null;
+	public TorTrajectory activeTrajectory = null;
+	public TorTrajectory nextTrajectory = null;
 	
 	private double targetVelocity;
 	private double targetAcceleration;
@@ -84,7 +84,7 @@ public class DriveController {
 
 		// Rotation
 		rotationPID.updatePosition(hardware.getHeading());
-		rotationPID.updateVelocity(hardware.getOmega());
+//		rotationPID.updateVelocity(hardware.getOmega());
 
 		if (motionProfilingActive) {
 			if (activeTrajectory == joystickTraj) {
@@ -120,6 +120,8 @@ public class DriveController {
 
 		translationPID.update();
 		rotationPID.update();
+		
+		SmartDashboard.putNumber("Rotation Error", rotationPID.error());
 
 		if (motionProfilingActive) {
 			if (activeTrajectory != joystickTraj) {
@@ -156,20 +158,48 @@ public class DriveController {
 			translationPID.setkD(0.5);
 			translationPID.setkPv(0.0);
 			translationPID.setkA(0.0);
+			
+			translationPID.setPositionTolerance(0.05);
+			translationPID.setVelocityTolerance(0.0125);
+			rotationPID.setPositionTolerance(0.0125);
+			rotationPID.setVelocityTolerance(0.0125);
 		}
 		else if(state == RobotMode.TELEOP){
+//			rotationPID.setMinimumOutput(0.0);
+//			rotationPID.setkP(5.0);
+//			rotationPID.setkI(0.0);
+//			rotationPID.setkD(0.1);
+//			rotationPID.setkPv(0.0);
+//			rotationPID.setkA(0.0);
+//			translationPID.setMinimumOutput(0.0);
+//			translationPID.setkP(5.0);
+//			translationPID.setkI(0.0);
+//			translationPID.setkD(0.1);
+//			translationPID.setkPv(0.0);
+//			translationPID.setkA(0.0);
+//			
+//			translationPID.setPositionTolerance(0.05);
+//			translationPID.setVelocityTolerance(0.0125);
+//			rotationPID.setPositionTolerance(0.0125);
+//			rotationPID.setVelocityTolerance(0.0125);
+			
 			rotationPID.setMinimumOutput(0.0);
-			rotationPID.setkP(5.0);
-			rotationPID.setkI(0.0);
-			rotationPID.setkD(0.1);
+			rotationPID.setkP(22.0);
+			rotationPID.setkI(10.0);
+			rotationPID.setkD(0.5);
 			rotationPID.setkPv(0.0);
 			rotationPID.setkA(0.0);
 			translationPID.setMinimumOutput(0.0);
-			translationPID.setkP(5.0);
-			translationPID.setkI(0.0);
-			translationPID.setkD(0.1);
+			translationPID.setkP(17.0);
+			translationPID.setkI(1.0);
+			translationPID.setkD(0.5);
 			translationPID.setkPv(0.0);
 			translationPID.setkA(0.0);
+			
+			translationPID.setPositionTolerance(0.05);
+			translationPID.setVelocityTolerance(0.0125);
+			rotationPID.setPositionTolerance(0.0125);
+			rotationPID.setVelocityTolerance(0.0125);
 		}
 		else{
 			rotationPID.setMinimumOutput(0.0);
@@ -184,6 +214,11 @@ public class DriveController {
 			translationPID.setkD(0.0);
 			translationPID.setkPv(0.0);
 			translationPID.setkA(0.0);
+			
+			translationPID.setPositionTolerance(0.5);
+			translationPID.setVelocityTolerance(0.125);
+			rotationPID.setPositionTolerance(1.25);
+			rotationPID.setVelocityTolerance(1.25);
 		}
 	}
 
@@ -207,6 +242,7 @@ public class DriveController {
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
 		resetPID();
+		resetWaypoints();
 		hardware.chooseVelocityControl();
 	}
 
@@ -334,8 +370,8 @@ public class DriveController {
 	}
 
 	public void resetWaypoints() {
-		positionWaypoint = 0;
-		headingWaypoint = 0;
+		positionWaypoint = translationPID.position();
+		headingWaypoint = rotationPID.position();
 	}
 
 	public void resetPID() {

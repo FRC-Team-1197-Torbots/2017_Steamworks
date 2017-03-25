@@ -35,7 +35,7 @@ public class DriveControllerTest extends Test{
 		controller = dc;
 		this.drive = drive;
 		forward = new LinearTrajectory(1.0);
-		backward = new LinearTrajectory(-1.0);
+		backward = new LinearTrajectory(-2.0);
 		rightTurn = new PivotTrajectory(90);
 		leftTurn = new PivotTrajectory(-90);
 	}
@@ -60,14 +60,21 @@ public class DriveControllerTest extends Test{
 			break;
 		case FORWARDTRAJ:
 			if(enterButtonDownEvent()){
-				testLinearTrajectory(forward);
+				System.out.println("Active (Before): " + drive.controller.activeTrajectory);
+				System.out.println("Next (Before): " + drive.controller.nextTrajectory);
+				drive.executeTrajectory(forward);
+				System.out.println("Active (After): " + drive.controller.activeTrajectory);
+				System.out.println("Next (After): " + drive.controller.nextTrajectory);
 				testPhase = TestPhase.FORWARDSTALL;
 			}
 			break;
 		case FORWARDSTALL:
+			testLinearTrajectory(forward);
 			if(forward.isComplete()){
 				printEncoderError();
 				printLinearToleranceError();
+				drive.controller.shiftToLowGear();
+				drive.controller.shiftToHighGear();
 				System.out.println();
 				System.out.println("Ready to test backward trajectory.");
 				System.out.println("> press A to execute the test.");
@@ -76,11 +83,12 @@ public class DriveControllerTest extends Test{
 			break;
 		case BACKWARDTRAJ:
 			if(enterButtonDownEvent()){
-				testLinearTrajectory(backward);
+				drive.executeTrajectory(backward);
 				testPhase = TestPhase.BACKWARDSTALL;
 			}
 			break;
 		case BACKWARDSTALL:
+			testLinearTrajectory(backward);
 			if(backward.isComplete()){
 				printEncoderError();
 				printLinearToleranceError();
@@ -140,7 +148,6 @@ public class DriveControllerTest extends Test{
 	}
 
 	public void testLinearTrajectory(TorTrajectory traj){
-		drive.executeTrajectory(traj);
 		if(traj.getGoalPos() > 0){
 			if(controller.hardware.getRightEncoder() > 0){
 				rightEncoderDirection = true;
@@ -246,6 +253,11 @@ public class DriveControllerTest extends Test{
 		else{
 			System.out.println("TEST PASSED (Rotation): The heading is within the tolerance");
 		}
+	}
+	
+	public boolean testTrajComplete(TorTrajectory traj){
+		return Math.abs(drive.controller.hardware.getPosition()) > Math.abs(traj.getGoalPos()*0.5) 
+				&& drive.controller.hardware.getVelocity() == 0;
 	}
 	
 	protected void reset() {

@@ -24,6 +24,7 @@ public class TorAuto {
 	private TwoGearPos4 twoGearPos4;
 	
 	private TorGear gear;
+	private TorGearIntake gearIntake;
 	
 	public static enum BOILERAUTO
 	{
@@ -204,9 +205,11 @@ public class TorAuto {
 	}
 	
 	public void twoGear() {
+		boolean virtualAcquireButton = false;
+		boolean virtualDeployButton = false;
 		twoGearAutoState = TWOGEARAUTO.POS0;
 		while(twoGearAutoState != TWOGEARAUTO.IDLE){
-			gear.autoControl(); // put in button values
+			gearIntake.autoControl(virtualAcquireButton, virtualDeployButton);
 			switch(twoGearAutoState){
 			case IDLE:
 				break;
@@ -215,29 +218,28 @@ public class TorAuto {
 				twoGearAutoState = TWOGEARAUTO.ZIGZAGGING;
 				break;
 			case ZIGZAGGING:
+				gear.autoControl();
 				if(twoGearPos1.isComplete()){
-				//drop the gear
-				//set intake to "acquire"
+					virtualAcquireButton = true;
 					drive.executeTrajectory(twoGearPos2);
 					twoGearAutoState = TWOGEARAUTO.DRIVINGBACK;
 				}
 				break;
 			case DRIVINGBACK:
-				if(twoGearPos2.isComplete()){ 
+				if(twoGearPos2.isComplete()){
 					drive.executeTrajectory(twoGearPos3);
 					twoGearAutoState = TWOGEARAUTO.TURNINGAROUND;
 				}
 				break;
 			case TURNINGAROUND:
 				if(twoGearPos3.isComplete()){ 
-				// "let go" of virtual intake button to retract
-//					drive.executeTrajectory(twoGearPos4);
+					virtualAcquireButton = false;
 					twoGearAutoState = TWOGEARAUTO.DRIVINGFORWARD;
 				}
 				break;
 			case DRIVINGFORWARD:
 				if(twoGearPos4.isComplete()){ 
-					// deploy gear
+					virtualDeployButton = true;
 					// maybe have one more trajectory to back up a little bit?
 					boilerAutoState = BOILERAUTO.IDLE;
 				}

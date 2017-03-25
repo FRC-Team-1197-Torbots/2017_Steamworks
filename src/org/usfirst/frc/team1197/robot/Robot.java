@@ -98,7 +98,7 @@ public class Robot extends SampleRobot {
 //    		else{
 //    			gear.autoControl();
 //    		}
-//    		gearIntake.autoControl();
+    		gearIntake.autoControl(player2.getRawButton(5), player2.getRawButton(3)); // acquireButton, deployButton
 //    		climb.playerControl();
     		
 //    		if(player2.getRawButton(1)){

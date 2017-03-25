@@ -35,59 +35,25 @@ public class TorGearIntake {
 		this.gearIntakeDetector = gearIntakeDetector;
 	}
 	
-	public void autoControl(){
+	public void autoControl(boolean acquireButton, boolean deployButton){
 		currentTime = System.currentTimeMillis();
-//		if(stick.getRawButton(5)){
-//			gearIntakePiston.set(true);
-//			if(!gearIntakeDetector.get()){
-//				if(firstTime){
-//					endTime = System.currentTimeMillis() + 1000;
-//					firstTime = false;
-//				}
-//				if(endTime < currentTime){
-//					gearIntake.set(0.0);
-//				}
-//				else{
-//					gearIntake.set(-0.5);
-//				}
-//			}
-//			else{
-//				firstTime = true;
-//				gearIntake.set(-1.0);
-//			}
-//		}
-//		else if(stick.getRawButton(3)){
-//			gearIntakePiston.set(true);
-//			if(!gearIntakeDetector.get()){
-//				gearIntake.set(1.0);
-//			}
-//		}
-//		else{
-//			gearIntakePiston.set(false);
-//			if(endTime < currentTime){
-//				gearIntake.set(0.0);
-//			}
-//			else{
-//				gearIntake.set(-0.5);
-//			}
-//		}
 		switch(gearIntakeState){
 		case RETRACTED:
-			if(!stick.getRawButton(5)){
+			if(!acquireButton){
 				justAcquired = false;
 			}
 			if(currentTime > endTime){
 				gearIntake.set(0.0);
 			}
-			if(!justAcquired && stick.getRawButton(5)){
+			if(!justAcquired && acquireButton){
 				setStateAcquiring();
 			}
-			else if(stick.getRawButton(3)){
+			else if(deployButton){
 				setStateDeploying();
 			}
 			break;
 		case ACQUIRING:
-			if(!stick.getRawButton(5)){
+			if(!deployButton){
 				setStateRetracted();
 				endTime = -10;
 			}
@@ -110,7 +76,7 @@ public class TorGearIntake {
 			}
 			break;
 		case DEPLOYING:
-			if(!stick.getRawButton(3)){
+			if(!deployButton){
 				setStateRetracted();
 				endTime = -10;
 			}

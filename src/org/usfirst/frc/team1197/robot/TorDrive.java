@@ -33,7 +33,7 @@ public class TorDrive
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
-			controller.run();
+				controller.run();
 		}
 	}
 	Notifier mpNotifier = new Notifier(new PeriodicRunnable());
@@ -228,10 +228,10 @@ public class TorDrive
 			executeTrajectory(left);
 		}
 		else if(buttonY && !buttonYlast){
-//			executeTrajectory(forward);
+			executeTrajectory(forward);
 		}
 		else if(buttonA && !buttonAlast){
-//			executeTrajectory(backward);
+			executeTrajectory(backward);
 		}
 		else{
 			

@@ -75,13 +75,13 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-//    	gearIntake.enable();
-//    	mode = RobotMode.AUTO;
-//    	drive.controller.setClosedLoopConstants(mode);
-//    	drive.enable();
-//    	TorTrajectory.setRotationMirrored(!isRed());
-//    	auto.initialize();
-//    	auto.run();
+    	gearIntake.enable();
+    	mode = RobotMode.AUTO;
+    	drive.controller.setClosedLoopConstants(mode);
+    	drive.enable();
+    	TorTrajectory.setRotationMirrored(!isRed());
+    	auto.initialize();
+    	auto.run();
     }
 
     public void operatorControl() {

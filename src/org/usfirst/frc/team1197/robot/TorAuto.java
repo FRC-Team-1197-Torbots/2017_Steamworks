@@ -18,6 +18,11 @@ public class TorAuto {
 	private CenterPos1 centerPos1;
 	private CenterPos2 centerPos2;
 	
+	private TwoGearPos1 twoGearPos1;
+	private TwoGearPos2 twoGearPos2;
+	private TwoGearPos3 twoGearPos3;
+	private TwoGearPos4 twoGearPos4;
+	
 	private TorGear gear;
 	
 	public static enum BOILERAUTO
@@ -43,6 +48,14 @@ public class TorAuto {
 		private CENTERAUTO() {}
 	}
 	public CENTERAUTO centerAutoState = CENTERAUTO.IDLE;
+	
+	public static enum TWOGEARAUTO
+	{
+		IDLE, POS0, ZIGZAGGING, DRIVINGBACK, TURNINGAROUND, DRIVINGFORWARD;
+		
+		private TWOGEARAUTO() {}
+	}
+	public TWOGEARAUTO twoGearAutoState = TWOGEARAUTO.IDLE;	
 	
 	public TorAuto(TorDrive drive, Joystick cypress, TorGear gear) {
 		this.drive = drive;
@@ -187,6 +200,50 @@ public class TorAuto {
 				}
 				break;
 			}
+		}
+	}
+	
+	public void twoGear() {
+		twoGearAutoState = TWOGEARAUTO.POS0;
+		while(twoGearAutoState != TWOGEARAUTO.IDLE){
+			gear.autoControl(); // put in button values
+			switch(twoGearAutoState){
+			case IDLE:
+				break;
+			case POS0:
+				drive.executeTrajectory(twoGearPos1);
+				twoGearAutoState = TWOGEARAUTO.ZIGZAGGING;
+				break;
+			case ZIGZAGGING:
+				if(twoGearPos1.isComplete()){
+				//drop the gear
+				//set intake to "acquire"
+					drive.executeTrajectory(twoGearPos2);
+					twoGearAutoState = TWOGEARAUTO.DRIVINGBACK;
+				}
+				break;
+			case DRIVINGBACK:
+				if(twoGearPos2.isComplete()){ 
+					drive.executeTrajectory(twoGearPos3);
+					twoGearAutoState = TWOGEARAUTO.TURNINGAROUND;
+				}
+				break;
+			case TURNINGAROUND:
+				if(twoGearPos3.isComplete()){ 
+				// "let go" of virtual intake button to retract
+//					drive.executeTrajectory(twoGearPos4);
+					twoGearAutoState = TWOGEARAUTO.DRIVINGFORWARD;
+				}
+				break;
+			case DRIVINGFORWARD:
+				if(twoGearPos4.isComplete()){ 
+					// deploy gear
+					// maybe have one more trajectory to back up a little bit?
+					boilerAutoState = BOILERAUTO.IDLE;
+				}
+				break;
+			}
+			
 		}
 	}
 }

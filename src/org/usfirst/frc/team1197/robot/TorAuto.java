@@ -19,9 +19,18 @@ public class TorAuto {
 	private CenterPos2 centerPos2;
 	
 	private TwoGearPos1 twoGearPos1;
-	private TwoGearPos2 twoGearPos2;
-	private TwoGearPos3 twoGearPos3;
-	private TwoGearPos4 twoGearPos4;
+	
+//  Put this in Spline Generator for Zig Zag
+//  set dangerFactor to 0.4
+//	inputSpline = new TorSpline(0.38, 6.84, 0.0);
+//	inputSpline.add(new LineSegment(1.0, 0.0));
+//	inputSpline.add(new LineSegment(2.75, -90.0*(Math.PI/180.0)));
+//	inputSpline.add(new LineSegment(1.0, 90.0*(Math.PI/180.0)));
+	
+	private TorTrajectory twoGearPos2;
+	private TorTrajectory twoGearPos3;
+	private TorTrajectory twoGearPos4;
+	private TorTrajectory twoGearPos5;
 	
 	private TorGear gear;
 	private TorGearIntake gearIntake;
@@ -52,7 +61,7 @@ public class TorAuto {
 	
 	public static enum TWOGEARAUTO
 	{
-		IDLE, POS0, ZIGZAGGING, DRIVINGBACK, TURNINGAROUND, DRIVINGFORWARD;
+		IDLE, POS0, ZIGZAGGING, DRIVINGBACK, TURNINGAROUND, DRIVINGFORWARD, TADAA;
 		
 		private TWOGEARAUTO() {}
 	}
@@ -72,6 +81,12 @@ public class TorAuto {
 		
 		centerPos1 = new CenterPos1();
 		centerPos2 = new CenterPos2();
+		
+		twoGearPos1 = new TwoGearPos1();
+		twoGearPos2 = new LinearTrajectory(1.15);
+		twoGearPos3 = new PivotTrajectory(180);
+		twoGearPos4 = new LinearTrajectory(-1.0);
+		twoGearPos5 = new LinearTrajectory(1.0); //if needed
 		
 		this.gear = gear;
 	}
@@ -234,18 +249,24 @@ public class TorAuto {
 			case TURNINGAROUND:
 				if(twoGearPos3.isComplete()){ 
 					virtualAcquireButton = false;
+					drive.executeTrajectory(twoGearPos4);
 					twoGearAutoState = TWOGEARAUTO.DRIVINGFORWARD;
 				}
 				break;
 			case DRIVINGFORWARD:
 				if(twoGearPos4.isComplete()){ 
 					virtualDeployButton = true;
-					// maybe have one more trajectory to back up a little bit?
-					boilerAutoState = BOILERAUTO.IDLE;
+					drive.executeTrajectory(twoGearPos5);
+					twoGearAutoState = TWOGEARAUTO.TADAA;
+				}
+				break;
+			case TADAA:
+				if(twoGearPos4.isComplete()){
+					drive.executeTrajectory(twoGearPos5);
+					twoGearAutoState = TWOGEARAUTO.IDLE;
 				}
 				break;
 			}
-			
 		}
 	}
 }

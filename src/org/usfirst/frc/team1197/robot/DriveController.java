@@ -84,7 +84,7 @@ public class DriveController {
 
 		// Rotation
 		rotationPID.updatePosition(hardware.getHeading());
-//		rotationPID.updateVelocity(hardware.getOmega());
+		rotationPID.updateVelocity(hardware.getOmega());
 
 		if (motionProfilingActive) {
 			if (activeTrajectory == joystickTraj) {

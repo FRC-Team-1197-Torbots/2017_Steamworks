@@ -33,9 +33,9 @@ public class DriveHardware {
 	public static final double absoluteMaxOmega = absoluteMaxSpeed / halfTrackWidth;
 	
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 1.0; // 1.0
+	private final double kP = 0.0; // 1.0
 	private final double kI = 0.0; // 0.0
-	private final double kD = 50.0; // 50.0
+	private final double kD = 0.0; // 50.0
 	
 	private boolean leftOutputReversed = true;
 	private boolean rightOutputReversed = false;

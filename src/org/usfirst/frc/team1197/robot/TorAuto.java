@@ -80,7 +80,6 @@ public class TorAuto {
 		else{
 			position = -1;
 		}
-		
 	}
 	
 	public void run() {
@@ -133,12 +132,18 @@ public class TorAuto {
 				break;
 			case POS0:
 				drive.executeTrajectory(loadingPos1);
+				System.out.println("PosError: " + drive.controller.getPositionError() + " VelError: " + drive.controller.getVelocityError());
+				System.out.println("HeadError: " + drive.controller.getHeadingError() + " OmgError: " + drive.controller.getOmegaError());
+				System.out.println("-----------------------------------------------------------------------------------------------------");
 				loadAutoState = LOADSTATIONAUTO.POS1;
 				break;
 			case POS1:
 				gear.autoControl();
 				if(loadingPos1.isComplete()){
 					drive.executeTrajectory(loadingPos2);
+					System.out.println("PosError: " + drive.controller.getPositionError() + " VelError: " + drive.controller.getVelocityError());
+					System.out.println("HeadError: " + drive.controller.getHeadingError() + " OmgError: " + drive.controller.getOmegaError());
+					System.out.println("-----------------------------------------------------------------------------------------------------");
 					loadAutoState = LOADSTATIONAUTO.POS2;
 				}
 				break;

@@ -19,7 +19,7 @@ public class DriveHardware {
 	private final CANTalon leftSlave1;
 	private final CANTalon leftSlave2;
 	private final Solenoid solenoid;
-	private final AHRS gyro;
+	private static AHRS gyro;
 	private static final double encoderTicksPerMeter = 7110.6; // (units: ticks per meter)
 	private static final double approximateSensorSpeed = 4357; // measured maximum (units: RPM)
 	private static final double quadEncNativeUnits = 512.0; // (units: ticks per revolution)
@@ -41,7 +41,9 @@ public class DriveHardware {
 	private boolean rightOutputReversed = false;
 
 	public DriveHardware() {
-		gyro = new AHRS(SerialPort.Port.kMXP);
+		if(gyro == null){
+			gyro = new AHRS(SerialPort.Port.kMXP);
+		}
 		solenoid = new Solenoid(0);
 		leftSlave1 = new CANTalon(1); // 7
 		leftMaster = new CANTalon(2); // 8
@@ -213,5 +215,11 @@ public class DriveHardware {
 	
 	public void shiftToHighGear() {
 		solenoid.set(false);
+	}
+	
+	public void init(){
+		if(gyro == null){
+			gyro = new AHRS(SerialPort.Port.kMXP);
+		}
 	}
 }

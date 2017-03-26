@@ -33,7 +33,7 @@ public class TorDrive
 	
 	class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
-				controller.run();
+			controller.run();
 		}
 	}
 	Notifier mpNotifier = new Notifier(new PeriodicRunnable());

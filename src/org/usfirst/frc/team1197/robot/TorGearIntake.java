@@ -102,7 +102,6 @@ public class TorGearIntake {
 					endTime = System.currentTimeMillis() + 1000;
 					justAcquired = true;
 					setStateRetracted();
-					System.out.println("RETRACTING");
 				}
 				else{
 					firstTime = true;
@@ -119,13 +118,11 @@ public class TorGearIntake {
 	}
 	
 	public void setStateRetracted(){
-//		System.out.println("RETRACTED");
 		gearIntakePiston.set(false);
 		gearIntakeState = GEARINTAKE.RETRACTED;
 	}
 	
 	public void setStateAcquiring(){
-//		System.out.println("ACQUIRING");
 		endTime = System.currentTimeMillis() + 150000;
 		firstTime = true;
 		gearIntakePiston.set(true);
@@ -134,7 +131,6 @@ public class TorGearIntake {
 	}
 	
 	public void setStateDeploying(){
-//		System.out.println("DEPLOYING");
 		firstTime = true;
 		gearIntakePiston.set(true);
 		gearIntake.set(0.5);

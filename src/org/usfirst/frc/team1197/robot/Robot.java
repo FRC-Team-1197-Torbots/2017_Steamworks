@@ -42,6 +42,8 @@ public class Robot extends SampleRobot {
 	private TorAuto auto;
 	protected static RobotMode mode;
 	
+	private long endTime = System.currentTimeMillis();
+	
     public Robot() {
     	CameraServer server = CameraServer.getInstance();
     	server.startAutomaticCapture("cam0", 0);
@@ -81,8 +83,15 @@ public class Robot extends SampleRobot {
     	drive.enable();
     	TorTrajectory.setRotationMirrored(!isRed());
     	auto.initialize();
+    	endTime = System.currentTimeMillis() + 10000;
     	while(isEnabled() && isAutonomous()){
-    		auto.run();
+    		if(System.currentTimeMillis() > endTime && Math.abs(drive.controller.hardware.getPosition()) < 0.1){
+    			drive.controller.shiftToLowGear();
+    			drive.controller.setTargets(-0.5, -0.5);
+    		}
+    		else{
+    			auto.run();
+    		}
     	}
     }
 
@@ -102,16 +111,7 @@ public class Robot extends SampleRobot {
     		}
     		gearIntake.autoControl();
     		climb.playerControl();
-    		
-//    		if(player2.getRawButton(1)){
-//    			gearIntakeTalon.set(-1.0);
-//    		}
-//    		else{
-//    			gearIntakeTalon.set(0.0);
-//    		}
-//    		System.out.println(gearIntakeTalon.getOutputCurrent());
-//    		SmartDashboard.putNumber("current", gearIntakeTalon.getOutputCurrent());
-//    		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
+    		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
     	}
     }
 

@@ -187,22 +187,22 @@ public class DriveController {
 //			rotationPID.setVelocityTolerance(0.0125);
 			
 			rotationPID.setMinimumOutput(0.0);
-			rotationPID.setkP(0.1);
-			rotationPID.setkI(0.0);
-			rotationPID.setkD(0.0);
+			rotationPID.setkP(22.0);
+			rotationPID.setkI(10.0);
+			rotationPID.setkD(0.5);
 			rotationPID.setkPv(0.0);
 			rotationPID.setkA(0.0);
 			translationPID.setMinimumOutput(0.0);
-			translationPID.setkP(0.1);
-			translationPID.setkI(0.0);
-			translationPID.setkD(0.0);
+			translationPID.setkP(17.0);
+			translationPID.setkI(1.0);
+			translationPID.setkD(0.5);
 			translationPID.setkPv(0.0);
 			translationPID.setkA(0.0);
 			
-			translationPID.setPositionTolerance(0.1);
-			translationPID.setVelocityTolerance(0.125);
-			rotationPID.setPositionTolerance(0.15);
-			rotationPID.setVelocityTolerance(1.25);
+			translationPID.setPositionTolerance(0.05);
+			translationPID.setVelocityTolerance(0.0125);
+			rotationPID.setPositionTolerance(0.0125);
+			rotationPID.setVelocityTolerance(0.0125);
 		}
 		else{
 			rotationPID.setMinimumOutput(0.0);
@@ -244,7 +244,7 @@ public class DriveController {
 		motionProfilingActive = true;
 		activeTrajectory = defaultTrajectory;
 		nextTrajectory = defaultTrajectory;
-//		resetWaypoints(); // TODO: remove
+		resetWaypoints(); // TODO: remove
 		resetPID();
 		hardware.chooseVelocityControl();
 	}
@@ -310,6 +310,7 @@ public class DriveController {
 			disable(); //Guarantee safe transition between AUTO/TELEOP/TEST.
 		}
 //		resetWaypoints(); //TODO: Uncomment
+		hardware.init();
 		enabled  = true;
 		isHighGear = false;
 		shiftToHighGear();
@@ -374,12 +375,12 @@ public class DriveController {
 	}
 
 	public void resetWaypoints() {
-		hardware.resetEncoder(); // TODO: Uncomment
-		hardware.resetGyro();
-		positionWaypoint = 0.0;
-		headingWaypoint = 0.0;
-//		positionWaypoint = translationPID.position(); // TODO: remove
-//		headingWaypoint = rotationPID.position();
+//		hardware.resetEncoder(); // TODO: Uncomment
+//		hardware.resetGyro();
+//		positionWaypoint = 0.0;
+//		headingWaypoint = 0.0;
+		positionWaypoint = translationPID.position(); // TODO: remove
+		headingWaypoint = rotationPID.position();
 	}
 
 	public void resetPID() {

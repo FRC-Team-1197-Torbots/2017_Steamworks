@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 
 public class DriveHardware {
 
@@ -33,12 +34,16 @@ public class DriveHardware {
 	public static final double absoluteMaxOmega = absoluteMaxSpeed / halfTrackWidth;
 	
 	private final double kF = (1023.0) / ((approximateSensorSpeed * quadEncNativeUnits) / (600.0));
-	private final double kP = 0.0; // 1.0
+	private final double kP = 1.0; // 1.0
 	private final double kI = 0.0; // 0.0
-	private final double kD = 0.0; // 50.0
+	private final double kD = 50.0; // 50.0
 	
 	private boolean leftOutputReversed = true;
 	private boolean rightOutputReversed = false;
+	
+	private double angleOffSet = 0.0;
+	private double lastHeading = 0.0;
+	private double heading = 0.0;
 
 	public DriveHardware() {
 		if(gyro == null){
@@ -176,7 +181,12 @@ public class DriveHardware {
 	}
 
 	public double getHeading() {
-		return (gyro.getAngle() * (Math.PI / 180)); // [radians]
+//		lastHeading = heading;
+		heading = (gyro.getFusedHeading() * (Math.PI / 180));
+//		if(!(Math.abs(heading) > 0.1) && ((int)(heading*400) % 700 < 6)){
+//			heading = lastHeading;
+//		}
+		return heading; // [radians]
 	}
 
 	public double getOmega() {
@@ -194,7 +204,12 @@ public class DriveHardware {
 	}
 
 	public void resetGyro() {
+//		do {
 		gyro.reset();
+		gyro.zeroYaw();
+//		Timer.delay(0.005);
+//		} while(!(Math.abs(getHeading()) < 0.1 || Math.abs(getHeading() - (2*Math.PI)) < 0.1));
+		
 	}
 
 	public double getBacklash() {

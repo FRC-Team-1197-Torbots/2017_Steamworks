@@ -129,9 +129,9 @@ public class TorPID {
 //		SmartDashboard.putNumber("Math.abs(vel)", Math.abs(vel));
 //		SmartDashboard.putNumber("velTarget", velTarget);
 //		SmartDashboard.putNumber("Math.abs(error)", Math.abs(error));
-		return ( (Math.abs(error) <= posTolerance)); 
-//			  && (Math.abs(velTarget) <= velTolerance) 
-//			  && (Math.abs(vel) <= velTolerance) );
+		return ( (Math.abs(error) <= posTolerance) 
+			  && (Math.abs(velTarget) <= velTolerance) 
+			  && (Math.abs(vel) <= velTolerance) );
 	}
 	
 	// SETUP METHODS (recommended: call all of them!)

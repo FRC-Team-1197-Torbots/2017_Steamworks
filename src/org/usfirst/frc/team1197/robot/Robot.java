@@ -93,6 +93,7 @@ public class Robot extends SampleRobot {
     			auto.run();
     		}
     	}
+    	drive.disable();
     }
 
     public void operatorControl() {
@@ -113,6 +114,7 @@ public class Robot extends SampleRobot {
     		climb.playerControl();
     		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
     	}
+    	drive.disable();
     }
 
     public void test() {

@@ -83,7 +83,7 @@ public class Robot extends SampleRobot {
     	drive.enable();
     	TorTrajectory.setRotationMirrored(!isRed());
     	auto.initialize();
-    	endTime = System.currentTimeMillis() + 10000;
+    	endTime = System.currentTimeMillis() + 12000;
     	while(isEnabled() && isAutonomous()){
     		if(System.currentTimeMillis() > endTime && Math.abs(drive.controller.hardware.getPosition()) < 0.1){
     			drive.controller.shiftToLowGear();

@@ -6,7 +6,6 @@ public class TorAuto {
 	private int position; //position goes from left to right
 	private TorDrive drive;
 	private Joystick cypress;
-	
 	private BoilerPos1 boilerPos1;
 	private BoilerPos2 boilerPos2;
 	private BoilerPos3 boilerPos3;

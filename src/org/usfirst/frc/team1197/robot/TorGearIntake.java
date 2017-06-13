@@ -73,13 +73,13 @@ public class TorGearIntake {
 //		}
 		switch(gearIntakeState){
 		case RETRACTED:
-			if(!stick.getRawButton(5)){
+			if(!stick.getRawButton(2)){
 				justAcquired = false;
 			}
 			if(currentTime > endTime){
 				gearIntake.set(0.0);
 			}
-			if(!justAcquired && stick.getRawButton(5)){
+			if(!justAcquired && stick.getRawButton(2)){
 				setStateAcquiring();
 			}
 			else if(stick.getRawButton(3)){
@@ -87,7 +87,7 @@ public class TorGearIntake {
 			}
 			break;
 		case ACQUIRING:
-			if(!stick.getRawButton(5)){
+			if(!stick.getRawButton(2)){
 				setStateRetracted();
 				endTime = -10;
 			}
@@ -144,7 +144,7 @@ public class TorGearIntake {
 
 	
 	public void playerControl(){
-		if(stick.getRawButton(5)){
+		if(stick.getRawButton(2)){
 			gearIntakePiston.set(true);
 		}
 		else{

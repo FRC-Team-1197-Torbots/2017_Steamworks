@@ -78,7 +78,7 @@ public class TorDrive
 			if (controller.usingCarDriveForHighGear) {
 //				carDrive(throttleAxis, carSteerAxis);
 //				ImprovedArcadeDrive(throttleAxis, arcadeSteerAxis);
-				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
 			} else {
 				if(!rightBumper){
 					ArcadeDrive(throttleAxis, arcadeSteerAxis);
@@ -164,7 +164,7 @@ public class TorDrive
 			}
 		}
 		
-		v = (rightMotorSpeed + leftMotorSpeed) * 0.5;
+		v = (rightMotorSpeed + leftMotorSpeed) * 0.1;
 		w = (rightMotorSpeed - leftMotorSpeed) / DriveHardware.trackWidth;
 		controller.setTargets(v, w);
 	}

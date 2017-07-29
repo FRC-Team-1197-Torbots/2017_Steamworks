@@ -31,7 +31,7 @@ public class Robot extends SampleRobot {
 	
 	private DigitalInput gearSwitch;
 	private DigitalInput gearIntakeDetector;
-	
+
 	private DriveHardwareTest hardwareTest;
 	private DriveControllerTest controllerTest;
 	
@@ -60,7 +60,7 @@ public class Robot extends SampleRobot {
     	gearIntakePiston = new Solenoid(2);
     	
     	player1 = new Joystick(0);
-    	player2 = new Joystick(0);
+    	player2 = new Joystick(1);
     	autoBox = new Joystick(2);
     	
     	gearSwitch = new DigitalInput(0);
@@ -68,7 +68,7 @@ public class Robot extends SampleRobot {
     	
     	drive = new TorDrive(player1, autoBox);
     	climb = new TorClimb(climbTalon, player2);
-    	gearIntake = new TorGearIntake(player1, gearIntakeTalon, gearIntakePiston, gearIntakeDetector);
+    	gearIntake = new TorGearIntake(player2, gearIntakeTalon, gearIntakePiston, gearIntakeDetector);
     	gear = new TorGear(gearPiston, gearSwitch, player1);
     	auto = new TorAuto(drive, autoBox, gear);
     	
@@ -77,23 +77,23 @@ public class Robot extends SampleRobot {
     }
 
     public void autonomous() {
-    	gearIntake.enable();
-    	mode = RobotMode.AUTO;
-    	drive.controller.setClosedLoopConstants(mode);
-    	drive.enable();
-    	TorTrajectory.setRotationMirrored(!isRed());
-    	auto.initialize();
-    	endTime = System.currentTimeMillis() + 12000;
-    	while(isEnabled() && isAutonomous()){
-    		if(System.currentTimeMillis() > endTime && Math.abs(drive.controller.hardware.getPosition()) < 0.1){
-    			drive.controller.shiftToLowGear();
-    			drive.controller.setTargets(-0.5, -0.5);
-    		}
-    		else{
-    			auto.run();
-    		}
-    	}
-    	drive.disable();
+//    	gearIntake.enable();
+//    	mode = RobotMode.AUTO;
+//    	drive.controller.setClosedLoopConstants(mode);
+//    	drive.enable();
+//    	TorTrajectory.setRotationMirrored(!isRed());
+//    	auto.initialize();
+//    	endTime = System.currentTimeMillis() + 12000;
+//    	while(isEnabled() && isAutonomous()){
+//    		if(System.currentTimeMillis() > endTime && Math.abs(drive.controller.hardware.getPosition()) < 0.1){
+//    			drive.controller.shiftToLowGear();
+//    			drive.controller.setTargets(-0.5, -0.5);
+//    		}
+//    		else{
+//    			auto.run();
+//    		}
+//    	}
+//    	drive.disable();
     }
 
     public void operatorControl() {
@@ -112,7 +112,6 @@ public class Robot extends SampleRobot {
     		}
     		gearIntake.autoControl();
     		climb.playerControl();
-//    		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
     	}
     	drive.disable();
     }
@@ -126,7 +125,8 @@ public class Robot extends SampleRobot {
 //			controllerTest.run();
 //			Test.setButtons(getButtonA(), getButtonB());
 //			hardwareTest.run();
-			compressor.start();
+			//compressor.start();
+			
 //			SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
 		}
 	}

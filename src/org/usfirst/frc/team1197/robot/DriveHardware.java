@@ -181,11 +181,7 @@ public class DriveHardware {
 	}
 
 	public double getHeading() {
-//		lastHeading = heading;
 		heading = (gyro.getFusedHeading() * (Math.PI / 180));
-//		if(!(Math.abs(heading) > 0.1) && ((int)(heading*400) % 700 < 6)){
-//			heading = lastHeading;
-//		}
 		return heading; // [radians]
 	}
 

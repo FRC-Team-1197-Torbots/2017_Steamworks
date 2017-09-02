@@ -37,40 +37,6 @@ public class TorGearIntake {
 	
 	public void autoControl(){
 		currentTime = System.currentTimeMillis();
-//		if(stick.getRawButton(5)){
-//			gearIntakePiston.set(true);
-//			if(!gearIntakeDetector.get()){
-//				if(firstTime){
-//					endTime = System.currentTimeMillis() + 1000;
-//					firstTime = false;
-//				}
-//				if(endTime < currentTime){
-//					gearIntake.set(0.0);
-//				}
-//				else{
-//					gearIntake.set(-0.5);
-//				}
-//			}
-//			else{
-//				firstTime = true;
-//				gearIntake.set(-1.0);
-//			}
-//		}
-//		else if(stick.getRawButton(3)){
-//			gearIntakePiston.set(true);
-//			if(!gearIntakeDetector.get()){
-//				gearIntake.set(1.0);
-//			}
-//		}
-//		else{
-//			gearIntakePiston.set(false);
-//			if(endTime < currentTime){
-//				gearIntake.set(0.0);
-//			}
-//			else{
-//				gearIntake.set(-0.5);
-//			}
-//		}
 		switch(gearIntakeState){
 		case RETRACTED:
 			if(!stick.getRawButton(2)){

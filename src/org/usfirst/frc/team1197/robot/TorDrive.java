@@ -78,14 +78,10 @@ public class TorDrive
 			if (controller.usingCarDriveForHighGear) {
 //				carDrive(throttleAxis, carSteerAxis);
 //				ImprovedArcadeDrive(throttleAxis, arcadeSteerAxis);
-//				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+				buttonDrive(buttonA, buttonB, buttonX, buttonY);
+//				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			} else {
-//				if(!rightBumper){
-//					ArcadeDrive(throttleAxis, arcadeSteerAxis);
-//				}
-//				else{
-//					ArcadeDrive(-throttleAxis, arcadeSteerAxis);
-//				}
+				ArcadeDrive(throttleAxis, arcadeSteerAxis);
 			}
 			// When you hold down the shiftButton (left bumper), then shift to low gear.
 			if (shiftButton) {

@@ -94,9 +94,10 @@ public class Robot extends SampleRobot {
 //    		}
 //    	}
 //    	drive.disable();
-    }
+   }
 
     public void operatorControl() {
+//    	long startTime = System.currentTimeMillis();
     	mode = RobotMode.TELEOP;
     	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
@@ -112,22 +113,24 @@ public class Robot extends SampleRobot {
     		}
     		gearIntake.autoControl();
     		climb.playerControl();
+//    		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
+//    		SmartDashboard.putNumber("ENCODER", drive.controller.hardware.getPosition());
     	}
     	drive.disable();
+//    	long endTime = System.currentTimeMillis();
+//    	System.out.println(endTime - startTime);
     }
 
     public void test() {
-//    	mode = RobotMode.TEST;
-//    	drive.controller.setClosedLoopConstants(mode);
-//    	drive.enable();
+    	mode = RobotMode.TEST;
+    	drive.controller.setClosedLoopConstants(mode);
+    	drive.enable();
 		while(isEnabled()){
 //			Test.setButtons(getButtonA(), getButtonB());
 //			controllerTest.run();
-//			Test.setButtons(getButtonA(), getButtonB());
-//			hardwareTest.run();
+			Test.setButtons(getButtonA(), getButtonB());
+			hardwareTest.run();
 			//compressor.start();
-			
-//			SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
 		}
 	}
 

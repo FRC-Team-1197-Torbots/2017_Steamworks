@@ -11,7 +11,7 @@ public class TorLidar
 	/** 
 	 * Use 9600 baud rate and SerialPort.Port.kOnboard to instantiate.
 	 *  port = new SerialPort(9600, SerialPort.Port.kOnboard);
-	 *  
+	 *  Make sure to turn off console out on the roborio
 	 */
 	public TorLidar(SerialPort sp)
 	{

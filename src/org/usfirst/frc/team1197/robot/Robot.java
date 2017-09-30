@@ -97,7 +97,6 @@ public class Robot extends SampleRobot {
    }
 
     public void operatorControl() {
-//    	long startTime = System.currentTimeMillis();
     	mode = RobotMode.TELEOP;
     	drive.controller.setClosedLoopConstants(mode);
     	drive.enable();
@@ -113,12 +112,8 @@ public class Robot extends SampleRobot {
     		}
     		gearIntake.autoControl();
     		climb.playerControl();
-//    		SmartDashboard.putNumber("GYRO", drive.controller.hardware.getHeading());
-//    		SmartDashboard.putNumber("ENCODER", drive.controller.hardware.getPosition());
     	}
     	drive.disable();
-//    	long endTime = System.currentTimeMillis();
-//    	System.out.println(endTime - startTime);
     }
 
     public void test() {
@@ -130,7 +125,6 @@ public class Robot extends SampleRobot {
 //			controllerTest.run();
 			Test.setButtons(getButtonA(), getButtonB());
 			hardwareTest.run();
-			//compressor.start();
 		}
 	}
 

@@ -28,7 +28,6 @@ public class Robot extends SampleRobot {
 	private Joystick player1;
 	private Joystick player2;
 	private Joystick autoBox;
-	
 	private DigitalInput gearSwitch;
 	private DigitalInput gearIntakeDetector;
 
@@ -41,7 +40,7 @@ public class Robot extends SampleRobot {
 	private TorGear gear;
 	private TorAuto auto;
 	protected static RobotMode mode;
-	
+	//pjwefpjwepojpweojf
 	private long endTime = System.currentTimeMillis();
 	
     public Robot() {
